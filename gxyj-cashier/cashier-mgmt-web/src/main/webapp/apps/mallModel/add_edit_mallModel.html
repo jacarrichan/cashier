@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>新增地方平台收银模板配置</title>
+<script id="seajsnode" type="text/javascript" src="../../loader.js" data-js="./js/add_edit_mallModel.js" data-css="./css/add_edit_mallModel.css"></script>
+</head>
+<body>
+	<div class="wrapper wrapper-content">
+		<div class="modal fade" id="smModal">
+			<div class="modal-dialog modal-sm">
+			    <div class="modal-content">
+			      	<div class="modal-header">
+			        	<h4 class="modal-title">提示</h4>
+			      	</div>
+			      	<div class="modal-body">
+			        	<h4>新增成功，是否继续新增？</h4>
+			      	</div>
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-default btn-no" data-dismiss=  "modal">取消</button>
+			        	<button type="button" class="btn btn-primary btn-yes">继续</button>
+			      	</div>
+			    </div>
+		  	</div>
+		</div>
+		<form class="form-horizontal form-inline form-group" id="form">
+		    <input type="hidden" id="rowId" name="rowId"/> 
+		    <input type="hidden" id="mallName" name="mallName"/>
+		    <input type="hidden" id="channelName" name="channelName"/>
+		    <input type="hidden" id="webpageName" name="webpageName"/>
+		    
+		     <div class="form-group col-sm-12">
+				<label class="col-sm-5"><span class="red">*</span> 业务渠道名称:</label>
+				 <select class="form-control" id="channelId" name="channelId"
+					style="width: 200px;" data-rule='[required=true]'>
+				</select>
+			</div>
+			
+		    <div class="form-group col-sm-12">
+				<label class="col-sm-5"><span class="red">*</span> 平台名称:</label> 
+				<select
+					class="form-control" id="mallId" name="mallId"
+					style="width: 200px;" data-rule='[required=false]'>
+				</select>
+			</div>
+			
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5"><span class="red">*</span> 业务渠道模板名称:</label> 
+				<select class="form-control" id="webpageId" name="webpageId" style="width: 200px;" data-rule='[required=true]'>
+					<option value="" selected="selected">请选择</option>
+				</select>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="modelUrl"><span class="red">*</span> 模板地址:</label>
+				<input class="form-control" id="modelUrl"  name="modelUrl" disabled='disabled' style="width: 200px;" />
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="terminal"><span class="red">*</span> 适应终端:</label>
+				<select class="form-control" id="terminal" name="terminal" style="width: 200px;" disabled='disabled'  >
+				    <option value=""></option>
+					<option value="01">PC</option>
+					<option value="02">WAP</option>
+					<option value="03">APP（微支付）</option>
+				</select>
+			</div>
+			
+			
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5"><span class="red">*</span> 支付渠道:</label>
+					<div id="channelDiv" class="col-sm-offset-5">
+					<div class="panel-group" id="accordionPanels" aria-multiselectable="true">
+						  <div class="panel panel-default">
+						    <div class="panel-heading" id="headingOne">
+						      <h4 class="panel-title">
+						        <a data-toggle="collapse" data-parent="#accordionPanels" href="#collapseOne">
+						          	个人网银
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapseOne" class="panel-collapse collapse in">
+						      <div class="panel-body" id="personalType"></div>
+						    </div>
+						  </div>
+						  <div class="panel panel-default">
+						    <div class="panel-heading" id="headingTwo">
+						      <h4 class="panel-title">
+						        <a class="collapsed" data-toggle="collapse" data-parent="#accordionPanels" href="#collapseTwo">
+						         	企业网银
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapseTwo" class="panel-collapse collapse">
+						      <div class="panel-body" id="companyType"></div>
+						    </div>
+						  </div>
+						  <div class="panel panel-default">
+						    <div class="panel-heading" id="headingThree">
+						      <h4 class="panel-title">
+						        <a class="collapsed" data-toggle="collapse" data-parent="#accordionPanels" href="#collapseThree">
+						         	第三方支付
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapseThree" class="panel-collapse collapse">
+						      <div class="panel-body" id="thirdType"></div>
+						    </div>
+						  </div>
+						</div>
+				</div>
+				<div class="col-sm-6 col-sm-offset-5" id="radioPart">
+					<input type="radio" id="btn1" name="flagButton"  > 全选&nbsp;&nbsp;
+	                <input type="radio" id="btn2" name="flagButton"  > 取消选择&nbsp;&nbsp;
+	                <input type="radio" id="btn3" name="flagButton"  > 反选
+				</div>
+			</div>
+			
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5"><span class="red">*</span> 是否启用:</label>
+				<label class="radio-inline">
+				  <input type="radio" value="1" id="open" name="openFlag"  checked="true"/> 是
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" value="0" id="close" name="openFlag"  /> 否
+				</label>
+			</div>
+		    
+			
+			<div class="col-sm-12">
+				<div class="alert"></div>
+			</div>
+		</form>
+		
+		<div class="form-group form-buttons text-center">
+			<button class="btn btn-success btn-submit">提交</button>
+			<button class="btn btn-warning btn-cancel">取消</button>
+		</div>
+	</div>
+	<script type="text/template" id="option.tpl">
+		<option value="{{d.code}}" {{d.attr || ''}}>{{d.name}}</option>
+	</script>
+	<script type="text/template" id="input.tpl">
+		{{# for(var i = 0, len = d.length; i < len; i++){ }}
+			<label class="checkbox-inline">
+	    		<input type="checkbox" value="{{d[i].channelCode}}" id="{{d[i].channelName}}" name="payChannel" /> {{d[i].channelName}}
+			</label>
+		{{# } }}
+	</script>
+</body>
+</html>

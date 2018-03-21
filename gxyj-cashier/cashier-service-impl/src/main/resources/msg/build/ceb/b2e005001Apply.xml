@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<function_list>
+		<item name="myUtils" class="com.gxyj.cashier.common.convert.utils.ConvertUtils" />
+	</function_list>
+	<transaction code="CEBB2e005001"><!--发起报文 -->
+		<request msg_type="bean">
+			<group name="Transaction">
+				<group name="SystemHead">
+					<item name="Language" value="zh_CN" />
+					<item name="Encodeing" bean_field="cncodeing" />
+					<item name="Version" bean_field="version" />
+					<item name="ServiceName" bean_field="serviceName" />
+					<item name="CifNo" bean_field="cifNo" />
+					<item name="UserID" bean_field="userId" />
+					<item name="SyMacFlag" bean_field="syMacFlag" />
+					<item name="MAC" bean_field="mac" />
+					<item name="SyPinFlag" bean_field="syPinFlag" />
+					<item name="PinSeed" bean_field="pinSeed" />
+					<item name="LicenseId" bean_field="licenseId" />
+					<item name="Flag" bean_field="flag" />
+					<item name="Note" bean_field="note" />
+				</group>
+
+				<group name="TransHead">
+					<item name="TransCode" value="b2e005001" /><!-- 交易码 固定填b2e005001 -->
+					<item name="BatchID" bean_field="batchId" /><!-- 交易流水号, 上送报文为BatchID防止重复提交用 -->
+					<item name="JnlDate" bean_field="jnlDate" /><!--请求日期 YYYYMMDD -->
+					<item name="JnlTime" bean_field="jnlTime" /><!-- 请求时间 HH24MISS -->
+				</group>
+				<group name="TransContent">
+					<group name="ReqData">
+						<item name="ClientPatchID" bean_field="clientPatchID" /><!-- 客户端批内序号/客户交易号 -->
+						<item name="merchantId" bean_field="merchantId" /><!-- 商户号 -->
+						<item name="checkDate" bean_field="checkDate" /><!-- 对账日期 yyyyMMdd -->
+						<!-- 对账文件类型 “A”：消费+退货 “X”：消费 “T”:退货 “S”:清算明细 -->
+						<item name="checkFileType" value="A" />
+					</group>
+				</group>
+
+			</group>
+		</request>
+
+		<response msg_type="xml">
+			<group name="Transaction" doc_encode="GBK">
+			<group name="SystemHead">
+					<item name="Language" value="zh_CN" />
+					<item name="Encodeing"/>
+					<item name="Version" />
+					<item name="ServiceName" />
+					<item name="CifNo"/>
+					<item name="UserID"/>
+					<item name="SyMacFlag"/>
+					<item name="MAC"/>
+					<item name="SyPinFlag"/>
+					<item name="PinSeed"/>
+					<item name="LicenseId"/>
+					<item name="Flag"/>
+					<item name="Note"/>
+				</group>
+
+				<group name="TransHead">
+					<item name="TransCode" value="b2e005001" /><!-- 交易码 固定填b2e005001 -->
+					<item name="BatchID"/><!-- 交易流水号, 上送报文为BatchID防止重复提交用 -->
+					<item name="JnlDate"/><!--请求日期 YYYYMMDD -->
+					<item name="JnlTime" /><!-- 请求时间 HH24MISS -->
+				</group>
+				<group name="TransContent">
+					<group name="ReqData">
+						<item name="ClientPatchID" /><!-- 客户端批内序号/客户交易号 -->
+						<item name="merchantId" /><!-- 商户号 -->
+						<item name="checkDate" /><!-- 对账日期 yyyyMMdd -->
+						<!-- 对账文件类型 “A”：消费+退货 “X”：消费 “T”:退货 “S”:清算明细 -->
+						<item name="checkFileType" value="A" />
+					</group>
+				</group>
+			</group>
+		</response>

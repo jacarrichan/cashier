@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<function_list>
+		<item name="myUtils" class="com.gxyj.cashier.common.convert.utils.ConvertUtils" />
+	</function_list>
+	<transaction code="6W0111"><!--商户流水文件下载申请 -->
+		<request msg_type="bean">
+			<group name="TX">
+				<item name="REQUEST_SN" bean_field="requestMsgId" /><!-- 请求序列号 只可以使用数字 -->
+				<item name="CUST_ID" bean_field="merId" /><!--商户号(网银商户号) -->
+				<item name="USER_ID" bean_field="userId" /><!--操作员号 -->
+				<item name="PASSWORD" bean_field="password" /><!--操作员号交易密码 -->
+				<item name="TX_CODE" value="6W0111" /><!--交易请求码 -->
+				<item name="LANGUAGE" value="CN" /><!--语言 固定为CN -->
+
+				<group name="TX_INFO">
+					<item name="SOURCE" bean_field="fileName" /><!-- 要下载的文件名 -->
+					<item name="FILEPATH" value="merchant/shls" /><!--文件路径 -->
+					<item name="LOCAL_REMOTE" value="0" />	<!--下载路径标志 F 一般0 -->
+				</group>
+			</group>
+		</request>
+
+		<response msg_type="xml">
+			<group name="TX" doc_encode="GB2312">
+				<item name="REQUEST_SN" /><!-- 请求序列号 只可以使用数字 -->
+				<item name="CUST_ID" /><!--商户号(网银商户号) -->
+				<item name="USER_ID" /><!--操作员号 -->
+				<item name="PASSWORD" /><!--操作员号交易密码 -->
+				<item name="TX_CODE" /><!--交易请求码 -->
+				<item name="LANGUAGE" /><!--语言 固定为CN -->
+
+				<group name="TX_INFO">
+					<item name="SOURCE" /><!-- 要下载的文件名 -->
+					<item name="FILEPATH" /><!--文件路径 -->
+					<item name="LOCAL_REMOTE" />	<!--下载路径标志 F 一般0 -->
+				</group>
+			</group>
+		</response>
+
+	</transaction>
+</config>

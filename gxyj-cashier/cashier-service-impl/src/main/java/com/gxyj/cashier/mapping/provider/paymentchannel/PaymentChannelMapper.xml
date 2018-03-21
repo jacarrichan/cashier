@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.paymentchannel.PaymentChannelMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.PaymentChannel">
+    <id column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="channel_code" jdbcType="VARCHAR" property="channelCode" />
+    <result column="channel_name" jdbcType="VARCHAR" property="channelName" />
+    <result column="using_date" jdbcType="CHAR" property="usingDate" />
+    <result column="using_status" jdbcType="TINYINT" property="usingStatus" />
+    <result column="channel_platform" jdbcType="CHAR" property="channelPlatform" />
+    <result column="merchant_id" jdbcType="VARCHAR" property="merchantId" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="private_key" property="privateKey" jdbcType="LONGVARCHAR" />
+    <result column="public_key" property="publicKey" jdbcType="LONGVARCHAR" />
+    <result column="channel_type" property="channelType" jdbcType="VARCHAR" />
+    <result column="channel_logo" property="channelLogo" jdbcType="VARCHAR" />
+    <result column="ajax_url" property="ajaxUrl" jdbcType="VARCHAR" />
+    <result column="merch_account" property="merchAccount" jdbcType="VARCHAR" />
+    <result column="merch_acct_pwd" property="merchAcctPwd" jdbcType="VARCHAR" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+    <result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+    <result column="version" jdbcType="TINYINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, channel_code, channel_name, using_date, using_status, channel_platform, merchant_id, 
+    app_id, private_key, channel_type, public_key, channel_logo, ajax_url, created_by, merch_account, merch_acct_pwd, created_by, created_date, last_updt_by, last_updt_date, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_payment_channel
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from csr_payment_channel
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.PaymentChannel">
+    insert into csr_payment_channel (row_id, channel_code, channel_name, 
+      using_date, using_status, channel_platform, 
+      merch_account, merch_acct_pwd, merchant_id, 
+      app_id, created_by, created_date, 
+      last_updt_by, last_updt_date, version, 
+      private_key, public_key, 
+      channel_type, channel_logo, ajax_url)
+    values (#{rowId,jdbcType=INTEGER}, #{channelCode,jdbcType=VARCHAR}, #{channelName,jdbcType=VARCHAR}, 
+      #{usingDate,jdbcType=CHAR}, #{usingStatus,jdbcType=TINYINT}, #{channelPlatform,jdbcType=CHAR}, 
+      #{merchAccount,jdbcType=VARCHAR}, #{merchAcctPwd,jdbcType=VARCHAR}, #{merchantId,jdbcType=VARCHAR}, 
+      #{appId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{lastUpdtBy,jdbcType=VARCHAR}, #{lastUpdtDate,jdbcType=TIMESTAMP}, #{version,jdbcType=TINYINT}, 
+      #{privateKey,jdbcType=LONGVARCHAR}, #{publicKey,jdbcType=LONGVARCHAR},
+      #{channelType,jdbcType=VARCHAR}, #{channelLogo,jdbcType=VARCHAR}, #{ajaxUrl,jdbcType=VARCHAR)
+        
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.PaymentChannel">
+        insert into csr_payment_channel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        row_id,
+      </if>
+      <if test="channelCode != null" >
+        channel_code,
+      </if>
+      <if test="channelName != null" >
+        channel_name,
+      </if>
+      <if test="usingDate != null" >
+        using_date,
+      </if>
+      <if test="usingStatus != null" >
+        using_status,
+      </if>
+      <if test="channelPlatform != null" >
+        channel_platform,
+      </if>
+      <if test="merchAccount != null" >
+        merch_account,
+      </if>
+      <if test="merchAcctPwd != null" >
+        merch_acct_pwd,
+      </if>
+      <if test="merchantId != null" >
+        merchant_id,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="createdDate != null" >
+        created_date,
+      </if>
+      <if test="lastUpdtBy != null" >
+        last_updt_by,
+      </if>
+      <if test="lastUpdtDate != null" >
+        last_updt_date,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="privateKey != null" >
+        private_key,
+      </if>
+      <if test="publicKey != null" >
+        public_key,
+      </if>
+      <if test="channelType != null" >
+        channel_type,
+      </if>
+      <if test="channelLogo != null" >
+        channel_logo,
+      </if>
+      <if test="ajaxUrl != null" >
+        ajax_url,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="channelCode != null" >
+        #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null" >
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="usingDate != null" >
+        #{usingDate,jdbcType=CHAR},
+      </if>
+      <if test="usingStatus != null" >
+        #{usingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="channelPlatform != null" >
+        #{channelPlatform,jdbcType=CHAR},
+      </if>
+      <if test="merchAccount != null" >
+        #{merchAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="merchAcctPwd != null" >
+        #{merchAcctPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantId != null" >
+        #{merchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null" >
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null" >
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=TINYINT},
+      </if>
+      <if test="privateKey != null" >
+        #{privateKey,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="publicKey != null" >
+        #{publicKey,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="channelType != null" >
+        #{channelType,jdbcType=VARCHAR},
+      </if>
+      <if test="channelLogo != null" >
+        #{channelLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="ajaxUrl != null" >
+        #{ajaxUrl,jdbcType=VARCHAR},
+      </if>
+      
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.PaymentChannel">
+    update csr_payment_channel
+    <set >
+      <if test="channelCode != null" >
+        channel_code = #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null" >
+        channel_name = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="usingDate != null" >
+        using_date = #{usingDate,jdbcType=CHAR},
+      </if>
+      <if test="usingStatus != null" >
+        using_status = #{usingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="channelPlatform != null" >
+        channel_platform = #{channelPlatform,jdbcType=CHAR},
+      </if>
+      <if test="merchAccount != null" >
+        merch_account = #{merchAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="merchAcctPwd != null" >
+        merch_acct_pwd = #{merchAcctPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantId != null" >
+        merchant_id = #{merchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null" >
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null" >
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=TINYINT},
+      </if>
+      <if test="privateKey != null" >
+        private_key = #{privateKey,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="publicKey != null" >
+        public_key = #{publicKey,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="channelType != null" >
+        channel_type = #{channelType,jdbcType=VARCHAR},
+      </if>
+      <if test="channelLogo != null" >
+        channel_logo = #{channelLogo,jdbcType=VARCHAR},
+      </if> 
+      <if test="ajaxUrl != null" >
+        ajax_url = #{ajaxUrl,jdbcType=VARCHAR},
+      </if>
+           
+    </set>
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.PaymentChannel">
+    update csr_payment_channel
+    set channel_code = #{channelCode,jdbcType=VARCHAR},
+      channel_name = #{channelName,jdbcType=VARCHAR},
+      using_date = #{usingDate,jdbcType=CHAR},
+      using_status = #{usingStatus,jdbcType=TINYINT},
+      channel_platform = #{channelPlatform,jdbcType=CHAR},
+      merch_account = #{merchAccount,jdbcType=VARCHAR},
+      merch_acct_pwd = #{merchAcctPwd,jdbcType=VARCHAR},
+      merchant_id = #{merchantId,jdbcType=VARCHAR},
+      app_id = #{appId,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=TINYINT},
+      private_key = #{privateKey,jdbcType=LONGVARCHAR},
+      public_key = #{publicKey,jdbcType=LONGVARCHAR},
+      channel_type = #{channelType,jdbcType=VARCHAR},
+      channel_logo = #{channelLogo,jdbcType=VARCHAR},
+      ajax_url = #{ajaxUrl,jdbcType=VARCHAR}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+    <select id="selectByLikePoJo" parameterType="java.util.Map"  resultMap="BaseResultMap">
+  	select * from csr_payment_channel where 1=1 and using_status in (0,1,2)
+  	  <if test="channelCode != null and channelCode != '' ">
+        AND channel_code like concat('%',#{channelCode,jdbcType=VARCHAR},'%') 
+      </if>
+      <if test="channelName != null and channelName != '' ">
+        AND channel_name like concat('%',#{channelName,jdbcType=VARCHAR},'%') 
+      </if>
+      <if test="usingStatus != null and usingStatus != '' ">
+        AND using_status = #{usingStatus,jdbcType=TINYINT}
+      </if>
+      <if test="channelPlatform != null and channelPlatform != '' ">
+        AND channel_platform = #{channelPlatform,jdbcType=CHAR}
+      </if>
+      <if test="channelType != null and channelType != '' ">
+        AND channel_type = #{channelType,jdbcType=VARCHAR}
+      </if>
+      <if test="channelLogo != null and channelLogo != '' ">
+        AND channel_logo = #{channelLogo,jdbcType=VARCHAR}
+      </if>
+      <if test="merchantId != null and merchantId != '' ">
+        AND merchant_id like concat('%',#{merchantId,jdbcType=VARCHAR},'%') 
+      </if>
+      <if test="startSettlDate != null and startSettlDate != '' ">
+        <![CDATA[ AND using_date > #{startSettlDate,jdbcType=VARCHAR}  ]]>
+      </if>
+      <if test="endSettlDate != null and endSettlDate != '' ">
+        <![CDATA[ AND using_date < #{endSettlDate,jdbcType=VARCHAR}  ]]>
+      </if>
+      order by using_status desc , using_date desc
+  </select>
+  
+  <select id="selectByChannelCode" parameterType="java.lang.String"  resultMap="BaseResultMap">
+  		select 
+  	<include refid="Base_Column_List" />
+  	 	from csr_payment_channel where channel_code= #{channelCode,jdbcType=VARCHAR}  	  
+  </select>
+  
+  <select id="selectByChannelCodeAndUsingStatus" resultMap="BaseResultMap" parameterType="java.util.Map">
+  		select 
+  	<include refid="Base_Column_List" />
+  	 	from csr_payment_channel where 1=1
+  	 	<if test="channelCode != null and channelCode != '' ">
+  	 		and channel_code= #{channelCode,jdbcType=VARCHAR}
+  	 	</if>
+  	 	<if test="channelPlatform != null and channelPlatform != '' ">
+  	 		and channel_platform= #{channelPlatform,jdbcType=VARCHAR}
+  	 	</if>
+  	 	 and using_status != 0  order by row_id desc;	  
+  </select>
+  
+ <select id="selectByChannelName"  resultMap="BaseResultMap">
+ 		select 
+  			<include refid="Base_Column_List" />
+  	 	from csr_payment_channel where channel_name= #{channelName,jdbcType=VARCHAR}
+ </select>
+ 
+ <select id="queryList" parameterType="com.gxyj.cashier.domain.PaymentChannel" resultMap="BaseResultMap">
+	select
+	<include refid="Base_Column_List" />
+	from csr_payment_channel where 1 = 1
+	<if test="usingStatus != null">
+		and using_status = #{usingStatus,jdbcType=TINYINT}
+	</if>
+	<if test="channelPlatform != null and channelPlatform !='' ">
+		and channel_platform = #{channelPlatform,jdbcType=CHAR}
+	</if>
+	<if test="channelCode != null and channelCode != '' ">
+  	 	and channel_code= #{channelCode,jdbcType=VARCHAR}
+  	</if>
+  </select>  
+
+</mapper>

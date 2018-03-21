@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gxyj.cashier.mapping.order.OrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.OrderInfo" >
+    <id column="row_id" property="rowId" jdbcType="INTEGER" />
+    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="trans_id" property="transId" jdbcType="VARCHAR" />
+    <result column="prod_name" property="prodName" jdbcType="VARCHAR" />
+    <result column="terminal" property="terminal" jdbcType="CHAR" />
+    <result column="order_type" property="orderType" jdbcType="CHAR" />
+    <result column="channel_id" property="channelId" jdbcType="INTEGER" />
+    <result column="channel_cd" property="channelCd" jdbcType="VARCHAR" />
+    <result column="mall_id" property="mallId" jdbcType="VARCHAR" />
+    <result column="pay_phone" property="payPhone" jdbcType="VARCHAR" />
+    <result column="client_ip" property="clientIp" jdbcType="VARCHAR" />
+    <result column="trans_amt" property="transAmt" jdbcType="DECIMAL" />
+    <result column="charge_fee" property="chargeFee" jdbcType="DECIMAL" />
+    <result column="trans_time" property="transTime" jdbcType="TIMESTAMP" />
+    <result column="proc_state" property="procState" jdbcType="CHAR" />
+    <result column="err_flag" property="errFlag" jdbcType="TINYINT" />
+    <result column="err_desc" property="errDesc" jdbcType="VARCHAR" />
+    <result column="recon_flag" property="reconFlag" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="last_updt_date" property="lastUpdtDate" jdbcType="TIMESTAMP" />
+    <result column="last_updt_by" property="lastUpdtBy" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="TINYINT" />
+    <result column="payer_insti_nm" property="payerInstiNm" jdbcType="VARCHAR" />
+  </resultMap>
+  
+	<resultMap id="summaryMap" type="com.gxyj.cashier.domain.OrderSummary">
+		<result column="order_type" property="orderType" jdbcType="CHAR" />
+		<result column="trans_date" property="transDate" jdbcType="VARCHAR" />
+		<result column="pay_Insti_No" property="payInstiNo" jdbcType="VARCHAR" />
+		<result column="trans_ttl_amt" property="transTtlAmt" jdbcType="DECIMAL" />
+		<result column="charge_fee" property="chargeFee" jdbcType="DECIMAL" />
+		<result column="refund_ttl_amt" property="refundTtlAmt" jdbcType="DECIMAL" />
+		<result column="ttl_cnt" property="ttlCnt" jdbcType="INTEGER" />
+		<result column="ttl_refund_cnt" property="ttlRefundCnt" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="OrderPaymentMap" type="com.gxyj.cashier.domain.OrderPayment" >
+	    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
+	    <result column="trans_id" property="transId" jdbcType="VARCHAR" />
+	    <result column="terminal" property="terminal" jdbcType="CHAR" />
+	    <result column="order_type" property="orderType" jdbcType="CHAR" />
+	    <result column="mall_id" property="mallId" jdbcType="VARCHAR" />
+	    <result column="client_ip" property="clientIp" jdbcType="VARCHAR" />
+	    <result column="payer_insti_no" property="payerInstiNo" jdbcType="VARCHAR" />
+	    <result column="trans_amt" property="transAmt" jdbcType="DECIMAL" />
+	    <result column="charge_fee" property="chargeFee" jdbcType="DECIMAL" />
+	    <result column="trans_time" property="transTime" jdbcType="TIMESTAMP" />
+	    <result column="insti_rsp_time" property="instiRspTime" jdbcType="VARCHAR" />
+	    <result column="proc_state" property="procState" jdbcType="CHAR" />
+ 	</resultMap>
+ 	
+	
+	 <resultMap id="MonitorMap" type="com.gxyj.cashier.domain.OrderMonitor">
+	    <result column="channel_cd" property="channelCd" jdbcType="VARCHAR" />
+		<result column="sum_trans_amt" property="sumTransAmt" jdbcType="DECIMAL" />
+		<result column="sum_trans_count" property="sumTransCount" jdbcType="INTEGER" />
+		<result column="payer_insti_nm" property="payerInstiNm" jdbcType="VARCHAR" />
+		<result column="payer_insti_no" property="payerInstiNo" jdbcType="VARCHAR" />
+		<result column="sum_succ_amt" property="sumSuccAmt" jdbcType="DECIMAL" />
+		<result column="sum_succ_count" property="sumSuccCount" jdbcType="INTEGER" />
+		<result column="sum_fail_count" property="sumFailCount" jdbcType="INTEGER" />
+		<result column="sum_fail_amt" property="sumFailAmt" jdbcType="DECIMAL" />
+		<result column="sum_timeout_count" property="sumTimeoutCount" jdbcType="INTEGER" />
+	</resultMap>
+	
+  <sql id="Base_Column_List" >
+    row_id, order_id, trans_id,prod_name, terminal, order_type, channel_id,channel_cd,mall_id,pay_phone, client_ip, trans_amt, 
+    charge_fee, trans_time, proc_state, err_flag, err_desc, recon_flag, remark, created_by, 
+    created_date, last_updt_date, last_updt_by, version
+  </sql>
+  
+  <select id="queryPaymentSummary" resultMap="summaryMap" parameterType="java.util.Map">
+		select trans_date,
+        sum(ttl_cnt) as ttl_cnt,
+        sum(trans_ttl_amt) as trans_ttl_amt,
+		sum(charge_fee) as charge_fee,
+        sum(refund_ttl_amt) as refund_ttl_amt,
+		sum(ttl_refund_cnt) as ttl_refund_cnt,
+		payer_insti_no
+		from (select '0' as order_type,
+		date_format(t.trans_time,'%Y%m%d') as trans_date,
+		count(t.row_id) as ttl_cnt,
+		sum(t.trans_amt) as trans_ttl_amt,
+		sum(t.charge_fee) as charge_fee,
+		0.00 as refund_ttl_amt,
+		0 as ttl_refund_cnt,
+		t1.payer_insti_no as payer_insti_no
+		from csr_order_info t,csr_payment t1 
+		where t1.trans_id=t.trans_id  
+			and date_format(t.trans_time, '%Y%m%d')=#{transDate,jdbcType=VARCHAR} 
+			and t1.payer_insti_no like concat(#{payInstiNo,jdbcType=VARCHAR},'%') 
+		group by t1.payer_insti_no,date_format(t.trans_time,'%Y%m%d')
+		union
+		select '1' as order_type,
+		date_format(t.refund_date,'%Y%m%d') as trans_date,
+		0 as ttl_cnt,
+		0.00 as trans_ttl_amt,
+		0.00 as charge_fee,
+		sum(t.refund_amt) as refund_ttl_amt,
+		count(t.row_id) as ttl_refund_cnt,
+		t1.payer_insti_no as payer_insti_no
+		from csr_refund_order t,csr_payment t1 
+		where t1.trans_id=t.trans_id 
+			and date_format(t.refund_date, '%Y%m%d')=#{transDate,jdbcType=VARCHAR} 
+			and t1.payer_insti_no like concat(#{payInstiNo,jdbcType=VARCHAR},'%') 
+	  group by
+		t1.payer_insti_no,date_format(t.refund_date,'%Y%m%d')
+		) a group by a.payer_insti_no,a.trans_date
+	</select>
+	<select id="queryOrderPaymentList" resultMap="OrderPaymentMap" parameterType="java.util.Map">
+		SELECT o.order_id,p.trans_id,o.trans_time,p.insti_rsp_time,p.payer_insti_no,o.proc_state,o.order_type,o.mall_id,
+		o.trans_amt,o.client_ip
+		FROM csr_order_info o 
+		LEFT JOIN csr_payment p ON o.trans_id = p.trans_id 
+		WHERE 1=1 
+		<if test="orderId != null and orderId != ''" >
+			and o.order_id = #{orderId,jdbcType=VARCHAR}
+		</if>
+	    <if test="rowId != null and rowId !=''" >
+	       	and o.row_id = #{rowId,jdbcType=INTEGER}
+	    </if>
+	    <if test="transId != null and transId != ''" >
+	     	and o.trans_id = #{transId,jdbcType=VARCHAR}
+	    </if>
+	    <if test="channelCd != null and channelCd != ''" >
+	     	and o.channel_cd = #{channelCd,jdbcType=VARCHAR}
+	    </if>
+	    <if test="payerInstiNo != null and payerInstiNo != ''" >
+	     	and p.payer_insti_no = #{payerInstiNo,jdbcType=VARCHAR}
+	    </if>
+	    <if test="transBeginTime != null and transBeginTime !=''" >
+	    	<![CDATA[ AND o.trans_time >= #{transBeginTime,jdbcType=VARCHAR} ]]>
+	    </if>
+	    <if test="transEndTime != null and transEndTime != ''" >
+	    	<![CDATA[ AND o.trans_time <= #{transEndTime,jdbcType=VARCHAR} ]]>
+	    </if>
+	    limit 0,1000
+	</select>
+	<select id="selectByTransId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from csr_order_info
+		where trans_id = #{transId,jdbcType=INTEGER}
+		
+	</select>
+	<select id="selectByOrderId" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from csr_order_info
+		where order_id = #{orderId,jdbcType=VARCHAR} and channel_cd = #{channelCd,jdbcType=VARCHAR}
+		
+	</select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.gxyj.cashier.domain.OrderInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from csr_order_info
+    where order_id = #{orderId,jdbcType=VARCHAR} 
+    <if test="rowId != null" >
+       and row_id = #{rowId,jdbcType=INTEGER}
+    </if>
+    <if test="transId != null" >
+     and  trans_id = #{transId,jdbcType=VARCHAR}
+    </if>
+    <if test="channelCd != null" >
+     and  channel_cd = #{channelCd,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="findByOrderIdAndChannelCd" resultMap="BaseResultMap" parameterType="com.gxyj.cashier.domain.OrderInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from csr_order_info
+    where order_id = #{orderId,jdbcType=VARCHAR} and channel_cd = #{channelCd,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectCountByPrimaryKey" resultType="java.lang.Integer" parameterType="com.gxyj.cashier.domain.OrderInfo" >
+    select 
+    count(*)
+    from csr_order_info
+    where 1=1
+      and order_id = #{orderId,jdbcType=VARCHAR} and channel_cd = #{channelCd,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.gxyj.cashier.domain.OrderInfoKey" >
+    delete from csr_order_info
+    where order_id = #{orderId,jdbcType=VARCHAR}
+    <if test="rowId != null" >
+       and row_id = #{rowId,jdbcType=INTEGER}
+    </if>
+    <if test="transId != null" >
+     and  trans_id = #{transId,jdbcType=VARCHAR}
+    </if>
+  </delete> 
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.OrderInfo" >
+    insert into csr_order_info (row_id, order_id, trans_id, prod_name,
+      terminal, order_type, channel_id,channel_cd,pay_phone,
+      client_ip, trans_amt, charge_fee, 
+      trans_time, proc_state, err_flag, 
+      err_desc, recon_flag, remark, 
+      created_by, created_date, last_updt_date, 
+      last_updt_by, version)
+    values (#{rowId,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{transId,jdbcType=VARCHAR}, #{prodName,jdbcType=VARCHAR},
+      #{terminal,jdbcType=CHAR}, #{orderType,jdbcType=CHAR}, #{channelId,jdbcType=INTEGER},#{channelCd,jdbcType=VARCHAR}, #{payPhone,jdbcType=VARCHAR},
+      #{clientIp,jdbcType=VARCHAR}, #{transAmt,jdbcType=DECIMAL}, #{chargeFee,jdbcType=DECIMAL}, 
+      #{transTime,jdbcType=TIMESTAMP}, #{procState,jdbcType=CHAR}, #{errFlag,jdbcType=TINYINT}, 
+      #{errDesc,jdbcType=VARCHAR}, #{reconFlag,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtDate,jdbcType=TIMESTAMP}, 
+      #{lastUpdtBy,jdbcType=VARCHAR}, #{version,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.OrderInfo" >
+    insert into csr_order_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        row_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="transId != null" >
+        trans_id,
+      </if>
+      <if test="prodName != null" >
+        prod_name,
+      </if>
+      <if test="terminal != null" >
+        terminal,
+      </if>
+      <if test="orderType != null" >
+        order_type,
+      </if>
+      <if test="payPhone != null" >
+        pay_phone,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="channelCd != null" >
+        channel_cd,
+      </if>
+      <if test="mallId != null" >
+      	mall_id,
+      </if>
+      <if test="clientIp != null" >
+        client_ip,
+      </if>
+      <if test="transAmt != null" >
+        trans_amt,
+      </if>
+      <if test="chargeFee != null" >
+        charge_fee,
+      </if>
+      <if test="transTime != null" >
+        trans_time,
+      </if>
+      <if test="procState != null" >
+        proc_state,
+      </if>
+      <if test="errFlag != null" >
+        err_flag,
+      </if>
+      <if test="errDesc != null" >
+        err_desc,
+      </if>
+      <if test="reconFlag != null" >
+        recon_flag,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="createdDate != null" >
+        created_date,
+      </if>
+      <if test="lastUpdtDate != null" >
+        last_updt_date,
+      </if>
+      <if test="lastUpdtBy != null" >
+        last_updt_by,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="transId != null" >
+        #{transId,jdbcType=VARCHAR},
+      </if>
+      <if test="prodName != null" >
+        #{prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="terminal != null" >
+        #{terminal,jdbcType=CHAR},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=CHAR},
+      </if>
+      <if test="payPhone != null" >
+        #{payPhone,jdbcType=CHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=INTEGER},
+      </if>
+       <if test="channelCd != null" >
+        #{channelCd,jdbcType=INTEGER},
+      </if>
+      <if test="mallId != null" >
+        #{mallId,jdbcType=INTEGER},
+      </if>
+      <if test="clientIp != null" >
+        #{clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="transAmt != null" >
+        #{transAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeFee != null" >
+        #{chargeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="transTime != null" >
+        #{transTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="procState != null" >
+        #{procState,jdbcType=CHAR},
+      </if>
+      <if test="errFlag != null" >
+        #{errFlag,jdbcType=TINYINT},
+      </if>
+      <if test="errDesc != null" >
+        #{errDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="reconFlag != null" >
+        #{reconFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null" >
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null" >
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.OrderInfo" >
+    update csr_order_info
+    <set >
+      <if test="terminal != null" >
+        terminal = #{terminal,jdbcType=CHAR},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=CHAR},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="channelCd != null" >
+        channel_cd=#{channelCd,jdbcType=VARCHAR},
+      </if>
+      <if test="mallId != null" >
+        mall_id=#{mallId,jdbcType=VARCHAR},
+      </if>
+      <if test="clientIp != null" >
+        client_ip = #{clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="payPhone != null" >
+        pay_phone = #{payPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="transAmt != null" >
+        trans_amt = #{transAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeFee != null" >
+        charge_fee = #{chargeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="transTime != null" >
+        trans_time = #{transTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="procState != null" >
+        proc_state = #{procState,jdbcType=CHAR},
+      </if>
+      <if test="errFlag != null" >
+        err_flag = #{errFlag,jdbcType=TINYINT},
+      </if>
+      <if test="errDesc != null" >
+        err_desc = #{errDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="reconFlag != null" >
+        recon_flag = #{reconFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null" >
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null" >
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=TINYINT},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=VARCHAR}
+    <if test="rowId != null" >
+       and row_id = #{rowId,jdbcType=INTEGER}
+    </if>
+    <if test="transId != null" >
+     and  trans_id = #{transId,jdbcType=VARCHAR}
+    </if>
+    <if test="channelCd != null" >
+     and  channel_cd = #{channelCd,jdbcType=VARCHAR}
+    </if>
+   
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.OrderInfo" >
+    update csr_order_info
+    set trans_id = #{transId,jdbcType=VARCHAR},
+      terminal = #{terminal,jdbcType=CHAR},
+      order_type = #{orderType,jdbcType=CHAR},
+      channel_id = #{channelId,jdbcType=INTEGER},
+      channel_cd = #{channelCd,jdbcType=VARCHAR},
+      client_ip = #{clientIp,jdbcType=VARCHAR},
+      pay_phone = #{payPhone,jdbcType=DECIMAL},
+      trans_amt = #{transAmt,jdbcType=DECIMAL},
+      charge_fee = #{chargeFee,jdbcType=DECIMAL},
+      trans_time = #{transTime,jdbcType=TIMESTAMP},
+      proc_state = #{procState,jdbcType=CHAR},
+      err_flag = #{errFlag,jdbcType=TINYINT},
+      err_desc = #{errDesc,jdbcType=VARCHAR},
+      recon_flag = #{reconFlag,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      version = #{version,jdbcType=TINYINT}
+    where order_id = #{orderId,jdbcType=VARCHAR}
+    <if test="rowId != null" >
+       and row_id = #{rowId,jdbcType=INTEGER}
+    </if>
+    <if test="transId != null" >
+     and  trans_id = #{transId,jdbcType=VARCHAR}
+    </if>
+  </update>
+  
+    <update id="updateNoReconPayment" parameterType="java.util.Map">
+    update csr_order_info t
+    set t.recon_flag = #{reconFlag,jdbcType=VARCHAR}
+    where date_format(t.trans_time,'%Y%m%d')=#{transDate,jdbcType=VARCHAR}
+     and t.trans_id in (select t1.trans_id from csr_payment t1 
+    						where t1.trans_id=t.trans_id and t1.payer_insti_no=#{payInstiNo,jdbcType=VARCHAR})
+  </update>
+  
+  <select id="selectList" parameterType="java.util.Map"  resultMap="BaseResultMap">
+  	 select 
+  	 	 a.row_id, a.order_id, a.trans_id, a.terminal, a.order_type, a.channel_id,a.pay_phone, a.client_ip, a.trans_amt, 
+    a.charge_fee, a.trans_time, a.proc_state, a.recon_flag, a.remark, b.payer_insti_nm,c.channel_name as channel_cd,d.mall_name as mall_id
+  	 from csr_order_info a, csr_payment b,csr_busi_channel c, csr_mall_info d  where a.trans_id = b.trans_id  and c.channel_code = a.channel_cd  and a.mall_id=d.mall_id
+  	  <if test="orderId != null and orderId != '' ">
+         AND a.order_id = #{orderId,jdbcType=VARCHAR}
+      </if>
+      <if test="terminal != null and terminal!='' " >
+        AND a.terminal = #{terminal,jdbcType=CHAR}
+      </if>
+      <if test="mallId != null and mallId!='' " >
+        AND a.mall_id = #{mallId,jdbcType=CHAR}
+      </if>
+      <if test="payerInstiNo != null and payerInstiNo!='' " >
+        AND b.payer_insti_no = #{payerInstiNo,jdbcType=CHAR}
+      </if>
+      <if test="procState != null and  procState != '' " >
+         AND  a.proc_state = #{procState,jdbcType=CHAR}
+      </if>
+      <if test="channelId != null and channelId != '' ">
+         AND a.channel_cd = #{channelId,jdbcType=VARCHAR}
+      </if>
+      <if test="startDate != null and startDate != '' ">
+        <![CDATA[ AND a.trans_time > #{startDate,jdbcType=VARCHAR}  ]]>
+      </if>
+      <if test="endDate != null and endDate != '' ">
+        <![CDATA[ AND a.trans_time < #{endDate,jdbcType=VARCHAR}  ]]>
+      </if>
+      order by  a.trans_time desc
+  </select>
+  
+  <select id="queryMonitorList" parameterType="java.lang.String"  resultMap="MonitorMap">
+  	 select channel_cd, SUM(trans_amt) as sum_trans_amt, count(*) as sum_trans_count 
+  	 FROM csr_order_info where   proc_state = '00'
+  	  <if test="transTime != null and transTime!='' " >
+        AND  date(trans_time) = #{transTime,jdbcType=VARCHAR}
+      </if>
+  	 group by channel_cd  
+  </select>
+  
+  <select id="queryPayMonitorList" parameterType="java.lang.String"  resultMap="MonitorMap">
+  	select b.payer_insti_no,b.payer_insti_nm, SUM( case when a.proc_state='00' then a.trans_amt else 0 end ) as sum_succ_amt, SUM( case when a.proc_state='00' then 1 else 0 end ) as sum_succ_count, SUM( case when a.proc_state='01' then  a.trans_amt  else 0 end ) as sum_fail_amt,
+  	  sum(case when a.proc_state='01'  then 1 else 0 end) as  sum_fail_count , sum(case when a.proc_state='05'  then 1 else 0 end) as  sum_timeout_count 
+  	 FROM csr_order_info a,csr_payment b  where a.trans_id=b.trans_id 
+  	 <if test="transTime != null and transTime!='' " >
+        AND  date(a.trans_time) = #{transTime,jdbcType=VARCHAR}
+     </if>
+  	 group by b.payer_insti_no,b.payer_insti_nm     
+  </select>
+  
+  <select id="selectByOrderIdList" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from csr_order_info
+		where order_id = #{orderId,jdbcType=VARCHAR} and channel_cd = #{channelCd,jdbcType=VARCHAR}
+		
+	</select>
+  
+</mapper>

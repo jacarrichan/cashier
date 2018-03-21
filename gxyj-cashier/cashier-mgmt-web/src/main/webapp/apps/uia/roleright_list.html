@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>角色权限管理</title>
+<script id="seajsnode" type="text/javascript" src="../../loader.js" data-js="./js/roleright-list" data-css="./css/roleright-list.css"></script>
+</head>
+<body>
+	<div class="wrapper wrapper-content">
+		<div class="nav-bread border-color-primary">
+			<ol class="breadcrumb">
+			  	<li>首页</li>
+			  	<li>系统管理</li>
+			  	<li class="active">角色权限管理</li>
+			</ol>
+		</div>
+		
+		<div class="panel-left col-sm-6">
+			<div class="search-panel">
+				<form class="search-form form-horizontal form-inline">
+					<div class="form-group col-sm-10">
+						<label class="col-sm-3" for="queryKey">关键词</label>
+						<div class="col-sm-9">
+							<input class="form-control" id="queryKey" placeholder="请输入角色名"/>
+						</div>
+					</div>
+				</form>
+				<div class="form-group form-buttons col-sm-10">
+					<button class="btn btn-warning search-btn">查 询</button>
+				</div>
+			</div>
+			
+			<div class="result-panel">
+				<div class="result-data grid">
+					<table class="table datatable">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>角色编号</th>
+								<th>角色名称</th>
+								<th>所属机构</th>
+								<th class="sort-disabled">操作</th>
+							</tr>
+						</thead>
+						<tbody id="data-body">
+							
+						</tbody>
+					</table>
+					<div class="pager-box">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="panel-right col-sm-6">
+			<br><br>
+			权限分配
+			<div class="result-panel-right">
+				<ul id="treeDemo" class="ztree"></ul>
+			</div>
+			<div class="form-group form-buttons hidden">
+			<button class="btn btn-success btn-sure">提交</button>
+		</div>
+		</div>
+	</div>
+	
+	<script type="text/template" id="list-tr.tpl">
+		<tr class="row-{{d.index}}" data-id="{{d.rowId}}" >
+			<td>{{d.index}}</td>
+			<td>{{d.roleId}}</td>
+			<td>{{d.roleName}}</td>
+			<td>{{d.brchName}}</td>
+			<td>
+				{{d.buttons}}
+			</td>
+		</tr>
+	</script>
+	
+	<script type="text/template" id="list-btn.tpl">
+		<a class="btn {{d.class}}" href="javascript:;" data-toggle="tooltip" title="{{d.title}}" data-id="{{d.roleId}}" data-right="{{d.rightCode}}">权限分配</a>
+	</script>
+		
+</body>
+</html>

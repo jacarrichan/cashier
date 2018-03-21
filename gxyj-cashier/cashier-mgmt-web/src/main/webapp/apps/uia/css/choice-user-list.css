@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+
+@import "../../../common/css/page-common.css";
+
+.search-panel {
+    padding: 10px 20px 0;
+}
+
+.result-data {
+    height: 230px;
+    overflow-y: auto;
+}

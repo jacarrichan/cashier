@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<function_list>
+		<item name="myUtils" class="com.gxyj.cashier.common.convert.utils.ConvertUtils" />
+	</function_list>
+	<transaction code="5W1002"><!--商户支付流水查询 -->
+		<request msg_type="xml">
+			<group name="TX">
+				<item name="REQUEST_SN" />	<!-- 请求序列号 同请求报文中的序列号 -->
+				<item name="CUST_ID" />		<!--商户号(网银商户号) 同请求报文中的商户号 -->
+				<item name="TX_CODE" />		<!--同请求报文中的交易码 -->
+				<item name="RETURN_CODE" />	<!--交易响应码 -->
+				<item name="RETURN_MSG" />	<!--交易响应信息 -->
+				<item name="LANGUAGE" />	<!--语言 同请求报文 -->
+				<group name="TX_INFO">
+					<item name="CUR_PAGE" /> 	<!--当前页次 -->
+					<item name="PAGE_COUNT"/>	<!--总页次-->
+					<group name="LIST">
+						<item name="TRAN_DATE"  />	<!--交易日期 -->
+						<item name="ACC_DATE"/>		<!--记账日期 -->
+						<item name="ORDER"  />		<!--订单号  -->
+						<item name="ACCOUNT"  />	<!--付款方账号 -->
+						<item name="PAYMENT_MONEY"/><!--支付金额  -->
+						<item name="REFUND_MONEY" /><!--退款金额  -->
+						<item name="POS_ID" />		<!--柜台号 -->
+						<item name="REM1"  />		<!--备注1 -->
+						<item name="REM2" />		<!--备注2 -->
+						<item name="ORDER_STATUS" /><!--订单状态 0:失败,1:成功,2:待银行确认,3:已部分退款,4:已全额退款,5:待银行确认 -->
+					</group>
+					<item name="NOTICE"  />		<!--提示信息 -->
+				</group>
+			</group>
+		</request>
+
+		<response msg_type="bean" bean="java.util.HashMap">
+			<group name="TX" doc_encode="GB2312">
+				<item name="REQUEST_SN" bean_field="requestMsgId" />	<!-- 请求序列号 同请求报文中的序列号 -->
+				<item name="CUST_ID" bean_field="custId" />				<!--商户号(网银商户号) 同请求报文中的商户号 -->
+				<item name="TX_CODE" bean_field="txCode" />				<!--同请求报文中的交易码 -->
+				<item name="RETURN_CODE" bean_field="returnCode" />		<!--交易响应码 -->
+				<item name="RETURN_MSG" bean_field="returnMsg" />		<!--交易响应信息 -->
+				<item name="LANGUAGE" bean_field="language" />			<!--语言 同请求报文 -->
+				<group name="TX_INFO">
+					<item name="CUR_PAGE" bean_field="curPage" />			<!--当前页次 -->
+					<item name="PAGE_COUNT" bean_field="pageCount" />		<!--总页次-->
+					<group name="LIST">	
+						<item name="TRAN_DATE" bean_field="tranDate" />			<!--交易日期 -->
+						<item name="ACC_DATE" bean_field="accDate" />			<!--记账日期 -->
+						<item name="ORDER" bean_field="order" />				<!--订单号  -->
+						<item name="ACCOUNT" bean_field="account" />			<!--付款方账号 -->
+						<item name="PAYMENT_MONEY" bean_field="paymentMoney" />	<!--支付金额  -->
+						<item name="REFUND_MONEY" bean_field="refundMoney" />	<!--退款金额  -->
+						<item name="POS_ID" bean_field="posId" />				<!--柜台号 -->
+						<item name="REM1" bean_field="rem1" />					<!--备注1 -->
+						<item name="REM2" bean_field="rem2" />					<!--备注2 -->
+						<item name="ORDER_STATUS" bean_field="orderStatus" />	<!--订单状态 0:失败,1:成功,2:待银行确认,3:已部分退款,4:已全额退款,5:待银行确认 -->
+					</group>
+					<item name="NOTICE" bean_field="notice" />				<!--提示信息 -->
+				</group>
+			</group>
+		</response>
+
+	</transaction>
+</config>

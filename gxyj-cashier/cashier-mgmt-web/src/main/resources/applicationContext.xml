@@ -1,0 +1,44 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.3.xsd    
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-4.3.xsd 
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+	http://www.springframework.org/schema/task  
+    http://www.springframework.org/schema/task/spring-task-4.3.xsd  
+	">
+
+	<!-- 开启注解模式 -->
+	<mvc:annotation-driven/>
+
+	<!-- 基于注解的方式配置切面 -->
+	<context:annotation-config />
+
+	<!-- 使用默认的Servlet来响应静态文件 -->
+	<mvc:default-servlet-handler />
+
+	<!-- 自动代理 -->
+	<aop:aspectj-autoproxy />
+
+	<!-- 扫描管理Bean配置 -->
+	<context:component-scan base-package="com.gxyj.cashier.mgmt.web.*" />
+	<!-- 扫描管理Bean配置结束 -->
+
+	<!-- springMVC配置 -->
+	<import resource="dispatcherContext.xml" />
+	<!-- springMVC配置结束 -->
+
+	<import resource="spring-consumer.xml" />
+
+</beans>

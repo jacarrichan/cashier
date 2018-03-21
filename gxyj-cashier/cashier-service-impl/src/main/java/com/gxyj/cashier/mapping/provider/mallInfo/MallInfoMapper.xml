@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.mallInfo.MallInfoMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.MallInfo">
+    <id column="row_id" jdbcType="BIGINT" property="rowId" />
+    <result column="mall_id" jdbcType="VARCHAR" property="mallId" />
+    <result column="brch_id" jdbcType="VARCHAR" property="brchId" />
+    <result column="mall_name" jdbcType="VARCHAR" property="mallName" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="mall_type" jdbcType="CHAR" property="mallType" />
+    <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+    <result column="create_year" jdbcType="VARCHAR" property="createYear" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="company_legal_person" jdbcType="VARCHAR" property="companyLegalPerson" />
+    <result column="bus_limit_date" jdbcType="VARCHAR" property="busLimitDate" />
+    <result column="mall_status" jdbcType="VARCHAR" property="mallStatus" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="modified_by" jdbcType="VARCHAR" property="modifiedBy" />
+    <result column="whenmodified" jdbcType="TIMESTAMP" property="whenmodified" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, mall_id, brch_id, mall_name, parent_id, mall_type, area_code, create_year, 
+    company_name, company_legal_person, bus_limit_date, mall_status, created_by, created_date, 
+    modified_by, whenmodified, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_mall_info
+    where row_id = #{rowId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from csr_mall_info
+    where row_id = #{rowId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.MallInfo">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_mall_info (mall_id, brch_id, mall_name, 
+      parent_id, mall_type, area_code, 
+      create_year, company_name, company_legal_person, 
+      bus_limit_date, mall_status, created_by, 
+      created_date, modified_by, whenmodified, 
+      version)
+    values (#{mallId,jdbcType=VARCHAR}, #{brchId,jdbcType=VARCHAR}, #{mallName,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=VARCHAR}, #{mallType,jdbcType=CHAR}, #{areaCode,jdbcType=VARCHAR}, 
+      #{createYear,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{companyLegalPerson,jdbcType=VARCHAR}, 
+      #{busLimitDate,jdbcType=VARCHAR}, #{mallStatus,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{modifiedBy,jdbcType=VARCHAR}, #{whenmodified,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.MallInfo">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_mall_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mallId != null">
+        mall_id,
+      </if>
+      <if test="brchId != null">
+        brch_id,
+      </if>
+      <if test="mallName != null">
+        mall_name,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="mallType != null">
+        mall_type,
+      </if>
+      <if test="areaCode != null">
+        area_code,
+      </if>
+      <if test="createYear != null">
+        create_year,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="companyLegalPerson != null">
+        company_legal_person,
+      </if>
+      <if test="busLimitDate != null">
+        bus_limit_date,
+      </if>
+      <if test="mallStatus != null">
+        mall_status,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="modifiedBy != null">
+        modified_by,
+      </if>
+      <if test="whenmodified != null">
+        whenmodified,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mallId != null">
+        #{mallId,jdbcType=VARCHAR},
+      </if>
+      <if test="brchId != null">
+        #{brchId,jdbcType=VARCHAR},
+      </if>
+      <if test="mallName != null">
+        #{mallName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="mallType != null">
+        #{mallType,jdbcType=CHAR},
+      </if>
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createYear != null">
+        #{createYear,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLegalPerson != null">
+        #{companyLegalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="busLimitDate != null">
+        #{busLimitDate,jdbcType=VARCHAR},
+      </if>
+      <if test="mallStatus != null">
+        #{mallStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedBy != null">
+        #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="whenmodified != null">
+        #{whenmodified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="insertSelectiveMap" parameterType="java.util.Map">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_mall_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mallId != null">
+        mall_id,
+      </if>
+      <if test="brchId != null">
+        brch_id,
+      </if>
+      <if test="mallName != null">
+        mall_name,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="mallType != null">
+        mall_type,
+      </if>
+      <if test="areaCode != null">
+        area_code,
+      </if>
+      <if test="createYear != null">
+        create_year,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="companyLegalPerson != null">
+        company_legal_person,
+      </if>
+      <if test="busLimitDate != null">
+        bus_limit_date,
+      </if>
+      <if test="mallStatus != null">
+        mall_status,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="modifiedBy != null">
+        modified_by,
+      </if>
+      <if test="whenmodified != null">
+        whenmodified,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mallId != null">
+        #{mallId,jdbcType=VARCHAR},
+      </if>
+      <if test="brchId != null">
+        #{brchId,jdbcType=VARCHAR},
+      </if>
+      <if test="mallName != null">
+        #{mallName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="mallType != null">
+        #{mallType,jdbcType=CHAR},
+      </if>
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createYear != null">
+        #{createYear,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLegalPerson != null">
+        #{companyLegalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="busLimitDate != null">
+        #{busLimitDate,jdbcType=VARCHAR},
+      </if>
+      <if test="mallStatus != null">
+        #{mallStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedBy != null">
+        #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="whenmodified != null">
+        #{whenmodified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.MallInfo">
+    update csr_mall_info
+    <set>
+      <if test="mallId != null">
+        mall_id = #{mallId,jdbcType=VARCHAR},
+      </if>
+      <if test="brchId != null">
+        brch_id = #{brchId,jdbcType=VARCHAR},
+      </if>
+      <if test="mallName != null">
+        mall_name = #{mallName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="mallType != null">
+        mall_type = #{mallType,jdbcType=CHAR},
+      </if>
+      <if test="areaCode != null">
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createYear != null">
+        create_year = #{createYear,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLegalPerson != null">
+        company_legal_person = #{companyLegalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="busLimitDate != null">
+        bus_limit_date = #{busLimitDate,jdbcType=VARCHAR},
+      </if>
+      <if test="mallStatus != null">
+        mall_status = #{mallStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedBy != null">
+        modified_by = #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="whenmodified != null">
+        whenmodified = #{whenmodified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where mall_id = #{mallId,jdbcType=VARCHAR}
+  </update>
+  
+    <update id="updateByPrimaryKeySelectiveByMap" parameterType="java.util.Map">
+    update csr_mall_info
+    <set>
+      <if test="mallId != null">
+        mall_id = #{mallId,jdbcType=VARCHAR},
+      </if>
+      <if test="brchId != null">
+        brch_id = #{brchId,jdbcType=VARCHAR},
+      </if>
+      <if test="mallName != null">
+        mall_name = #{mallName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="mallType != null">
+        mall_type = #{mallType,jdbcType=CHAR},
+      </if>
+      <if test="areaCode != null">
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createYear != null">
+        create_year = #{createYear,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLegalPerson != null">
+        company_legal_person = #{companyLegalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="busLimitDate != null">
+        bus_limit_date = #{busLimitDate,jdbcType=VARCHAR},
+      </if>
+      <if test="mallStatus != null">
+        mall_status = #{mallStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedBy != null">
+        modified_by = #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="whenmodified != null">
+        whenmodified = #{whenmodified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where mall_id = #{mallId,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.MallInfo">
+    update csr_mall_info
+    set mall_id = #{mallId,jdbcType=VARCHAR},
+      brch_id = #{brchId,jdbcType=VARCHAR},
+      mall_name = #{mallName,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      mall_type = #{mallType,jdbcType=CHAR},
+      area_code = #{areaCode,jdbcType=VARCHAR},
+      create_year = #{createYear,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      company_legal_person = #{companyLegalPerson,jdbcType=VARCHAR},
+      bus_limit_date = #{busLimitDate,jdbcType=VARCHAR},
+      mall_status = #{mallStatus,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      modified_by = #{modifiedBy,jdbcType=VARCHAR},
+      whenmodified = #{whenmodified,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=INTEGER}
+    where row_id = #{rowId,jdbcType=BIGINT}
+  </update>
+   <select id="selectMallInfoList" parameterType="com.gxyj.cashier.domain.MallInfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_mall_info where mall_status=1
+  </select>
+  
+  <select id="selectByMallId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_mall_info
+    where mall_id = #{mallId,jdbcType=VARCHAR}
+  </select>
+  
+  <insert id="insertBatch" parameterType="java.util.List">
+
+		insert into csr_mall_info (mall_id, brch_id, mall_name, 
+	      parent_id, mall_type, area_code, 
+	      create_year, company_name, company_legal_person, 
+	      bus_limit_date, mall_status, created_by, 
+	      created_date, modified_by, whenmodified, 
+	      version)
+	    <foreach collection="list" item="item" index="index" separator=",">
+	    values (#{mallId,jdbcType=VARCHAR}, #{brchId,jdbcType=VARCHAR}, #{mallName,jdbcType=VARCHAR}, 
+	      #{parentId,jdbcType=VARCHAR}, #{mallType,jdbcType=CHAR}, #{areaCode,jdbcType=VARCHAR}, 
+	      #{createYear,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{companyLegalPerson,jdbcType=VARCHAR}, 
+	      #{busLimitDate,jdbcType=VARCHAR}, #{mallStatus,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+	      #{createdDate,jdbcType=TIMESTAMP}, #{modifiedBy,jdbcType=VARCHAR}, #{whenmodified,jdbcType=TIMESTAMP}, 
+	      #{version,jdbcType=INTEGER})
+		</foreach>
+
+   </insert>
+  
+   <select id="findByListMallId" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_mall_info t1  where (t1.mall_id = #{mallId,jdbcType=VARCHAR} or t1.parent_id in (
+    <foreach collection="list" item="item" index="index" separator=",">
+      #{item}
+    </foreach>
+    )
+    ) and mall_status=1
+   </select>
+   
+   <select id="selectByBrchId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_mall_info
+    where brch_id = #{brchId,jdbcType=VARCHAR}
+   </select>
+</mapper>

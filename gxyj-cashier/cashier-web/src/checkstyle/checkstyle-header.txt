@@ -1,0 +1,10 @@
+^\Q/*\E$
+^\Q * Copyright (c) \E20\d\d\-20\d\d\Q China CO-OP ELECTRONIC COMMERCE CO. LTD. All Rights Reserved.\E$
+^\Q *\E$
+^\Q * This software is the confidential and proprietary information of\E$
+^\Q * China CO-OP ELECTRONIC COMMERCE CO. LTD. ("Confidential Information").\E$
+^\Q * It may not be copied or reproduced in any manner without the express\E$
+^\Q * written permission of China CO-OP ELECTRONIC COMMERCE CO. LTD.\E$
+^\Q */\E$
+^$
+^.*$

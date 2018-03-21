@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gxyj.cashier.mapping.payment.PaymentMapper" >
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.Payment" >
+    <id column="row_id" property="rowId" jdbcType="INTEGER" />
+    <id column="trans_id" property="transId" jdbcType="VARCHAR" />
+    <result column="refund_flag" property="refundFlag" jdbcType="TINYINT" />
+    <result column="sync_flag" property="syncFlag" jdbcType="TINYINT" />
+    <result column="payer_name" property="payerName" jdbcType="VARCHAR" />
+    <result column="payer_acct_no" property="payerAcctNo" jdbcType="VARCHAR" />
+    <result column="payer_insti_no" property="payerInstiNo" jdbcType="VARCHAR" />
+    <result column="payer_insti_nm" property="payerInstiNm" jdbcType="VARCHAR" />
+    <result column="insti_pay_type" property="instiPayType" jdbcType="CHAR" />
+    <result column="sign_data" property="signData" jdbcType="VARCHAR" />
+    <result column="sign_type" property="signType" jdbcType="CHAR" />
+    <result column="trans_code" property="transCode" jdbcType="VARCHAR" />
+    <result column="req_timestamp" property="reqTimestamp" jdbcType="VARCHAR" />
+    <result column="insti_trans_id" property="instiTransId" jdbcType="VARCHAR" />
+    <result column="insti_resp_cd" property="instiRespCd" jdbcType="VARCHAR" />
+    <result column="insti_rsp_des" property="instiRspDes" jdbcType="VARCHAR" />
+    <result column="insti_rsp_time" property="instiRspTime" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="last_updt_date" property="lastUpdtDate" jdbcType="TIMESTAMP" />
+    <result column="last_updt_by" property="lastUpdtBy" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    row_id, trans_id, refund_flag, sync_flag, payer_name, payer_acct_no, payer_insti_no, 
+    payer_insti_nm, insti_pay_type, sign_data, sign_type, trans_code, req_timestamp,insti_trans_id, 
+    insti_resp_cd, insti_rsp_des, insti_rsp_time, remark, created_by, created_date, last_updt_date, 
+    last_updt_by, version
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.gxyj.cashier.domain.PaymentKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from csr_payment
+    where trans_id = #{transId,jdbcType=VARCHAR}
+    <if test="rowId != null" >
+       and row_id = #{rowId,jdbcType=INTEGER}
+    </if>
+     	
+  </select>
+  
+  <select id="selectCountByPrimaryKey" resultType="java.lang.Integer" parameterType="com.gxyj.cashier.domain.PaymentKey" >
+    select 
+    count(*)
+    from csr_payment
+    where trans_id = #{transId,jdbcType=VARCHAR}
+    <if test="rowId != null" >
+       and row_id = #{rowId,jdbcType=INTEGER}
+    </if>
+    
+     	
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.gxyj.cashier.domain.PaymentKey" >
+    delete from csr_payment
+    where trans_id = #{transId,jdbcType=VARCHAR}
+    <if test="rowId != null" >
+       and row_id = #{rowId,jdbcType=INTEGER}
+    </if>
+    
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.Payment" >
+    insert into csr_payment (row_id, trans_id, refund_flag, 
+      sync_flag, payer_name, payer_acct_no, 
+      payer_insti_no, payer_insti_nm, insti_pay_type, 
+      sign_data, sign_type, trans_code, 
+      req_timestamp, insti_trans_id,insti_resp_cd, insti_rsp_des, 
+      insti_rsp_time, remark, created_by, 
+      created_date, last_updt_date, last_updt_by, 
+      version)
+    values (#{rowId,jdbcType=INTEGER}, #{transId,jdbcType=VARCHAR}, #{refundFlag,jdbcType=TINYINT}, 
+      #{syncFlag,jdbcType=TINYINT}, #{payerName,jdbcType=VARCHAR}, #{payerAcctNo,jdbcType=VARCHAR}, 
+      #{payerInstiNo,jdbcType=VARCHAR}, #{payerInstiNm,jdbcType=VARCHAR}, #{instiPayType,jdbcType=CHAR}, 
+      #{signData,jdbcType=VARCHAR}, #{signType,jdbcType=CHAR}, #{transCode,jdbcType=VARCHAR}, 
+      #{reqTimestamp,jdbcType=VARCHAR}, #{instiTransId,jdbcType=VARCHAR},#{instiRespCd,jdbcType=VARCHAR}, 
+      #{instiRspDes,jdbcType=VARCHAR}, #{instiRspTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtDate,jdbcType=TIMESTAMP}, 
+      #{lastUpdtBy,jdbcType=VARCHAR},#{version,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.Payment" >
+    insert into csr_payment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        row_id,
+      </if>
+      <if test="transId != null" >
+        trans_id,
+      </if>
+      <if test="refundFlag != null" >
+        refund_flag,
+      </if>
+      <if test="syncFlag != null" >
+        sync_flag,
+      </if>
+      <if test="payerName != null" >
+        payer_name,
+      </if>
+      <if test="payerAcctNo != null" >
+        payer_acct_no,
+      </if>
+      <if test="payerInstiNo != null" >
+        payer_insti_no,
+      </if>
+      <if test="payerInstiNm != null" >
+        payer_insti_nm,
+      </if>
+      <if test="instiPayType != null" >
+        insti_pay_type,
+      </if>
+      <if test="signData != null" >
+        sign_data,
+      </if>
+      <if test="signType != null" >
+        sign_type,
+      </if>
+      <if test="transCode != null" >
+        trans_code,
+      </if>
+      <if test="reqTimestamp != null" >
+        req_timestamp,
+      </if>
+      <if test="instiTransId != null" >
+        insti_trans_id,
+      </if>
+      <if test="instiRespCd != null" >
+        insti_resp_cd,
+      </if>
+      <if test="instiRspDes != null" >
+        insti_rsp_des,
+      </if>
+      <if test="instiRspTime != null" >
+        insti_rsp_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="createdDate != null" >
+        created_date,
+      </if>
+      <if test="lastUpdtDate != null" >
+        last_updt_date,
+      </if>
+      <if test="lastUpdtBy != null" >
+        last_updt_by,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="transId != null" >
+        #{transId,jdbcType=VARCHAR},
+      </if>
+      <if test="refundFlag != null" >
+        #{refundFlag,jdbcType=TINYINT},
+      </if>
+      <if test="syncFlag != null" >
+        #{syncFlag,jdbcType=TINYINT},
+      </if>
+      <if test="payerName != null" >
+        #{payerName,jdbcType=VARCHAR},
+      </if>
+      <if test="payerAcctNo != null" >
+        #{payerAcctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payerInstiNo != null" >
+        #{payerInstiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payerInstiNm != null" >
+        #{payerInstiNm,jdbcType=VARCHAR},
+      </if>
+      <if test="instiPayType != null" >
+        #{instiPayType,jdbcType=CHAR},
+      </if>
+      <if test="signData != null" >
+        #{signData,jdbcType=VARCHAR},
+      </if>
+      <if test="signType != null" >
+        #{signType,jdbcType=CHAR},
+      </if>
+      <if test="transCode != null" >
+        #{transCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reqTimestamp != null" >
+        #{reqTimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="instiTransId != null" >
+        #{instiTransId,jdbcType=VARCHAR},
+      </if>
+      <if test="instiRespCd != null" >
+        #{instiRespCd,jdbcType=VARCHAR},
+      </if>
+      <if test="instiRspDes != null" >
+        #{instiRspDes,jdbcType=VARCHAR},
+      </if>
+      <if test="instiRspTime != null" >
+        #{instiRspTime,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null" >
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null" >
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.Payment" >
+    update csr_payment
+    <set >
+      <if test="refundFlag != null" >
+        refund_flag = #{refundFlag,jdbcType=TINYINT},
+      </if>
+      <if test="syncFlag != null" >
+        sync_flag = #{syncFlag,jdbcType=TINYINT},
+      </if>
+      <if test="payerName != null" >
+        payer_name = #{payerName,jdbcType=VARCHAR},
+      </if>
+      <if test="payerAcctNo != null" >
+        payer_acct_no = #{payerAcctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payerInstiNo != null" >
+        payer_insti_no = #{payerInstiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payerInstiNm != null" >
+        payer_insti_nm = #{payerInstiNm,jdbcType=VARCHAR},
+      </if>
+      <if test="instiPayType != null" >
+        insti_pay_type = #{instiPayType,jdbcType=CHAR},
+      </if>
+      <if test="signData != null" >
+        sign_data = #{signData,jdbcType=VARCHAR},
+      </if>
+      <if test="signType != null" >
+        sign_type = #{signType,jdbcType=CHAR},
+      </if>
+      <if test="transCode != null" >
+        trans_code = #{transCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reqTimestamp != null" >
+        req_timestamp = #{reqTimestamp,jdbcType=VARCHAR},
+      </if>      
+      <if test="instiTransId != null" >
+        insti_trans_id = #{instiTransId,jdbcType=VARCHAR},
+      </if>
+      <if test="instiRespCd != null" >
+        insti_resp_cd = #{instiRespCd,jdbcType=VARCHAR},
+      </if>
+      <if test="instiRspDes != null" >
+        insti_rsp_des = #{instiRspDes,jdbcType=VARCHAR},
+      </if>
+      <if test="instiRspTime != null" >
+        insti_rsp_time = #{instiRspTime,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null" >
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null" >
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=TINYINT},
+      </if>
+    </set>
+    where trans_id = #{transId,jdbcType=VARCHAR}
+    <if test="rowId != null" >
+       and row_id = #{rowId,jdbcType=INTEGER}
+    </if>
+    
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.Payment" >
+    update csr_payment
+    set refund_flag = #{refundFlag,jdbcType=TINYINT},
+      sync_flag = #{syncFlag,jdbcType=TINYINT},
+      payer_name = #{payerName,jdbcType=VARCHAR},
+      payer_acct_no = #{payerAcctNo,jdbcType=VARCHAR},
+      payer_insti_no = #{payerInstiNo,jdbcType=VARCHAR},
+      payer_insti_nm = #{payerInstiNm,jdbcType=VARCHAR},
+      insti_pay_type = #{instiPayType,jdbcType=CHAR},
+      sign_data = #{signData,jdbcType=VARCHAR},
+      sign_type = #{signType,jdbcType=CHAR},
+      trans_code = #{transCode,jdbcType=VARCHAR},
+      req_timestamp = #{reqTimestamp,jdbcType=VARCHAR},      
+      insti_trans_id = #{instiTransId,jdbcType=VARCHAR},
+      insti_resp_cd = #{instiRespCd,jdbcType=VARCHAR},
+      insti_rsp_des = #{instiRspDes,jdbcType=VARCHAR},
+      insti_rsp_time = #{instiRspTime,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      version = #{version,jdbcType=TINYINT}
+    where trans_id = #{transId,jdbcType=VARCHAR}
+     <if test="rowId != null" >
+       and row_id = #{rowId,jdbcType=INTEGER}
+    </if>
+  </update>
+  
+  
+   <select id="fetchPaymentOfNotify" resultMap="BaseResultMap" parameterType="java.lang.Byte" >
+    select 
+    <include refid="Base_Column_List" />
+    from csr_payment
+    where sync_flag = #{syncFlag,jdbcType=TINYINT}
+  </select>
+  
+   <select id="selectByPaymentList" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from csr_payment
+		where trans_id = #{transId,jdbcType=VARCHAR}
+		
+	</select>
+
+</mapper>

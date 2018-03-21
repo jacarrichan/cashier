@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+
+@import "../../../common/css/page-common.css";
+
+.form-group > label,
+.form-group > div {
+	float: left;
+}
+
+.form-group > label {
+	text-align: right;
+}
+
+.form-group.form-buttons {
+    margin-top: 5px;
+    float: left;
+}
+
+#smModal {
+    margin: 14px;
+}
+
+.modal-backdrop.fade.in {
+    margin: 1px;
+    opacity: 0.3;
+}
+
+.td-right-middle {
+    text-align: right;
+    vertical-align: middle !important;
+}
+
+#dayNumDiv {
+	display: none;
+}

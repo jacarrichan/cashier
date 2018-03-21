@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>权限新增</title>
+<script id="seajsnode" type="text/javascript" src="../../loader.js" data-js="./js/rightinfo-addedit" data-css="./css/rightinfo-addedit.css"></script>
+</head>
+<body>
+	<div class="wrapper wrapper-content">
+		<div class="modal fade" id="smModal">
+			<div class="modal-dialog modal-sm">
+			    <div class="modal-content">
+			      	<div class="modal-header">
+			        	<h4 class="modal-title">提示</h4>
+			      	</div>
+			      	<div class="modal-body">
+			        	<h4>新增成功，是否继续新增？</h4>
+			      	</div>
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-default btn-no" data-dismiss="modal">取消</button>
+			        	<button type="button" class="btn btn-primary btn-yes">继续</button>
+			      	</div>
+			    </div>
+		  	</div>
+		</div>
+		
+		<form class="form-horizontal form-inline" id="form">
+			<div class="form-group col-sm-12">
+				<label class="col-sm-4" for="rightName"><span class="red">*</span> 菜单名称</label>
+				<div >
+					<input class="form-control" id="rightName" name="rightName" placeholder="菜单名称" data-rule='[required=true;maxlength=128;spec=true;isExist={"url":"m112/f11205","tokenUrl":true,"data":{}}]'/>
+				</div>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-4" for="rightUrl">菜单地址</label>
+				<div >
+					<input class="form-control" id="rightUrl" name="rightUrl" placeholder="菜单地址"  data-rule='[maxlength=128]'/>
+				</div>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-4" for="parentRightName">上级菜单</label>
+				<div >
+					<input class="form-control" id="parentRightName" name="parentRightName" readonly="readonly"/>
+					<input id="parentRightId" name="parentRightId" type="hidden"/> 
+					<button type="button" class="btn btn-rightchoice" data-toggle="dropdown">选择上级菜单</button>
+					<div class="dropdown-menu brchchoice-panel">
+					    <iframe id="rightFrame" name="rightFrame" src="" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+					</div>
+					<button type="button" class="btn btn-clear">清空</button>
+				</div>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-4" for="rightNum">菜单序号</label>
+				<div >
+					<input type="number"  class="form-control" id="rightNum" name="rightNum" placeholder="菜单序号"  data-rule='[maxlength=8;min=0]'/>
+				</div>
+			</div>
+			<div class="form-group col-sm-12 " id="funDiv">
+				<label class="col-sm-4" for="functions">功能权限</label>
+				<div>
+					<label class="checkbox-inline" data-code="add">
+					    <input type="checkbox" name="functions" id="right-add" value="add"> 新增
+				 	</label>
+					<label class="checkbox-inline" data-code="edit">
+					    <input type="checkbox" name="functions" id="right-edit" value="edit"> 修改
+					</label>
+					 <label class="checkbox-inline" data-code="delete">
+						<input type="checkbox" name="functions" id="right-delete" value="delete"> 删除
+					</label>
+					<label class="checkbox-inline" data-code="check">
+					    <input type="checkbox" name="functions" id="right-open" value="open"> 启用
+					</label> 
+					<label class="checkbox-inline" data-code="check">
+					    <input type="checkbox" name="functions" id="right-close" value="close"> 停用
+					</label>
+					<label class="checkbox-inline" data-code="check">
+					    <input type="checkbox" name="functions" id="right-vinn" value="vinn"> 维护
+					</label>
+				</div>
+				
+				<!-- <div class="col-sm-3">
+					<label class="checkbox-inline" data-code="check">
+					    <input type="checkbox" name="functions" id="right-close" value="close"> 关闭发布
+					</label>
+					<label class="checkbox-inline" data-code="check">
+					    <input type="checkbox" name="functions" id="right-preview" value="preview"> 大屏预览
+					</label>
+					<label class="checkbox-inline" data-code="check">
+					    <input type="checkbox" name="functions" id="right-importin" value="importin"> 数据导入
+					</label>
+					<label class="checkbox-inline" data-code="check">
+					    <input type="checkbox" name="functions" id="right-deploy" value="deploy"> 发布
+					</label>
+					<label class="checkbox-inline color-primary">
+					    <input type="checkbox" id="cbox-more"> 其他
+					</label>
+					<div class="functions-box hidden"></div>
+				</div> -->
+			</div>
+			
+			<div class="col-sm-12">
+				<div class="alert"></div>
+			</div>
+		</form>
+		<div class="form-group form-buttons">
+			<button class="btn btn-success btn-submit">提交</button>
+			<button class="btn btn-warning btn-cancel">取消</button>
+		</div>
+	</div>
+	
+	<script type="text/template" id="option.tpl">
+		<option value="{{d.code}}" {{d.attr || ''}}>{{d.name}}</option>
+	</script>
+	<script type="text/template" id="function.tpl">
+		<label class="checkbox-inline" data-code="{{d.code}}">
+			<input type="checkbox" name="functions" id="{{d.code}}" value="{{d.value}}" {{d.checked}} data-more="true" /> {{d.name}}
+		</label>
+	</script>
+</body>
+</html>

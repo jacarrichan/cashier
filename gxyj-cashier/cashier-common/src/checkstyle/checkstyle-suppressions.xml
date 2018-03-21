@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+    "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+    "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+<suppressions>
+	
+	<suppress files="[\\/]src[\\/]test[\\/]java[\\/]cli[\\/]command[\\/]" checks="ImportControl" />
+	<suppress files="[\\/]src[\\/]main[\\/]java[\\/]sample[\\/]" checks="ImportControl" />
+	<suppress files="[\\/]src[\\/]test[\\/]java[\\/]sample[\\/]" checks="ImportControl" />
+	<suppress files="[\\/]src[\\/]test[\\/]java[\\/]" checks="Javadoc*" />
+	<suppress files="[\\/]src[\\/]test[\\/]java[\\/]" checks="Javadoc*" />
+	<suppress files="com.gxyj.cashier.common.convert.*\.java" checks="Javadoc*" />
+	
+	<suppress files="\.java" checks="NoWhitespaceAfter" />
+	<suppress files="\.java" checks="WhitespaceAfter" />
+	<suppress files="\.java" checks="WhitespaceAround" />
+	<suppress files="\.java" checks="HideUtilityClassConstructor"/>
+	<suppress files="Constants\.java" checks="InterfaceIsType"/>
+	<suppress files="RegexConstants\.java" checks="InterfaceIsType"/>
+	
+	
+	<!-- 首句应以句号结尾-->
+	<suppress files="\.java" checks="JavadocStyle" />
+	<!-- 导入包顺序 -->
+	<suppress files="\.java" checks="ImportOrderCheck" />
+	<suppress files="\.java" checks="RequireThis" />
+	<suppress files="\.java" checks="RegexpSinglelineJava" />
+	<suppress files="\.java" checks="CommentsIndentation" />
+	<suppress files="\.java" checks="RegexpCheck" />
+	<suppress files="\.java" checks="AnnotationUseStyle" />
+	
+</suppressions>

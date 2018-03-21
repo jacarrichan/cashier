@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>供销收银台</title>
+    <script id="seajsnode" type="text/javascript" src="./../../loader.js" data-js="./js/app-cashier.js" 
+	data-css="./css/app-cashier.css"></script>
+</head>
+<body>
+	<div class="payment-warp">
+		<div class="payment-header">
+			<div class="head-title text-center">供销收银台</div>
+			<span class="back-icon" onclick="history.go(-1);">
+				<i class="icon icon-angle-left"></i>
+			</span>
+		</div>
+		<div class="order-info">
+			<p class="order-explain">订单信息</p>
+			<div class="order-items">
+				<div class="order-item order-num">
+					<span class="serial-num">
+						<span>交易流水号</span>
+					</span>：
+					<span id="batch"></span>
+				</div>
+				<div class="order-item order-num">
+					<span class="serial-num">
+						<span class="w4">订单编号</span>
+					</span>：
+					<span id="orderNumber"></span>
+				</div>
+				<div class="order-item">
+					<span class="serial-num">
+						<span class="w4">订单金额</span>
+					</span>：
+					<span id="orderAmount"></span>
+				</div>
+			</div>
+		</div>
+		<div class="order-info">
+			<p class="order-explain">支付方式</p>
+			<div class="pay-type" id="payType">
+			
+			</div>
+		</div>
+	</div>
+	<div class="payment-footer">
+		<div class="pay-prompt text-center" id="buyNow">立即支付</div>
+	</div>
+	
+	<!-- 页面超时弹框 -->
+   <!-- <div id="reloadPage">
+    	<div class="text-center refresh-explain">您因长时间未进行操作页面已过期，请<a href="javascript: void(0);" id="refreshPage">刷新</a>页面!</div>
+    </div> -->
+    
+    <!--  弹框背景 -->
+    <div id="modalMark"></div>
+	
+	<!-- 支付方式列表 -->
+	<script type="text/template" id="channel-list">
+		{{# for(var i = 0, len = d.bankLists.length; i < len; i++){ }}
+			<div class="pay-channel" >
+				<span class="channel-img">
+					<img class="bank-img" src="{{d.bankLists[i].src}}" data-channel="{{ d.payChannel }}" data-code="{{d.bankLists[i].payCode}}" data-bank="{{ d.bankLists[i].bank }}" data-ajax="{{ d.bankLists[i].ajaxUrl }}">
+				</span>
+				<span class="simulate-radio"></span>
+			</div>
+		{{# } }}
+	</script>
+</body>
+</html>

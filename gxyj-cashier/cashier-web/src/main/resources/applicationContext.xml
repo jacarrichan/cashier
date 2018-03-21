@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.3.xsd    
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-4.3.xsd 
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+	http://www.springframework.org/schema/task  
+    http://www.springframework.org/schema/task/spring-task-4.3.xsd  
+	">
+
+	<!-- 开启注解模式 -->
+	<mvc:annotation-driven/>
+
+	<!-- 基于注解的方式配置切面 -->
+	<context:annotation-config />
+
+	<!-- 使用默认的Servlet来响应静态文件 -->
+	<mvc:default-servlet-handler />
+
+	<!-- 自动代理 -->
+	<aop:aspectj-autoproxy />
+	
+	<!-- springMVC配置 -->
+	<!-- 静态资源 -->
+	 <mvc:resources location="/lib/" mapping="/lib/**" />
+	<mvc:resources location="/apps/" mapping="/apps/**" />
+	<mvc:resources location="/common/" mapping="/common/**" />
+	<mvc:resources location="/images/" mapping="/images/**" />
+	<mvc:resources location="/" mapping="/loader.js" />
+
+	<bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/view/" />
+		<property name="suffix" value=".jsp" />
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="order" value="1" />
+	</bean>
+	<!-- springMVC配置结束 -->
+
+	<!-- 扫描管理Bean配置 -->
+	<context:component-scan base-package="com.gxyj.cashier.web.controller.*"/>
+		<!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>-->
+
+	<!-- 开启注解模式
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+
+				</property>
+
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven> -->
+	<!-- 扫描管理Bean配置结束 -->
+
+	<import resource="spring-consumer.xml" />
+
+</beans>

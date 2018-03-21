@@ -1,0 +1,78 @@
+@CHARSET "UTF-8";
+
+@import "../../../common/css/page-common.css";
+
+body {
+	background: url('../../../images/background-1.jpg') no-repeat;
+	background-color: #c9ccd1;
+}
+
+.panel-login{
+	width: 800px;
+	height: 550px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	background: rgba(255, 255, 255, 0)
+}
+
+#container {
+    position: absolute;
+    z-index: -1;
+}
+
+.logo-panel {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+
+.logo-panel .title {
+    color: #eeeeee;
+}
+
+.panel-left {
+	background: #f6ab00;
+	width: 50%;
+	height: 100%;
+	text-align: center;
+	padding: 150px 10px;
+}
+
+.panel-right {
+	background: #ffffff;
+	width: 50%;
+	height: 100%;
+	padding: 50px 10px;
+}
+
+.panel-left .title {
+	color: #ffffff;
+}
+
+.panel-right .title {
+	width: 100%;
+	height: 50px;
+	line-height: 45px;
+	font-size: 22px;
+	text-align: center;
+}
+
+.login-form {
+	width: 100%;
+    height: 200px;
+    margin-top: 30px;
+	text-align: center;
+}
+
+.login-form .from-group {
+    margin-top: 40px;
+    /* margin-left: 70px; */
+}
+
+.login-form .tooltip {
+	width: 150px;
+}

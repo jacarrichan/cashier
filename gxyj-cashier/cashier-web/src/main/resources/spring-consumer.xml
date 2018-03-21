@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- <context:property-placeholder location="classpath:zookeeper.properties" ignore-unresolvable="true"/> -->
+	<dubbo:registry protocol="zookeeper" address="${application.zookeeper-connect-url}" check="false" />
+    
+	<dubbo:application name="consumer-cashier-web"  />
+ 
+    <dubbo:consumer timeout="5000" />
+ 
+    <!-- 生成远程服务代理 -->
+    <dubbo:reference interface="com.gxyj.cashier.service.business.BusiChannelService" id="busiChannelService" check="false" />
+    <dubbo:reference interface="com.gxyj.cashier.service.wechat.PayWeChatService" id="payWeChatService" check="false" />
+    <dubbo:reference interface="com.gxyj.cashier.service.wechat.QueryWeChatService" id="queryWeChatService" check="false" />
+    <dubbo:reference interface="com.gxyj.cashier.service.wechat.RefundQueryWeChatService" id="refundQueryWeChatService" check="false" />
+    <dubbo:reference interface="com.gxyj.cashier.service.mallinterface.MallInterfaceService" id="mallInterfaceService" check="false" />
+    <dubbo:reference interface="com.gxyj.cashier.service.displayTemplate.MallModelService" id="mallModelService" check="false" />
+    <dubbo:reference interface="com.gxyj.cashier.service.order.OrderPayInfoService" id="orderPayInfoService" check="false"  />
+	<dubbo:reference interface="com.gxyj.cashier.service.ifmessage.IfsMessageService" id="ifsMessageService" check="false"  />
+	<dubbo:reference interface="com.gxyj.cashier.service.commongenno.CommonGenNoService" id="commonGenNoService" check="false"  />
+	<dubbo:reference interface="com.gxyj.cashier.service.order.ChangeOrderStatusService" id="changeOrderStatusService" check="false"  />
+	<dubbo:reference interface="com.gxyj.cashier.service.order.ChangeRefundOrderStatusService" id="changeRefundOrderStatusService" check="false"  />
+	<dubbo:reference interface="com.gxyj.cashier.service.payment.PaymentService" id="paymentService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.order.OrderInfoService" id="orderInfoService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.recon.ReconciliationService" id="reconciliationService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.paymentchannel.PaymentChannelService" id="paymentChannelService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.forward.ForwardService" id="forwardService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.recon.QueryReconciliationService" id="queryReconciliationService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.order.OrderRefundService" id="orderRefundService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.interfacesurl.InterfacesUrlService" id="interfacesUrlService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.order.OrderCloseService" id="orderCloseService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.bestpay.BestPayService" id="bestPayService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.rocketmq.RocketMqService" id="rocketMqService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.alipay.AliPayService" id="aliPayService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.gopay.GoPayService" id="goPayService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.rcb.RcbPayService" id="rcbPayService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.ccb.CcbPayService" id="ccbPayService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.order.OrderTradePayService" id="orderTradePayService" check="false" />
+	
+	
+	<dubbo:reference interface="com.gxyj.cashier.service.CEBBank.CEBBankService" id="cEBBankService" check="false" />
+	
+	<dubbo:reference interface="com.gxyj.cashier.service.message.MessageService" id="messageService" check="false" />
+	
+	<dubbo:reference interface="com.gxyj.cashier.service.displayTemplate.WebpageModelService" id="webpageModelService" check="false" />
+	
+	
+	<dubbo:reference interface="com.gxyj.cashier.service.alipay.AliPayAppService" id="aliPayAppService" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.alipay.AliPayH5Service" id="aliPayh5Service" check="false" />
+	
+	<dubbo:reference interface="com.gxyj.cashier.service.bestpay.BestPayH5Service" id="bestPayH5Service" check="false" />
+	<dubbo:reference interface="com.gxyj.cashier.service.paymentchannel.CsrPayMerRelationService" id="payMerRelationService" check="false" />
+	
+</beans>

@@ -1,0 +1,679 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<config>
+	<function_list>
+		<item name="myUtils" class="com.echinacoop.itranspond.convert.utils.ConvertUtils"/>
+	</function_list>
+	<transaction code="sample100"><!--发起报文 -->
+		<request msg_type="bean">
+			<group name="Document">				
+			  <group name="FIToFICstmrCdtTrf" >
+			    <group name="GrpHdr" >
+			      <item name="MsgId" bean_field="msg_id" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--报文标识号-->
+			      <item name="CreDtTm" bean_field="msg_cre_tm" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--报文发送时间-->
+			      <item name="NbOfTxs" value="1"/><!--明细业务总笔数-->
+			      <group name="SttlmInf" >
+			        <item name="SttlmMtd" value="CLRG"/><!---->
+			      </group>
+			    </group>
+			    <group name="CdtTrfTxInf" >
+			      <group name="PmtId" >
+			        <item name="EndToEndId" bean_field="end2end_id" function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--端到端标识号-->
+			        <item name="TxId" bean_field="trans_id" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--交易标识号-->
+			      </group>
+			      <group name="PmtTpInf" >
+			        <group name="CtgyPurp" >
+			          <item name="Prtry" bean_field="trans_type" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--业务类型编码-->
+			        </group>
+			      </group>
+			      <item name="IntrBkSttlmAmt" bean_field="amount" function="signUtil.buildSignString(#signCtx, 'CNY'+./, 1)" value="function:strUtil.formatNumber(./.toString(),'#0.00#')"><!--货币符号、金额-->
+			        <attr name="Ccy" value="CNY"/>
+			      </item>
+			      <item name="SttlmPrty" bean_field="priority" function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--业务优先级-->
+			      <item name="ChrgBr" value="DEBT"/><!---->
+			      <!-- 人行新标 Begin -->
+			      <group name="InstgAgt">
+				      	<group name="FinInstnId">
+				      		<group name="ClrSysMmbId">
+				      			<item name="MmbId" bean_field="send_sap_bank_code" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--付款清算行行号-->
+				      		</group>			      		
+				      	</group>
+				      	<group name="BrnchId">
+				      		<item name="Id" bean_field="send_bank_code" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--付款行行号-->
+				      	</group>
+			      </group>
+			      
+			      <group name="InstdAgt">
+				      	<group name="FinInstnId">
+				      		<group name="ClrSysMmbId">
+				      			<item name="MmbId" bean_field="recv_sap_bank_code" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--收款清算行行号-->
+				      		</group>			      		
+				      	</group>
+				      	<group name="BrnchId">
+				      		<item name="Id" bean_field="recv_bank_code" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--收款行行号-->
+				      	</group>
+			      </group>
+			      
+			      <!-- 中介机构-->
+			      <group name="IntrmyAgt1">
+			      <group name="FinInstnId">
+			      		<group name="ClrSysMmbId">
+			      			<item name="MmbId" bean_field="agent_bank_code" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--中介机构1-->
+			      		</group>
+			      		<item name="Nm" bean_field="agent_bank_name" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--中介机构1名称-->			      		
+			      	</group>
+			      </group>
+			      
+			      <group name="IntrmyAgt2">
+			      	<group name="FinInstnId">
+			      		<group name="ClrSysMmbId">
+			      			<item name="MmbId" bean_field="agent_bank_code_1" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--中介机构2-->
+			      		</group>
+			      		<item name="Nm" bean_field="agent_bank_name_1" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--中介机构2名称-->			      		
+			      	</group>
+			      </group>
+			      
+			       
+			      <group name="Dbtr" >
+			        <item name="Nm" bean_field="payer_name" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--付款人名称  -->
+			        <group name="PstlAdr" >
+			          <item name="AdrLine" bean_field="payer_addr" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--付款人地址-->
+			        </group>
+			      </group>
+			      
+			      <group name="DbtrAcct" >
+			        <group name="Id" >
+			          <group name="Othr" >
+			            <item name="Id" bean_field="payer_acct_no" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--付款人账号-->
+			          </group>
+			        </group>
+			      </group>
+			      <group name="DbtrAgt">
+			      	<group name="FinInstnId">
+			      		<group name="ClrSysMmbId">
+			      			<item name="MmbId" bean_field="payer_open_bank_code" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--付款人开户行行号-->
+			      		</group>
+			      		<item name="Nm" bean_field="payer_open_bank_name" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--付款人开户行名称-->			      		
+			      	</group>
+			      </group>
+			      
+			      <group name="CdtrAgt">
+			      	<group name="FinInstnId">
+			      		<group name="ClrSysMmbId">
+			      			<item name="MmbId" bean_field="bener_open_bank_code" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--收款人开户行行号-->
+			      		</group>
+			      		<item name="Nm" bean_field="payee_open_bank_name" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--收款人开户行名称-->			      		
+			      	</group>
+			      </group>
+			      
+			      			      
+			      <!-- 人行新标 End -->
+
+			      <group name="Cdtr" >
+			        <item name="Nm" bean_field="bener_name" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--收款人名称-->
+			        <group name="PstlAdr" >
+			          <item name="AdrLine" bean_field="bener_addr" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--收款人地址-->
+			        </group>
+			      </group>
+			      <group name="CdtrAcct" >
+			        <group name="Id" >
+			          <group name="Othr" >
+			            <item name="Id" bean_field="bener_acct_no" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--收款人账号-->
+			            <!--<item name="Issr" bean_field="bener_open_bank_code" function="signUtil.buildSignString(#signCtx, ./, 0)"/>收款人开户行行号-->
+			          </group>
+			        </group>
+			      </group>
+			      <group name="Purp" >
+			        <item name="Prtry" bean_field="trans_kind" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--业务种类编码-->
+			      </group>
+			      <item name="paymentInfo" bean_field="payment_info"></item>
+			      <item name="remark" bean_field="remark"></item>
+			      <group name="RmtInf"  bean_field="ext">
+					<item name="Ustrd" value="../../remark==null ? null :(../../remark.length()>135 ? ('/H01/' + ../../remark.substring(0,135)) :('/H01/' + ../../remark))" /><!--备注-->
+			        <item name="Ustrd" value="../../remark==null ? null :(../../remark.length()>135 ? ('/H02/' + ../../remark.substring(135)) :(null))" /><!--备注2-->
+			        <item name="Ustrd" value="../../paymentInfo==null ? null :(../../paymentInfo.length()>135 ? ('/H03/' + ../../paymentInfo.substring(0,135)) :('/H03/' + ../../paymentInfo))" /><!--附言-->
+			        <item name="Ustrd" value="../../paymentInfo==null ? null :(../../paymentInfo.length()>135 ? ('/H04/' + ../../paymentInfo.substring(135)) :(null))" /><!--附言2-->			        
+			        <item name="Ustrd" bean_field="a109.c0c" value="./==null ? null :('/C0C/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--票据日期-->
+			        <item name="Ustrd" bean_field="a109.f1a" value="./==null ? null :('/F1A/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--凭证种类-->
+			        <item name="Ustrd" bean_field="a110.c0d" value="./==null ? null :('/C0D/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--票据日期-->
+			        <item name="Ustrd" bean_field="a110.d38" value="function:./==null ? null :('/D38/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--赔偿金金额-->
+			        <item name="Ustrd" bean_field="a110.d39" value="function:./==null ? null :('/D39/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--拒付金金额-->
+			        <item name="Ustrd" bean_field="a110.d0m" value="function:./==null ? null :('/D0M/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--原托金额-->
+			        <item name="Ustrd" bean_field="a110.d0n" value="function:./==null ? null :('/D0N/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--支付金额-->
+			        <item name="Ustrd" bean_field="a110.d0o" value="function:./==null ? null :('/D0O/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--多付金额-->
+			        <item name="Ustrd" bean_field="a105.e51" value="./==null ? null :('/E51/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--原报文标识号-->
+			        <item name="Ustrd" bean_field="a105.a70" value="./==null ? null :('/A70/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--原发起参与机构-->
+			        <item name="Ustrd" bean_field="a105.f40" value="./==null ? null :('/F40/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--原报文类型代码-->
+			        <item name="Ustrd" bean_field="a105.h20" value="./==null ? null :('/H20/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--退汇原因-->
+
+			        <item name="Ustrd" bean_field="a113.c14" value="./==null ? null :('/C14/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--关联业务委托日期-->
+			        <item name="Ustrd" bean_field="a113.f56" value="./==null ? null :('/F56/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--费用编码-->
+			        <item name="Ustrd" bean_field="a113.d63" value="function:./==null ? null :('/D63/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--发报行的收费-->
+			        <item name="Ustrd" bean_field="a113.d64" value="function:./==null ? null :('/D64/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--收报行的收费-->
+			        <item name="Ustrd" bean_field="a113.h19" value="./==null ? null :('/H19/'+./)" /><!--跨境业务附言-->
+			        <!-- 1.4新标准 -->
+			        <item name="temph32" bean_field="a113.h32" hidden="true"/><!-- 零时变量 收款人名称 -->
+			        <item name="Ustrd" value="../temph32==null ? null :(../temph32.length()>135 ? ('/H32/' + ../temph32.substring(0,135)) : ('/H32/' + ../temph32))" /><!--收款人名称2-->
+			        <item name="Ustrd" value="../temph32==null ? null :(../temph32.length()>135 ? ('/H33/' + ../temph32.substring(135)) : (null))" /><!--收款人名称3-->
+			        <item name="Ustrd" bean_field="a113.h34" value="./==null ? null :('/H34/'+./)" /><!--收款人地址2-->
+			        <item name="Ustrd" bean_field="a113.h35" value="./==null ? null :('/H35/'+./)" /><!--收款人地址3-->
+			        <item name="Ustrd" bean_field="a113.h36" value="./==null ? null :('/H36/'+./)" /><!--收款人地址4-->
+			        <item name="Ustrd" bean_field="a113.h37" value="./==null ? null :('/H37/'+./)" /><!--收款人地址5-->
+			        <item name="Ustrd" bean_field="a113.b29" value="./==null ? null :('/B29/'+./)" /><!--收款人账号2-->
+			        <item name="temph38" bean_field="a113.h38" hidden="true"/><!-- 零时变量 付款人名称 -->
+			        <item name="Ustrd" value="../temph38==null ? null :(../temph38.length()>135 ? ('/H38/' + ../temph38.substring(0,135)) : ('/H38/' + ../temph38))" /><!--付款人名称2-->
+			        <item name="Ustrd" value="../temph38==null ? null :(../temph38.length()>135 ? ('/H39/' + ../temph38.substring(135)) : (null))" /><!--付款人名称3-->
+			        <item name="Ustrd" bean_field="a113.h40" value="./==null ? null :('/H40/'+./)" /><!--付款人名称2-->
+			        <item name="Ustrd" bean_field="a113.h41" value="./==null ? null :('/H41/'+./)" /><!--付款人名称3-->
+			        <item name="Ustrd" bean_field="a113.h42" value="./==null ? null :('/H42/'+./)" /><!--付款人名称4-->
+			        <item name="Ustrd" bean_field="a113.h43" value="./==null ? null :('/H43/'+./)" /><!--付款人名称5-->
+			        <item name="Ustrd" bean_field="a113.b30" value="./==null ? null :('/B30/'+./)" /><!--付款人账号2-->
+			        
+			        <item name="Ustrd" bean_field="a201.c17" value="./==null ? null :('/C17/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--出票日期-->
+			        <item name="Ustrd" bean_field="a201.b21" value="./==null ? null :('/B21/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--出票人名称-->
+			        <item name="Ustrd" bean_field="a201.d30" value="function:./==null ? null :('/D30/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--票据金额-->
+			        <item name="Ustrd" bean_field="a201.d0a" value="function:./==null ? null :('/D0A/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--牌价-->
+			        <item name="Ustrd" bean_field="a201.e41" value="./==null ? null :('/E41/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--票据张数-->
+			        <item name="Ustrd" bean_field="a202.c10" value="./==null ? null :('/C10/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--出票日期-->
+			        <item name="Ustrd" bean_field="a202.e15" value="./==null ? null :('/E15/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--汇票密押-->
+			        <item name="Ustrd" bean_field="a202.f51" value="./==null ? null :('/F51/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--汇票种类-->
+			        <item name="Ustrd" bean_field="a202.d14" value="function:./==null ? null :('/D14/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--出票金额-->
+			        <item name="Ustrd" bean_field="a202.a59" value="./==null ? null :('/A59/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--汇票签发行行号-->
+			        <item name="Ustrd" bean_field="a202.b11" value="./==null ? null :('/B11/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--汇票申请人账号-->
+			        <item name="Ustrd" bean_field="a202.b17" value="./==null ? null :('/B17/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--汇票申请人名称-->
+			        <item name="Ustrd" bean_field="a202.b13" value="./==null ? null :('/B13/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--票面记载的收款人名称-->
+			        <item name="Ustrd" bean_field="a202.a60" value="./==null ? null :('/A60/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--最后持票人开户行-->
+			        <item name="Ustrd" bean_field="a202.b12" value="./==null ? null :('/B12/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--最后持票人账号-->
+			        <item name="Ustrd" bean_field="a202.b22" value="./==null ? null :('/B22/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--最后持票人名称-->
+			        <item name="Ustrd" bean_field="a202.d31" value="function:./==null ? null :('/D31/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--多余金额-->
+			        <item name="Ustrd" bean_field="a202.d11" value="function:./==null ? null :('/D11/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--实际结算金额-->
+			        <item name="Ustrd" bean_field="a202.c19" value="./==null ? null :('/C19/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--提示付款日期-->
+			        <item name="Ustrd" bean_field="a202.a07" value="./==null ? null :('/A07/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--现金汇票兑付行-->
+			        
+			        <item name="Ustrd" bean_field="a203.c03" value="./==null ? null :('/C03/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--银行汇票 出票日期-->
+			        <item name="Ustrd" bean_field="a203.d15" value="function:./==null ? null :('/D15/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--银行汇票 出票金额-->
+			        <item name="Ustrd" bean_field="a203.b18" value="./==null ? null :('/B18/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--银行汇票 汇票申请人账号-->
+			        <item name="Ustrd" bean_field="a203.b15" value="./==null ? null :('/B15/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--银行汇票 汇票申请人名称-->
+			        <item name="Ustrd" bean_field="a203.d16" value="function:./==null ? null :('/D16/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--银行汇票 实际结算金额-->
+			        <item name="Ustrd" bean_field="a203.d17" value="function:./==null ? null :('/D17/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--银行汇票 多余金额-->
+			        <item name="Ustrd" bean_field="a203.f52" value="./==null ? null :('/F52/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--银行汇票 汇票种类-->
+			        
+			        <item name="Ustrd" bean_field="a204.c03" value="./==null ? null :('/C03/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--银行本票 出票日期-->
+			        <item name="Ustrd" bean_field="a204.d15" value="function:./==null ? null :('/D15/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--银行本票 出票金额-->
+			        <item name="Ustrd" bean_field="a204.b18" value="./==null ? null :('/B18/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--银行本票 汇票申请人账号-->
+			        <item name="Ustrd" bean_field="a204.b15" value="./==null ? null :('/B15/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--银行本票 汇票申请人名称-->
+			        <item name="Ustrd" bean_field="a204.d16" value="function:./==null ? null :('/D16/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--银行本票 实际结算金额-->
+			        <item name="Ustrd" bean_field="a204.d17" value="function:./==null ? null :('/D17/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--银行本票 多余金额-->
+			        <item name="Ustrd" bean_field="a204.f52" value="./==null ? null :('/F52/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--银行本票 汇票种类-->
+			        
+			        <item name="Ustrd" bean_field="a111.c03" value="./==null ? null :('/C03/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--商业汇票 出票日期-->
+			        <item name="Ustrd" bean_field="a111.d15" value="./==null ? null :('/D15/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--商业汇票 出票日期-->
+			        <item name="Ustrd" bean_field="a111.b18" value="./==null ? null :('/B18/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--商业汇票 出票日期-->
+			        <item name="Ustrd" bean_field="a111.b15" value="./==null ? null :('/B15/'+./)" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--商业汇票 出票日期-->
+			        <item name="Ustrd" bean_field="a111.d16" value="./==null ? null :('/D16/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--商业汇票 出票日期-->
+			        <item name="Ustrd" bean_field="a111.d17" value="./==null ? null :('/D17/CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))" function="signUtil.buildSignString(#signCtx, (./==null ? null : ./.substring(5)), 0)"/><!--商业汇票 出票日期-->
+			        </group>
+			    </group>
+			  </group>
+
+			</group>
+		</request>
+
+		<response msg_type="xml">
+			<group name="Document" doc_encode="UTF-8">
+				<attr name="xmlns" value="urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02"/>
+			  <group name="FIToFICstmrCdtTrf" >
+			    <group name="GrpHdr" >
+			      <item name="MsgId" /><!--报文标识号-->
+			      <item name="CreDtTm" /><!--报文发送时间-->
+			      <item name="NbOfTxs" /><!--明细业务总笔数-->
+			      <group name="SttlmInf" >
+			        <item name="SttlmMtd" /><!---->
+			      </group>
+			    </group>
+			    <group name="CdtTrfTxInf" >
+			      <group name="PmtId" >
+			        <item name="EndToEndId" /><!--端到端标识号-->
+			        <item name="TxId" /><!--交易标识号-->
+			      </group>
+			      <group name="PmtTpInf" >
+			        <group name="CtgyPurp" >
+			          <item name="Prtry" /><!--业务类型编码-->
+			        </group>
+			      </group>
+			      <item name="IntrBkSttlmAmt" ><!--货币符号、金额-->
+			      	<attr name="Ccy" value="CNY"/>
+			      </item>
+			      <item name="SttlmPrty" /><!--业务优先级-->
+			      <item name="ChrgBr" /><!---->
+			      <!-- 人行新标 Begin -->
+			      <group name="InstgAgt">
+			      	<group name="FinInstnId">
+			      		<group name="ClrSysMmbId">
+			      			<item name="MmbId"/><!--付款清算行行号-->
+			      		</group>			      		
+			      	</group>
+			      	<group name="BrnchId">
+			      		<item name="Id"/><!--付款行行号-->
+			      	</group>
+			      </group>
+			      
+			      <group name="InstdAgt">
+			      	<group name="FinInstnId">
+			      		<group name="ClrSysMmbId">
+			      			<item name="MmbId"/><!--收款清算行行号-->
+			      		</group>			      		
+			      	</group>
+			      	<group name="BrnchId">
+			      		<item name="Id"/><!--收款行行号-->
+			      	</group>
+			      </group>
+			      
+			      <!-- 中介机构-->
+			      <group name="IntrmyAgt1" hidden="whenAllChildHidden">
+			      <group name="FinInstnId"   hidden="whenAllChildHidden">
+			      		<group name="ClrSysMmbId"   hidden="whenAllChildHidden">
+			      			<item name="MmbId"   hidden="./==null||./==''"/><!--中介机构1-->
+			      		</group>
+			      		<item name="Nm"  hidden="./==null||./==''" value="function:myUtils.xmlContentEncode(./)"/><!--中介机构1名称-->			      		
+			      	</group>
+			      </group>
+			      
+			      <group name="IntrmyAgt2"   hidden="whenAllChildHidden">
+			      	<group name="FinInstnId"  hidden="whenAllChildHidden">
+			      		<group name="ClrSysMmbId"  hidden="whenAllChildHidden">
+			      			<item name="MmbId"   hidden="./==null||./==''"/><!--中介机构2-->
+			      		</group>
+			      		<item name="Nm"  hidden="./==null||./==''" value="function:myUtils.xmlContentEncode(./)"/><!--中介机构2名称-->			      		
+			      	</group>
+			      </group>
+			      
+			      <group name="Dbtr"  hidden="whenAllChildHidden">
+			        <item name="Nm"   hidden="./==null||./==''" value="function:myUtils.xmlContentEncode(./)"/><!-- 付款人名称-->
+			        <group name="PstlAdr"   hidden="whenAllChildHidden">
+			          <item name="AdrLine"   hidden="./==null||./==''" value="function:myUtils.xmlContentEncode(./)"/><!-- 付款人地址-->
+			        </group>
+			      </group>
+			      
+			      
+			      <group name="DbtrAcct" >
+			        <group name="Id" >
+			          <group name="Othr" >
+			            <item name="Id"/><!--付款人账号-->
+			          </group>
+			        </group>
+			      </group>
+			      <group name="DbtrAgt"  hidden="whenAllChildHidden">
+			      	<group name="FinInstnId"  hidden="whenAllChildHidden">
+			      		<group name="ClrSysMmbId"  hidden="whenAllChildHidden">
+			      			<item name="MmbId"  hidden="./==null||./==''"/><!--付款人开户行行号-->
+			      		</group>
+			      		<item name="Nm"   hidden="./==null||./==''" value="function:myUtils.xmlContentEncode(./)"/><!--付款人开户行名称-->			      		
+			      	</group>
+			      </group>
+			      
+			      <group name="CdtrAgt"  hidden="whenAllChildHidden">
+			      	<group name="FinInstnId"  hidden="whenAllChildHidden">
+			      		<group name="ClrSysMmbId"  hidden="whenAllChildHidden">
+			      			<item name="MmbId"  hidden="./==null||./==''"/><!--收款人开户行行号-->
+			      		</group>
+			      		<item name="Nm"  hidden="./==null||./==''" value="function:myUtils.xmlContentEncode(./)"/><!--收款人开户行名称-->			      		
+			      	</group>
+			      </group>
+			      
+			      			      
+			      <!-- 人行新标 End -->			      
+			      <group name="Cdtr"  hidden="whenAllChildHidden" >
+			        <item name="Nm"  hidden="./==null||./==''" value="function:myUtils.xmlContentEncode(./)"/><!--收款人名称-->
+			        <group name="PstlAdr"  hidden="whenAllChildHidden">
+			          <item name="AdrLine"  hidden="./==null||./==''" value="function:myUtils.xmlContentEncode(./)"/><!--收款人地址-->
+			        </group>
+			      </group>
+			      <group name="CdtrAcct"  hidden="whenAllChildHidden">
+			        <group name="Id" >
+			          <group name="Othr" >
+			            <item name="Id" /><!--收款人账号--><!--
+			            <item name="Issr" />收款人开户行行号-->
+			           </group>
+			        </group>
+			      </group>
+			      <group name="Purp" >
+			        <item name="Prtry" /><!--业务种类编码-->
+			      </group>
+			      <group name="RmtInf"  hidden="whenAllChildHidden">
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''" value="function:myUtils.xmlContentEncode(./)"/><!--备注-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''" value="function:myUtils.xmlContentEncode(./)"/><!--备注2-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''" value="function:myUtils.xmlContentEncode(./)"/><!--附言-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''" value="function:myUtils.xmlContentEncode(./)"/><!--附言2-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--票据日期-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--凭证种类-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--票据日期-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--赔偿金金额-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--拒付金金额-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--原托金额-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--支付金额-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--多付金额-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--原报文标识号-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--原发起参与机构-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--原报文类型代码-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''" value="function:myUtils.xmlContentEncode(./)"/><!--退汇原因-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--关联业务委托日期-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--费用编码-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--发报行的收费-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--收报行的收费-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--跨境业务附言-->
+			        
+			         <!-- 1.4新标准 -->
+			        <item name="Ustrd" hidden="./==null||./.trim()==''"/><!--收款人名称2-->
+			        <item name="Ustrd" hidden="./==null||./.trim()==''"/><!--收款人名称3-->
+			        <item name="Ustrd" hidden="./==null||./.trim()==''"/><!--收款人地址2-->
+			        <item name="Ustrd" hidden="./==null||./.trim()==''"/><!--收款人地址3-->
+			        <item name="Ustrd" hidden="./==null||./.trim()==''"/><!--收款人地址4-->
+			        <item name="Ustrd" hidden="./==null||./.trim()==''"/><!--收款人地址5-->
+			        <item name="Ustrd" hidden="./==null||./.trim()==''"/><!--收款人账号2-->
+			        <item name="Ustrd" hidden="./==null||./.trim()==''"/><!--付款人名称2-->
+			        <item name="Ustrd" hidden="./==null||./.trim()==''"/><!--付款人名称3-->
+			        <item name="Ustrd" hidden="./==null||./.trim()==''"/><!--付款人名称2-->
+			        <item name="Ustrd" hidden="./==null||./.trim()==''"/><!--付款人名称3-->
+			        <item name="Ustrd" hidden="./==null||./.trim()==''"/><!--付款人名称4-->
+			        <item name="Ustrd" hidden="./==null||./.trim()==''"/><!--付款人名称5-->
+			        <item name="Ustrd" hidden="./==null||./.trim()==''"/><!--付款人账号2-->
+			        
+			        
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--出票日期-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''" value="function:myUtils.xmlContentEncode(./)"/><!--出票人名称-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--票据金额-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--牌价-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--票据张数-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--出票日期-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--汇票密押-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--汇票种类-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--出票金额-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--汇票签发行行号-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--汇票申请人账号-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''" value="function:myUtils.xmlContentEncode(./)"/><!--汇票申请人名称-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''" value="function:myUtils.xmlContentEncode(./)"/><!--票面记载的收款人名称-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--最后持票人开户行-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--最后持票人账号-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''" value="function:myUtils.xmlContentEncode(./)"/><!--最后持票人名称-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--多余金额-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--实际结算金额-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--提示付款日期-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--现金汇票兑付行-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--银行汇票 出票日期-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--银行汇票 出票金额-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--银行汇票 汇票申请人账号-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''" value="function:myUtils.xmlContentEncode(./)"/><!--银行汇票 汇票申请人名称-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--银行汇票 实际结算金额-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--银行汇票 多余金额-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--银行汇票 汇票种类-->	
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--银行本票 出票日期-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--银行本票 出票金额-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--银行本票 汇票申请人账号-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''" value="function:myUtils.xmlContentEncode(./)"/><!--银行本票 汇票申请人名称-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--银行本票 实际结算金额-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--银行本票 多余金额-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--银行本票 汇票种类-->	
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--商业汇票 票据日期-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--商业汇票 票据金额-->	
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--商业汇票 票据日期-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--商业汇票 票据金额-->	
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--商业汇票 票据日期-->
+			        <item name="Ustrd"  hidden="./==null||./.trim()==''"/><!--商业汇票 票据金额-->			        
+			      </group>
+			    </group>
+			  </group>
+
+			</group>
+		</response>
+	</transaction>
+
+	<transaction code="200hvps.111.001.01"><!--接收人行贷记业务报文 -->
+		<request msg_type="xml">
+			<group name="Document">
+  <group name="FIToFICstmrCdtTrf" >
+    <group name="GrpHdr" >
+      <item name="MsgId" /><!--报文标识号-->
+      <item name="CreDtTm" /><!--报文发送时间-->
+      <item name="NbOfTxs" /><!--明细业务总笔数-->
+      <group name="SttlmInf" >
+        <item name="SttlmMtd" /><!---->
+      </group>
+    </group>
+    <group name="CdtTrfTxInf" >
+      <group name="PmtId" >
+        <item name="EndToEndId" /><!--端到端标识号-->
+        <item name="TxId" /><!--交易标识号-->
+      </group>
+      <group name="PmtTpInf" >
+        <group name="CtgyPurp" >
+          <item name="Prtry" /><!--业务类型编码-->
+        </group>
+      </group>
+      <item name="IntrBkSttlmAmt" ><!--货币符号、金额-->
+      	<attr name="Ccy" value="CNY"/>
+      </item>
+      <item name="SttlmPrty" /><!--业务优先级-->
+      <item name="ChrgBr" /><!---->
+      <group name="Dbtr" >
+        <item name="Nm"  hidden="./==null||./==''"/><!--付款人名称-->
+        <group name="PstlAdr"  hidden="whenAllChildHidden">
+          <item name="AdrLine"  hidden="./==null||./==''"/><!--付款人地址-->
+        </group>
+      </group>
+      <group name="DbtrAcct"  hidden="whenAllChildHidden">
+        <group name="Id" >
+          <group name="Othr" >
+            <item name="Id" /><!--付款人账号-->
+            <item name="Issr" /><!--付款人开户行行号-->
+          </group>
+        </group>
+      </group>
+      <group name="DbtrAgt" >
+        <group name="FinInstnId" >
+          <group name="ClrSysMmbId" >
+            <item name="MmbId" /><!--付款清算行行号-->
+          </group>
+        </group>
+        <group name="BrnchId" >
+          <item name="Id" /><!--付款行行号-->
+        </group>
+      </group>
+      <group name="CdtrAgt" >
+        <group name="FinInstnId" >
+          <group name="ClrSysMmbId" >
+            <item name="MmbId" /><!--收款清算行行号-->
+          </group>
+        </group>
+        <group name="BrnchId" >
+          <item name="Id" /><!--收款行行号-->
+        </group>
+      </group>
+      <group name="Cdtr" >
+        <item name="Nm"  hidden="./==null||./==''"/><!--收款人名称-->
+        <group name="PstlAdr"  hidden="whenAllChildHidden">
+          <item name="AdrLine"  hidden="./==null||./==''"/><!--收款人地址-->
+        </group>
+      </group>
+      <group name="CdtrAcct"  hidden="whenAllChildHidden">
+        <group name="Id" >
+          <group name="Othr" >
+            <item name="Id" /><!--收款人账号-->
+            <item name="Issr" /><!--收款人开户行行号-->
+          </group>
+        </group>
+      </group>
+      <group name="Purp" >
+        <item name="Prtry" /><!--业务种类编码-->
+      </group>
+      <group name="RmtInf"  hidden="request:./==null||request:./.size()==0">
+        <item name="Ustrd"  hidden="./==null||./==''"/><!--备注-->
+        <item name="Ustrd"  hidden="request:../{a109}==null"/><!--票据日期-->
+        <item name="Ustrd"  hidden="request:../{a109}==null"/><!--凭证种类-->
+        <item name="Ustrd"  hidden="request:../{a110}==null"/><!--票据日期-->
+        <item name="Ustrd"  hidden="request:../{a110}==null"/><!--赔偿金金额-->
+        <item name="Ustrd"  hidden="request:../{a110}==null"/><!--拒付金金额-->
+        <item name="Ustrd"  hidden="request:../{a105}==null"/><!--原报文标识号-->
+        <item name="Ustrd"  hidden="request:../{a105}==null"/><!--原发起参与机构-->
+        <item name="Ustrd"  hidden="request:../{a105}==null"/><!--原报文类型代码-->
+        <item name="Ustrd"  hidden="(request:../{a105}==null)||(./==null||./=='')"/><!--退汇原因-->
+        <item name="Ustrd"  hidden="(request:../{a113}==null)||(./==null||./=='')"/><!--关联业务委托日期-->
+        <item name="Ustrd"  hidden="(request:../{a113}==null)||(./==null||./=='')"/><!--业务发起转汇行BIC码-->
+        <item name="Ustrd"  hidden="(request:../{a113}==null)||(./==null||./=='')"/><!--业务发起转汇行名称-->
+        <item name="Ustrd"  hidden="(request:../{a113}==null)||(./==null||./=='')"/><!--业务接收转汇行BIC码-->
+        <item name="Ustrd"  hidden="(request:../{a113}==null)||(./==null||./=='')"/><!--业务接收转汇行名称-->
+        <item name="Ustrd"  hidden="request:../{a113}==null"/><!--费用编码-->
+        <item name="Ustrd"  hidden="(request:../{a113}==null)||(./==null||./=='')"/><!--发报行的收费-->
+        <item name="Ustrd"  hidden="(request:../{a113}==null)||(./==null||./=='')"/><!--收报行的收费-->
+        <item name="Ustrd"  hidden="(request:../{a113}==null)||(./==null||./=='')"/><!--跨境业务附言-->
+        <item name="Ustrd"  hidden="request:../{a201}==null"/><!--出票日期-->
+        <item name="Ustrd"  hidden="request:../{a201}==null"/><!--出票人名称-->
+        <item name="Ustrd"  hidden="request:../{a201}==null"/><!--票据金额-->
+        <item name="Ustrd"  hidden="(request:../{a201}==null)||(./==null||./=='')"/><!--牌价-->
+        <item name="Ustrd"  hidden="request:../{a201}==null"/><!--票据张数-->
+        <item name="Ustrd"  hidden="(request:../{a202}==null)||(./==null||./=='')"/><!--出票日期-->
+        <item name="Ustrd"  hidden="(request:../{a202}==null)||(./==null||./=='')"/><!--汇票密押-->
+        <item name="Ustrd"  hidden="request:../{a202}==null"/><!--汇票种类-->
+        <item name="Ustrd"  hidden="(request:../{a202}==null)||(./==null||./=='')"/><!--出票金额-->
+        <item name="Ustrd"  hidden="request:../{a202}==null"/><!--汇票签发行行号-->
+        <item name="Ustrd"  hidden="request:../{a202}==null"/><!--汇票申请人账号-->
+        <item name="Ustrd"  hidden="request:../{a202}==null"/><!--汇票申请人名称-->
+        <item name="Ustrd"  hidden="(request:../{a202}==null)||(./==null||./=='')"/><!--票面记载的收款人名称-->
+        <item name="Ustrd"  hidden="request:../{a202}==null"/><!--最后持票人开户行-->
+        <item name="Ustrd"  hidden="request:../{a202}==null"/><!--最后持票人账号-->
+        <item name="Ustrd"  hidden="request:../{a202}==null"/><!--最后持票人名称-->
+        <item name="Ustrd"  hidden="(request:../{a202}==null)||(./==null||./=='')"/><!--多余金额-->
+        <item name="Ustrd"  hidden="(request:../{a202}==null)||(./==null||./=='')"/><!--实际结算金额-->
+        <item name="Ustrd"  hidden="(request:../{a202}==null)||(./==null||./=='')"/><!--提示付款日期-->
+        <item name="Ustrd"  hidden="(request:../{a202}==null)||(./==null||./=='')"/><!--现金汇票兑付行-->
+      </group>
+    </group>
+  </group>
+
+			</group>
+		</request>
+
+		<response msg_type="bean"  bean="java.util.HashMap">
+			<group name="Document">
+  <group name="FIToFICstmrCdtTrf" >
+    <group name="GrpHdr" >
+      <item name="MsgId" bean_field="msg_id"/><!--报文标识号-->
+      <item name="CreDtTm" bean_field="msg_cre_tm"/><!--报文发送时间-->
+      <item name="NbOfTxs" value="1"/><!--明细业务总笔数-->
+      <group name="SttlmInf" >
+        <item name="SttlmMtd" value="CLRG"/><!---->
+      </group>
+    </group>
+    <group name="CdtTrfTxInf" >
+      <group name="PmtId" >
+        <item name="EndToEndId" bean_field="end2end_id"/><!--端到端标识号-->
+        <item name="TxId" bean_field="trans_id"/><!--交易标识号-->
+      </group>
+      <group name="PmtTpInf" >
+        <group name="CtgyPurp" >
+          <item name="Prtry" bean_field="trans_type" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--业务类型编码-->
+        </group>
+      </group>
+      <item name="IntrBkSttlmAmt" bean_field="amount" function="signUtil.buildSignString(#signCtx, 'CNY'+./, 1)" value="function:strUtil.formatNumber(./.toString(),'#0.00#')"><!--货币符号、金额-->
+        <attr name="Ccy" value="CNY"/>
+      </item>
+      <item name="SttlmPrty" bean_field="priority" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--业务优先级-->
+      <item name="ChrgBr" value="DEBT"/><!---->
+      <group name="Dbtr" >
+        <item name="Nm" bean_field="payer_name" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--付款人名称-->
+        <group name="PstlAdr" >
+          <item name="AdrLine" bean_field="payer_addr" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--付款人地址-->
+        </group>
+      </group>
+      <group name="DbtrAcct" >
+        <group name="Id" >
+          <group name="Othr" >
+            <item name="Id" bean_field="payer_acct_no" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--付款人账号-->
+            <item name="Issr" bean_field="payer_open_bank_code" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--付款人开户行行号-->
+          </group>
+        </group>
+      </group>
+      <group name="DbtrAgt" >
+        <group name="FinInstnId" >
+          <group name="ClrSysMmbId" >
+            <item name="MmbId" bean_field="send_sap_bank_code" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--付款清算行行号-->
+          </group>
+        </group>
+        <group name="BrnchId" >
+          <item name="Id" bean_field="send_bank_code" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--付款行行号-->
+        </group>
+      </group>
+      <group name="CdtrAgt" >
+        <group name="FinInstnId" >
+          <group name="ClrSysMmbId" >
+            <item name="MmbId" bean_field="recv_sap_bank_code" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--收款清算行行号-->
+          </group>
+        </group>
+        <group name="BrnchId" >
+          <item name="Id" bean_field="recv_bank_code" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--收款行行号-->
+        </group>
+      </group>
+      <group name="Cdtr" >
+        <item name="Nm" bean_field="bener_name" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--收款人名称-->
+        <group name="PstlAdr" >
+          <item name="AdrLine" bean_field="bener_addr" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--收款人地址-->
+        </group>
+      </group>
+      <group name="CdtrAcct" >
+        <group name="Id" >
+          <group name="Othr" >
+            <item name="Id" bean_field="bener_acct_no" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--收款人账号-->
+            <item name="Issr" bean_field="bener_open_bank_code" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--收款人开户行行号-->
+          </group>
+        </group>
+      </group>
+      <group name="Purp" >
+        <item name="Prtry" bean_field="trans_kind" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--业务种类编码-->
+      </group>
+      <group name="RmtInf"  bean_field="ext">
+        <item name="Ustrd" bean_field="g0.remark"/><!--备注-->
+        <item name="Ustrd" bean_field="a109.c0c"/><!--票据日期-->
+        <item name="Ustrd" bean_field="a109.f1a"/><!--凭证种类-->
+        <item name="Ustrd" bean_field="a110.c0d"/><!--票据日期-->
+        <item name="Ustrd" bean_field="a110.d38"/><!--赔偿金金额-->
+        <item name="Ustrd" bean_field="a110.d39"/><!--拒付金金额-->
+        <item name="Ustrd" bean_field="a105.e51"/><!--原报文标识号-->
+        <item name="Ustrd" bean_field="a105.a70"/><!--原发起参与机构-->
+        <item name="Ustrd" bean_field="a105.f40"/><!--原报文类型代码-->
+        <item name="Ustrd" bean_field="a105.h20"/><!--退汇原因-->
+        <item name="Ustrd" bean_field="a113.c14" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--关联业务委托日期-->
+        <item name="Ustrd" bean_field="a113.a28" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--业务发起转汇行BIC码-->
+        <item name="Ustrd" bean_field="a113.h17" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--业务发起转汇行名称-->
+        <item name="Ustrd" bean_field="a113.a29" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--业务接收转汇行BIC码-->
+        <item name="Ustrd" bean_field="a113.h18" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--业务接收转汇行名称-->
+        <item name="Ustrd" bean_field="a113.f56" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--费用编码-->
+        <item name="Ustrd" bean_field="a113.d63" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--发报行的收费-->
+        <item name="Ustrd" bean_field="a113.d64" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--收报行的收费-->
+        <item name="Ustrd" bean_field="a113.h19"/><!--跨境业务附言-->
+        <item name="Ustrd" bean_field="a201.c17" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--出票日期-->
+        <item name="Ustrd" bean_field="a201.b21" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--出票人名称-->
+        <item name="Ustrd" bean_field="a201.d30" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--票据金额-->
+        <item name="Ustrd" bean_field="a201.d0a" function="signUtil.buildSignString(#signCtx, ./, 0)"/><!--牌价-->
+        <item name="Ustrd" bean_field="a201.e41" function="signUtil.buildSignString(#signCtx, ./, 1)"/><!--票据张数-->
+        <item name="Ustrd" bean_field="a202.c10"/><!--出票日期-->
+        <item name="Ustrd" bean_field="a202.e15"/><!--汇票密押-->
+        <item name="Ustrd" bean_field="a202.f51"/><!--汇票种类-->
+        <item name="Ustrd" bean_field="a202.d14"/><!--出票金额-->
+        <item name="Ustrd" bean_field="a202.a59"/><!--汇票签发行行号-->
+        <item name="Ustrd" bean_field="a202.b11"/><!--汇票申请人账号-->
+        <item name="Ustrd" bean_field="a202.b17"/><!--汇票申请人名称-->
+        <item name="Ustrd" bean_field="a202.b13"/><!--票面记载的收款人名称-->
+        <item name="Ustrd" bean_field="a202.a60"/><!--最后持票人开户行-->
+        <item name="Ustrd" bean_field="a202.b12"/><!--最后持票人账号-->
+        <item name="Ustrd" bean_field="a202.b22"/><!--最后持票人名称-->
+        <item name="Ustrd" bean_field="a202.d31"/><!--多余金额-->
+        <item name="Ustrd" bean_field="a202.d11"/><!--实际结算金额-->
+        <item name="Ustrd" bean_field="a202.c19"/><!--提示付款日期-->
+        <item name="Ustrd" bean_field="a202.a07"/><!--现金汇票兑付行-->
+      </group>
+    </group>
+  </group>
+      
+			</group>			
+		</response>
+	</transaction>
+</config>

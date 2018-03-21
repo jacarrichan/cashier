@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>退款订单详情</title>
+<script id="seajsnode" type="text/javascript" src="../../loader.js" data-js="./js/detail_refundOrder.js" data-css="./css/detail_refundOrder.css"></script>
+</head>
+<body>
+	<div class="wrapper wrapper-content">
+		<form class="form-horizontal form-inline form-group" id="form">
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="transId"><span class="red">*</span> 交易支付序号：</label>
+				<input class="form-control" id="transId"  name="transId" disabled='disabled'  style="width: 180px;"/>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="channelCd"><span class="red">*</span> 业务名称：</label>
+				<input class="form-control" id="channelCd"  name="channelCd" disabled='disabled' style="width: 180px;"/>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="mallId"><span class="red">*</span> 平台名称：</label>
+				<input class="form-control" id="mallId"  name="mallId" disabled='disabled' style="width: 180px;"/>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="refundId"><span class="red">*</span> 退款订单号：</label>
+				<input class="form-control" id="refundId"  name="refundId" disabled='disabled' style="width: 180px;"/>
+			</div>
+			
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="orgnOrderId"><span class="red">*</span> 原订单编号：</label>
+				<input class="form-control" id="orgnOrderId"  name="orgnOrderId" disabled='disabled' style="width: 180px;"/>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="refundDate"><span class="red">*</span> 退款时间：</label>
+				<input class="form-control" id="refundDate"  name="refundDate" disabled='disabled' style="width: 180px;"/>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="refundAmt"><span class="red">*</span> 金额：</label>
+				<input class="form-control" id="refundAmt"  name="refundAmt" disabled='disabled' style="width: 180px;"/>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="payerInstiNm"><span class="red">*</span> 支付渠道：</label>
+				<input class="form-control" id="payerInstiNm"  name="payerInstiNm" disabled='disabled' style="width: 180px;"/>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="procState"><span class="red">*</span> 退款状态：</label>
+				<input class="form-control" id="procState"  name="procState" disabled='disabled' style="width: 180px;"/>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="remark"><span class="red">*</span> 是否通知商城：</label>
+				<input class="form-control" id="remark"  name="remark" disabled='disabled' style="width: 180px;"/>
+			</div>
+			<div class="col-sm-12">
+				<div class="alert"></div>
+			</div>
+		</form>
+		
+		<div class="form-group form-buttons text-center">
+			<button class="btn btn-warning btn-cancel">确定</button>
+		</div>
+	</div>
+	<script type="text/template" id="option.tpl">
+		<option value="{{d.code}}" {{d.attr || ''}}>{{d.name}}</option>
+	</script>
+</body>
+</html>

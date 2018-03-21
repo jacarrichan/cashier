@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.displayTemplate.MallModelCfgMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.MallModelCfg">
+    <id column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="mall_id" jdbcType="VARCHAR" property="mallId" />
+    <result column="mall_name" jdbcType="VARCHAR" property="mallName" />
+    <result column="channel_name" jdbcType="INTEGER" property="channelName" />
+    <result column="channel_id" jdbcType="INTEGER" property="channelId" />
+    <result column="pay_channel" jdbcType="VARCHAR" property="payChannel" />
+    <result column="pay_channel_name" jdbcType="VARCHAR" property="payChannelName" />
+    <result column="webpage_name" jdbcType="VARCHAR" property="webpageName" />
+    <result column="webpage_id" jdbcType="VARCHAR" property="webpageId" />
+    <result column="model_url" jdbcType="VARCHAR" property="modelUrl" />
+    <result column="terminal" jdbcType="CHAR" property="terminal" />
+    <result column="open_flag" jdbcType="TINYINT" property="openFlag" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+    <result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+    <result column="version" jdbcType="TINYINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, mall_id, mall_name, channel_name, channel_id, pay_channel, pay_channel_name, webpage_name, webpage_id, model_url, 
+    terminal, open_flag, created_by, created_date, last_updt_date, last_updt_by, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_mall_model_cfg
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from csr_mall_model_cfg
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByMallId" parameterType="java.lang.String">
+    delete from csr_mall_model_cfg
+    where mall_id = #{mallId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.MallModelCfg">
+    insert into csr_mall_model_cfg (row_id, mall_id, mall_name, channel_name,
+      channel_id, pay_channel, pay_channel_name,webpage_name, 
+      webpage_id, model_url, terminal, 
+      open_flag, created_by, created_date, 
+      last_updt_date, last_updt_by, version
+      )
+    values (#{rowId,jdbcType=INTEGER}, #{mallId,jdbcType=VARCHAR}, #{mallName,jdbcType=VARCHAR}, #{channelName,jdbcType=VARCHAR}, 
+      #{channelId,jdbcType=INTEGER}, #{payChannel,jdbcType=VARCHAR}, #{payChannelName,jdbcType=VARCHAR},  #{webpageName,jdbcType=VARCHAR}, 
+      #{webpageId,jdbcType=VARCHAR}, #{modelUrl,jdbcType=VARCHAR}, #{terminal,jdbcType=CHAR}, 
+      #{openFlag,jdbcType=TINYINT}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{lastUpdtDate,jdbcType=TIMESTAMP}, #{lastUpdtBy,jdbcType=VARCHAR}, #{version,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.MallModelCfg">
+    insert into csr_mall_model_cfg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rowId != null">
+        row_id,
+      </if>
+      <if test="mallId != null">
+        mall_id,
+      </if>
+      <if test="mallName != null">
+        mall_name,
+      </if>
+      <if test="channelName != null">
+        channel_name,
+      </if>
+      <if test="channelId != null">
+        channel_id,
+      </if>
+      <if test="payChannel != null">
+        pay_channel,
+      </if>
+       <if test="payChannelName != null">
+        pay_channel_name,
+      </if>
+      <if test="webpageName != null">
+        webpage_name,
+      </if>
+      <if test="webpageId != null">
+        webpage_id,
+      </if>
+      <if test="modelUrl != null">
+        model_url,
+      </if>
+      <if test="terminal != null">
+        terminal,
+      </if>
+      <if test="openFlag != null">
+        open_flag,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date,
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rowId != null">
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="mallId != null">
+        #{mallId,jdbcType=VARCHAR},
+      </if>
+      <if test="mallName != null">
+        #{mallName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null">
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null">
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="payChannel != null">
+        #{payChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelName != null">
+        #{payChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="webpageName != null">
+        #{webpageName,jdbcType=VARCHAR},
+      </if>
+      <if test="webpageId != null">
+        #{webpageId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelUrl != null">
+        #{modelUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="terminal != null">
+        #{terminal,jdbcType=CHAR},
+      </if>
+      <if test="openFlag != null">
+        #{openFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null">
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.MallModelCfg">
+    update csr_mall_model_cfg
+    <set>
+      <if test="mallId != null">
+        mall_id = #{mallId,jdbcType=VARCHAR},
+      </if>
+      <if test="mallName != null">
+        mall_name = #{mallName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null">
+        channel_name = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null">
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="payChannel != null">
+        pay_channel = #{payChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelName != null">
+        pay_channel_name = #{payChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="webpageName != null">
+        webpage_name = #{webpageName,jdbcType=VARCHAR},
+      </if>
+      <if test="webpageId != null">
+        webpage_id = #{webpageId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelUrl != null">
+        model_url = #{modelUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="terminal != null">
+        terminal = #{terminal,jdbcType=CHAR},
+      </if>
+      <if test="openFlag != null">
+        open_flag = #{openFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=TINYINT},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.MallModelCfg">
+    update csr_mall_model_cfg
+    set mall_id = #{mallId,jdbcType=VARCHAR},
+      mall_name = #{mallName,jdbcType=VARCHAR},
+      channel_name = #{channelName,jdbcType=VARCHAR},
+      channel_id = #{channelId,jdbcType=INTEGER},
+      pay_channel = #{payChannel,jdbcType=VARCHAR},
+      pay_channel_name = #{payChannelName,jdbcType=VARCHAR},
+      webpage_name = #{webpageName,jdbcType=VARCHAR},
+      webpage_id = #{webpageId,jdbcType=VARCHAR},
+      model_url = #{modelUrl,jdbcType=VARCHAR},
+      terminal = #{terminal,jdbcType=CHAR},
+      open_flag = #{openFlag,jdbcType=TINYINT},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      version = #{version,jdbcType=TINYINT}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByMallIdSelective" parameterType="com.gxyj.cashier.domain.MallModelCfg">
+    update csr_mall_model_cfg
+    <set>
+      <if test="mallName != null">
+        mall_name = #{mallName,jdbcType=VARCHAR},
+      </if>
+      <if test="mallName != null">
+        channel_name = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null">
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="payChannel != null">
+        pay_channel = #{payChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannelName != null">
+        pay_channel_name = #{payChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="webpageName != null">
+        webpage_name = #{webpageName,jdbcType=VARCHAR},
+      </if>
+      <if test="webpageId != null">
+        webpage_id = #{webpageId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelUrl != null">
+        model_url = #{modelUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="terminal != null">
+        terminal = #{terminal,jdbcType=CHAR},
+      </if>
+      <if test="openFlag != null">
+        open_flag = #{openFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=TINYINT},
+      </if>
+    </set>
+    where mall_id = #{mallId,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <select id="selectMallModelList" parameterType="com.gxyj.cashier.domain.MallModelCfg" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_mall_model_cfg  where 1 = 1
+    <if test="openFlag != null">
+	  and  open_flag = #{openFlag,jdbcType=TINYINT}
+    </if>
+    <if test="channelId != null and channelId != ''">
+       and channel_id = #{channelId,jdbcType=INTEGER}
+    </if>
+	<if test="payChannel != null and payChannel != ''">
+		and pay_channel = #{payChannel,jdbcType=INTEGER}
+	</if>
+	<if test="mallId != null and mallId != ''">
+		and mall_id = #{mallId,jdbcType=VARCHAR} 
+		or mall_id= 'ALL'
+		<if test="openFlag != null">
+	      and  open_flag = #{openFlag,jdbcType=TINYINT}
+    	</if>
+   		<if test="channelId != null and channelId != ''">
+      	 and channel_id = #{channelId,jdbcType=INTEGER}
+   		</if>
+	    <if test="payChannel != null and payChannel != ''">
+			and pay_channel = #{payChannel,jdbcType=INTEGER}
+	    </if>
+	</if>
+	order by last_updt_date desc
+  </select>
+  <select id="queryMallModelList" parameterType="com.gxyj.cashier.domain.MallModelCfg" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+    from csr_mall_model_cfg  where 1 = 1
+    <if test="openFlag != null">
+	  and  open_flag = #{openFlag,jdbcType=TINYINT}
+    </if>
+    <if test="channelId != null and channelId != ''">
+       and channel_id = #{channelId,jdbcType=INTEGER}
+    </if>
+	<if test="payChannel != null and payChannel != ''">
+		and pay_channel = #{payChannel,jdbcType=INTEGER}
+	</if>
+	<if test="mallId != null">
+		and mall_id = #{mallId,jdbcType=VARCHAR}
+	</if>
+	<if test="terminal != null and terminal != ''">
+		and terminal = #{terminal,jdbcType=VARCHAR}
+	</if>
+	<if test="webpageId != null and webpageId != ''">
+        and webpage_id = #{webpageId,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="queryMallModel" parameterType="com.gxyj.cashier.domain.MallModelCfg" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+    from csr_mall_model_cfg  where 1 = 1 
+    and mall_id = #{mallId,jdbcType=VARCHAR}
+    and channel_id = #{channelId,jdbcType=INTEGER}
+    and terminal = #{terminal,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectBusiChannelList" parameterType="com.gxyj.cashier.domain.MallModelCfg" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_pay_template  where 1 = 1
+	<if test="openFlag != null">
+	  and  open_flag = #{openFlag,jdbcType=TINYINT}
+    </if>
+  </select>
+  
+  
+    <select id="selectMallModelPojo" parameterType="com.gxyj.cashier.domain.MallModelCfg" resultMap="BaseResultMap">
+    select 
+    		<include refid="Base_Column_List" />
+   	from csr_mall_model_cfg  where 1 = 1
+    <if test="openFlag != null">
+	    and  open_flag = #{openFlag,jdbcType=TINYINT}
+    </if>
+	<if test="payChannel != null and payChannel != ''">
+		and pay_channel like concat('%', #{payChannel,jdbcType=INTEGER},'%') 
+	</if>
+	order by last_updt_date desc
+  </select>
+  
+  <select id="selectArg" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select a.mall_id,a.model_url, b.channel_code as mall_name,a.terminal 
+        from csr_mall_model_cfg  a ,csr_busi_channel  b where  a.channel_id= b.row_id and a.row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  
+</mapper>

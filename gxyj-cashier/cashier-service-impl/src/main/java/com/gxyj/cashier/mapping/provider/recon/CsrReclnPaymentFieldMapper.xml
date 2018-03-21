@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.recon.CsrReclnPaymentFieldMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.CsrReclnPaymentField">
+    <id column="row_id" jdbcType="BIGINT" property="rowId" />
+    <result column="channel" jdbcType="VARCHAR" property="channel" />
+    <result column="table_type" jdbcType="VARCHAR" property="tableType" />
+    <result column="table1_name" jdbcType="VARCHAR" property="table1Name" />
+    <result column="table2_name" jdbcType="VARCHAR" property="table2Name" />
+    <result column="field1_name" jdbcType="VARCHAR" property="field1Name" />
+    <result column="field2_name" jdbcType="VARCHAR" property="field2Name" />
+    <result column="operation" jdbcType="VARCHAR" property="operation" />
+    <result column="field_type" jdbcType="VARCHAR" property="fieldType" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+    <result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+    <result column="version" jdbcType="TINYINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, channel, table_type, table1_name, table2_name, field1_name, field2_name, 
+    operation, field_type, created_by, created_date, last_updt_by, 
+    last_updt_date, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_recln_payment_field
+    where row_id = #{rowId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from csr_recln_payment_field
+    where row_id = #{rowId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.CsrReclnPaymentField">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_recln_payment_field (channel, table_type, table1_name, 
+      table2_name, field1_name, field2_name, 
+      operation, field_type, created_by, created_date, last_updt_by, 
+      last_updt_date, version
+      )
+    values (#{channel,jdbcType=VARCHAR}, #{tableType,jdbcType=VARCHAR}, #{table1Name,jdbcType=VARCHAR}, 
+      #{table2Name,jdbcType=VARCHAR}, #{field1Name,jdbcType=VARCHAR}, #{field2Name,jdbcType=VARCHAR}, 
+      #{operation,jdbcType=VARCHAR}, #{fieldType,jdbcType=VARCHAR}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtBy,jdbcType=VARCHAR}, 
+      #{lastUpdtDate,jdbcType=TIMESTAMP}, #{version,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.CsrReclnPaymentField">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_recln_payment_field
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="channel != null">
+        channel,
+      </if>
+      <if test="tableType != null">
+        table_type,
+      </if>
+      <if test="table1Name != null">
+        table1_name,
+      </if>
+      <if test="table2Name != null">
+        table2_name,
+      </if>
+      <if test="field1Name != null">
+        field1_name,
+      </if>
+      <if test="field2Name != null">
+        field2_name,
+      </if>
+      <if test="operation != null">
+        operation,
+      </if>
+      <if test="fieldType != null">
+        field_type,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by,
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="tableType != null">
+        #{tableType,jdbcType=VARCHAR},
+      </if>
+      <if test="table1Name != null">
+        #{table1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="table2Name != null">
+        #{table2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="field1Name != null">
+        #{field1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="field2Name != null">
+        #{field2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null">
+        #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldType != null">
+        #{fieldType,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.CsrReclnPaymentField">
+    update csr_recln_payment_field
+    <set>
+      <if test="channel != null">
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="tableType != null">
+        table_type = #{tableType,jdbcType=VARCHAR},
+      </if>
+      <if test="table1Name != null">
+        table1_name = #{table1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="table2Name != null">
+        table2_name = #{table2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="field1Name != null">
+        field1_name = #{field1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="field2Name != null">
+        field2_name = #{field2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null">
+        operation = #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldType != null">
+        field_type = #{fieldType,jdbcType=VARCHAR},
+      </if>
+       <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=TINYINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.CsrReclnPaymentField">
+    update csr_recln_payment_field
+    set channel = #{channel,jdbcType=VARCHAR},
+      table_type = #{tableType,jdbcType=VARCHAR},
+      table1_name = #{table1Name,jdbcType=VARCHAR},
+      table2_name = #{table2Name,jdbcType=VARCHAR},
+      field1_name = #{field1Name,jdbcType=VARCHAR},
+      field2_name = #{field2Name,jdbcType=VARCHAR},
+      operation = #{operation,jdbcType=VARCHAR},
+      field_type = #{fieldType,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=TINYINT}
+    where row_id = #{rowId,jdbcType=BIGINT}
+  </update>
+  
+  <select id="findByChannelAndTableType" parameterType="com.gxyj.cashier.domain.CsrReclnPaymentField" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_recln_payment_field
+    where channel = #{channel,jdbcType=VARCHAR} and
+      table_type = #{tableType,jdbcType=VARCHAR}
+  </select>
+</mapper>

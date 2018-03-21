@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.recon.CsrWechatRecnLtMapper">
+	<resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.CsrWechatRecnLt">
+		<id column="row_id" jdbcType="INTEGER" property="rowId" />
+		<result column="recnl_cl_id" jdbcType="INTEGER" property="recnlClId" />
+		<result column="proc_state" jdbcType="VARCHAR" property="procState" />
+		<result column="check_date" jdbcType="VARCHAR" property="checkDate" />
+		<result column="trans_date" jdbcType="VARCHAR" property="transDate" />
+		<result column="public_user_id" jdbcType="VARCHAR" property="publicUserId" />
+		<result column="merch_id" jdbcType="VARCHAR" property="merchId" />
+		<result column="sub_merch_id" jdbcType="VARCHAR" property="subMerchId" />
+		<result column="mac_id" jdbcType="VARCHAR" property="macId" />
+		<result column="wx_order_no" jdbcType="VARCHAR" property="wxOrderNo" />
+		<result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="trans_type" jdbcType="VARCHAR" property="transType" />
+		<result column="trans_status" jdbcType="VARCHAR" property="transStatus" />
+		<result column="payer_bank_code" jdbcType="VARCHAR" property="payerBankCode" />
+		<result column="cny" jdbcType="CHAR" property="cny" />
+		<result column="trans_amt" jdbcType="DECIMAL" property="transAmt" />
+		<result column="trans_pkg_amt" jdbcType="DECIMAL" property="transPkgAmt" />
+		<result column="wx_refund_no" jdbcType="VARCHAR" property="wxRefundNo" />
+		<result column="refund_no" jdbcType="VARCHAR" property="refundNo" />
+		<result column="refund_amt" jdbcType="DECIMAL" property="refundAmt" />
+		<result column="refund_pkg_amt" jdbcType="DECIMAL" property="refundPkgAmt" />
+		<result column="refund_type" jdbcType="VARCHAR" property="refundType" />
+		<result column="refund_status" jdbcType="VARCHAR" property="refundStatus" />
+		<result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+		<result column="merch_name" jdbcType="VARCHAR" property="merchName" />
+		<result column="charge_amt" jdbcType="DECIMAL" property="chargeAmt" />
+		<result column="charge_rate" jdbcType="VARCHAR" property="chargeRate" />
+		<result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+		<result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+		<result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+		<result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+		<result column="version" jdbcType="TINYINT" property="version" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		row_id, recnl_cl_id, proc_state, check_date, trans_date, public_user_id,
+		merch_id,
+		sub_merch_id, mac_id, wx_order_no, order_no, user_id, trans_type, trans_status,
+		payer_bank_code,
+		cny, trans_amt, trans_pkg_amt, wx_refund_no, refund_no, refund_amt,
+		refund_pkg_amt,
+		refund_type, refund_status, goods_name, merch_name, charge_amt, charge_rate,
+		created_by,
+		created_date, last_updt_by, last_updt_date, version
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from csr_wechat_recn_lt
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from csr_wechat_recn_lt
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.gxyj.cashier.domain.CsrWechatRecnLt">
+		<selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into csr_wechat_recn_lt (recnl_cl_id, proc_state, check_date,
+		trans_date, public_user_id, merch_id,
+		sub_merch_id, mac_id, wx_order_no,
+		order_no, user_id, trans_type,
+		trans_status, payer_bank_code, cny,
+		trans_amt, trans_pkg_amt, wx_refund_no,
+		refund_no, refund_amt, refund_pkg_amt,
+		refund_type, refund_status, goods_name,
+		merch_name, charge_amt, charge_rate,
+		created_by, created_date, last_updt_by,
+		last_updt_date, version)
+		values (#{recnlClId,jdbcType=INTEGER}, #{procState,jdbcType=VARCHAR},
+		#{checkDate,jdbcType=VARCHAR},
+		#{transDate,jdbcType=VARCHAR}, #{publicUserId,jdbcType=VARCHAR}, #{merchId,jdbcType=VARCHAR},
+		#{subMerchId,jdbcType=VARCHAR}, #{macId,jdbcType=VARCHAR},
+		#{wxOrderNo,jdbcType=VARCHAR},
+		#{orderNo,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{transType,jdbcType=VARCHAR},
+		#{transStatus,jdbcType=VARCHAR}, #{payerBankCode,jdbcType=VARCHAR},
+		#{cny,jdbcType=CHAR},
+		#{transAmt,jdbcType=DECIMAL}, #{transPkgAmt,jdbcType=DECIMAL}, #{wxRefundNo,jdbcType=VARCHAR},
+		#{refundNo,jdbcType=VARCHAR}, #{refundAmt,jdbcType=DECIMAL},
+		#{refundPkgAmt,jdbcType=DECIMAL},
+		#{refundType,jdbcType=VARCHAR}, #{refundStatus,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR},
+		#{merchName,jdbcType=VARCHAR}, #{chargeAmt,jdbcType=DECIMAL},
+		#{chargeRate,jdbcType=VARCHAR},
+		#{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtBy,jdbcType=VARCHAR},
+		#{lastUpdtDate,jdbcType=TIMESTAMP}, #{version,jdbcType=TINYINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gxyj.cashier.domain.CsrWechatRecnLt">
+		<selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into csr_wechat_recn_lt
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="recnlClId != null">
+				recnl_cl_id,
+			</if>
+			<if test="procState != null">
+				proc_state,
+			</if>
+			<if test="checkDate != null">
+				check_date,
+			</if>
+			<if test="transDate != null">
+				trans_date,
+			</if>
+			<if test="publicUserId != null">
+				public_user_id,
+			</if>
+			<if test="merchId != null">
+				merch_id,
+			</if>
+			<if test="subMerchId != null">
+				sub_merch_id,
+			</if>
+			<if test="macId != null">
+				mac_id,
+			</if>
+			<if test="wxOrderNo != null">
+				wx_order_no,
+			</if>
+			<if test="orderNo != null">
+				order_no,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="transType != null">
+				trans_type,
+			</if>
+			<if test="transStatus != null">
+				trans_status,
+			</if>
+			<if test="payerBankCode != null">
+				payer_bank_code,
+			</if>
+			<if test="cny != null">
+				cny,
+			</if>
+			<if test="transAmt != null">
+				trans_amt,
+			</if>
+			<if test="transPkgAmt != null">
+				trans_pkg_amt,
+			</if>
+			<if test="wxRefundNo != null">
+				wx_refund_no,
+			</if>
+			<if test="refundNo != null">
+				refund_no,
+			</if>
+			<if test="refundAmt != null">
+				refund_amt,
+			</if>
+			<if test="refundPkgAmt != null">
+				refund_pkg_amt,
+			</if>
+			<if test="refundType != null">
+				refund_type,
+			</if>
+			<if test="refundStatus != null">
+				refund_status,
+			</if>
+			<if test="goodsName != null">
+				goods_name,
+			</if>
+			<if test="merchName != null">
+				merch_name,
+			</if>
+			<if test="chargeAmt != null">
+				charge_amt,
+			</if>
+			<if test="chargeRate != null">
+				charge_rate,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="createdDate != null">
+				created_date,
+			</if>
+			<if test="lastUpdtBy != null">
+				last_updt_by,
+			</if>
+			<if test="lastUpdtDate != null">
+				last_updt_date,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="recnlClId != null">
+				#{recnlClId,jdbcType=INTEGER},
+			</if>
+			<if test="procState != null">
+				#{procState,jdbcType=VARCHAR},
+			</if>
+			<if test="checkDate != null">
+				#{checkDate,jdbcType=VARCHAR},
+			</if>
+			<if test="transDate != null">
+				#{transDate,jdbcType=VARCHAR},
+			</if>
+			<if test="publicUserId != null">
+				#{publicUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="merchId != null">
+				#{merchId,jdbcType=VARCHAR},
+			</if>
+			<if test="subMerchId != null">
+				#{subMerchId,jdbcType=VARCHAR},
+			</if>
+			<if test="macId != null">
+				#{macId,jdbcType=VARCHAR},
+			</if>
+			<if test="wxOrderNo != null">
+				#{wxOrderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNo != null">
+				#{orderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="transType != null">
+				#{transType,jdbcType=VARCHAR},
+			</if>
+			<if test="transStatus != null">
+				#{transStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="payerBankCode != null">
+				#{payerBankCode,jdbcType=VARCHAR},
+			</if>
+			<if test="cny != null">
+				#{cny,jdbcType=CHAR},
+			</if>
+			<if test="transAmt != null">
+				#{transAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="transPkgAmt != null">
+				#{transPkgAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="wxRefundNo != null">
+				#{wxRefundNo,jdbcType=VARCHAR},
+			</if>
+			<if test="refundNo != null">
+				#{refundNo,jdbcType=VARCHAR},
+			</if>
+			<if test="refundAmt != null">
+				#{refundAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="refundPkgAmt != null">
+				#{refundPkgAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="refundType != null">
+				#{refundType,jdbcType=VARCHAR},
+			</if>
+			<if test="refundStatus != null">
+				#{refundStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsName != null">
+				#{goodsName,jdbcType=VARCHAR},
+			</if>
+			<if test="merchName != null">
+				#{merchName,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeAmt != null">
+				#{chargeAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="chargeRate != null">
+				#{chargeRate,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createdDate != null">
+				#{createdDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtBy != null">
+				#{lastUpdtBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdtDate != null">
+				#{lastUpdtDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.CsrWechatRecnLt">
+		update csr_wechat_recn_lt
+		<set>
+			<if test="recnlClId != null">
+				recnl_cl_id = #{recnlClId,jdbcType=INTEGER},
+			</if>
+			<if test="procState != null">
+				proc_state = #{procState,jdbcType=VARCHAR},
+			</if>
+			<if test="checkDate != null">
+				check_date = #{checkDate,jdbcType=VARCHAR},
+			</if>
+			<if test="transDate != null">
+				trans_date = #{transDate,jdbcType=VARCHAR},
+			</if>
+			<if test="publicUserId != null">
+				public_user_id = #{publicUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="merchId != null">
+				merch_id = #{merchId,jdbcType=VARCHAR},
+			</if>
+			<if test="subMerchId != null">
+				sub_merch_id = #{subMerchId,jdbcType=VARCHAR},
+			</if>
+			<if test="macId != null">
+				mac_id = #{macId,jdbcType=VARCHAR},
+			</if>
+			<if test="wxOrderNo != null">
+				wx_order_no = #{wxOrderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNo != null">
+				order_no = #{orderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="transType != null">
+				trans_type = #{transType,jdbcType=VARCHAR},
+			</if>
+			<if test="transStatus != null">
+				trans_status = #{transStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="payerBankCode != null">
+				payer_bank_code = #{payerBankCode,jdbcType=VARCHAR},
+			</if>
+			<if test="cny != null">
+				cny = #{cny,jdbcType=CHAR},
+			</if>
+			<if test="transAmt != null">
+				trans_amt = #{transAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="transPkgAmt != null">
+				trans_pkg_amt = #{transPkgAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="wxRefundNo != null">
+				wx_refund_no = #{wxRefundNo,jdbcType=VARCHAR},
+			</if>
+			<if test="refundNo != null">
+				refund_no = #{refundNo,jdbcType=VARCHAR},
+			</if>
+			<if test="refundAmt != null">
+				refund_amt = #{refundAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="refundPkgAmt != null">
+				refund_pkg_amt = #{refundPkgAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="refundType != null">
+				refund_type = #{refundType,jdbcType=VARCHAR},
+			</if>
+			<if test="refundStatus != null">
+				refund_status = #{refundStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsName != null">
+				goods_name = #{goodsName,jdbcType=VARCHAR},
+			</if>
+			<if test="merchName != null">
+				merch_name = #{merchName,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeAmt != null">
+				charge_amt = #{chargeAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="chargeRate != null">
+				charge_rate = #{chargeRate,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				created_by = #{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createdDate != null">
+				created_date = #{createdDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtBy != null">
+				last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdtDate != null">
+				last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="version != null">
+				version = #{version,jdbcType=TINYINT},
+			</if>
+		</set>
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.CsrWechatRecnLt">
+		update csr_wechat_recn_lt
+		set recnl_cl_id = #{recnlClId,jdbcType=INTEGER},
+		proc_state = #{procState,jdbcType=VARCHAR},
+		check_date = #{checkDate,jdbcType=VARCHAR},
+		trans_date = #{transDate,jdbcType=VARCHAR},
+		public_user_id = #{publicUserId,jdbcType=VARCHAR},
+		merch_id = #{merchId,jdbcType=VARCHAR},
+		sub_merch_id = #{subMerchId,jdbcType=VARCHAR},
+		mac_id = #{macId,jdbcType=VARCHAR},
+		wx_order_no = #{wxOrderNo,jdbcType=VARCHAR},
+		order_no = #{orderNo,jdbcType=VARCHAR},
+		user_id = #{userId,jdbcType=VARCHAR},
+		trans_type = #{transType,jdbcType=VARCHAR},
+		trans_status = #{transStatus,jdbcType=VARCHAR},
+		payer_bank_code = #{payerBankCode,jdbcType=VARCHAR},
+		cny = #{cny,jdbcType=CHAR},
+		trans_amt = #{transAmt,jdbcType=DECIMAL},
+		trans_pkg_amt = #{transPkgAmt,jdbcType=DECIMAL},
+		wx_refund_no = #{wxRefundNo,jdbcType=VARCHAR},
+		refund_no = #{refundNo,jdbcType=VARCHAR},
+		refund_amt = #{refundAmt,jdbcType=DECIMAL},
+		refund_pkg_amt = #{refundPkgAmt,jdbcType=DECIMAL},
+		refund_type = #{refundType,jdbcType=VARCHAR},
+		refund_status = #{refundStatus,jdbcType=VARCHAR},
+		goods_name = #{goodsName,jdbcType=VARCHAR},
+		merch_name = #{merchName,jdbcType=VARCHAR},
+		charge_amt = #{chargeAmt,jdbcType=DECIMAL},
+		charge_rate = #{chargeRate,jdbcType=VARCHAR},
+		created_by = #{createdBy,jdbcType=VARCHAR},
+		created_date = #{createdDate,jdbcType=TIMESTAMP},
+		last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+		last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+		version = #{version,jdbcType=TINYINT}
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectByCheckDate" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from csr_wechat_recn_lt
+		where check_date = #{checkDate,jdbcType=VARCHAR}
+			and proc_state!='99'
+	</select>
+
+
+
+	<update id="batchUpdateDetails" parameterType="java.util.List">
+
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			update csr_wechat_recn_lt
+			<set>
+				proc_state=${item.chkResult}
+			</set>
+			where row_id = ${item.id}
+		</foreach>
+
+	</update>
+	
+	<update id="batchUpdateDetail" parameterType="java.util.Map">
+			update csr_wechat_recn_lt
+			<set>
+				proc_state = #{procState,jdbcType=VARCHAR},
+			</set>
+			where recnl_cl_id = #{recnlClId,jdbcType=INTEGER}
+	</update>
+	
+	
+
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<function_list>
+		<item name="myUtils" class="com.gxyj.cashier.common.convert.utils.ConvertUtils" />
+	</function_list>
+	<transaction code="5W1004"><!--商户单笔退款交易 -->
+		<request msg_type="xml">
+			<group name="TX">
+				<item name="REQUEST_SN" /><!-- 请求序列号 同请求报文中的序列号 -->
+				<item name="CUST_ID" /><!--商户号(网银商户号) 同请求报文中的商户号 -->
+				<item name="TX_CODE" /><!--同请求报文中的交易码 -->
+				<item name="RETURN_CODE" /><!--交易响应码 -->
+				<item name="RETURN_MSG" /><!--交易响应信息 -->
+				<item name="LANGUAGE" /><!--语言 同请求报文 -->
+				<group name="TX_INFO">
+					<item name="ORDER_NUM" /><!--订单号 -->
+					<item name="PAY_AMOUNT" /><!--支付金额-->
+					<item name="AMOUNT" /><!--退款金额-->
+				</group>
+			</group>
+		</request>
+
+		<response msg_type="bean" bean="java.util.HashMap">
+			<group name="TX" doc_encode="GB2312">
+				<item name="REQUEST_SN" bean_field="requestMsgId" /><!-- 请求序列号 同请求报文中的序列号 -->
+				<item name="CUST_ID" bean_field="custId" /><!--商户号(网银商户号) 同请求报文中的商户号 -->
+				<item name="TX_CODE" bean_field="txCode" /><!--同请求报文中的交易码 -->
+				<item name="RETURN_CODE" bean_field="returnCode" /><!--交易响应码 -->
+				<item name="RETURN_MSG" bean_field="returnMsg" /><!--交易响应信息 -->
+				<item name="LANGUAGE" bean_field="language" /><!--语言 同请求报文 -->
+				<group name="TX_INFO">
+					<item name="ORDER_NUM" bean_field="orderNum" /><!--订单号 -->
+					<item name="PAY_AMOUNT" bean_field="payAmount" /><!--支付金额-->
+					<item name="AMOUNT" bean_field="amount" /><!--退款金额-->
+				</group>
+			</group>
+		</response>
+
+	</transaction>
+</config>

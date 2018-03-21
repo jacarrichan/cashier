@@ -1,0 +1,57 @@
+@CHARSET "UTF-8";
+
+@import "../../../common/css/page-common.css";
+
+th.number,
+td.number {
+	width: 65px !important;
+}
+
+th.sort-disabled,
+td.sort-disabled {
+	width: 200px !important;
+}
+
+th.status,
+td.status {
+	width: 180px !important;
+}
+
+th.date,
+td.date {
+	width: 90px !important;
+}
+
+th.order,
+td.order {
+	width: 150px !important;
+}
+.tip-icon {
+	color: #999999;
+	cursor: pointer !important;
+}
+
+.tip-icon.error {
+	color: #990000;
+}
+
+.line {
+    width: 100%;
+    display: inline-block;
+}
+
+/* .col-sm-2 {
+    width: 80px;
+} */
+
+.td-right-middle {
+    text-align: right;
+    vertical-align: middle !important;
+}
+.wrapper-content {
+	overflow-y: auto;
+	height: 100%;
+}
+.search-panel .btn-group {
+	padding-left: 0;
+}

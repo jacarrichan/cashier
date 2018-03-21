@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.displayTemplate.PayTemplateMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.PayTemplate">
+    <id column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="template_name" jdbcType="VARCHAR" property="templateName" />
+    <result column="template_url" jdbcType="VARCHAR" property="templateUrl" />
+    <result column="terminal" jdbcType="CHAR" property="terminal" />
+    <result column="open_flag" jdbcType="TINYINT" property="openFlag" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+    <result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+    <result column="version" jdbcType="TINYINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, template_name, template_url, terminal, open_flag, created_by, created_date, 
+    last_updt_date, last_updt_by, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_pay_template
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from csr_pay_template
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.PayTemplate">
+    insert into csr_pay_template (template_name, template_url, 
+      terminal, created_by, 
+      created_date, last_updt_date, last_updt_by)
+    values (#{templateName,jdbcType=VARCHAR}, #{templateUrl,jdbcType=VARCHAR}, 
+      #{terminal,jdbcType=CHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtDate,jdbcType=TIMESTAMP}, #{lastUpdtBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.PayTemplate">
+    insert into csr_pay_template
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rowId != null">
+        row_id,
+      </if>
+      <if test="templateName != null">
+        template_name,
+      </if>
+      <if test="templateUrl != null">
+        template_url,
+      </if>
+      <if test="terminal != null">
+        terminal,
+      </if>
+      <if test="openFlag != null">
+        open_flag,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date,
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rowId != null">
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="templateName != null">
+        #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="templateUrl != null">
+        #{templateUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="terminal != null">
+        #{terminal,jdbcType=CHAR},
+      </if>
+      <if test="openFlag != null">
+        #{openFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null">
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.PayTemplate">
+    update csr_pay_template
+    <set>
+      <if test="templateName != null">
+        template_name = #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="templateUrl != null">
+        template_url = #{templateUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="terminal != null">
+        terminal = #{terminal,jdbcType=CHAR},
+      </if>
+      <if test="openFlag != null">
+        open_flag = #{openFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=TINYINT},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.PayTemplate">
+    update csr_pay_template
+    set template_name = #{templateName,jdbcType=VARCHAR},
+      template_url = #{templateUrl,jdbcType=VARCHAR},
+      terminal = #{terminal,jdbcType=CHAR},
+      open_flag = #{openFlag,jdbcType=TINYINT},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      version = #{version,jdbcType=TINYINT}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectPayTemplateList" parameterType="com.gxyj.cashier.domain.PayTemplate" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_pay_template  where 1 = 1
+    <if test="openFlag != null">
+	  and  open_flag = #{openFlag,jdbcType=TINYINT}
+    </if>
+	<if test="terminal != null and terminal != ''">
+		and terminal = #{terminal,jdbcType=CHAR}
+	</if>
+	<if test="templateName != null and templateName != ''">
+		and template_name LIKE CONCAT('%',#{templateName,jdbcType=VARCHAR},'%')  
+	</if>
+	order by last_updt_date desc
+  </select>
+  
+  <select id="checkName" parameterType="com.gxyj.cashier.domain.PayTemplate" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_pay_template  where 1 = 1
+	<if test="terminal != null">
+		and terminal = #{terminal,jdbcType=CHAR}
+	</if>
+	<if test="templateName != null and templateName != ''">
+       and template_name = #{templateName,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.displayTemplate.WebpageModelCfgMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.WebpageModelCfg">
+    <id column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="page_name" jdbcType="VARCHAR" property="pageName" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="channel_id" jdbcType="INTEGER" property="channelId" />
+    <result column="channel_name" jdbcType="INTEGER" property="channelName" />
+    <result column="template_id" jdbcType="INTEGER" property="templateId" />
+    <result column="template_name" jdbcType="VARCHAR" property="templateName" />
+    <result column="terminal" jdbcType="CHAR" property="terminal" />
+    <result column="defautl_webpage" jdbcType="CHAR" property="defautlWebpage" />
+    <result column="open_flag" jdbcType="TINYINT" property="openFlag" />
+    <result column="page_address" jdbcType="VARCHAR" property="pageAddress" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+    <result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+    <result column="version" jdbcType="TINYINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, page_name, introduction, channel_id, channel_name, template_id, template_name, terminal, 
+    defautl_webpage, open_flag, page_address, created_by, created_date, last_updt_date, last_updt_by, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_webpage_model_cfg
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from csr_webpage_model_cfg
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.WebpageModelCfg">
+    insert into csr_webpage_model_cfg (row_id, page_name, introduction, 
+      channel_id, 
+      channel_name, template_id, template_name, 
+      terminal, defautl_webpage, open_flag, page_address,
+      created_by, created_date, last_updt_date, 
+      last_updt_by, version)
+    values (#{rowId,jdbcType=INTEGER}, #{pageName,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
+      #{channelId,jdbcType=INTEGER}, #{channelName,jdbcType=INTEGER}, #{templateId,jdbcType=INTEGER}, #{templateName,jdbcType=VARCHAR}, 
+      #{terminal,jdbcType=CHAR}, #{defautlWebpage,jdbcType=CHAR}, #{openFlag,jdbcType=TINYINT}, #{pageAddress,jdbcType=VARCHAR}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtDate,jdbcType=TIMESTAMP}, 
+      #{lastUpdtBy,jdbcType=VARCHAR}, #{version,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.WebpageModelCfg">
+    insert into csr_webpage_model_cfg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rowId != null">
+        row_id,
+      </if>
+      <if test="pageName != null">
+        page_name,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+      <if test="channelId != null">
+        channel_id,
+      </if>
+      <if test="channelName != null">
+        channel_name,
+      </if>
+      <if test="templateId != null">
+        template_id,
+      </if>
+      <if test="templateName != null">
+        template_name,
+      </if>
+      <if test="terminal != null">
+        terminal,
+      </if>
+      <if test="defautlWebpage != null">
+        defautl_webpage,
+      </if>
+      <if test="openFlag != null">
+        open_flag,
+      </if>
+      <if test="pageAddress != null">
+        page_address,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date,
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rowId != null">
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="pageName != null">
+        #{pageName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null">
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="channelName != null">
+        #{channelName,jdbcType=INTEGER},
+      </if>
+      <if test="templateId != null">
+        #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="templateName != null">
+        #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="terminal != null">
+        #{terminal,jdbcType=CHAR},
+      </if>
+      <if test="defautlWebpage != null">
+        #{defautlWebpage,jdbcType=CHAR},
+      </if>
+      <if test="openFlag != null">
+        #{openFlag,jdbcType=TINYINT},
+      </if>
+      <if test="pageAddress != null">
+        #{pageAddress,jdbcType=TINYINT},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null">
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.WebpageModelCfg">
+    update csr_webpage_model_cfg
+    <set>
+      <if test="pageName != null">
+        page_name = #{pageName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null">
+        template_id = #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="templateName != null">
+        template_name = #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="defautlWebpage != null">
+        defautl_webpage = #{defautlWebpage,jdbcType=CHAR},
+      </if>
+      <if test="openFlag != null">
+        open_flag = #{openFlag,jdbcType=TINYINT},
+      </if>
+       <if test="pageAddress != null">
+        page_address = #{pageAddress,jdbcType=TINYINT},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=TINYINT},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.WebpageModelCfg">
+    update csr_webpage_model_cfg
+    set page_name = #{pageName,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      channel_id = #{channelId,jdbcType=INTEGER},
+      channel_name = #{channelName,jdbcType=INTEGER},
+      template_id = #{templateId,jdbcType=INTEGER},
+      template_name = #{templateName,jdbcType=VARCHAR},
+      terminal = #{terminal,jdbcType=CHAR},
+      defautl_webpage = #{defautlWebpage,jdbcType=CHAR},
+      open_flag = #{openFlag,jdbcType=TINYINT},
+      page_address = #{pageAddress,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      version = #{version,jdbcType=TINYINT}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  
+   <select id="selectWebpageModelList" parameterType="com.gxyj.cashier.domain.WebpageModelCfg" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_webpage_model_cfg  where 1 = 1
+    <if test="openFlag != null">
+	  and  open_flag = #{openFlag,jdbcType=TINYINT}
+    </if>
+	<if test="terminal != null and terminal != ''">
+		and terminal = #{terminal,jdbcType=CHAR}
+	</if>
+	<if test="channelId != null and channelId != ''">
+		and channel_id = #{channelId,jdbcType=INTEGER}
+	</if>
+	<if test="channelName != null and channelName != ''">
+		and channel_name = #{channelName,jdbcType=INTEGER}
+	</if>
+	<if test="pageName != null and pageName != ''">
+		and page_name LIKE CONCAT('%',#{pageName,jdbcType=VARCHAR},'%')  
+	</if>
+	 order by last_updt_date desc
+  </select>
+  <select id="checkName" parameterType="com.gxyj.cashier.domain.WebpageModelCfg" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_webpage_model_cfg  where 1 = 1
+	<if test="terminal != null">
+		and terminal = #{terminal,jdbcType=CHAR}
+	</if>
+	<if test="channelId != null">
+		and channel_id = #{channelId,jdbcType=CHAR}
+	</if>
+	<if test="defautlWebpage != null">
+        and defautl_webpage = #{defautlWebpage,jdbcType=CHAR}
+    </if>
+	<if test="pageName != null ">
+       and page_name = #{pageName,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="queryWebpageModelList" parameterType="com.gxyj.cashier.domain.WebpageModelCfg" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_webpage_model_cfg   where 1 = 1
+	<if test="openFlag != null">
+	  and  open_flag = #{openFlag,jdbcType=TINYINT}
+    </if>
+    <if test="channelId != null and channelId != ''">
+		and channel_id = #{channelId,jdbcType=INTEGER}
+	</if>
+	 <if test="templateId != null">
+		and template_id = #{templateId,jdbcType=INTEGER}
+	</if>
+	<if test="defautlWebpage != null">
+        and defautl_webpage = #{defautlWebpage,jdbcType=CHAR}
+    </if>
+    <if test="terminal != null">
+		and terminal = #{terminal,jdbcType=CHAR}
+	</if>
+  </select>
+  
+  <select id="selectByPojo"  parameterType="com.gxyj.cashier.domain.WebpageModelCfg" resultMap="BaseResultMap">
+  	select 
+   		 <include refid="Base_Column_List" />
+    from 
+    	csr_webpage_model_cfg   
+    where 
+    	1 = 1
+      <if test="pageName != null">
+        AND page_name = #{pageName,jdbcType=VARCHAR}
+      </if>
+      <if test="introduction != null">
+        AND introduction = #{introduction,jdbcType=VARCHAR}
+      </if>
+      <if test="channelId != null">
+        AND channel_id = #{channelId,jdbcType=INTEGER}
+      </if>
+      <if test="channelName != null">
+        AND channel_name = #{channelName,jdbcType=INTEGER}
+      </if>
+      <if test="templateId != null">
+        AND template_id = #{templateId,jdbcType=INTEGER}
+      </if>
+      <if test="templateName != null">
+        AND template_name = #{templateName,jdbcType=VARCHAR}
+      </if>
+      <if test="terminal != null">
+        AND terminal = #{terminal,jdbcType=CHAR}
+      </if>
+      <if test="defautlWebpage != null">
+        AND defautl_webpage = #{defautlWebpage,jdbcType=CHAR}
+      </if>
+      <if test="openFlag != null">
+        AND open_flag = #{openFlag,jdbcType=TINYINT}
+      </if>
+       <if test="pageAddress != null">
+        AND page_address = #{pageAddress,jdbcType=TINYINT}
+      </if>
+      <if test="createdBy != null">
+        AND created_by = #{createdBy,jdbcType=VARCHAR}
+      </if>
+      <if test="createdDate != null">
+        AND created_date = #{createdDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastUpdtDate != null">
+        AND last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastUpdtBy != null">
+        AND last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR}
+      </if>
+      <if test="version != null">
+        AND version = #{version,jdbcType=TINYINT}
+      </if>
+  </select>
+  <select id="selectArg" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select a.page_address, b.channel_code as page_name,a.terminal 
+      from csr_webpage_model_cfg  a ,csr_busi_channel  b where  a.channel_id= b.row_id and a.row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  
+</mapper>

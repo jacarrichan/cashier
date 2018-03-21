@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com</groupId>
+	<artifactId>gxyj-cashier</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>gxyj-cashier</name>
+	<packaging>pom</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+
+	</dependencies>
+
+	<modules>
+		<module>cashier-common</module>
+		<module>cashier-service-api</module>
+		<module>cashier-service-impl</module>
+		<module>cashier-web</module>
+		<module>cashier-mgmt-web</module>
+		<module>cashier-client</module>
+		
+	</modules>
+</project>

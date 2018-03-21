@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<function_list>
+		<item name="myUtils" class="com.gxyj.cashier.common.convert.utils.ConvertUtils" />
+	</function_list>
+	<transaction code="5W1005"><!--商户流水文件下载申请 -->
+		<request msg_type="bean">
+			<group name="TX">
+				<item name="REQUEST_SN" bean_field="requestMsgId" /><!-- 请求序列号 只可以使用数字 -->
+				<item name="CUST_ID" bean_field="merId" /><!--商户号(网银商户号) -->
+				<item name="USER_ID" bean_field="userId" /><!--操作员号 -->
+				<item name="PASSWORD" bean_field="password" /><!--操作员号交易密码 -->
+				<item name="TX_CODE" value="5W1005" /><!--交易请求码 -->
+				<item name="LANGUAGE" value="CN" /><!--语言 固定为CN -->
+				<group name="TX_INFO">
+					<item name="DATE" bean_field="billDate" /><!--日期 -->
+					<item name="KIND" bean_field="kind" /><!--流水状态 1：已结流水（默认），0：未结流水 -->
+					<item name="FILETYPE" bean_field="filetype" />	<!--文件类型 -->
+					<item name="TYPE" bean_field="type" /><!-- 流水类型 0：支付流水；1：退款流水 -->
+					<item name="NORDERBY" bean_field="norderby" /><!-- 排序 1：交易日期；2：订单号 -->
+					<item name="POS_CODE" value="002043583" /><!-- 柜台号(不输入为全部) -->
+					<item name="ORDER" bean_field="order" /><!--订单号 -->
+					<item name="STATUS" bean_field="status" /><!--订单状态 0：交易失败,1：交易成功,2：待银行确认(未结流水);3：全部(未结流水) -->
+				</group>
+			</group>
+		</request>
+
+		<response msg_type="xml">
+			<group name="TX" doc_encode="GB2312">
+				<item name="REQUEST_SN" /><!-- 请求序列号 只可以使用数字 -->
+				<item name="CUST_ID" /><!--商户号(网银商户号) -->
+				<item name="USER_ID" /><!--操作员号 -->
+				<item name="PASSWORD" /><!--操作员号交易密码 -->
+				<item name="TX_CODE" value="5W1005" /><!--交易请求码 -->
+				<item name="LANGUAGE" value="CN" /><!--语言 固定为CN -->
+				<group name="TX_INFO">
+					<item name="DATE" /><!--日期 -->
+					<item name="KIND" /><!--流水状态 1：已结流水（默认），0：未结流水 -->
+					<item name="FILETYPE" />	<!--文件类型 -->
+					<item name="TYPE" /><!-- 流水类型 0：支付流水；1：退款流水 -->
+					<item name="NORDERBY" /><!-- 排序 1：交易日期；2：订单号 -->
+					<item name="POS_CODE" /><!-- 柜台号(不输入为全部) -->
+					<item name="ORDER" /><!--订单号 -->
+					<item name="STATUS" /><!--订单状态 0：交易失败,1：交易成功,2：待银行确认(未结流水);3：全部(未结流水) -->
+				</group>
+			</group>
+		</response>
+
+	</transaction>
+</config>

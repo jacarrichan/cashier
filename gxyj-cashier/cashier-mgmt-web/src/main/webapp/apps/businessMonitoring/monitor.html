@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <title>业务监控</title>
+    <script id="seajsnode" type="text/javascript" src="./../../loader.js" data-js="./js/business.js" 
+	data-css="./css/business.css"></script>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+  		<script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+  		<script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body onload="on_page_loaded()">
+    <div class="pay-wrapper">
+    	<!-- 头部导航栏 -->
+        <div class="row monitor-section">
+            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1" style="padding: 0;">
+            	<h2 class="text-center">业务监控</h2>
+            	<div class="monitor-part" >
+            		<div class="caption-section">
+	            		<div class="pull-left monitor-name">交易记录监控</div>
+	            		<div class="text-center pull-right" id="timeMonitor"></div>
+	            	</div>
+	            	<div id="recordsTb">
+		            	
+	            	</div>
+            	</div>
+            </div>
+        </div>
+        <div class="row monitor-section">
+            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 channel-part">
+            	<div class="caption-section">
+            		<div class="pull-left monitor-name">支付渠道监控</div>
+            		<div class="text-center pull-right" id="channelTime"></div>
+            	</div>
+                <div>
+				  	<ul class="list-unstyled channel-lists" id="payChanneTb">
+				  		
+				  	</ul>
+				</div>
+            </div>
+        </div>
+        <div id="body-right">
+        </div>
+        
+        <input id="recordsLink" type="hidden" data-info="records" data-id="110050" data-index="7" data-href="apps/orderQuery/orderQuery.html">
+        
+    </div>  
+    	
+	<!-- 交易记录监控 -->
+	<script type="text/template" id="recordsTplLists">
+			<div class="over-hidden order-info" >
+		        <div class="pull-left order-left">
+	            	<p class="text-center">总订单数</p>
+	            	<p class="text-center">{{d.totalCount}}</p>
+	        	</div>
+	        	<div class="pull-right order-right">
+	            	<p class="text-center">总订单金额</p>
+	            	<p class="text-center">&yen;{{d.totalAmt}}</p>
+	        	</div>    	
+		    </div>
+		    <div id="main" style="width: 80%;height: 500px;margin: 0 auto;"></div>
+	        
+	</script> 
+	
+	<!-- 日期 -->
+	<script type="text/template" id="timeTpl">
+		<span>日期：{{d.nowDate}}</span>
+	</script>  
+	<script type="text/template" id="payChannelTpl">
+	{{# for(var i = 0, leng = d.length; i < leng; i++){ }}
+		<li class="pull-left channel-list">
+			<div class="over-hidden">
+				<span class="pull-left"><strong>{{d[i].payerInstiNm}}</strong></span>
+				<span class="pull-left">
+					{{# if (d[i].openFlag = "0") { }}
+						<span class="no-use">(未启用)</span>
+					{{# } else if (d[i].openFlag = "1"){ }}
+						<span class="in-use">(启用)</span>
+					{{# } else { }}
+						<span class="no-use">(删除)</span>
+					{{# } }}
+				</span>
+			</div>
+			<div class="echarts-item" id="echarts-{{i}}" style="width: 90%;height: 200px;margin: 0 auto;" data-info="records" data-id="110050" data-index="7" data-href="apps/orderQuery/orderQuery.html"></div>
+			<div lass="over-hidden">
+				<span class="pull-left">对账数据日期：{{d[i].dateAcount}}</span>
+				<span class="pull-right">
+					{{# if (d[i].acountResult = "01") { }}
+						对账相符
+					{{# } else if (d[i].acountResult = ""){ }}
+						未对账
+					{{# } else { }}
+						对账异常
+					{{# } }}
+				</span>
+			</div>
+		</li>
+	{{# } }}	
+	</script>
+	<script>
+		function getEvent(){ //同时兼容ie和ff的写法， 这个方法是网上copy的  
+		 
+		        if(document.all){
+		        	return window.event;
+		        } 
+		        func=getEvent.caller; 
+		        while(func!=null){ 
+		            var arg0=func.arguments[0]; 
+		            if(arg0) 
+		            { 
+		                if((arg0.constructor==Event || arg0.constructor ==MouseEvent)|| (typeof(arg0)=="object" && arg0.preventDefault && arg0.stopPropagation)) 
+		                { 
+		                    return arg0; 
+		                } 
+		            } 
+		            func=func.caller; 
+		        } 
+		        return null; 
+		} 
+	
+		function ConfirmClose(){ 
+		    if(window.event){
+		    	if(!window.localStorage){
+		            alert("浏览器支持不localstorage");
+		            return false;
+		        }else{
+		        	var storageInfo = window.localStorage;
+		        	storageInfo.removeItem("dataInfo");
+		        	storageInfo.removeItem("dataId");
+		        	storageInfo.removeItem("dataIndex");
+		        	storageInfo.removeItem("dataHref");
+		        }
+		    } else { 
+		        getEvent().preventDefault();//for firefox 
+		        if(!window.localStorage){
+			        alert("浏览器支持不localstorage");
+			        return false;
+			    }else{
+			     	var storageInfo = window.localStorage;
+			     	storageInfo.removeItem("dataInfo");
+			        storageInfo.removeItem("dataId");
+			        storageInfo.removeItem("dataIndex");
+			        storageInfo.removeItem("dataHref");
+			    }
+		    }
+		} 
+	
+		function on_page_loaded(){//自己定义的body的onload事件 
+		    try{ 
+		        if(!window.onbeforeunload){    //为了不覆盖原来的onbeforeunload方法，先判断 
+		            window.onbeforeunload = ConfirmClose;   //todo 增加了窗口关闭前的提示 
+		        }
+		    }catch(e){
+		        	
+		    } 
+		}
+	</script>
+</body>
+</html>

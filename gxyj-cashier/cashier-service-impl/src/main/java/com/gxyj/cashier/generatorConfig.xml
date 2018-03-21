@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+	<properties resource="application.properties" />
+	
+	
+
+	<classPathEntry location="/Users/Documents/code/mysql-connector-java-5.1.16.jar" />
+
+
+	<context id="context1" >
+		<property name="beginningDelimiter" value="`" />
+		<property name="endingDelimiter" value="`" />
+		<property name="javaFileEncoding" value="UTF-8"/>
+
+		<!-- <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+			<property name="mappers" value="com.gxyj.cashier.utils.CasherMapper" />
+		</plugin> -->
+
+		<commentGenerator type="com.gxyj.cashier.MyCommentGenerator">
+			<property name="suppressAllComments" value="false" />
+			<property name="suppressDate" value="false" />
+			<property name="encoding" value="utf-8" />
+		</commentGenerator>
+		
+		
+		<!-- <jdbcConnection driverClass="${spring.datasource.type}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+        </jdbcConnection> -->
+
+
+	<jdbcConnection connectionURL="jdbc:mysql://192.168.84.190:3306/iflytek
+			driverClass="com.mysql.jdbc.Driver" password="123456" userId="root" />
+
+		<javaModelGenerator targetPackage="com.gxyj.cashier.domain"
+			targetProject="cashier-service-api" />
+
+		<sqlMapGenerator targetPackage="com.gxyj.cashier.mapping.provider.recon"
+			targetProject="cashier-service-impl" />
+
+		<javaClientGenerator targetPackage="com.gxyj.cashier.mapping.recon"
+			targetProject="cashier-service-impl" type="XMLMAPPER" />
+			
+		<!--XMLMAPPER, ANNOTATEDMAPPER -->
+
+		<!-- <table schema="gxyj_cashier_db" tableName="csr_wechat_recn_cl"
+			enableSelectByExample="false" enableDeleteByExample="false"
+			enableCountByExample="false" enableUpdateByExample="false"
+			selectByExampleQueryId="false">	
+			<generatedKey column="row_id" sqlStatement="Mysql" identity="true" />	
+		</table>
+		
+		<table schema="gxyj_cashier_db" tableName="csr_wechat_recn_lt"
+			enableSelectByExample="false" enableDeleteByExample="false"
+			enableCountByExample="false" enableUpdateByExample="false"
+			selectByExampleQueryId="false">
+
+			<generatedKey column="row_id" sqlStatement="Mysql" identity="true" />
+		</table> 
+		
+		<table schema="gxyj_cashier_db" tableName="csr_recon_result_lt"
+		domainObjectName="ReconResultLt"
+			enableSelectByExample="false" enableDeleteByExample="false"
+			enableCountByExample="false" enableUpdateByExample="false"
+			selectByExampleQueryId="false">
+
+			<generatedKey column="row_id" sqlStatement="Mysql" identity="true" />
+		</table>
+		
+		
+			<table schema="gxyj_cashier_db" tableName="csr_recon_result_cl"
+		domainObjectName="ReconResultCl"
+			enableSelectByExample="false" enableDeleteByExample="false"
+			enableCountByExample="false" enableUpdateByExample="false"
+			selectByExampleQueryId="false">
+
+			<generatedKey column="row_id" sqlStatement="Mysql" identity="true" />
+		</table>-->	
+		
+		<table schema="iflytek" tableName="sys_user_info"		
+			enableSelectByExample="false" enableDeleteByExample="false"
+			enableCountByExample="false" enableUpdateByExample="false"
+			selectByExampleQueryId="false">
+
+			<generatedKey column="row_id" sqlStatement="Mysql" identity="true" />
+		</table>	
+		
+		
+
+
+
+
+
+
+	</context>
+</generatorConfiguration>

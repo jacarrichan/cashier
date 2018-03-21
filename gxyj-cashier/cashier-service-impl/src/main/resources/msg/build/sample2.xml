@@ -1,0 +1,454 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<config>
+	<function_list>
+		<item name="myUtils" class="com.echinacoop.itranspond.convert.util.ConvertUtils"/>
+		<item name="strUtil" class="com.mind.platform.system.utils.StringUtils"/>
+	</function_list>
+	<transaction code="sample2"><!--发起报文 -->
+	<request msg_type="bean">
+		<group name="Document">
+			<group name="CstmrCdtTrf">
+				<group name="PKGGrpHdr">
+					<item name="MsgId" bean_field="msg_id"
+						function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--报文标识号 -->
+					<item name="CreDtTm" bean_field="msg_cre_tm"
+						function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--报文发送时间 -->
+					<group name="InstgPty">
+						<item name="InstgDrctPty" bean_field="send_sap_bank_code"
+							function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--发起直接参与机构 -->
+					</group>
+					<group name="InstdPty">
+						<item name="InstdDrctPty" bean_field="recv_sap_bank_code"
+							function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--接收直接参与机构 -->
+					</group>
+					<item name="NbOfTxs" bean_field="total_cnt"
+						function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--明细业务总笔数 -->
+					<item name="CtrlSum" bean_field="total_amt"
+						function="signUtil.buildSignString(#signCtx, 'CNY'+./, 1)" value="function:strUtil.formatNumber(./.toString(),'#0.00#')"><!--明细业务总金额 -->
+						<attr name="Ccy" value="CNY" />
+					</item>
+					<item name="SysCd" value="BEPS"
+						function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--系统编号 -->
+					<item name="Rmk" bean_field="remark" /><!--备注 -->
+				</group>
+
+				<group name="CstmrCdtTrfInf" repeat="true" bean_field="trans_detail">
+					<item name="TxId" bean_field="trans_id"
+						function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--明细标识号 -->
+					<group name="Dbtr">
+						<item name="Nm" bean_field="payer_name"
+							function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--付款人名称 -->
+						<group name="PstlAdr">
+							<item name="AdrLine" bean_field="payer_addr"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--付款人地址 -->
+						</group>
+					</group>
+					<group name="DbtrAcct">
+						<group name="Id">
+							<group name="Othr">
+								<item name="Id" bean_field="payer_acct_no"
+									function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--付款人账号 -->
+								<item name="Issr" bean_field="payer_open_bank_code"
+									function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--付款人开户行行号 -->
+							</group>
+						</group>
+					</group>
+					<group name="DbtrAgt">
+						<group name="BrnchId">
+							<item name="Id" bean_field="send_bank_code"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--付款行行号 -->
+						</group>
+					</group>
+					<group name="CdtrAgt">
+						<group name="BrnchId">
+							<item name="Id" bean_field="recv_bank_code"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--收款行行号 -->
+						</group>
+					</group>
+					<group name="Cdtr">
+						<item name="Nm" bean_field="bener_name"
+							function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--收款人名称 -->
+						<group name="PstlAdr">
+							<item name="AdrLine" bean_field="bener_addr"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--收款人地址 -->
+						</group>
+					</group>
+					<group name="CdtrAcct">
+						<group name="Id">
+							<group name="Othr">
+								<item name="Id" bean_field="bener_acct_no"
+									function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--收款人账号 -->
+								<item name="Issr" bean_field="bener_open_bank_code"
+									function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--收款人开户行行号 -->
+							</group>
+						</group>
+					</group>
+					<item name="Amt" bean_field="amount"
+						function="signUtil.buildSignString(#signCtx, 'CNY'+./, 1)" value="function:strUtil.formatNumber(./.toString(),'#0.00#')"><!--货币符号、金额 -->
+						<attr name="Ccy" value="CNY" />
+					</item>
+					<group name="PmtTpInf">
+						<group name="CtgyPurp">
+							<item name="Prtry" bean_field="trans_type"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--业务类型编码 -->
+						</group>
+					</group>
+					<group name="Purp">
+						<item name="Prtry" bean_field="trans_kind"
+							function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--业务种类编码 -->
+					</group>
+					<item name="AddtlInf" bean_field="payment_info" /><!--附言 -->
+					<group name="CstmrCdtTrfAddtlInf" bean_field="ext">
+						<group name="ColltnInf" bean_field="a109">
+							<item name="Tp" bean_field="tp"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--票据种类 -->
+							<item name="Dt" bean_field="dt"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--票据日期 -->
+							<item name="Nb" bean_field="nb"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--票据号码 -->
+						</group>
+						<group name="ColltnWthAccptncInf" bean_field="a110">
+							<item name="Dt" bean_field="dt"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--票据日期 -->
+							<item name="Nb" bean_field="nb"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--票据号码 -->
+							<item name="AmdsAmt" bean_field="amdsamt"
+								function="signUtil.buildSignString(#signCtx, (./==null? null :'CNY'+./), 0)"
+								value="function:./==null ? null :(@com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"><!--赔偿金金额 -->
+								<attr name="Ccy" value="CNY" />
+							</item>
+							<item name="RctAmt" bean_field="rctamt"
+								function="signUtil.buildSignString(#signCtx, (./==null? null :'CNY'+./), 0)"
+								value="function:./==null ? null :(@com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"><!--拒付金额 -->
+								<attr name="Ccy" value="CNY" />
+							</item>
+
+							<item name="OrgnlAmt" bean_field="orgnlamt"
+								function="signUtil.buildSignString(#signCtx, (./==null? null :'CNY'+./), 0)"
+								value="function:./==null ? null :(@com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"><!--原托金额 -->
+								<attr name="Ccy" value="CNY" />
+							</item>
+
+							<item name="PmtAmt" bean_field="pmtamt"
+								function="signUtil.buildSignString(#signCtx, (./==null? null :'CNY'+./), 0)"
+								value="function:./==null ? null :(@com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"><!--支付金额 -->
+								<attr name="Ccy" value="CNY" />
+							</item>
+
+							<item name="OddAmt" bean_field="oddamt"
+								function="signUtil.buildSignString(#signCtx, (./==null? null :'CNY'+./), 0)"
+								value="function:./==null ? null :(@com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"><!--多付金额 -->
+								<attr name="Ccy" value="CNY" />
+							</item>
+						</group>
+						<group name="PmtInf" bean_field="a301">
+							<item name="FlowNb" bean_field="flownb" /><!--收费单位流水号 -->
+							<item name="Term" bean_field="term"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--所属期间 -->
+							<item name="Tp" bean_field="tp"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--缴费类型 -->
+							<item name="Rmk" bean_field="rmk" /><!--收费附言 -->
+						</group>
+						<group name="RtrInf" bean_field="a105">
+							<group name="OrgnlGrpHdr">
+								<item name="OrgnlMsgId" bean_field="orgnlmsgid"
+									function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--原报文标识号 -->
+								<item name="OrgnlInstgPty" bean_field="orgnlinstgpty"
+									function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--原发起参与机构 -->
+								<item name="OrgnlMT" bean_field="orgnlmt"
+									function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--原报文类型 -->
+							</group>
+							<group name="OrgnlTx">
+								<item name="InstgIndrctPty" bean_field="instgindrctpty"
+									function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--原发起间接参与机构 -->
+								<item name="InstdIndrctPty" bean_field="instdindrctpty"
+									function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--原接收间接参与机构 -->
+								<item name="OrgnlTxId" bean_field="orgnltxid"
+									function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--原明细标识号 -->
+								<item name="OrgnlTxTpCd" bean_field="orgnltxtpcd"
+									function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--原业务类型编码 -->
+							</group>
+							<item name="Cntt" bean_field="cntt"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--退汇原因 -->
+						</group>
+						<!-- 支票附加数据域 -->
+						<group name="ChqInf" bean_field="a201">
+							<item name="IsseDt" bean_field="issedt"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--出票日期 -->
+							<item name="DrwrNm" bean_field="drwrnm"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--出票人名称 -->
+							<item name="ChqAmt" bean_field="chqamt"
+								value="function:./==null ? null :(@com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"
+								function="signUtil.buildSignString(#signCtx, (./==null? null :'CNY'+./), 0)"><!--票据金额 -->
+								<attr name="Ccy" value="CNY" />
+							</item>
+							<item name="Amt" bean_field="amt"
+								value="function:./==null ? null :(@com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"
+								function="signUtil.buildSignString(#signCtx, (./==null? null :'CNY'+./), 0)"><!--牌价 -->
+								<attr name="Ccy" value="CNY" />
+							</item>
+							<item name="Nb" bean_field="nb"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--票据张数 -->
+						</group>
+						<!--银行汇票业务附加数据 -->
+						<group name="BkDrftInf" bean_field="a203">
+							<item name="IsseDt" bean_field="issedt"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--出票日期 -->
+							<item name="DrftAmt" bean_field="drftamt"
+								value="function:./==null ? null :('CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--出票金额 -->
+							<item name="ApplyAcct" bean_field="applyacct"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--汇票申请人账号 -->
+							<item name="ApplyNm" bean_field="applynm"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--汇票申请人名称 -->
+							<item name="SttlmAmt" bean_field="sttlmamt"
+								value="function:./==null ? null :('CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--实际结算金额 -->
+							<item name="OddAmt" bean_field="oddamt"
+								value="function:./==null ? null :('CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--多余金额 -->
+							<item name="DrftTp" bean_field="drfttp"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--汇票种类 -->
+						</group>
+
+						<!--商业汇票业务附加数据 -->
+						<group name="ComrclDrftInf" bean_field="a111">
+							<item name="IsseDt" bean_field="issedt"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--出票日期 -->
+							<item name="DrftAmt" bean_field="drftamt"
+								value="function:./==null ? null :('CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--出票金额 -->
+							<item name="ApplyAcct" bean_field="applyacct"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--汇票申请人账号 -->
+							<item name="ApplyNm" bean_field="applynm"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--汇票申请人名称 -->
+							<item name="SttlmAmt" bean_field="sttlmamt"
+								value="function:./==null ? null :('CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--实际结算金额 -->
+							<item name="OddAmt" bean_field="oddamt"
+								value="function:./==null ? null :('CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--多余金额 -->
+						</group>
+
+						<!-- 银行本票业务附加数据 -->
+						<group name="CshrChckInf" bean_field="a204">
+							<item name="IsseDt" bean_field="issedt"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--出票日期 -->
+							<item name="DrftAmt" bean_field="drftamt"
+								value="function:./==null ? null :('CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--出票金额 -->
+							<item name="ApplyAcct" bean_field="applyacct"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--汇票申请人账号 -->
+							<item name="ApplyNm" bean_field="applynm"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--汇票申请人名称 -->
+							<item name="SttlmAmt" bean_field="sttlmamt"
+								value="function:./==null ? null :('CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--实际结算金额 -->
+							<item name="OddAmt" bean_field="oddamt"
+								value="function:./==null ? null :('CNY'+ @com.mind.platform.system.utils.StringUtils@formatNumber(./.toString(),'#0.00'))"
+								function="signUtil.buildSignString(#signCtx, ./, 0)" /><!--多余金额 -->
+							<item name="DrftTp" bean_field="drfttp"
+								function="signUtil.buildSignString(#signCtx, ./, 1)" /><!--汇票种类 -->
+						</group>
+					</group>
+				</group>
+			</group>
+		</group>
+	</request>
+
+	<response msg_type="xml">
+		<group name="Document" doc_encode="UTF-8">
+			<attr name="xmlns" value="urn:cnaps:std:beps:2010:tech:xsd:beps.121.001.01" />
+			<group name="CstmrCdtTrf">
+				<group name="PKGGrpHdr">
+					<item name="MsgId" /><!--报文标识号 -->
+					<item name="CreDtTm" /><!--报文发送时间 -->
+					<group name="InstgPty">
+						<item name="InstgDrctPty" /><!--发起直接参与机构 -->
+					</group>
+					<group name="InstdPty">
+						<item name="InstdDrctPty" /><!--接收直接参与机构 -->
+					</group>
+					<item name="NbOfTxs" /><!--明细业务总笔数 -->
+					<item name="CtrlSum"><!--明细业务总金额 -->
+						<attr name="Ccy" value="CNY" />
+					</item>
+					<item name="SysCd" /><!--系统编号 -->
+					<item name="Rmk" hidden="./==null||./==''" /><!--备注 -->
+				</group>
+				<group name="NPCPrcInf" hidden="true">
+					<item name="PrcSts" /><!--NPC处理状态 -->
+					<item name="PrcCd" /><!--NPC处理码 -->
+					<item name="RjctInf" hidden="./==null||./==''" /><!--NPC拒绝信息 -->
+					<item name="NetgDt" hidden="./==null||./==''" /><!--NPC轧差日期 -->
+					<item name="NetgRnd" hidden="./==null||./==''" /><!--NPC轧差场次 -->
+					<item name="SttlmDt" hidden="./==null||./==''" /><!--NPC清算日期/终态日期 -->
+					<item name="RcvTm" hidden="./==null||./==''" /><!--NPC接收时间 -->
+					<item name="TrnsmtTm" hidden="./==null||./==''" /><!--NPC转发时间 -->
+				</group>
+				<group name="CstmrCdtTrfInf" repeat="true">
+					<item name="TxId" /><!--明细标识号 -->
+					<group name="Dbtr">
+						<item name="Nm" /><!--付款人名称 -->
+						<group name="PstlAdr" hidden="whenAllChildHidden">
+							<item name="AdrLine" hidden="./==null||./==''"
+								value="function:myUtils.xmlContentEncode(./)" /><!--付款人地址 -->
+						</group>
+					</group>
+					<group name="DbtrAcct">
+						<group name="Id">
+							<group name="Othr">
+								<item name="Id" /><!--付款人账号 -->
+								<item name="Issr" /><!--付款人开户行行号 -->
+							</group>
+						</group>
+					</group>
+					<group name="DbtrAgt">
+						<group name="BrnchId">
+							<item name="Id" /><!--付款行行号 -->
+						</group>
+					</group>
+					<group name="CdtrAgt">
+						<group name="BrnchId">
+							<item name="Id" /><!--收款行行号 -->
+						</group>
+					</group>
+					<group name="Cdtr">
+						<item name="Nm" value="function:myUtils.xmlContentEncode(./)" /><!--收款人名称 -->
+						<group name="PstlAdr" hidden="whenAllChildHidden">
+							<item name="AdrLine" hidden="./==null||./==''"
+								value="function:myUtils.xmlContentEncode(./)" /><!--收款人地址 -->
+						</group>
+					</group>
+					<group name="CdtrAcct">
+						<group name="Id">
+							<group name="Othr">
+								<item name="Id" /><!--收款人账号 -->
+								<item name="Issr" /><!--收款人开户行行号 -->
+							</group>
+						</group>
+					</group>
+					<item name="Amt"><!--货币符号、金额 -->
+						<attr name="Ccy" value="CNY" />
+					</item>
+					<group name="PmtTpInf">
+						<group name="CtgyPurp">
+							<item name="Prtry" /><!--业务类型编码 -->
+						</group>
+					</group>
+					<group name="Purp">
+						<item name="Prtry" /><!--业务种类编码 -->
+					</group>
+					<item name="AddtlInf" hidden="./==null||./==''"
+						value="function:myUtils.xmlContentEncode(./)" /><!--附言 -->
+					<group name="CstmrCdtTrfAddtlInf" hidden="./==null">
+						<group name="ColltnInf" hidden="./==null">
+							<item name="Tp" /><!--票据种类 -->
+							<item name="Dt" /><!--票据日期 -->
+							<item name="Nb" /><!--票据号码 -->
+						</group>
+						<group name="ColltnWthAccptncInf" hidden="./==null">
+							<item name="Dt" /><!--票据日期 -->
+							<item name="Nb" /><!--票据号码 -->
+							<item name="AmdsAmt" hidden="./==null||./==''"><!--赔偿金金额 -->
+								<attr name="Ccy" value="CNY" />
+							</item>
+							<item name="RctAmt" hidden="./==null||./==''"><!--拒付金额 -->
+								<attr name="Ccy" value="CNY" />
+							</item>
+
+							<item name="OrgnlAmt" hidden="./==null||./==''"><!--原托金额 -->
+								<attr name="Ccy" value="CNY" />
+							</item>
+
+							<item name="PmtAmt" hidden="./==null||./==''"><!--支付金额 -->
+								<attr name="Ccy" value="CNY" />
+							</item>
+
+							<item name="OddAmt" hidden="./==null||./==''"><!--多付金额 -->
+								<attr name="Ccy" value="CNY" />
+							</item>
+
+						</group>
+						<group name="PmtInf" hidden="./==null||./.size()==0">
+							<item name="FlowNb" /><!--收费单位流水号 -->
+							<item name="Term" /><!--所属期间 -->
+							<item name="Tp" /><!--缴费类型 -->
+							<item name="Rmk" hidden="./==null||./==''"
+								value="function:myUtils.xmlContentEncode(./)" /><!--收费附言 -->
+						</group>
+						<group name="RtrInf" hidden="./==null||./.size()==0">
+							<group name="OrgnlGrpHdr">
+								<item name="OrgnlMsgId" /><!--原报文标识号 -->
+								<item name="OrgnlInstgPty" /><!--原发起参与机构 -->
+								<item name="OrgnlMT" /><!--原报文类型 -->
+							</group>
+							<group name="OrgnlTx">
+								<item name="InstgIndrctPty" /><!--原发起间接参与机构 -->
+								<item name="InstdIndrctPty" /><!--原接收间接参与机构 -->
+								<item name="OrgnlTxId" /><!--原明细标识号 -->
+								<item name="OrgnlTxTpCd" /><!--原业务类型编码 -->
+							</group>
+							<item name="Cntt" hidden="./==null||./==''"
+								value="function:myUtils.xmlContentEncode(./)" /><!--退汇原因 -->
+						</group>
+						<!-- 支票附加数据域 -->
+						<group name="ChqInf" hidden="./==null||./.size()==0">
+							<item name="IsseDt" /><!--出票日期 -->
+							<item name="DrwrNm" value="function:myUtils.xmlContentEncode(./)" /><!--出票人名称 -->
+							<item name="ChqAmt">
+								<attr name="Ccy" value="CNY" />
+							</item><!--票据金额 -->
+							<item name="Amt" hidden="./==null||./==''">
+								<attr name="Ccy" value="CNY" />
+							</item><!--牌价 -->
+							<item name="Nb" /><!--票据张数 -->
+						</group>
+						<!--银行汇票业务附加数据 -->
+						<group name="BkDrftInf" hidden="./==null||./.size()==0">
+							<item name="IsseDt" /><!--出票日期 -->
+							<item name="DrftAmt" /><!--出票金额 -->
+
+							<item name="ApplyAcct" hidden="./==null||./==''" /><!--汇票申请人账号 -->
+							<item name="ApplyNm" hidden="./==null||./==''"
+								value="function:myUtils.xmlContentEncode(./)" /><!--汇票申请人名称 -->
+							<item name="SttlmAmt" hidden="./==null||./==''" /><!--实际结算金额 -->
+							<item name="OddAmt" hidden="./==null||./==''" /><!--多余金额 -->
+
+							<item name="DrftTp" /><!--汇票种类 -->
+						</group>
+
+						<!--商业汇票业务附加数据 -->
+						<group name="ComrclDrftInf" hidden="./==null||./.size()==0">
+							<item name="IsseDt" /><!--出票日期 -->
+							<item name="DrftAmt" /><!--出票金额 -->
+
+							<item name="ApplyAcct" hidden="./==null||./==''" /><!--汇票申请人账号 -->
+							<item name="ApplyNm" hidden="./==null||./==''"
+								value="function:myUtils.xmlContentEncode(./)" /><!--汇票申请人名称 -->
+							<item name="SttlmAmt" hidden="./==null||./==''" /><!--实际结算金额 -->
+							<item name="OddAmt" hidden="./==null||./==''" /><!--多余金额 -->
+						</group>
+
+						<!-- 银行本票业务附加数据 -->
+						<group name="CshrChckInf" hidden="./==null||./.size()==0">
+							<item name="IsseDt" /><!--出票日期 -->
+							<item name="DrftAmt" /><!--出票金额 -->
+
+							<item name="ApplyAcct" hidden="./==null||./==''" /><!--汇票申请人账号 -->
+							<item name="ApplyNm" hidden="./==null||./==''"
+								value="function:myUtils.xmlContentEncode(./)" /><!--汇票申请人名称 -->
+							<item name="SttlmAmt" hidden="./==null||./==''" /><!--实际结算金额 -->
+							<item name="OddAmt" hidden="./==null||./==''" /><!--多余金额 -->
+
+							<item name="DrftTp" /><!--汇票种类 -->
+						</group>
+
+					</group>
+				</group>
+			</group>
+		</group>
+	</response>
+</transaction>
+
+</config>

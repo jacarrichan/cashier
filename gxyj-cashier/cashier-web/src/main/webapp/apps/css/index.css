@@ -1,0 +1,102 @@
+@CHARSET "UTF-8";
+
+html, body {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+header {
+	width: 100%;
+	height: 60px;
+	float: left;
+	border-bottom: 1px solid #dddddd;
+}
+
+
+header .top-body {
+	width: 1280px;
+	height: 60px;
+	margin: auto;
+}
+
+header .logo {
+    width: 300px;
+    height: 100%;
+    float: left;
+}
+
+header .logo img {
+    height: 80px;
+}
+
+header .head-right {
+    float: left;
+    height: 100%;
+    line-height: 120px;
+}
+
+header .head-right .logo-text {
+    font-size: 18px;
+}
+
+.contain {
+	height: 700px;
+	width: 100% !important;
+	position: relative;
+	z-index: 1;
+	float: left;
+	padding-top: 20px;
+}
+
+.contain .back-line {
+    z-index: -1;
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    background: url('../../images/back-line.png');
+}
+
+.contain .page-box {
+    min-height: 380px;
+    height: 100%;
+    width: 1280px;
+    margin: auto;
+    border: 1px solid #dddddd;
+    background: #ffffff;
+}
+
+footer {
+	width: 100%;
+	height: 140px;
+	margin-top: 35px;
+	background: #333333;
+	float: left;
+}
+
+footer .foot-body {
+	width: 1280px;
+	height: 100%;
+	padding: 20px 30px;
+	margin: auto;
+	color: #777777;
+	text-align: center;
+}
+
+.orderCash{
+	color:red;
+	margin-right: 5px;
+}
+
+.orderId{
+	color:red;
+	margin-right: 30px;
+}
+
+.paymentInfo{
+	 padding-top: 3px;
+	 margin-bottom: 0px;
+	 margin-left: 80px;
+}

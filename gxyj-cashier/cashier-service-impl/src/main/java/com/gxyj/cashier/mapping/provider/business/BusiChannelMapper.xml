@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.business.BusiChannelMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.BusiChannel">
+    <id column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="channel_code" jdbcType="VARCHAR" property="channelCode" />
+    <result column="channel_name" jdbcType="VARCHAR" property="channelName" />
+    <result column="using_date" jdbcType="CHAR" property="usingDate" />
+    <result column="using_status" jdbcType="TINYINT" property="usingStatus" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="app_key" jdbcType="VARCHAR" property="appKey" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+    <result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+    <result column="version" jdbcType="TINYINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, channel_code, channel_name, using_date, using_status, app_id, app_key, created_by, 
+    created_date, last_updt_by, last_updt_date, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_busi_channel
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from csr_busi_channel
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.BusiChannel">
+    insert into csr_busi_channel (row_id, channel_code, channel_name, 
+      using_date, using_status, app_id, 
+      app_key, created_by, created_date, 
+      last_updt_by, last_updt_date, version
+      )
+    values (#{rowId,jdbcType=INTEGER}, #{channelCode,jdbcType=VARCHAR}, #{channelName,jdbcType=VARCHAR}, 
+      #{usingDate,jdbcType=CHAR}, #{usingStatus,jdbcType=TINYINT}, #{appId,jdbcType=VARCHAR}, 
+      #{appKey,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{lastUpdtBy,jdbcType=VARCHAR}, #{lastUpdtDate,jdbcType=TIMESTAMP}, #{version,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.BusiChannel">
+    insert into csr_busi_channel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rowId != null">
+        row_id,
+      </if>
+      <if test="channelCode != null">
+        channel_code,
+      </if>
+      <if test="channelName != null">
+        channel_name,
+      </if>
+      <if test="usingDate != null">
+        using_date,
+      </if>
+      <if test="usingStatus != null">
+        using_status,
+      </if>
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="appKey != null">
+        app_key,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by,
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rowId != null">
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="channelCode != null">
+        #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null">
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="usingDate != null">
+        #{usingDate,jdbcType=CHAR},
+      </if>
+      <if test="usingStatus != null">
+        #{usingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appKey != null">
+        #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.BusiChannel">
+    update csr_busi_channel
+    <set>
+      <if test="channelCode != null">
+        channel_code = #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null">
+        channel_name = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="usingDate != null">
+        using_date = #{usingDate,jdbcType=CHAR},
+      </if>
+      <if test="usingStatus != null">
+        using_status = #{usingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appKey != null">
+        app_key = #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=TINYINT},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.BusiChannel">
+    update csr_busi_channel
+    set channel_code = #{channelCode,jdbcType=VARCHAR},
+      channel_name = #{channelName,jdbcType=VARCHAR},
+      using_date = #{usingDate,jdbcType=CHAR},
+      using_status = #{usingStatus,jdbcType=TINYINT},
+      app_id = #{appId,jdbcType=VARCHAR},
+      app_key = #{appKey,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=TINYINT}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByLikePoJo" parameterType="java.util.Map"  resultMap="BaseResultMap">
+  	select * from csr_busi_channel where 1=1 and using_status in (0,1,2)
+  	  <if test="channelCode != null and channelCode != '' ">
+        AND channel_code like concat('%',#{channelCode,jdbcType=VARCHAR},'%') 
+      </if>
+      <if test="channelName != null and channelName != '' ">
+        AND channel_name like concat('%',#{channelName,jdbcType=VARCHAR},'%') 
+      </if>
+      <if test="usingStatus != null and usingStatus != '' ">
+        AND using_status = #{usingStatus,jdbcType=TINYINT}
+      </if>
+      <if test="startSettlDate != null and startSettlDate != '' ">
+        <![CDATA[ AND using_date > #{startSettlDate,jdbcType=VARCHAR}  ]]>
+      </if>
+      <if test="endSettlDate != null and endSettlDate != '' ">
+        <![CDATA[ AND using_date < #{endSettlDate,jdbcType=VARCHAR}  ]]>
+      </if>
+      
+      order by using_status desc , using_date desc
+  </select>
+  
+ 
+  <select id="selectByChannelCode" resultMap="BaseResultMap">
+   select 
+   		<include refid="Base_Column_List" /> 
+   from 
+   		csr_busi_channel 
+   where 
+   		channel_code = #{channelCode,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByChannelCd" resultMap="BaseResultMap">
+   select 
+   		<include refid="Base_Column_List" /> 
+   from 
+   		csr_busi_channel 
+   where 
+   		channel_code = #{channelCode,jdbcType=VARCHAR}
+  </select>
+ 
+  <select id="selectBusiChannelList" parameterType="com.gxyj.cashier.domain.BusiChannel" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_busi_channel  where 1 = 1
+	<if test="usingStatus != null">
+        and using_status = #{usingStatus,jdbcType=TINYINT}
+    </if>
+     <if test="channelCode != null and channelCode != ''  ">
+       and channel_code = #{channelCode,jdbcType=VARCHAR}
+      </if>
+  </select>
+  
+  <select id="selectByChannelName" resultMap="BaseResultMap">
+   select 
+   		<include refid="Base_Column_List" /> 
+   from 
+   		csr_busi_channel 
+   where 
+   		channel_name = #{channelName,jdbcType=VARCHAR}
+  </select>
+ 
+</mapper>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="#{email.activation.title}">cashier creation</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <p th:text="#{email.activation.greeting(${obj.userId})}">
+            Dear
+        </p>
+        <p th:text="#{email.creation.text1}">
+            Your account xxxx has been created on Cashier System, please click on the URL below to access it:
+        </p>
+        <p>
+          <a th:href="@{|${baseUrl}/#/reset/finish?key=${obj.password}|}"
+             th:text="|${obj.userId}|">login</a>
+        </p>
+        <p>
+            <span th:text="#{email.activation.text2}">Regards, </span>
+            <br/>
+            <em th:text="#{email.signature}">gxyj Cashier.</em>
+        </p>
+    </body>
+</html>

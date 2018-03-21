@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+
+@import "../../../common/css/page-common.css";
+
+.form-group > label,
+.form-group > div {
+	float: left;
+}
+
+.form-group > label {
+	text-align: right;
+}
+
+.form-group.form-buttons {
+    margin-top: 0;
+    float: left;
+}
+
+.brchchoice-panel {
+    margin-left: 30px;
+    width: 740px;
+    height: 400px;
+}
+
+.upFrame {
+	border: 0;
+	margin: 0 auto;
+	height: 32px;
+    width: 80px;
+    position: absolute;
+    right: 0;
+    top: 32px;
+    opacity: 0;
+}
+
+.head-img-box {
+    position: relative;
+}
+
+.headimg-preview {
+    position: absolute;
+    right: 90px;
+    top: 280px;
+}
+
+img.user-headimg {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+}
+
+.warning-div {
+    text-align: center;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+	<title>收银台订单支付</title>
+	<script id="seajsnode" type="text/javascript" src="./../../loader.js" data-js="./js/repay" 
+		data-css="./css/repay.css"></script>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+  		<script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+  		<script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+<form id="frmPayment" method="get" action="">
+  <div class="form-group col-sm-12">
+  	<lable >适应终端:</label>
+    <select class="form-control" style="width: 150px;" id="terminal" >
+       <option value="01">PC</option>
+       <option value="03">APP</option>
+       <option value="02">WAP</option>
+    </select>
+  </div>
+   <div class="form-group col-sm-12">
+  	<lable ><span class="red">*</span>订单编号:</label>
+    <input class="form-control" style="width: 150px;" id="orderId"/>
+  </div>
+   <div class="form-group col-sm-12">
+  	<lable> <span class="red">*</span>支付金额:</label>
+    <input class="form-control" style="width: 150px;" id="transAmt"/>
+  </div>
+   <div class="form-group col-sm-12">
+  	<lable>订单时间:</label>
+    
+    <input type="date" style="width: 150px;" id="transTime" />
+  </div>
+   <div class="form-group col-sm-12">
+  	<lable>订单类型:</label>
+    <select class="form-control" style="width: 150px;"  id="orderType" >
+       <option value="01">零售订单</option>
+       <option value="02">团购订单</option>
+       <option value="03">秒杀订单</option>
+       <option value="04">限时抢购订单</option>
+       <option value="09">基团购</option>
+       <option value="10">金融产品</option>
+    </select>
+  </div>
+   <div class="form-group col-sm-12">
+  	<lable>业务渠道代码:</label>
+    <select class="form-control" style="width: 150px;"  id="channelId" >
+       <option value="001">B2C</option>
+       <option value="002">B2B</option>
+       <option value="003">O2O</option>
+       <option value="004">零批</option>
+    </select>
+  </div>
+   <div class="form-group col-sm-12">
+  	<lable>买方真实姓名:</label>
+    <input class="form-control" style="width: 150px;" type="text" id="buyerName"/>
+  </div>
+   <div class="form-group col-sm-12">
+  	<lable>买方联系方式:</label>
+    <input class="form-control" style="width: 150px;" id="buyerTelePhone"/>
+  </div>
+   <div class="form-group col-sm-12">
+  	<lable>买方银行卡号:</label>
+    <input class="form-control" style="width: 150px;" id="buyerTelePhone"/>
+  </div>
+  <div class="form-group col-sm-12">
+  	<lable>买方手机号:</label>
+    <input class="form-control" style="width: 150px;" id="buyerPhone"/>
+  </div>
+   <div class="form-group col-sm-12">
+  	<lable>平台编号:</label>
+    <input class="form-control" style="width: 150px;" value="00000000" id="mallId"/>
+  </div>
+  <div>
+  	<input type="button" id="btnPay" value="提交支付"/>
+  	<input type="hidden" value="" id="jsonValue"/>
+  </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.PaymentResultMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.PaymentResult">
+    <id column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+    <id column="PAYMENT_SYSTEM_ID" jdbcType="VARCHAR" property="paymentSystemId" />
+    <result column="PAYMENT_ID" jdbcType="VARCHAR" property="paymentId" />
+    <result column="PAYMENT_TYPE" jdbcType="VARCHAR" property="paymentType" />
+    <result column="PAYMENT_TIME" jdbcType="TIMESTAMP" property="paymentTime" />
+    <result column="PAYMENT_STATUS" jdbcType="VARCHAR" property="paymentStatus" />
+    <result column="PAYMENT_FEE" jdbcType="DECIMAL" property="paymentFee" />
+    <result column="SHARE_RATE" jdbcType="DECIMAL" property="shareRate" />
+    <result column="EVENT_NO" jdbcType="VARCHAR" property="eventNo" />
+    <result column="OUTER_DEAL_LOG_ID" jdbcType="VARCHAR" property="outerDealLogId" />
+    <result column="PAYED_BANK" jdbcType="VARCHAR" property="payedBank" />
+    <result column="E_PAY_PHONE" jdbcType="CHAR" property="ePayPhone" />
+    <result column="E_PAY_CARD_NO" jdbcType="CHAR" property="ePayCardNo" />
+    <result column="INSTALMENTS" jdbcType="CHAR" property="instalments" />
+    <result column="REFUNDED_TIME" jdbcType="TIMESTAMP" property="refundedTime" />
+    <result column="PAY_CARD_NO" jdbcType="VARCHAR" property="payCardNo" />
+    <result column="PAY_CARD_TYPE" jdbcType="VARCHAR" property="payCardType" />
+    <result column="PAY_AMT" jdbcType="DECIMAL" property="payAmt" />
+    <result column="PAY_SCORE" jdbcType="DECIMAL" property="payScore" />
+    <result column="SHARE_CASH" jdbcType="DECIMAL" property="shareCash" />
+    <result column="CLEAR_STATUS" jdbcType="CHAR" property="clearStatus" />
+    <result column="PAYED_TIME" jdbcType="TIMESTAMP" property="payedTime" />
+    <result column="CHANNEL_TYPE" jdbcType="VARCHAR" property="channelType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ORDER_ID, PAYMENT_SYSTEM_ID, PAYMENT_ID, PAYMENT_TYPE, PAYMENT_TIME, PAYMENT_STATUS, 
+    PAYMENT_FEE, SHARE_RATE, EVENT_NO, OUTER_DEAL_LOG_ID, PAYED_BANK, E_PAY_PHONE, E_PAY_CARD_NO, 
+    INSTALMENTS, REFUNDED_TIME, PAY_CARD_NO, PAY_CARD_TYPE, PAY_AMT, PAY_SCORE, SHARE_CASH, 
+    CLEAR_STATUS, PAYED_TIME, CHANNEL_TYPE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.gxyj.cashier.domain.PaymentResultKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b2c_payment_result
+    where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+      and PAYMENT_SYSTEM_ID = #{paymentSystemId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.gxyj.cashier.domain.PaymentResultKey">
+    delete from b2c_payment_result
+    where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+      and PAYMENT_SYSTEM_ID = #{paymentSystemId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.PaymentResult">
+    insert into b2c_payment_result (ORDER_ID, PAYMENT_SYSTEM_ID, PAYMENT_ID, 
+      PAYMENT_TYPE, PAYMENT_TIME, PAYMENT_STATUS, 
+      PAYMENT_FEE, SHARE_RATE, EVENT_NO, 
+      OUTER_DEAL_LOG_ID, PAYED_BANK, E_PAY_PHONE, 
+      E_PAY_CARD_NO, INSTALMENTS, REFUNDED_TIME, 
+      PAY_CARD_NO, PAY_CARD_TYPE, PAY_AMT, 
+      PAY_SCORE, SHARE_CASH, CLEAR_STATUS, 
+      PAYED_TIME, CHANNEL_TYPE)
+    values (#{orderId,jdbcType=VARCHAR}, #{paymentSystemId,jdbcType=VARCHAR}, #{paymentId,jdbcType=VARCHAR}, 
+      #{paymentType,jdbcType=VARCHAR}, #{paymentTime,jdbcType=TIMESTAMP}, #{paymentStatus,jdbcType=VARCHAR}, 
+      #{paymentFee,jdbcType=DECIMAL}, #{shareRate,jdbcType=DECIMAL}, #{eventNo,jdbcType=VARCHAR}, 
+      #{outerDealLogId,jdbcType=VARCHAR}, #{payedBank,jdbcType=VARCHAR}, #{ePayPhone,jdbcType=CHAR}, 
+      #{ePayCardNo,jdbcType=CHAR}, #{instalments,jdbcType=CHAR}, #{refundedTime,jdbcType=TIMESTAMP}, 
+      #{payCardNo,jdbcType=VARCHAR}, #{payCardType,jdbcType=VARCHAR}, #{payAmt,jdbcType=DECIMAL}, 
+      #{payScore,jdbcType=DECIMAL}, #{shareCash,jdbcType=DECIMAL}, #{clearStatus,jdbcType=CHAR}, 
+      #{payedTime,jdbcType=TIMESTAMP}, #{channelType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.PaymentResult">
+    insert into b2c_payment_result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="paymentSystemId != null">
+        PAYMENT_SYSTEM_ID,
+      </if>
+      <if test="paymentId != null">
+        PAYMENT_ID,
+      </if>
+      <if test="paymentType != null">
+        PAYMENT_TYPE,
+      </if>
+      <if test="paymentTime != null">
+        PAYMENT_TIME,
+      </if>
+      <if test="paymentStatus != null">
+        PAYMENT_STATUS,
+      </if>
+      <if test="paymentFee != null">
+        PAYMENT_FEE,
+      </if>
+      <if test="shareRate != null">
+        SHARE_RATE,
+      </if>
+      <if test="eventNo != null">
+        EVENT_NO,
+      </if>
+      <if test="outerDealLogId != null">
+        OUTER_DEAL_LOG_ID,
+      </if>
+      <if test="payedBank != null">
+        PAYED_BANK,
+      </if>
+      <if test="ePayPhone != null">
+        E_PAY_PHONE,
+      </if>
+      <if test="ePayCardNo != null">
+        E_PAY_CARD_NO,
+      </if>
+      <if test="instalments != null">
+        INSTALMENTS,
+      </if>
+      <if test="refundedTime != null">
+        REFUNDED_TIME,
+      </if>
+      <if test="payCardNo != null">
+        PAY_CARD_NO,
+      </if>
+      <if test="payCardType != null">
+        PAY_CARD_TYPE,
+      </if>
+      <if test="payAmt != null">
+        PAY_AMT,
+      </if>
+      <if test="payScore != null">
+        PAY_SCORE,
+      </if>
+      <if test="shareCash != null">
+        SHARE_CASH,
+      </if>
+      <if test="clearStatus != null">
+        CLEAR_STATUS,
+      </if>
+      <if test="payedTime != null">
+        PAYED_TIME,
+      </if>
+      <if test="channelType != null">
+        CHANNEL_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentSystemId != null">
+        #{paymentSystemId,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentId != null">
+        #{paymentId,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentType != null">
+        #{paymentType,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentTime != null">
+        #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentStatus != null">
+        #{paymentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentFee != null">
+        #{paymentFee,jdbcType=DECIMAL},
+      </if>
+      <if test="shareRate != null">
+        #{shareRate,jdbcType=DECIMAL},
+      </if>
+      <if test="eventNo != null">
+        #{eventNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outerDealLogId != null">
+        #{outerDealLogId,jdbcType=VARCHAR},
+      </if>
+      <if test="payedBank != null">
+        #{payedBank,jdbcType=VARCHAR},
+      </if>
+      <if test="ePayPhone != null">
+        #{ePayPhone,jdbcType=CHAR},
+      </if>
+      <if test="ePayCardNo != null">
+        #{ePayCardNo,jdbcType=CHAR},
+      </if>
+      <if test="instalments != null">
+        #{instalments,jdbcType=CHAR},
+      </if>
+      <if test="refundedTime != null">
+        #{refundedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payCardNo != null">
+        #{payCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payCardType != null">
+        #{payCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="payAmt != null">
+        #{payAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="payScore != null">
+        #{payScore,jdbcType=DECIMAL},
+      </if>
+      <if test="shareCash != null">
+        #{shareCash,jdbcType=DECIMAL},
+      </if>
+      <if test="clearStatus != null">
+        #{clearStatus,jdbcType=CHAR},
+      </if>
+      <if test="payedTime != null">
+        #{payedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channelType != null">
+        #{channelType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.PaymentResult">
+    update b2c_payment_result
+    <set>
+      <if test="paymentId != null">
+        PAYMENT_ID = #{paymentId,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentType != null">
+        PAYMENT_TYPE = #{paymentType,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentTime != null">
+        PAYMENT_TIME = #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentStatus != null">
+        PAYMENT_STATUS = #{paymentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentFee != null">
+        PAYMENT_FEE = #{paymentFee,jdbcType=DECIMAL},
+      </if>
+      <if test="shareRate != null">
+        SHARE_RATE = #{shareRate,jdbcType=DECIMAL},
+      </if>
+      <if test="eventNo != null">
+        EVENT_NO = #{eventNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outerDealLogId != null">
+        OUTER_DEAL_LOG_ID = #{outerDealLogId,jdbcType=VARCHAR},
+      </if>
+      <if test="payedBank != null">
+        PAYED_BANK = #{payedBank,jdbcType=VARCHAR},
+      </if>
+      <if test="ePayPhone != null">
+        E_PAY_PHONE = #{ePayPhone,jdbcType=CHAR},
+      </if>
+      <if test="ePayCardNo != null">
+        E_PAY_CARD_NO = #{ePayCardNo,jdbcType=CHAR},
+      </if>
+      <if test="instalments != null">
+        INSTALMENTS = #{instalments,jdbcType=CHAR},
+      </if>
+      <if test="refundedTime != null">
+        REFUNDED_TIME = #{refundedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payCardNo != null">
+        PAY_CARD_NO = #{payCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payCardType != null">
+        PAY_CARD_TYPE = #{payCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="payAmt != null">
+        PAY_AMT = #{payAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="payScore != null">
+        PAY_SCORE = #{payScore,jdbcType=DECIMAL},
+      </if>
+      <if test="shareCash != null">
+        SHARE_CASH = #{shareCash,jdbcType=DECIMAL},
+      </if>
+      <if test="clearStatus != null">
+        CLEAR_STATUS = #{clearStatus,jdbcType=CHAR},
+      </if>
+      <if test="payedTime != null">
+        PAYED_TIME = #{payedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channelType != null">
+        CHANNEL_TYPE = #{channelType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+      and PAYMENT_SYSTEM_ID = #{paymentSystemId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.PaymentResult">
+    update b2c_payment_result
+    set PAYMENT_ID = #{paymentId,jdbcType=VARCHAR},
+      PAYMENT_TYPE = #{paymentType,jdbcType=VARCHAR},
+      PAYMENT_TIME = #{paymentTime,jdbcType=TIMESTAMP},
+      PAYMENT_STATUS = #{paymentStatus,jdbcType=VARCHAR},
+      PAYMENT_FEE = #{paymentFee,jdbcType=DECIMAL},
+      SHARE_RATE = #{shareRate,jdbcType=DECIMAL},
+      EVENT_NO = #{eventNo,jdbcType=VARCHAR},
+      OUTER_DEAL_LOG_ID = #{outerDealLogId,jdbcType=VARCHAR},
+      PAYED_BANK = #{payedBank,jdbcType=VARCHAR},
+      E_PAY_PHONE = #{ePayPhone,jdbcType=CHAR},
+      E_PAY_CARD_NO = #{ePayCardNo,jdbcType=CHAR},
+      INSTALMENTS = #{instalments,jdbcType=CHAR},
+      REFUNDED_TIME = #{refundedTime,jdbcType=TIMESTAMP},
+      PAY_CARD_NO = #{payCardNo,jdbcType=VARCHAR},
+      PAY_CARD_TYPE = #{payCardType,jdbcType=VARCHAR},
+      PAY_AMT = #{payAmt,jdbcType=DECIMAL},
+      PAY_SCORE = #{payScore,jdbcType=DECIMAL},
+      SHARE_CASH = #{shareCash,jdbcType=DECIMAL},
+      CLEAR_STATUS = #{clearStatus,jdbcType=CHAR},
+      PAYED_TIME = #{payedTime,jdbcType=TIMESTAMP},
+      CHANNEL_TYPE = #{channelType,jdbcType=VARCHAR}
+    where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+      and PAYMENT_SYSTEM_ID = #{paymentSystemId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+	<property name="APP_LOG_PATH" value="/data/logs" />
+
+	<springProfile name="dev">		
+		<logger name="com.gxyj.cashier" level="DEBUG" />				
+	</springProfile>
+	
+	<springProfile name="test">		
+		<logger name="com.gxyj.cashier" level="DEBUG" />	
+
+	</springProfile>
+	
+	<springProfile name="uat">		
+		<logger name="com.gxyj.cashier" level="INFO" />
+	</springProfile>
+	
+	<springProfile name="prod">		
+		<logger name="com.gxyj.cashier" level="INFO" />
+	</springProfile>
+
+	<logger name="org.apache.ibatis" level="INFO" />
+	<logger name="org.mybatis.spring" level="INFO" />
+    <logger name="org.springframework.boot" level="INFO" />
+	<logger name="com.alibaba.dubbo" level="ERROR" />
+	<logger name="org.springframework.web" level="INFO" />
+	<logger name="com.alibaba.dubbo" level="ERROR" />
+	<logger name=" c.a.d.r.zookeeper" level="ERROR" />
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${APP_LOG_PATH}/cashier-service-%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<maxHistory>90</maxHistory>
+			<maxFileSize>200MB</maxFileSize>
+			<totalSizeCap>20GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<charset>utf-8</charset>
+			<Pattern>%d %-5level [%thread] %logger{0}: %msg%n</Pattern>
+		</encoder>
+
+	</appender>
+
+
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
+
+		<appender-ref ref="FILE" />
+	</root>
+
+</configuration>

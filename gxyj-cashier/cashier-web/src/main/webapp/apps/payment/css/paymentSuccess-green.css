@@ -1,0 +1,140 @@
+@CHARSET "UTF-8";
+
+body {
+    background-color: #f0f3f0;
+    overflow-x: hidden;
+}
+.over-hidden {
+    overflow: hidden;
+}
+.btn-white {
+    background-color: #fff;
+    border: 1px solid #fe8b00;
+    color: #fe8b00;
+}
+.m-t-xs {
+	margin-top: 5px;
+}
+.btn-white:hover,
+.btn-white:focus {
+    background-color: #fff;
+    border: 1px solid #fe8b00;
+    color: #fe8b00;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+     box-shadow: none;
+}
+.btn-green {
+	background-color: #00cdd5;
+    border: 1px solid #777;
+    color: #555;
+    text-shadow: none;
+}
+.btn-green:hover,
+.btn-green:focus {
+    background-color: #00cdd5;
+    border: 1px solid #777;
+    color: #555;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+.payment-head {
+    background-color: #fff;
+    height: 90px;
+}
+.header {
+    padding: 8px 0;
+    height: 90px;
+}
+.logo-img {
+	height: 100%;
+	overflow: hidden;
+}
+.gx-logo {
+	padding: 6px 6px 6px 0;
+	min-height: 100%;
+	float: left;
+	max-width: none;
+}
+.logo-name {
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 32px;
+    float: left;
+}
+.header-right {
+    padding: 42px 0 0 0;
+    margin-bottom: 0;
+}
+.header-right li {
+    cursor: pointer;
+}
+.header-right .active {
+    color: #000000;
+    font-weight: 700;
+}
+.pay-footer {
+    margin: 40px 20px 20px 20px;
+    text-align: center;
+    background-color: #f0f3f0;
+}
+.content-left {
+    width: 10%;
+    text-align: right;
+}
+.content-right {
+    width: 90%;
+    text-align: left;
+    color: #fff;
+}
+.success-content {
+    padding: 30px;
+    overflow: hidden;
+}
+.success-section {
+    background-color: #00cdd5
+}
+.order-detail {
+    margin-top: 20px;
+}
+.success-img {
+    margin-top: 10px;
+    padding-right: 10px;
+}
+.order-item {
+    display: inline-block;
+    width: 5em;
+    text-align: justify;
+}
+.order-item span {
+    display: block;
+}
+.w2 {
+    letter-spacing:3em; /*如果需要y个字两端对齐，则为(x-y)/(y-1),这里是（4-2）/(2-1)=2em */
+    margin-right:-3em; /*同上*/
+}
+.w3 {
+    letter-spacing:1em; /*如果需要y个字两端对齐，则为(x-y)/(y-1),这里是（4-3）/(3-1)=0.5em */
+    margin-right:-1em; /*同上*/
+}
+.w4 {
+    letter-spacing:0.33em; /*如果需要y个字两端对齐，则为(x-y)/(y-1),这里是（4-3）/(3-1)=0.5em */
+    margin-right:-0.33em; /*同上*/
+}
+.pay-item {
+	line-height: 25px;
+}
+.buy-btn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.pay-wrapper .breadcrumb>li+li:before {
+    content: "|\00a0";
+}
+.buy-continue {
+    padding-left: 25px;
+    padding-right: 25px;
+}

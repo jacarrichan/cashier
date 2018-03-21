@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+
+@import "../../../common/css/page-common.css";
+
+.form-group > label,
+.form-group > div {
+	float: left;
+}
+
+.form-group > label {
+	text-align: right;
+}
+
+.form-group.form-buttons {
+    margin-top: 50px;
+    float: left;
+}
+
+.brchchoice-panel {
+    margin-left: 30px;
+    width: 740px;
+    height: 400px;
+}

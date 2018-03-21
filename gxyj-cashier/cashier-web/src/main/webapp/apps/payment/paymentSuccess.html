@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <title>供销收银台</title>
+    <script id="seajsnode" type="text/javascript" src="./../../loader.js" data-js="./js/paymentSuccess.js" 
+	data-css="./css/paymentSuccess.css"></script>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+  		<script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+  		<script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+     <div class="pay-wrapper">
+        <div class="row payment-head">
+            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                <div class="header">
+                        <span class="logo-img pull-left">
+                            <img class="gx-logo" src="../images/payment/logo.png" alt="">
+                            <span class="logo-name">收银台</span>
+                        </span>
+                    <ol class="breadcrumb pull-right header-right" id="payment-header">
+                        <li class="active" id="userId"></li>
+                        <li><span>我的订单</span></li>
+                        <li><span>支付帮助</span></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="row success-section">
+            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 success-content">
+                <div class="content-left pull-left">
+                    <div class="success-img">
+                        <img src="../images/payment/pay-success.jpg" alt="">
+                    </div>
+                </div>
+                <div class="content-right pull-right" id="orderSection">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pay-footer">
+        <p>Copyright &copy; 2015 - 2017 供销e家版权所有 京ICP备15050565号 京公网安备11011202001970 经营许可证编号：京ICP证151138号</p>
+    </div>
+    <!-- <div class="pay-item">
+        <span class="order-item"><span class="w2">规格</span></span>：
+        <span>{{d.orderSpec}}</span>
+    </div> -->
+    <!-- 订单信息  -->
+	<script type="text/template" id="orderInfo">
+		<h3>供销e家已经收到您的付款&yen;{{d.totalPay}}元，请确定收到货品再确认付款。</h3>
+            <div class="order-detail">
+                <div class="pay-item">
+                    <span class="order-item"><span class="w3">订单号</span></span>：
+                    <span>{{d.orderNum}}</span>
+                </div>
+				<div class="pay-item">
+                    <span class="order-item"><span class="">交易流水号</span></span>：
+                    <span>{{d.transId}}</span>
+                </div>
+                <div class="pay-item">
+                    <span class="order-item"><span class="w4">订单金额</span></span>：
+                    <span>&yen;{{d.totalPay}}</span>
+                </div>
+                <div class="pay-item">
+                    <span class="order-item"><span class="w4">商品名称</span></span>：
+                    <span class="product-order">{{d.orderGoods}}</span>
+                </div>
+            </div>
+            <div class="buy-btn">
+                <a href="http://www.gxyj.com/index.html" class="btn btn-white buy-continue">继续购买</a>
+            </div>
+	</script>
+	<!-- 用户id-->
+	<script type="text/template" id="userInfo">
+		<span>{{d.userId}}</span>
+	</script>
+</body>
+</html>

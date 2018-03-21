@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.recon.CsrReconFileMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.CsrReconFile">
+    <id column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="channel_id" jdbcType="INTEGER" property="channelId" />
+    <result column="channel_code" jdbcType="VARCHAR" property="channelCode" />
+    <result column="recon_date" jdbcType="VARCHAR" property="reconDate" />
+    <result column="data_sts" jdbcType="BIT" property="dataSts" />
+    <result column="data_file" jdbcType="VARCHAR" property="dataFile" />
+    <result column="srv_ip" jdbcType="CHAR" property="srvIp" />
+    <result column="proc_state" jdbcType="VARCHAR" property="procState" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+    <result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+    <result column="version" jdbcType="TINYINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, channel_id, channel_code, recon_date, data_sts, data_file, srv_ip, proc_state, 
+    created_by, created_date, last_updt_by, last_updt_date, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_recon_file
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from csr_recon_file
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.CsrReconFile">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_recon_file (channel_id, channel_code, recon_date, 
+      data_sts, data_file, srv_ip, 
+      proc_state, created_by, created_date, 
+      last_updt_by, last_updt_date, version
+      )
+    values (#{channelId,jdbcType=INTEGER}, #{channelCode,jdbcType=VARCHAR}, #{reconDate,jdbcType=VARCHAR}, 
+      #{dataSts,jdbcType=BIT}, #{dataFile,jdbcType=VARCHAR}, #{srvIp,jdbcType=CHAR}, 
+      #{procState,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{lastUpdtBy,jdbcType=VARCHAR}, #{lastUpdtDate,jdbcType=TIMESTAMP}, #{version,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.CsrReconFile">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_recon_file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="channelId != null">
+        channel_id,
+      </if>
+      <if test="channelCode != null">
+        channel_code,
+      </if>
+      <if test="reconDate != null">
+        recon_date,
+      </if>
+      <if test="dataSts != null">
+        data_sts,
+      </if>
+      <if test="dataFile != null">
+        data_file,
+      </if>
+      <if test="srvIp != null">
+        srv_ip,
+      </if>
+      <if test="procState != null">
+        proc_state,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by,
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="channelId != null">
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="channelCode != null">
+        #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reconDate != null">
+        #{reconDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataSts != null">
+        #{dataSts,jdbcType=BIT},
+      </if>
+      <if test="dataFile != null">
+        #{dataFile,jdbcType=VARCHAR},
+      </if>
+      <if test="srvIp != null">
+        #{srvIp,jdbcType=CHAR},
+      </if>
+      <if test="procState != null">
+        #{procState,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.CsrReconFile">
+    update csr_recon_file
+    <set>
+      <if test="channelId != null">
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="channelCode != null">
+        channel_code = #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reconDate != null">
+        recon_date = #{reconDate,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSts != null">
+        data_sts = #{dataSts,jdbcType=BIT},
+      </if>
+      <if test="dataFile != null">
+        data_file = #{dataFile,jdbcType=VARCHAR},
+      </if>
+      <if test="srvIp != null">
+        srv_ip = #{srvIp,jdbcType=CHAR},
+      </if>
+      <if test="procState != null">
+        proc_state = #{procState,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=TINYINT},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.CsrReconFile">
+    update csr_recon_file
+    set channel_id = #{channelId,jdbcType=INTEGER},
+      channel_code = #{channelCode,jdbcType=VARCHAR},
+      recon_date = #{reconDate,jdbcType=VARCHAR},
+      data_sts = #{dataSts,jdbcType=BIT},
+      data_file = #{dataFile,jdbcType=VARCHAR},
+      srv_ip = #{srvIp,jdbcType=CHAR},
+      proc_state = #{procState,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=TINYINT}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByCriteira" parameterType="com.gxyj.cashier.domain.CsrReconFile" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_recon_file
+    where recon_date = #{reconDate,jdbcType=VARCHAR}
+     <if test="channelCode != null">
+        and channel_code = #{channelCode,jdbcType=VARCHAR}
+      </if>
+     <if test="procState != null">
+       and proc_state = #{procState,jdbcType=VARCHAR}
+      </if>
+      <if test="dataSts != null">
+        and data_sts = #{dataSts,jdbcType=BIT}
+      </if>
+  </select>
+  
+	<select id="queryFileExists" parameterType="com.gxyj.cashier.domain.CsrPaymentLog"
+		resultType="java.lang.Integer">
+		select
+		count(row_id)
+		from csr_recon_file
+		where channel_code = #{channelCode,jdbcType=VARCHAR}
+		and recon_date = #{reconDate,jdbcType=VARCHAR}
+		and data_sts = #{dataSts,jdbcType=BIT}
+		and proc_state in('01','03')
+	</select>
+  
+  
+
+</mapper>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.recon.CsrWechatRecnClMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.CsrWechatRecnCl">
+    <id column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="check_date" jdbcType="VARCHAR" property="checkDate" />
+    <result column="proc_state" jdbcType="VARCHAR" property="procState" />
+    <result column="trans_ttl_cnt" jdbcType="INTEGER" property="transTtlCnt" />
+    <result column="trans_ttl_amt" jdbcType="DECIMAL" property="transTtlAmt" />
+    <result column="refund_ttl_amt" jdbcType="DECIMAL" property="refundTtlAmt" />
+    <result column="refund_pck_ttl_amt" jdbcType="DECIMAL" property="refundPckTtlAmt" />
+    <result column="charge_ttl_amt" jdbcType="DECIMAL" property="chargeTtlAmt" />
+    <result column="recon_file_id" jdbcType="INTEGER" property="reconFileId" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+    <result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+    <result column="version" jdbcType="TINYINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, check_date, proc_state, trans_ttl_cnt, trans_ttl_amt, refund_ttl_amt, refund_pck_ttl_amt, 
+    charge_ttl_amt, recon_file_id, created_by, created_date, last_updt_by, last_updt_date, 
+    version
+  </sql>
+  
+  <select id="selectByCheckDate" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_wechat_recn_cl
+    where check_date = #{checkDate,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_wechat_recn_cl
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from csr_wechat_recn_cl
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.CsrWechatRecnCl">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_wechat_recn_cl (check_date, proc_state, trans_ttl_cnt, 
+      trans_ttl_amt, refund_ttl_amt, refund_pck_ttl_amt, 
+      charge_ttl_amt, recon_file_id, created_by, 
+      created_date, last_updt_by, last_updt_date, 
+      version)
+    values (#{checkDate,jdbcType=VARCHAR}, #{procState,jdbcType=VARCHAR}, #{transTtlCnt,jdbcType=INTEGER}, 
+      #{transTtlAmt,jdbcType=DECIMAL}, #{refundTtlAmt,jdbcType=DECIMAL}, #{refundPckTtlAmt,jdbcType=DECIMAL}, 
+      #{chargeTtlAmt,jdbcType=DECIMAL}, #{reconFileId,jdbcType=INTEGER}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtBy,jdbcType=VARCHAR}, #{lastUpdtDate,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.CsrWechatRecnCl">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_wechat_recn_cl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="checkDate != null">
+        check_date,
+      </if>
+      <if test="procState != null">
+        proc_state,
+      </if>
+      <if test="transTtlCnt != null">
+        trans_ttl_cnt,
+      </if>
+      <if test="transTtlAmt != null">
+        trans_ttl_amt,
+      </if>
+      <if test="refundTtlAmt != null">
+        refund_ttl_amt,
+      </if>
+      <if test="refundPckTtlAmt != null">
+        refund_pck_ttl_amt,
+      </if>
+      <if test="chargeTtlAmt != null">
+        charge_ttl_amt,
+      </if>
+      <if test="reconFileId != null">
+        recon_file_id,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by,
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="checkDate != null">
+        #{checkDate,jdbcType=VARCHAR},
+      </if>
+      <if test="procState != null">
+        #{procState,jdbcType=VARCHAR},
+      </if>
+      <if test="transTtlCnt != null">
+        #{transTtlCnt,jdbcType=INTEGER},
+      </if>
+      <if test="transTtlAmt != null">
+        #{transTtlAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="refundTtlAmt != null">
+        #{refundTtlAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="refundPckTtlAmt != null">
+        #{refundPckTtlAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeTtlAmt != null">
+        #{chargeTtlAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="reconFileId != null">
+        #{reconFileId,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.CsrWechatRecnCl">
+    update csr_wechat_recn_cl
+    <set>
+      <if test="checkDate != null">
+        check_date = #{checkDate,jdbcType=VARCHAR},
+      </if>
+      <if test="procState != null">
+        proc_state = #{procState,jdbcType=VARCHAR},
+      </if>
+      <if test="transTtlCnt != null">
+        trans_ttl_cnt = #{transTtlCnt,jdbcType=INTEGER},
+      </if>
+      <if test="transTtlAmt != null">
+        trans_ttl_amt = #{transTtlAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="refundTtlAmt != null">
+        refund_ttl_amt = #{refundTtlAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="refundPckTtlAmt != null">
+        refund_pck_ttl_amt = #{refundPckTtlAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeTtlAmt != null">
+        charge_ttl_amt = #{chargeTtlAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="reconFileId != null">
+        recon_file_id = #{reconFileId,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=TINYINT},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.CsrWechatRecnCl">
+    update csr_wechat_recn_cl
+    set check_date = #{checkDate,jdbcType=VARCHAR},
+      proc_state = #{procState,jdbcType=VARCHAR},
+      trans_ttl_cnt = #{transTtlCnt,jdbcType=INTEGER},
+      trans_ttl_amt = #{transTtlAmt,jdbcType=DECIMAL},
+      refund_ttl_amt = #{refundTtlAmt,jdbcType=DECIMAL},
+      refund_pck_ttl_amt = #{refundPckTtlAmt,jdbcType=DECIMAL},
+      charge_ttl_amt = #{chargeTtlAmt,jdbcType=DECIMAL},
+      recon_file_id = #{reconFileId,jdbcType=INTEGER},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=TINYINT}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+</mapper>

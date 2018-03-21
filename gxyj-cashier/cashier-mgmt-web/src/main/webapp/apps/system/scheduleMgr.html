@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>支付模板配置</title>
+<script id="seajsnode" type="text/javascript" src="../../loader.js"
+	data-js="./js/scheduleMgr" data-css="./css/scheduleMgr.css"></script>
+</head>
+<body>
+	<div class="wrapper wrapper-content">
+		<div class="nav-bread border-color-primary">
+			<ol class="breadcrumb">
+				<li>首页</li>
+				<li>系统管理</li>
+				<li class="active">任务维护</li>
+			</ol>
+		</div>
+
+		<div class="form-group col-sm-12">
+			<div class="form-group col-sm-12">
+				<div class="divTip">
+					<span class="tip"> 功能说明：
+						<ul>
+							<li>此功能用于对现有的Schedule任务进行维护启、停操作。</li>
+							<li>任务的具体参数需通过菜单：业务配置->系统参数配置 进行修改</li>
+							<li>参数值修改后通过先停用、再启用完成参数生效</li>
+						</ul>
+					</span>
+				</div>
+				<div class="btn-taskPannel btn-group col-sm-8" data-toggle="buttons">
+					</label> <label class="btn btn-primary btn-start"> <input
+						type="radio" name="action" id="action1" value="start"> 启用
+					</label> <label class="btn btn-primary btn-stop"> <input
+						type="radio" name="action" id="action2" value="stop" checked>
+						停用
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

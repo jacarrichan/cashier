@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>地方平台收银模板配置</title>
+<script id="seajsnode" type="text/javascript" src="../../loader.js" data-js="./js/unrecognizedMsgQuery" data-css="./css/unrecognizedMsgQuery.css"></script>
+</head>
+<body>
+	<div class="wrapper wrapper-content">
+	
+		<div class="nav-bread border-color-primary">
+			<ol class="breadcrumb">
+			  	<li>首页</li>
+			  	<li>系统管理</li>
+			  	<li class="active">订单列表查询</li>
+			</ol>
+		</div>
+		<div class="search-panel">
+				<div class="form-group col-sm-12">
+				    <div class="form-group col-sm-6 col-lg-3">
+				  		<label for="payerInstiNo" class="control-label active">支付渠道:</label>
+				  		<select class="col-sm-8" id="payerInstiNo" name="payerInstiNo">
+							<option value="" selected="selected">全部</option>
+						</select>
+					</div>
+					 <div class="form-group col-sm-6 col-lg-3" style="overflow: hidden;">
+				  		<label for="errFlag" class="control-label active pull-left">报文编号:</label>
+				  		<div class="pull-left" id="msgIdParent" style="padding-left: 3px;padding-right: 0;">
+				  			<input id="msgId" name="msgId" type="text" class="form-control" placeholder="请输入报文编号">
+				  		</div>
+				    </div>
+					
+				    <div class="form-group col-sm-6 col-lg-3">
+				  		<label for="errFlag" class="control-label active">报文状态:</label>
+				  		<select class="col-sm-8" id="errFlag" name="errFlag">
+							<option value="" selected="selected">全部</option>
+							<option value="0" >正常 </option>
+							<option value="1" >异常 </option>
+						</select>
+				    </div>
+				   <div class="form-group col-sm-6">
+				  		<label class="control-label pull-left">报文时间:</label>
+						<div class="col-sm-4">
+							<input id="startDate" name="startDate" type="text" class="form-control form-datetime" placeholder="请选择查询起始时间" readonly>
+						</div>
+						<label class="=control-label pull-left" style="text-align:center;" >至</label>
+						<div class="col-sm-4">
+							<input id="endDate" name="endDate" type="text" class="form-control form-datetime" placeholder="请选择查询截止时间" readonly>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group col-sm-12">
+					<div class="form-group">
+						<button class="btn btn-warning clear-btn">重置</button>
+						<button class="btn btn-warning search-btn">查 询</button>
+					</div>
+				</div>
+		</div>
+		
+		<div class="result-panel">
+			<div class="result-data grid">
+				<table class="table datatable" data-checkable="true" >
+					<thead>
+						<tr>
+							<th class="number">#</th>
+							<th>报文编号</th>
+							<th>报文描述</th>
+							<th>支付渠道</th>
+							<th>报文状态</th>
+							<th>原因</th>
+							<th class="sort-disabled">操作</th>
+						</tr>
+					</thead>
+					<tbody id="data-body">
+					</tbody>
+				</table>
+				<div class="pager-box">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/template" id="list-tr.tpl">
+		<tr class="row-{{d.index}}" data-id="{{d.rowId}}">
+			<td class="number"> {{d.index}}</td>
+			<td>{{d.msgId}}</td>
+	        <td>{{d.msgDesc}}</td>
+			<td>{{d.channelCd}}</td>
+			<td>{{d.errFlag}}</td>
+            <td>{{d.errDesc}}</td>
+			<td class="sort-disabled">
+				{{d.buttons}}
+			</td>
+		</tr>
+	</script>
+	
+	<script type="text/template" id="list-btn.tpl">
+		<a class="icon-btn {{d.class}} " href="javascript:;" data-right="{{d.rightCode}}" data-toggle="tooltip" title="{{d.title}}"><i class="icon {{d.icon}}"></i></a>
+	</script>
+	
+	<script type="text/template" id="option.tpl">
+		<option value="{{d.code}}" {{d.attr || ''}}>{{d.name}}</option>
+	</script>
+	
+	<script type="text/template" id="icon.tpl">
+		<a class="tip-icon {{d.class}}" title="{{d.title}}" data-toggle="tooltip" data-placement="{{d.dir}}" href="javascript:;"><i class="icon {{d.icon}}"></i></a>
+	</script>
+	
+	<script type="text/template" id="label.tpl">
+		<span class="label {{d.flag}}">{{d.value}}</span>
+	</script>
+</body>
+</html>

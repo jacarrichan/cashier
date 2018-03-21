@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>机构新增</title>
+<script id="seajsnode" type="text/javascript" src="../../loader.js" data-js="./js/roleinfo-addedit" data-css="./css/roleinfo-addedit.css"></script>
+</head>
+<body>
+	<div class="wrapper wrapper-content">
+		<div class="modal fade" id="smModal">
+			<div class="modal-dialog modal-sm">
+			    <div class="modal-content">
+			      	<div class="modal-header">
+			        	<h4 class="modal-title">提示</h4>
+			      	</div>
+			      	<div class="modal-body">
+			        	<h4>新增成功，是否继续新增？</h4>
+			      	</div>
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-default btn-no" data-dismiss="modal">取消</button>
+			        	<button type="button" class="btn btn-primary btn-yes">继续</button>
+			      	</div>
+			    </div>
+		  	</div>
+		</div>
+		
+		<form class="form-horizontal form-inline" id="form">
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="roleName"><span class="red">*</span> 角色名称</label>
+				<div >
+					<input class="form-control" id="roleName" name="roleName" placeholder="角色名称" data-rule='[required=true;maxlength=128;bothSideBlank=false;chinaCharNumber=true;isExist={"url":"m108/f10807","tokenUrl":true,"data":{}}]'/>
+				</div>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="brchId"><span class="red">*</span> 所属机构</label>
+				<div >
+					<input class="form-control" id="brchName" name="brchName" readonly="readonly" data-rule='[required=true;]'/> 
+					<span>
+						<input id="brchId" name="brchId" type="hidden"/> 
+						<button type="button" class="btn btn-brchchoice" data-toggle="dropdown">选择所属机构</button>
+						<div class="dropdown-menu brchchoice-panel">
+						    <iframe id="brchFrame" name="brchFrame" src="" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+						</div>
+						<button type="button" class="btn btn-clear">清空</button>
+					</span>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="alert"></div>
+			</div>
+		</form>
+		<div class="form-group form-buttons">
+			<button class="btn btn-success btn-submit">提交</button>
+			<button class="btn btn-warning btn-cancel">取消</button>
+		</div>
+	</div>
+	
+	<script type="text/template" id="option.tpl">
+		<option value="{{d.code}}" {{d.attr || ''}}>{{d.name}}</option>
+	</script>
+</body>
+</html>

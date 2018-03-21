@@ -1,0 +1,136 @@
+/**
+ * 
+ */
+define(function(require, exports, module) {
+	var comm = require('../../../common/js/page-common');
+	
+		ZV = require('../../../lib/zuiplugin/zui.validate');
+		demo1 = require("../../../lib/background/back.demo.1");
+		demo2 = require("../../../lib/background/back.demo.2");
+		demo3 = require("../../../lib/background/back.demo.3");
+
+		require("../../../lib/background/tweenlite.min");
+	
+	function PageScript(){
+		this.websocket = null;
+	}
+	
+	PageScript.prototype.init = function(){
+		$.support.cors = true;
+		
+		// 进入登录页面时就清理缓存token
+		if(window['sessionStorage']){
+			sessionStorage.removeItem("authen");
+			sessionStorage.removeItem("refresh_token");
+			sessionStorage.removeItem("expires_in");
+		}
+		
+		$('.panel-login').css({"margin-top": (($(window).height() - $('.panel-login').height())/2) + "px"});
+		if(window['requestAnimationFrame']){
+			
+			var ri = parseInt(Math.random() * 3) + 1;
+			if(ri == 1){
+				demo1.init();
+			} else if(ri == 2){
+				demo2.init();
+			} else if(ri == 3){
+				demo3.init();
+			}
+		}
+		
+		// websocket
+		/*$.useModule(['websocket'], function(){
+			page.websocket = new YSWebSocket({
+				success: function(e){
+					log.info("connection success");
+				},
+				message: function(e, d){
+					log.info("message:", e, d);
+				}
+			});
+		});*/
+		
+		page.$formZV = ZV('.login-form');
+		
+		page.$formZV.validate({
+			rules: {
+				uName: {
+					required: true,
+					length: [1, 30]
+				},
+				pwd: {
+					required: true,
+					length: [1, 30]
+				}
+			}, message: {
+				uName: {
+					required: "请输入您的用户名",
+					length: "用户名长度应在{0}至{1}位之间"
+				},
+				pwd: {
+					required: "请输入您的密码",
+					length: "密码长度应在{0}至{1}位之间"
+				}
+			}
+		});
+		
+	  	page.bindEvent();
+	};
+	//'m802/f80201',
+	PageScript.prototype.loginServer = function(){
+		if(page.$formZV.validate()){
+			var zuiLoad = new $.ZuiLoader().show('正在验证，请稍候...');
+			
+			var uName = $('#uName').val();
+			var pwd = $('#pwd').val();
+			var uri = consts.WEB_BASE + 'base/loginAction';
+			$.ajax({
+				url : uri,
+				data: {userType: 'admin', username: uName, password: pwd},
+				dataType: 'json',
+				type: 'post',
+				success : function(result){
+					if(result.success){
+						document.location.href = "./index.html";
+					} else {
+						error(result.msg);
+					}
+				},
+				error : function(){
+					alert("登录异常！");
+				}
+			});
+			zuiLoad.hide();
+		}
+	};
+	
+	PageScript.prototype.bindEvent = function(){
+		
+		$('#uName,#pwd').on('keyup', function(e){
+			var code = e.keyCode || e.witch;
+			if(code == 13){
+				page.loginServer();
+			}
+		});
+		
+		$('.sub-btn').on('click', function(){
+			page.loginServer();
+		});
+		
+		$('.forget-pwd').on('click', function(){
+			alert("请联系管理员");
+		});
+		
+		$('.rest-btn').on('click', function(){
+			$('#uName').val('');
+			$('#pwd').val('');
+		});
+		
+	};
+	
+	var page = new PageScript();
+	page.init();
+	
+	
+	return page;
+});

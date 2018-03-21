@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<function_list>
+		<item name="myUtils" class="com.gxyj.cashier.common.convert.utils.ConvertUtils" />
+	</function_list>
+	<transaction code="wxReclnApply"><!--微信对账单申请 -->
+		<request msg_type="bean">
+			<group name="xml">
+				<item name="appid" bean_field="appid" /><!-- 公众账号ID -->
+				<item name="mch_id" bean_field="mch_id" /><!-- 微信支付分配的商户号 -->
+				<item name="nonce_str" bean_field="nonce_str" /><!-- 随机字符串，不长于32位 -->
+				<item name="sign" bean_field="sign" /><!--签名 -->
+				<item name="sign_type" bean_field="sign_type" /><!--签名类型 MD5 -->
+				<item name="bill_date" bean_field="bill_date" /><!--对账单日期 -->
+				<item name="bill_type" bean_field="bill_type" /><!--账单类型 -->
+			</group>
+		</request>
+		
+		<response msg_type="xml">
+			<group name="xml" doc_encode="utf-8">
+				<item name="appid" /><!-- 公众账号ID -->
+				<item name="mch_id" /><!-- 微信支付分配的商户号 -->
+				<item name="nonce_str" /><!-- 随机字符串，不长于32位 -->
+				<item name="sign" /><!--签名 -->
+				<item name="sign_type"/><!--签名类型 MD5 -->
+				<item name="bill_date" /><!--对账单日期 -->
+				<item name="bill_type" /><!--账单类型 -->
+			</group>
+		</response>
+	</transaction>
+</config>

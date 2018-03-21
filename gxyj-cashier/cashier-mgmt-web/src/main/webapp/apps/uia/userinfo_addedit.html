@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用户新增</title>
+<script id="seajsnode" type="text/javascript" src="../../loader.js" data-js="./js/userinfo-addedit" data-css="./css/userinfo-addedit.css"></script>
+</head>
+<body>
+	<div class="wrapper wrapper-content">
+		<div class="modal fade" id="smModal">
+			<div class="modal-dialog modal-sm">
+			    <div class="modal-content">
+			      	<div class="modal-header">
+			        	<h4 class="modal-title">提示</h4>
+			      	</div>
+			      	<div class="modal-body">
+			        	<h4>新增成功，是否继续新增？</h4>
+			      	</div>
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-default btn-no" data-dismiss="modal">取消</button>
+			        	<button type="button" class="btn btn-primary btn-yes">继续</button>
+			      	</div>
+			    </div>
+		  	</div>
+		</div>
+		
+		<form class="form-horizontal form-inline" id="form">
+			<div class="form-group col-sm-12">
+				<label class="col-sm-4" for="userName"><span class="red">*</span> 用户名</label>
+				<div class="">
+					<input class="form-control" id="userName" name="userName" placeholder="用户名" data-rule='[required=true;maxlength=64;isExist={"url":"m101/f10105","tokenUrl":true,"data":{}}]'/>
+				</div>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-4" for="trueName"><span class="red">*</span>  真实姓名</label>
+				<div class="">
+					<input class="form-control" id="trueName" name="trueName" placeholder="真实姓名" data-rule="[required=true;maxlength=64]"/>
+				</div>
+			</div>
+			<div class="form-group col-sm-12" id="pwdDiv">
+				<label class="col-sm-4" for="password"><span class="red">*</span> 密码</label>
+				<div class="">
+					<input type="password" class="form-control" id="password" name="password" placeholder="6位以上非特殊字符" data-rule="[required=true;minlength=6;maxlength=128]"/>
+				</div>
+			</div>
+			<!-- <div class="form-group col-sm-12">
+				<label class="col-sm-4" for="userType">用户类型</label>
+				<div class="col-sm-7">
+					<select class="form-control" id="userType" name="userType">
+						
+					</select>
+				</div>
+			</div> -->
+			<div class="form-group col-sm-12">
+				<label class="col-sm-4" for="brchId"><span class="red">*</span> 所属机构</label>
+				<div class="">
+					<input class="form-control" id="brchName" name="brchName" readonly="readonly"  placeholder="所属机构" data-rule="[required=true]"/> 
+					<span>
+						<input id="brchId" name="brchId" type="hidden"/> 
+						<button type="button" class="btn btn-brchchoice" data-toggle="dropdown">选择所属机构</button>
+						<div class="dropdown-menu brchchoice-panel">
+						    <iframe id="brchFrame" name="brchFrame" src="" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+						</div>
+						<button type="button" class="btn btn-clear">清空</button>
+					</span>
+				</div>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-4" for="sex">性别</label>
+				<div class="">
+					<select class="form-control" id="sex" name="sex">
+						
+					</select>
+				</div>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-4" for="birthday">生日</label>
+				<div class="">
+					<input class="form-control form-date" id="birthday" name="birthday" readonly="readonly"/>
+				</div>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-4" for="email">邮箱</label>
+				<div class="">
+					<input class="form-control" id="email" name="email"  placeholder="邮箱" data-rule="[email=true;maxlength=64]"/>
+				</div>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-4" for="telphone">手机号码</label>
+				<div class="">
+					<input class="form-control" id="telphone" name="telphone"  placeholder="手机号码" data-rule="[mobile=true;maxlength=64]"/>
+				</div>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-4" for="landlinePhone">固定电话</label>
+				<div class="">
+					<input class="form-control" id="landlinePhone" name="landlinePhone"  placeholder="固定电话" data-rule="[phone=true;maxlength=64]"/>
+					（格式：区号-号码，如：020-12345678）
+				</div>
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-4" for="address">地址</label>
+				<div class="">
+					<input class="form-control" id="address" name="address" placeholder="地址" data-rule="[maxlength=512]"/>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="alert"></div>
+			</div>
+		</form>
+		<div class="form-group form-buttons">
+			<button class="btn btn-success btn-submit">提交</button>
+			<button class="btn btn-warning btn-cancel">取消</button>
+		</div>
+	</div>
+	
+	<script type="text/template" id="option.tpl">
+		<option value="{{d.code}}" {{d.attr || ''}}>{{d.name}}</option>
+	</script>
+</body>
+</html>

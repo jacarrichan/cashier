@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.recon.CsrAlipayRecnLtMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.CsrAlipayRecnLt">
+    <id column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="recnl_cl_id" jdbcType="INTEGER" property="recnlClId" />
+    <result column="proc_state" jdbcType="VARCHAR" property="procState" />
+    <result column="check_date" jdbcType="VARCHAR" property="checkDate" />
+    <result column="trans_date" jdbcType="VARCHAR" property="transDate" />
+    <result column="alipay_trans_no" jdbcType="VARCHAR" property="alipayTransNo" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="merch_id" jdbcType="VARCHAR" property="merchId" />
+    <result column="busi_type" jdbcType="VARCHAR" property="busiType" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="alipay_create_date" jdbcType="TIMESTAMP" property="alipayCreateDate" />
+    <result column="alipay_finish_date" jdbcType="TIMESTAMP" property="alipayFinishDate" />
+    <result column="store_id" jdbcType="VARCHAR" property="storeId" />
+    <result column="store_name" jdbcType="VARCHAR" property="storeName" />
+    <result column="operater" jdbcType="VARCHAR" property="operater" />
+    <result column="terminal_no" jdbcType="VARCHAR" property="terminalNo" />
+    <result column="oth_account" jdbcType="VARCHAR" property="othAccount" />
+    <result column="trans_ttl_amt" jdbcType="DECIMAL" property="transTtlAmt" />
+    <result column="mer_real_amt" jdbcType="DECIMAL" property="merRealAmt" />
+    <result column="alipay_red_amt" jdbcType="DECIMAL" property="alipayRedAmt" />
+    <result column="jf_pay_amt" jdbcType="DECIMAL" property="jfPayAmt" />
+    <result column="alipay_discount" jdbcType="DECIMAL" property="alipayDiscount" />
+    <result column="mer_discount" jdbcType="DECIMAL" property="merDiscount" />
+    <result column="coupon_amt" jdbcType="DECIMAL" property="couponAmt" />
+    <result column="coupon_name" jdbcType="VARCHAR" property="couponName" />
+    <result column="mer_red_amt" jdbcType="DECIMAL" property="merRedAmt" />
+    <result column="card_pay_amt" jdbcType="DECIMAL" property="cardPayAmt" />
+    <result column="refund_batch_no" jdbcType="VARCHAR" property="refundBatchNo" />
+    <result column="service_amt" jdbcType="DECIMAL" property="serviceAmt" />
+    <result column="profit_amt" jdbcType="DECIMAL" property="profitAmt" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="trans_type" jdbcType="VARCHAR" property="transType" />
+    <result column="trans_status" jdbcType="VARCHAR" property="transStatus" />
+    <result column="trans_amt" jdbcType="DECIMAL" property="transAmt" />
+    <result column="refund_no" jdbcType="VARCHAR" property="refundNo" />
+    <result column="refund_amt" jdbcType="DECIMAL" property="refundAmt" />
+    <result column="refund_type" jdbcType="VARCHAR" property="refundType" />
+    <result column="refund_status" jdbcType="VARCHAR" property="refundStatus" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+    <result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+    <result column="version" jdbcType="TINYINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, recnl_cl_id, proc_state, check_date, trans_date, alipay_trans_no, order_no, 
+    merch_id, busi_type, goods_name, alipay_create_date, alipay_finish_date, store_id, 
+    store_name, operater, terminal_no, oth_account, trans_ttl_amt, mer_real_amt, alipay_red_amt, 
+    jf_pay_amt, alipay_discount, mer_discount, coupon_amt, coupon_name, mer_red_amt, 
+    card_pay_amt, refund_batch_no, service_amt, profit_amt, remark, trans_type, trans_status, 
+    trans_amt, refund_no, refund_amt, refund_type, refund_status, created_by, created_date, 
+    last_updt_by, last_updt_date, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_alipay_recn_lt
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByCheckDate" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_alipay_recn_lt
+    where check_date = #{checkDate,jdbcType=VARCHAR}    	
+			and proc_state!='99'
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from csr_alipay_recn_lt
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.CsrAlipayRecnLt">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_alipay_recn_lt (recnl_cl_id, proc_state, check_date, 
+      trans_date, alipay_trans_no, order_no, 
+      merch_id, busi_type, goods_name, 
+      alipay_create_date, alipay_finish_date, 
+      store_id, store_name, operater, 
+      terminal_no, oth_account, trans_ttl_amt, 
+      mer_real_amt, alipay_red_amt, jf_pay_amt, 
+      alipay_discount, mer_discount, coupon_amt, 
+      coupon_name, mer_red_amt, card_pay_amt, 
+      refund_batch_no, service_amt, profit_amt, 
+      remark, trans_type, trans_status, 
+      trans_amt, refund_no, refund_amt, 
+      refund_type, refund_status, created_by, 
+      created_date, last_updt_by, last_updt_date, 
+      version)
+    values (#{recnlClId,jdbcType=INTEGER}, #{procState,jdbcType=VARCHAR}, #{checkDate,jdbcType=VARCHAR}, 
+      #{transDate,jdbcType=VARCHAR}, #{alipayTransNo,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, 
+      #{merchId,jdbcType=VARCHAR}, #{busiType,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
+      #{alipayCreateDate,jdbcType=TIMESTAMP}, #{alipayFinishDate,jdbcType=TIMESTAMP}, 
+      #{storeId,jdbcType=VARCHAR}, #{storeName,jdbcType=VARCHAR}, #{operater,jdbcType=VARCHAR}, 
+      #{terminalNo,jdbcType=VARCHAR}, #{othAccount,jdbcType=VARCHAR}, #{transTtlAmt,jdbcType=DECIMAL}, 
+      #{merRealAmt,jdbcType=DECIMAL}, #{alipayRedAmt,jdbcType=DECIMAL}, #{jfPayAmt,jdbcType=DECIMAL}, 
+      #{alipayDiscount,jdbcType=DECIMAL}, #{merDiscount,jdbcType=DECIMAL}, #{couponAmt,jdbcType=DECIMAL}, 
+      #{couponName,jdbcType=VARCHAR}, #{merRedAmt,jdbcType=DECIMAL}, #{cardPayAmt,jdbcType=DECIMAL}, 
+      #{refundBatchNo,jdbcType=VARCHAR}, #{serviceAmt,jdbcType=DECIMAL}, #{profitAmt,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{transType,jdbcType=VARCHAR}, #{transStatus,jdbcType=VARCHAR}, 
+      #{transAmt,jdbcType=DECIMAL}, #{refundNo,jdbcType=VARCHAR}, #{refundAmt,jdbcType=DECIMAL}, 
+      #{refundType,jdbcType=VARCHAR}, #{refundStatus,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtBy,jdbcType=VARCHAR}, #{lastUpdtDate,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.CsrAlipayRecnLt">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_alipay_recn_lt
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="recnlClId != null">
+        recnl_cl_id,
+      </if>
+      <if test="procState != null">
+        proc_state,
+      </if>
+      <if test="checkDate != null">
+        check_date,
+      </if>
+      <if test="transDate != null">
+        trans_date,
+      </if>
+      <if test="alipayTransNo != null">
+        alipay_trans_no,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="merchId != null">
+        merch_id,
+      </if>
+      <if test="busiType != null">
+        busi_type,
+      </if>
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+      <if test="alipayCreateDate != null">
+        alipay_create_date,
+      </if>
+      <if test="alipayFinishDate != null">
+        alipay_finish_date,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="storeName != null">
+        store_name,
+      </if>
+      <if test="operater != null">
+        operater,
+      </if>
+      <if test="terminalNo != null">
+        terminal_no,
+      </if>
+      <if test="othAccount != null">
+        oth_account,
+      </if>
+      <if test="transTtlAmt != null">
+        trans_ttl_amt,
+      </if>
+      <if test="merRealAmt != null">
+        mer_real_amt,
+      </if>
+      <if test="alipayRedAmt != null">
+        alipay_red_amt,
+      </if>
+      <if test="jfPayAmt != null">
+        jf_pay_amt,
+      </if>
+      <if test="alipayDiscount != null">
+        alipay_discount,
+      </if>
+      <if test="merDiscount != null">
+        mer_discount,
+      </if>
+      <if test="couponAmt != null">
+        coupon_amt,
+      </if>
+      <if test="couponName != null">
+        coupon_name,
+      </if>
+      <if test="merRedAmt != null">
+        mer_red_amt,
+      </if>
+      <if test="cardPayAmt != null">
+        card_pay_amt,
+      </if>
+      <if test="refundBatchNo != null">
+        refund_batch_no,
+      </if>
+      <if test="serviceAmt != null">
+        service_amt,
+      </if>
+      <if test="profitAmt != null">
+        profit_amt,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="transType != null">
+        trans_type,
+      </if>
+      <if test="transStatus != null">
+        trans_status,
+      </if>
+      <if test="transAmt != null">
+        trans_amt,
+      </if>
+      <if test="refundNo != null">
+        refund_no,
+      </if>
+      <if test="refundAmt != null">
+        refund_amt,
+      </if>
+      <if test="refundType != null">
+        refund_type,
+      </if>
+      <if test="refundStatus != null">
+        refund_status,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by,
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="recnlClId != null">
+        #{recnlClId,jdbcType=INTEGER},
+      </if>
+      <if test="procState != null">
+        #{procState,jdbcType=VARCHAR},
+      </if>
+      <if test="checkDate != null">
+        #{checkDate,jdbcType=VARCHAR},
+      </if>
+      <if test="transDate != null">
+        #{transDate,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayTransNo != null">
+        #{alipayTransNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merchId != null">
+        #{merchId,jdbcType=VARCHAR},
+      </if>
+      <if test="busiType != null">
+        #{busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayCreateDate != null">
+        #{alipayCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alipayFinishDate != null">
+        #{alipayFinishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null">
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="operater != null">
+        #{operater,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalNo != null">
+        #{terminalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="othAccount != null">
+        #{othAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="transTtlAmt != null">
+        #{transTtlAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="merRealAmt != null">
+        #{merRealAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="alipayRedAmt != null">
+        #{alipayRedAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="jfPayAmt != null">
+        #{jfPayAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="alipayDiscount != null">
+        #{alipayDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="merDiscount != null">
+        #{merDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="couponAmt != null">
+        #{couponAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="couponName != null">
+        #{couponName,jdbcType=VARCHAR},
+      </if>
+      <if test="merRedAmt != null">
+        #{merRedAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="cardPayAmt != null">
+        #{cardPayAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="refundBatchNo != null">
+        #{refundBatchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceAmt != null">
+        #{serviceAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="profitAmt != null">
+        #{profitAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="transType != null">
+        #{transType,jdbcType=VARCHAR},
+      </if>
+      <if test="transStatus != null">
+        #{transStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="transAmt != null">
+        #{transAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="refundNo != null">
+        #{refundNo,jdbcType=VARCHAR},
+      </if>
+      <if test="refundAmt != null">
+        #{refundAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="refundType != null">
+        #{refundType,jdbcType=VARCHAR},
+      </if>
+      <if test="refundStatus != null">
+        #{refundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.CsrAlipayRecnLt">
+    update csr_alipay_recn_lt
+    <set>
+      <if test="recnlClId != null">
+        recnl_cl_id = #{recnlClId,jdbcType=INTEGER},
+      </if>
+      <if test="procState != null">
+        proc_state = #{procState,jdbcType=VARCHAR},
+      </if>
+      <if test="checkDate != null">
+        check_date = #{checkDate,jdbcType=VARCHAR},
+      </if>
+      <if test="transDate != null">
+        trans_date = #{transDate,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayTransNo != null">
+        alipay_trans_no = #{alipayTransNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merchId != null">
+        merch_id = #{merchId,jdbcType=VARCHAR},
+      </if>
+      <if test="busiType != null">
+        busi_type = #{busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayCreateDate != null">
+        alipay_create_date = #{alipayCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alipayFinishDate != null">
+        alipay_finish_date = #{alipayFinishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null">
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="operater != null">
+        operater = #{operater,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalNo != null">
+        terminal_no = #{terminalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="othAccount != null">
+        oth_account = #{othAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="transTtlAmt != null">
+        trans_ttl_amt = #{transTtlAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="merRealAmt != null">
+        mer_real_amt = #{merRealAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="alipayRedAmt != null">
+        alipay_red_amt = #{alipayRedAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="jfPayAmt != null">
+        jf_pay_amt = #{jfPayAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="alipayDiscount != null">
+        alipay_discount = #{alipayDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="merDiscount != null">
+        mer_discount = #{merDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="couponAmt != null">
+        coupon_amt = #{couponAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="couponName != null">
+        coupon_name = #{couponName,jdbcType=VARCHAR},
+      </if>
+      <if test="merRedAmt != null">
+        mer_red_amt = #{merRedAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="cardPayAmt != null">
+        card_pay_amt = #{cardPayAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="refundBatchNo != null">
+        refund_batch_no = #{refundBatchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceAmt != null">
+        service_amt = #{serviceAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="profitAmt != null">
+        profit_amt = #{profitAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="transType != null">
+        trans_type = #{transType,jdbcType=VARCHAR},
+      </if>
+      <if test="transStatus != null">
+        trans_status = #{transStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="transAmt != null">
+        trans_amt = #{transAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="refundNo != null">
+        refund_no = #{refundNo,jdbcType=VARCHAR},
+      </if>
+      <if test="refundAmt != null">
+        refund_amt = #{refundAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="refundType != null">
+        refund_type = #{refundType,jdbcType=VARCHAR},
+      </if>
+      <if test="refundStatus != null">
+        refund_status = #{refundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=TINYINT},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.CsrAlipayRecnLt">
+    update csr_alipay_recn_lt
+    set recnl_cl_id = #{recnlClId,jdbcType=INTEGER},
+      proc_state = #{procState,jdbcType=VARCHAR},
+      check_date = #{checkDate,jdbcType=VARCHAR},
+      trans_date = #{transDate,jdbcType=VARCHAR},
+      alipay_trans_no = #{alipayTransNo,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      merch_id = #{merchId,jdbcType=VARCHAR},
+      busi_type = #{busiType,jdbcType=VARCHAR},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      alipay_create_date = #{alipayCreateDate,jdbcType=TIMESTAMP},
+      alipay_finish_date = #{alipayFinishDate,jdbcType=TIMESTAMP},
+      store_id = #{storeId,jdbcType=VARCHAR},
+      store_name = #{storeName,jdbcType=VARCHAR},
+      operater = #{operater,jdbcType=VARCHAR},
+      terminal_no = #{terminalNo,jdbcType=VARCHAR},
+      oth_account = #{othAccount,jdbcType=VARCHAR},
+      trans_ttl_amt = #{transTtlAmt,jdbcType=DECIMAL},
+      mer_real_amt = #{merRealAmt,jdbcType=DECIMAL},
+      alipay_red_amt = #{alipayRedAmt,jdbcType=DECIMAL},
+      jf_pay_amt = #{jfPayAmt,jdbcType=DECIMAL},
+      alipay_discount = #{alipayDiscount,jdbcType=DECIMAL},
+      mer_discount = #{merDiscount,jdbcType=DECIMAL},
+      coupon_amt = #{couponAmt,jdbcType=DECIMAL},
+      coupon_name = #{couponName,jdbcType=VARCHAR},
+      mer_red_amt = #{merRedAmt,jdbcType=DECIMAL},
+      card_pay_amt = #{cardPayAmt,jdbcType=DECIMAL},
+      refund_batch_no = #{refundBatchNo,jdbcType=VARCHAR},
+      service_amt = #{serviceAmt,jdbcType=DECIMAL},
+      profit_amt = #{profitAmt,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      trans_type = #{transType,jdbcType=VARCHAR},
+      trans_status = #{transStatus,jdbcType=VARCHAR},
+      trans_amt = #{transAmt,jdbcType=DECIMAL},
+      refund_no = #{refundNo,jdbcType=VARCHAR},
+      refund_amt = #{refundAmt,jdbcType=DECIMAL},
+      refund_type = #{refundType,jdbcType=VARCHAR},
+      refund_status = #{refundStatus,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=TINYINT}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  
+  <update id="batchUpdateDetails" parameterType="java.util.List">
+
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			update csr_wechat_recn_lt
+			<set>
+				proc_state=${item.chkResult}
+			</set>
+			where id = ${item.id}
+		</foreach>
+
+  </update>
+</mapper>

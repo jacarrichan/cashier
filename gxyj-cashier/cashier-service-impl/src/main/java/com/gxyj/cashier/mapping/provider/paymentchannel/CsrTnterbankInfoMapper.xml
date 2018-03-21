@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.paymentchannel.CsrTnterbankInfoMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.CsrTnterbankInfo">
+    <id column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="channel_code" jdbcType="VARCHAR" property="channelCode" />
+    <result column="bank_type" jdbcType="VARCHAR" property="bankType" />
+    <result column="bank_code" jdbcType="VARCHAR" property="bankCode" />
+    <result column="bank_name" jdbcType="VARCHAR" property="bankName" />
+    <result column="bank_desc" jdbcType="VARCHAR" property="bankDesc" />
+    <result column="bank_logo_url" jdbcType="VARCHAR" property="bankLogoUrl" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+    <result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+    <result column="version" jdbcType="TINYINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, channel_code, bank_type, bank_code, bank_name, bank_desc, bank_logo_url, 
+    created_by, created_date, last_updt_date, last_updt_by, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_tnterbank_info
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from csr_tnterbank_info
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.CsrTnterbankInfo">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_tnterbank_info (channel_code, bank_type, bank_code, 
+      bank_name, bank_desc, bank_logo_url, 
+      created_by, created_date, last_updt_date, 
+      last_updt_by, version)
+    values (#{channelCode,jdbcType=VARCHAR}, #{bankType,jdbcType=VARCHAR}, #{bankCode,jdbcType=VARCHAR}, 
+      #{bankName,jdbcType=VARCHAR}, #{bankDesc,jdbcType=VARCHAR}, #{bankLogoUrl,jdbcType=VARCHAR}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtDate,jdbcType=TIMESTAMP}, 
+      #{lastUpdtBy,jdbcType=VARCHAR}, #{version,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.CsrTnterbankInfo">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_tnterbank_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="channelCode != null">
+        channel_code,
+      </if>
+      <if test="bankType != null">
+        bank_type,
+      </if>
+      <if test="bankCode != null">
+        bank_code,
+      </if>
+      <if test="bankName != null">
+        bank_name,
+      </if>
+      <if test="bankDesc != null">
+        bank_desc,
+      </if>
+      <if test="bankLogoUrl != null">
+        bank_logo_url,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date,
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="channelCode != null">
+        #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankType != null">
+        #{bankType,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCode != null">
+        #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null">
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankDesc != null">
+        #{bankDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="bankLogoUrl != null">
+        #{bankLogoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null">
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.CsrTnterbankInfo">
+    update csr_tnterbank_info
+    <set>
+      <if test="channelCode != null">
+        channel_code = #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankType != null">
+        bank_type = #{bankType,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCode != null">
+        bank_code = #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null">
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankDesc != null">
+        bank_desc = #{bankDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="bankLogoUrl != null">
+        bank_logo_url = #{bankLogoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=TINYINT},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.CsrTnterbankInfo">
+    update csr_tnterbank_info
+    set channel_code = #{channelCode,jdbcType=VARCHAR},
+      bank_type = #{bankType,jdbcType=VARCHAR},
+      bank_code = #{bankCode,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      bank_desc = #{bankDesc,jdbcType=VARCHAR},
+      bank_logo_url = #{bankLogoUrl,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      version = #{version,jdbcType=TINYINT}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectChannelCode" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from 
+    	csr_tnterbank_info
+    where 
+    	channel_code = #{channelCode,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByPojo" parameterType="com.gxyj.cashier.domain.CsrTnterbankInfo" resultMap="BaseResultMap">
+  	select 
+  		<include refid="Base_Column_List" />
+  	from 
+  		csr_tnterbank_info
+	where 1=1 
+	  <if test="channelCode != null and channelCode != '' ">
+        AND  channel_code = #{channelCode,jdbcType=VARCHAR}
+      </if>
+      <if test="bankType != null and bankType != '' ">
+        AND  bank_type = #{bankType,jdbcType=VARCHAR}
+      </if>
+      <if test="bankCode != null and bankCode != '' ">
+        AND  bank_code = #{bankCode,jdbcType=VARCHAR}
+      </if>
+      <if test="bankName != null and bankName != '' ">
+        AND  bank_name = #{bankName,jdbcType=VARCHAR}
+      </if>
+      <if test="bankDesc != null and bankDesc != '' ">
+        AND  bank_desc = #{bankDesc,jdbcType=VARCHAR}
+      </if>
+      <if test="bankLogoUrl != null and bankLogoUrl != '' ">
+        AND  bank_logo_url = #{bankLogoUrl,jdbcType=VARCHAR}
+      </if>
+  </select>
+  
+  
+</mapper>

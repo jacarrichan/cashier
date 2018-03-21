@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gxyj.cashier.mapping.ifsmessage.IfsMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.IfsMessage" >
+    <id column="msg_id" property="msgId" jdbcType="VARCHAR" />
+    <result column="msg_create_time" property="msgCreateTime" jdbcType="VARCHAR" />
+    <result column="sender" property="sender" jdbcType="VARCHAR" />
+    <result column="receiver" property="receiver" jdbcType="VARCHAR" />
+    <result column="sign" property="sign" jdbcType="VARCHAR" />
+    <result column="encryption" property="encryption" jdbcType="VARCHAR" />
+    <result column="interface_code" property="interfaceCode" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="return_url" property="returnUrl" jdbcType="VARCHAR" />
+    <result column="request_ip" property="requestIp" jdbcType="VARCHAR" />
+    <result column="rtn_code" property="rtnCode" jdbcType="VARCHAR" />
+    <result column="rtn_msg" property="rtnMsg" jdbcType="VARCHAR" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="last_updt_date" property="lastUpdtDate" jdbcType="TIMESTAMP" />
+    <result column="version" property="version" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.gxyj.cashier.domain.IfsMessage" extends="BaseResultMap" >
+    <result column="msg_data" property="msgData" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    msg_id, msg_create_time, sender, receiver, sign, encryption, interface_code, source, 
+    return_url, request_ip, rtn_code, rtn_msg, created_date, last_updt_date, version
+  </sql>
+  <sql id="Blob_Column_List" >
+    msg_data
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from csr_ifs_message
+    where msg_id = #{msgId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByMsgId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from csr_ifs_message
+    where msg_id = #{msgId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from csr_ifs_message
+    where msg_id = #{msgId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.IfsMessage" >
+    insert into csr_ifs_message (msg_id, msg_create_time, sender, 
+      receiver, sign, encryption, 
+      interface_code, source, return_url, 
+      request_ip, rtn_code, rtn_msg, 
+      created_date, last_updt_date, version, 
+      msg_data)
+    values (#{msgId,jdbcType=VARCHAR}, #{msgCreateTime,jdbcType=VARCHAR}, #{sender,jdbcType=VARCHAR}, 
+      #{receiver,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{encryption,jdbcType=VARCHAR}, 
+      #{interfaceCode,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{returnUrl,jdbcType=VARCHAR}, 
+      #{requestIp,jdbcType=VARCHAR}, #{rtnCode,jdbcType=VARCHAR}, #{rtnMsg,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtDate,jdbcType=TIMESTAMP}, #{version,jdbcType=TINYINT}, 
+      #{msgData,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.IfsMessage" >
+    insert into csr_ifs_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="msgId != null" >
+        msg_id,
+      </if>
+      <if test="msgCreateTime != null" >
+        msg_create_time,
+      </if>
+      <if test="sender != null" >
+        sender,
+      </if>
+      <if test="receiver != null" >
+        receiver,
+      </if>
+      <if test="sign != null" >
+        sign,
+      </if>
+      <if test="encryption != null" >
+        encryption,
+      </if>
+      <if test="interfaceCode != null" >
+        interface_code,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="returnUrl != null" >
+        return_url,
+      </if>
+      <if test="requestIp != null" >
+        request_ip,
+      </if>
+      <if test="rtnCode != null" >
+        rtn_code,
+      </if>
+      <if test="rtnMsg != null" >
+        rtn_msg,
+      </if>
+      <if test="createdDate != null" >
+        created_date,
+      </if>
+      <if test="lastUpdtDate != null" >
+        last_updt_date,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="msgData != null" >
+        msg_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="msgId != null" >
+        #{msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="msgCreateTime != null" >
+        #{msgCreateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sender != null" >
+        #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver != null" >
+        #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="encryption != null" >
+        #{encryption,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceCode != null" >
+        #{interfaceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="returnUrl != null" >
+        #{returnUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="requestIp != null" >
+        #{requestIp,jdbcType=VARCHAR},
+      </if>
+      <if test="rtnCode != null" >
+        #{rtnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rtnMsg != null" >
+        #{rtnMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null" >
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=TINYINT},
+      </if>
+      <if test="msgData != null" >
+        #{msgData,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.IfsMessage" >
+    update csr_ifs_message
+    <set >
+      <if test="msgCreateTime != null" >
+        msg_create_time = #{msgCreateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sender != null" >
+        sender = #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver != null" >
+        receiver = #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="encryption != null" >
+        encryption = #{encryption,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceCode != null" >
+        interface_code = #{interfaceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="returnUrl != null" >
+        return_url = #{returnUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="requestIp != null" >
+        request_ip = #{requestIp,jdbcType=VARCHAR},
+      </if>
+      <if test="rtnCode != null" >
+        rtn_code = #{rtnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rtnMsg != null" >
+        rtn_msg = #{rtnMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null" >
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=TINYINT},
+      </if>
+      <if test="msgData != null" >
+        msg_data = #{msgData,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where msg_id = #{msgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gxyj.cashier.domain.IfsMessage" >
+    update csr_ifs_message
+    set msg_create_time = #{msgCreateTime,jdbcType=VARCHAR},
+      sender = #{sender,jdbcType=VARCHAR},
+      receiver = #{receiver,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      encryption = #{encryption,jdbcType=VARCHAR},
+      interface_code = #{interfaceCode,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      return_url = #{returnUrl,jdbcType=VARCHAR},
+      request_ip = #{requestIp,jdbcType=VARCHAR},
+      rtn_code = #{rtnCode,jdbcType=VARCHAR},
+      rtn_msg = #{rtnMsg,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=TINYINT},
+      msg_data = #{msgData,jdbcType=LONGVARCHAR}
+    where msg_id = #{msgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.IfsMessage" >
+    update csr_ifs_message
+    set msg_create_time = #{msgCreateTime,jdbcType=VARCHAR},
+      sender = #{sender,jdbcType=VARCHAR},
+      receiver = #{receiver,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      encryption = #{encryption,jdbcType=VARCHAR},
+      interface_code = #{interfaceCode,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      return_url = #{returnUrl,jdbcType=VARCHAR},
+      request_ip = #{requestIp,jdbcType=VARCHAR},
+      rtn_code = #{rtnCode,jdbcType=VARCHAR},
+      rtn_msg = #{rtnMsg,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=TINYINT}
+    where msg_id = #{msgId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectList" parameterType="java.util.Map"  resultMap="ResultMapWithBLOBs">
+     SELECT a.msg_id, a.msg_create_time, a.msg_data, a.rtn_msg,a.rtn_code,a.interface_code, b.channel_name as source
+      from   csr_ifs_message a, csr_busi_channel  b where 1=1
+  	  <if test="sender != null and sender !='' " >
+         AND a.sender = #{sender,jdbcType=CHAR}
+      </if>
+      <if test="source != null and source != '' ">
+      	 AND a.source = b.channel_code 
+         AND a.source = #{source,jdbcType=VARCHAR}
+      </if>
+       <if test="msgId != null and msgId != '' ">
+         AND a.msg_id = #{msgId,jdbcType=VARCHAR}
+      </if>
+      <if test="interfaceCode != null and interfaceCode != '' ">
+         AND a.interface_code = #{interfaceCode,jdbcType=VARCHAR}
+      </if>
+      <if test="startDate != null and startDate != '' ">
+        <![CDATA[ AND a.msg_create_time > #{startDate,jdbcType=VARCHAR}  ]]>
+      </if>
+      <if test="endDate != null and endDate != '' ">
+        <![CDATA[ AND a.msg_create_time < #{endDate,jdbcType=VARCHAR}  ]]>
+      </if>
+      order by  a.msg_create_time desc 
+  </select>
+  
+</mapper>

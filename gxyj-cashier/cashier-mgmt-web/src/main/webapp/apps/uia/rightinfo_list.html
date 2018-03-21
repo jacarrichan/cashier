@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>权限管理</title>
+<script id="seajsnode" type="text/javascript" src="../../loader.js" data-js="./js/rightinfo-list" data-css="./css/rightinfo-list.css"></script>
+</head>
+<body>
+	<div class="wrapper wrapper-content">
+		<div class="nav-bread border-color-primary">
+			<ol class="breadcrumb">
+			  	<li>首页</li>
+			  	<li>系统管理</li>
+			  	<li class="active">权限管理</li>
+			</ol>
+		</div>
+		
+		<div class="modal fade" id="smModal">
+			<div class="modal-dialog modal-sm">
+			    <div class="modal-content">
+			      	<div class="modal-header">
+			        	<h4 class="modal-title">警告</h4>
+			      	</div>
+			      	<div class="modal-body">
+			        	您正在进行删除操作，记录删除后将不可恢复<br>确认要删除此记录吗？
+			      	</div>
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-default btn-no" data-dismiss="modal">取消</button>
+			        	<button type="button" class="btn btn-primary btn-yes" data-dismiss="modal">确认删除</button>
+			      	</div>
+			    </div>
+		  	</div>
+		</div>
+		
+		<div class="search-panel">
+			<form class="search-form form-horizontal form-inline">
+				<div class="form-group col-sm-5">
+					<label class="col-sm-3" for="queryKey">关键词</label>
+					<div class="col-sm-9">
+						<input class="form-control" id="queryKey" placeholder="请输入菜单名关键词"/>
+					</div>
+				</div>
+			</form>
+			<div class="form-group form-buttons col-sm-10">
+				<button class="btn btn-warning search-btn">查 询</button>
+			</div>
+		</div>
+		
+		<div class="result-panel">
+			<div class="func-buttons">
+				<button class="btn btn-success btn-add " data-right="add"><i class="icon icon-plus"></i> 新增</button>
+			</div>
+			<div class="result-data grid">
+				<table class="table datatable">
+					<thead>
+						<tr>
+							<th class="number">#</th>
+							<th>菜单名称</th>
+							<th>上级菜单名称</th>
+							<th>菜单地址</th>
+							<th>菜单排序码</th>
+							<th class="sort-disabled">操作</th>
+						</tr>
+					</thead>
+					<tbody id="data-body">
+						
+					</tbody>
+				</table>
+				<div class="pager-box">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/template" id="list-tr.tpl">
+		<tr class="row-{{d.index}}" data-id="{{d.rowId}}" >
+			<td  class="number">{{d.index}}</td>
+			<td>{{d.rightName}}</td>
+			<td>{{d.parentRightName}}</td>
+			<td>{{d.rightUrl}}</td>
+			<td>{{d.rightNum}}</td>
+			<td class="sort-disabled">
+				{{d.buttons}}
+			</td>
+		</tr>
+	</script>
+	
+	<script type="text/template" id="list-btn.tpl">
+		<a class="icon-btn {{d.class}}" href="javascript:;" data-toggle="tooltip" title="{{d.title}}" data-right="{{d.rightCode}}"><i class="icon {{d.icon}}"></i></a>
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<function_list>
+		<item name="myUtils" class="com.gxyj.cashier.common.convert.utils.ConvertUtils" />
+	</function_list>
+	<transaction code="CEBErrorResponse"><!--发起报文 -->
+		<request msg_type="bean">
+			<group name="MessageSuit">
+				<group name="Message">	
+					<item name="itemMsgId" bean_field="msgId"/>
+					<group name="Plain">
+						<attr name="id" value="Error" />
+						<item name="transId" value="Error"/><!--交易代码  Error-->
+						<item name="merId" bean_field="merCode"/><!-- 商户号 -->
+						<item name="errorCode" bean_field="errorCode"/><!-- 错误代码-->
+						<item name="errorMessage" bean_field="errorMessage"/><!-- 错误描述-->
+						<item name="errorDetail" bean_field="errorDetail"/><!-- 详细错误信息-->
+					</group>
+				</group>
+			</group>
+		</request>
+
+		<response msg_type="xml">
+			<group name="MessageSuit" doc_encode="UTF-8">
+				<group name="Message">
+				<item name="itemMsgId" hidden="true"/>	
+				<attr name="id"	value="./itemMsgId"/>			
+					<group name="Plain">
+						<attr name="id" value="Error" />
+						<item name="transId" value="Error"/><!--交易代码  Error-->
+						<item name="merId"/><!-- 商户号 -->
+						<item name="errorCode"/><!-- 错误代码-->
+						<item name="errorMessage"/><!-- 错误描述-->
+						<item name="errorDetail"/><!-- 详细错误信息-->
+					</group>
+				</group>
+			</group>
+		</response>
+		
+	</transaction>
+</config>

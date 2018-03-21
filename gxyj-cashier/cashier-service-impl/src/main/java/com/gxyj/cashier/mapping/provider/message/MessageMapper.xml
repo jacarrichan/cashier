@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gxyj.cashier.mapping.message.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.Message" >
+    <id column="row_id" property="rowId" jdbcType="INTEGER" />
+    <result column="outin_type" property="outinType" jdbcType="TINYINT" />
+    <result column="msg_id" property="msgId" jdbcType="VARCHAR" />
+    <result column="orgn_msg_id" property="orgnMsgId" jdbcType="VARCHAR" />
+    <result column="msg_desc" property="msgDesc" jdbcType="VARCHAR" />
+    <result column="channel_cd" property="channelCd" jdbcType="CHAR" />
+    <result column="client_ip" property="clientIp" jdbcType="VARCHAR" />
+    <result column="sign_data" property="signData" jdbcType="VARCHAR" />
+    <result column="sign_type" property="signType" jdbcType="VARCHAR" />
+    <result column="proc_state" property="procState" jdbcType="CHAR" />
+    <result column="err_flag" property="errFlag" jdbcType="TINYINT" />
+    <result column="err_desc" property="errDesc" jdbcType="VARCHAR" />
+    <result column="sender" property="sender" jdbcType="VARCHAR" />
+    <result column="recver" property="recver" jdbcType="VARCHAR" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="last_updt_date" property="lastUpdtDate" jdbcType="TIMESTAMP" />
+    <result column="last_updt_by" property="lastUpdtBy" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.gxyj.cashier.domain.Message" extends="BaseResultMap" >
+    <result column="msg_data" property="msgData" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    row_id, outin_type, msg_id, orgn_msg_id, msg_desc, channel_cd, client_ip, sign_data, 
+    sign_type, proc_state, err_flag, err_desc, sender, recver, created_by, created_date, 
+    last_updt_date, last_updt_by, version
+  </sql>
+  <sql id="Blob_Column_List" >
+    msg_data
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from csr_message
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from csr_message
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.Message" >
+    insert into csr_message (row_id, outin_type, msg_id, 
+      orgn_msg_id, msg_desc, channel_cd, 
+      client_ip, sign_data, sign_type, 
+      proc_state, err_flag, err_desc, 
+      sender, recver, created_by, 
+      created_date, last_updt_date, last_updt_by, 
+      version, msg_data)
+    values (#{rowId,jdbcType=INTEGER}, #{outinType,jdbcType=VARCHAR}, #{msgId,jdbcType=VARCHAR}, 
+      #{orgnMsgId,jdbcType=VARCHAR}, #{msgDesc,jdbcType=VARCHAR}, #{channelCd,jdbcType=CHAR}, 
+      #{clientIp,jdbcType=VARCHAR}, #{signData,jdbcType=VARCHAR}, #{signType,jdbcType=VARCHAR}, 
+      #{procState,jdbcType=CHAR}, #{errFlag,jdbcType=TINYINT}, #{errDesc,jdbcType=VARCHAR}, 
+      #{sender,jdbcType=VARCHAR}, #{recver,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtDate,jdbcType=TIMESTAMP}, #{lastUpdtBy,jdbcType=VARCHAR}, 
+      #{version,jdbcType=TINYINT}, #{msgData,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.Message" >
+    insert into csr_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null">
+        row_id,
+      </if>
+      <if test="outinType != null">
+        outin_type,
+      </if>
+      <if test="msgId != null" >
+        msg_id,
+      </if>
+      <if test="orgnMsgId != null">
+        orgn_msg_id,
+      </if>
+      <if test="msgDesc != null">
+        msg_desc,
+      </if>
+      <if test="channelCd != null">
+        channel_cd,
+      </if>
+      <if test="clientIp != null">
+        client_ip,
+      </if>
+      <if test="signData != null">
+        sign_data,
+      </if>
+      <if test="signType != null">
+        sign_type,
+      </if>
+      <if test="procState != null">
+        proc_state,
+      </if>
+      <if test="errFlag != null">
+        err_flag,
+      </if>
+      <if test="errDesc != null">
+        err_desc,
+      </if>
+      <if test="sender != null" >
+        sender,
+      </if>
+      <if test="recver != null" >
+        recver,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null" >
+        created_date,
+      </if>
+      <if test="lastUpdtDate != null" >
+        last_updt_date,
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="msgData != null" >
+        msg_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null">
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="outinType != null">
+        #{outinType,jdbcType=VARCHAR},
+      </if>
+      <if test="msgId != null">
+        #{msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgnMsgId != null">
+        #{orgnMsgId,jdbcType=VARCHAR},
+      </if>
+      <if test="msgDesc != null">
+        #{msgDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="channelCd != null">
+        #{channelCd,jdbcType=CHAR},
+      </if>
+      <if test="clientIp != null">
+        #{clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="signData != null">
+        #{signData,jdbcType=VARCHAR},
+      </if>
+      <if test="signType != null">
+        #{signType,jdbcType=VARCHAR},
+      </if>
+      <if test="procState != null">
+        #{procState,jdbcType=CHAR},
+      </if>
+      <if test="errFlag != null">
+        #{errFlag,jdbcType=TINYINT},
+      </if>
+      <if test="errDesc != null">
+        #{errDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sender != null">
+        #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="recver != null">
+        #{recver,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null">
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=TINYINT},
+      </if>
+      <if test="msgData != null">
+        #{msgData,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.Message" >
+    update csr_message
+    <set >
+      <if test="outinType != null">
+        outin_type = #{outinType,jdbcType=VARCHAR},
+      </if>
+      <if test="msgId != null">
+        msg_id = #{msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgnMsgId != null">
+        orgn_msg_id = #{orgnMsgId,jdbcType=VARCHAR},
+      </if>
+      <if test="msgDesc != null">
+        msg_desc = #{msgDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="channelCd != null">
+        channel_cd = #{channelCd,jdbcType=CHAR},
+      </if>
+      <if test="clientIp != null">
+        client_ip = #{clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="signData != null">
+        sign_data = #{signData,jdbcType=VARCHAR},
+      </if>
+      <if test="signType != null">
+        sign_type = #{signType,jdbcType=VARCHAR},
+      </if>
+      <if test="procState != null">
+        proc_state = #{procState,jdbcType=CHAR},
+      </if>
+      <if test="errFlag != null">
+        err_flag = #{errFlag,jdbcType=TINYINT},
+      </if>
+      <if test="errDesc != null">
+        err_desc = #{errDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sender != null">
+        sender = #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="recver != null">
+        recver = #{recver,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=TINYINT},
+      </if>
+      <if test="msgData != null">
+        msg_data = #{msgData,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gxyj.cashier.domain.Message" >
+    update csr_message
+    set outin_type = #{outinType,jdbcType=VARCHAR},
+      msg_id = #{msgId,jdbcType=VARCHAR},
+      orgn_msg_id = #{orgnMsgId,jdbcType=VARCHAR},
+      msg_desc = #{msgDesc,jdbcType=VARCHAR},
+      channel_cd = #{channelCd,jdbcType=CHAR},
+      client_ip = #{clientIp,jdbcType=VARCHAR},
+      sign_data = #{signData,jdbcType=VARCHAR},
+      sign_type = #{signType,jdbcType=VARCHAR},
+      proc_state = #{procState,jdbcType=CHAR},
+      err_flag = #{errFlag,jdbcType=TINYINT},
+      err_desc = #{errDesc,jdbcType=VARCHAR},
+      sender = #{sender,jdbcType=VARCHAR},
+      recver = #{recver,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      version = #{version,jdbcType=TINYINT},
+      msg_data = #{msgData,jdbcType=LONGVARCHAR}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.Message" >
+    update csr_message
+    set outin_type = #{outinType,jdbcType=VARCHAR},
+      msg_id = #{msgId,jdbcType=VARCHAR},
+      orgn_msg_id = #{orgnMsgId,jdbcType=VARCHAR},
+      msg_desc = #{msgDesc,jdbcType=VARCHAR},
+      channel_cd = #{channelCd,jdbcType=CHAR},
+      client_ip = #{clientIp,jdbcType=VARCHAR},
+      sign_data = #{signData,jdbcType=VARCHAR},
+      sign_type = #{signType,jdbcType=VARCHAR},
+      proc_state = #{procState,jdbcType=CHAR},
+      err_flag = #{errFlag,jdbcType=TINYINT},
+      err_desc = #{errDesc,jdbcType=VARCHAR},
+      sender = #{sender,jdbcType=VARCHAR},
+      recver = #{recver,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      version = #{version,jdbcType=TINYINT}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectList" parameterType="java.util.Map"  resultMap="ResultMapWithBLOBs">
+          select   a.row_id, a.outin_type, a.msg_id, a.orgn_msg_id, a.msg_desc, b.channel_name as channel_cd, a.client_ip, a.sign_data, 
+    a.sign_type, a.proc_state, a.err_flag, a.err_desc, a.sender, a.recver  from csr_message a ,csr_payment_channel b  where a.channel_cd=b.channel_code
+  	  <if test="msgId != null and msgId !='' " >
+        AND a.msg_id = #{msgId,jdbcType=VARCHAR}
+      </if>
+      <if test="channelCd != null and channelCd != '' ">
+         AND a.channel_cd = #{channelCd,jdbcType=VARCHAR}
+      </if>
+      <if test="errFlag != null and errFlag != '' ">
+         AND a.err_flag =  #{errFlag,jdbcType=TINYINT}
+      </if>
+      <if test="startDate != null and startDate != '' ">
+        <![CDATA[ AND a.last_updt_date > #{startDate,jdbcType=VARCHAR}  ]]>
+      </if>
+      <if test="endDate != null and endDate != '' ">
+        <![CDATA[ AND a.last_updt_date < #{endDate,jdbcType=VARCHAR}  ]]>
+      </if>
+       order by  a.last_updt_date desc 
+  </select>
+  
+</mapper>

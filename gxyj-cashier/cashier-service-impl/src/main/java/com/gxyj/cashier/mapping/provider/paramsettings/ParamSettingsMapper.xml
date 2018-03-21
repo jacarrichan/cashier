@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.paramsettings.ParamSettingsMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.ParamSettings">
+    <id column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="param_code" jdbcType="VARCHAR" property="paramCode" />
+    <result column="param_name" jdbcType="VARCHAR" property="paramName" />
+    <result column="param_value" jdbcType="VARCHAR" property="paramValue" />
+    <result column="param_desc" jdbcType="VARCHAR" property="paramDesc" />
+    <result column="param_type" jdbcType="TINYINT" property="paramType" />
+    <result column="val_flag" jdbcType="TINYINT" property="valFlag" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+    <result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+    <result column="version" jdbcType="TINYINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, param_code, param_name, param_value, param_desc, param_type, val_flag, created_by, 
+    created_date, last_updt_by, last_updt_date, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_param_settings
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByParamCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_param_settings
+    where param_code = #{paramCode,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from csr_param_settings
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.ParamSettings">
+    insert into csr_param_settings (row_id, param_code, param_name, 
+      param_value, param_desc, param_type, 
+      val_flag, created_by, created_date, 
+      last_updt_by, last_updt_date, version
+      )
+    values (#{rowId,jdbcType=INTEGER}, #{paramCode,jdbcType=VARCHAR}, #{paramName,jdbcType=VARCHAR}, 
+      #{paramValue,jdbcType=VARCHAR}, #{paramDesc,jdbcType=VARCHAR}, #{paramType,jdbcType=TINYINT}, 
+      #{valFlag,jdbcType=TINYINT}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{lastUpdtBy,jdbcType=VARCHAR}, #{lastUpdtDate,jdbcType=TIMESTAMP}, #{version,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.ParamSettings">
+    insert into csr_param_settings
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rowId != null">
+        row_id,
+      </if>
+      <if test="paramCode != null">
+        param_code,
+      </if>
+      <if test="paramName != null">
+        param_name,
+      </if>
+      <if test="paramValue != null">
+        param_value,
+      </if>
+      <if test="paramDesc != null">
+        param_desc,
+      </if>
+      <if test="paramType != null">
+        param_type,
+      </if>
+      <if test="valFlag != null">
+        val_flag,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by,
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rowId != null">
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="paramCode != null">
+        #{paramCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paramName != null">
+        #{paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="paramValue != null">
+        #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="paramDesc != null">
+        #{paramDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="paramType != null">
+        #{paramType,jdbcType=TINYINT},
+      </if>
+      <if test="valFlag != null">
+        #{valFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.ParamSettings">
+    update csr_param_settings
+    <set>
+      <if test="paramCode != null">
+        param_code = #{paramCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paramName != null">
+        param_name = #{paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="paramValue != null">
+        param_value = #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="paramDesc != null">
+        param_desc = #{paramDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="paramType != null">
+        param_type = #{paramType,jdbcType=TINYINT},
+      </if>
+      <if test="valFlag != null">
+        val_flag = #{valFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=TINYINT},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.ParamSettings">
+    update csr_param_settings
+    set param_code = #{paramCode,jdbcType=VARCHAR},
+      param_name = #{paramName,jdbcType=VARCHAR},
+      param_value = #{paramValue,jdbcType=VARCHAR},
+      param_desc = #{paramDesc,jdbcType=VARCHAR},
+      param_type = #{paramType,jdbcType=TINYINT},
+      val_flag = #{valFlag,jdbcType=TINYINT},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=TINYINT}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByLikePoJo" parameterType="com.gxyj.cashier.domain.ParamSettings" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List" />
+  	from csr_param_settings where 1=1
+  	  <if test="paramCode != null and paramCode != '' ">
+        AND param_code like concat('%', #{paramCode,jdbcType=VARCHAR},'%') 
+      </if>
+      <if test="paramName != null and paramName != '' ">
+        AND param_name like concat('%',#{paramName,jdbcType=VARCHAR},'%') 
+      </if>
+      <if test="paramValue != null and paramValue != '' ">
+        AND param_value like concat('%', #{paramValue,jdbcType=VARCHAR},'%') 
+      </if>
+      <if test="paramType != null">
+       AND param_type = #{paramType,jdbcType=TINYINT}
+      </if>
+      <if test="valFlag != null">
+        AND val_flag = #{valFlag,jdbcType=TINYINT}
+      </if>
+      order by val_flag desc , created_date desc
+  </select>
+  
+  <select id="selectByPoJo" parameterType="com.gxyj.cashier.domain.ParamSettings" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List" />
+  	from csr_param_settings where 1=1
+      <if test="paramCode != null">
+        AND  param_code = #{paramCode,jdbcType=VARCHAR}
+      </if>
+      <if test="paramName != null">
+        AND param_name = #{paramName,jdbcType=VARCHAR}
+      </if>
+      <if test="paramValue != null">
+        AND param_value = #{paramValue,jdbcType=VARCHAR}
+      </if>
+      <if test="paramDesc != null">
+        AND param_desc = #{paramDesc,jdbcType=VARCHAR}
+      </if>
+      <if test="paramType != null">
+        AND param_type = #{paramType,jdbcType=TINYINT}
+      </if>
+      <if test="valFlag != null">
+        AND val_flag = #{valFlag,jdbcType=TINYINT}
+      </if>
+      <if test="createdBy != null">
+        AND created_by = #{createdBy,jdbcType=VARCHAR}
+      </if>
+      <if test="createdDate != null">
+        AND created_date = #{createdDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastUpdtBy != null">
+        AND last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR}
+      </if>
+      <if test="lastUpdtDate != null">
+        AND last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="version != null">
+        AND version = #{version,jdbcType=TINYINT}
+      </if>
+      order by val_flag desc , created_date desc
+  </select>
+  
+  
+  <select id="selectByParamCodeList"  resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from csr_param_settings
+    where param_code = #{paramCode,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByParamName" resultMap="BaseResultMap">
+    select 
+   	 	<include refid="Base_Column_List" />
+    from 
+    	csr_param_settings
+    where 
+    	param_name = #{paramName,jdbcType=VARCHAR}
+  </select>
+  
+  
+</mapper>

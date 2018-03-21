@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gxyj.cashier.mapping.recon.CsrGopayRecnLtMapper" >
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.CsrGopayRecnLt" >
+    <id column="row_id" property="rowId" jdbcType="INTEGER" />
+    <result column="gopay_order_id" property="gopayOrderId" jdbcType="VARCHAR" />
+    <result column="gopay_txn_tm" property="gopayTxnTm" jdbcType="VARCHAR" />
+    <result column="mer_order_num" property="merOrderNum" jdbcType="VARCHAR" />
+    <result column="mer_txn_tm" property="merTxnTm" jdbcType="VARCHAR" />
+    <result column="tran_code" property="tranCode" jdbcType="VARCHAR" />
+    <result column="txn_amt" property="txnAmt" jdbcType="VARCHAR" />
+    <result column="biz_sts_cd" property="bizStsCd" jdbcType="VARCHAR" />
+    <result column="biz_sts_desc" property="bizStsDesc" jdbcType="VARCHAR" />
+    <result column="finish_tm" property="finishTm" jdbcType="VARCHAR" />
+    <result column="pay_chn" property="payChn" jdbcType="VARCHAR" />
+    <result column="stlm_date" property="stlmDate" jdbcType="VARCHAR" />
+    <result column="qry_tran_code" property="qryTranCode" jdbcType="VARCHAR" />
+    <result column="proc_state" property="procState" jdbcType="CHAR" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="last_updt_by" property="lastUpdtBy" jdbcType="VARCHAR" />
+    <result column="last_updt_date" property="lastUpdtDate" jdbcType="TIMESTAMP" />
+    <result column="version" property="version" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    row_id, gopay_order_id, gopay_txn_tm, mer_order_num, mer_txn_tm, tran_code, txn_amt, 
+    biz_sts_cd, biz_sts_desc, finish_tm, pay_chn, stlm_date, qry_tran_code, proc_state, 
+    created_by, created_date, last_updt_by, last_updt_date, version
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from csr_gopay_recn_lt
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from csr_gopay_recn_lt
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.CsrGopayRecnLt" >
+    insert into csr_gopay_recn_lt (row_id, gopay_order_id, gopay_txn_tm, 
+      mer_order_num, mer_txn_tm, tran_code, 
+      txn_amt, biz_sts_cd, biz_sts_desc, 
+      finish_tm, pay_chn, stlm_date, 
+      qry_tran_code, proc_state, created_by, 
+      created_date, last_updt_by, last_updt_date, 
+      version)
+    values (#{rowId,jdbcType=INTEGER}, #{gopayOrderId,jdbcType=VARCHAR}, #{gopayTxnTm,jdbcType=VARCHAR}, 
+      #{merOrderNum,jdbcType=VARCHAR}, #{merTxnTm,jdbcType=VARCHAR}, #{tranCode,jdbcType=VARCHAR}, 
+      #{txnAmt,jdbcType=VARCHAR}, #{bizStsCd,jdbcType=VARCHAR}, #{bizStsDesc,jdbcType=VARCHAR}, 
+      #{finishTm,jdbcType=VARCHAR}, #{payChn,jdbcType=VARCHAR}, #{stlmDate,jdbcType=VARCHAR}, 
+      #{qryTranCode,jdbcType=VARCHAR}, #{procState,jdbcType=CHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtBy,jdbcType=VARCHAR}, #{lastUpdtDate,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.CsrGopayRecnLt" >
+    insert into csr_gopay_recn_lt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        row_id,
+      </if>
+      <if test="gopayOrderId != null" >
+        gopay_order_id,
+      </if>
+      <if test="gopayTxnTm != null" >
+        gopay_txn_tm,
+      </if>
+      <if test="merOrderNum != null" >
+        mer_order_num,
+      </if>
+      <if test="merTxnTm != null" >
+        mer_txn_tm,
+      </if>
+      <if test="tranCode != null" >
+        tran_code,
+      </if>
+      <if test="txnAmt != null" >
+        txn_amt,
+      </if>
+      <if test="bizStsCd != null" >
+        biz_sts_cd,
+      </if>
+      <if test="bizStsDesc != null" >
+        biz_sts_desc,
+      </if>
+      <if test="finishTm != null" >
+        finish_tm,
+      </if>
+      <if test="payChn != null" >
+        pay_chn,
+      </if>
+      <if test="stlmDate != null" >
+        stlm_date,
+      </if>
+      <if test="qryTranCode != null" >
+        qry_tran_code,
+      </if>
+      <if test="procState != null" >
+        proc_state,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="createdDate != null" >
+        created_date,
+      </if>
+      <if test="lastUpdtBy != null" >
+        last_updt_by,
+      </if>
+      <if test="lastUpdtDate != null" >
+        last_updt_date,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="gopayOrderId != null" >
+        #{gopayOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="gopayTxnTm != null" >
+        #{gopayTxnTm,jdbcType=VARCHAR},
+      </if>
+      <if test="merOrderNum != null" >
+        #{merOrderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="merTxnTm != null" >
+        #{merTxnTm,jdbcType=VARCHAR},
+      </if>
+      <if test="tranCode != null" >
+        #{tranCode,jdbcType=VARCHAR},
+      </if>
+      <if test="txnAmt != null" >
+        #{txnAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="bizStsCd != null" >
+        #{bizStsCd,jdbcType=VARCHAR},
+      </if>
+      <if test="bizStsDesc != null" >
+        #{bizStsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="finishTm != null" >
+        #{finishTm,jdbcType=VARCHAR},
+      </if>
+      <if test="payChn != null" >
+        #{payChn,jdbcType=VARCHAR},
+      </if>
+      <if test="stlmDate != null" >
+        #{stlmDate,jdbcType=VARCHAR},
+      </if>
+      <if test="qryTranCode != null" >
+        #{qryTranCode,jdbcType=VARCHAR},
+      </if>
+      <if test="procState != null" >
+        #{procState,jdbcType=CHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null" >
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null" >
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.CsrGopayRecnLt" >
+    update csr_gopay_recn_lt
+    <set >
+      <if test="gopayOrderId != null" >
+        gopay_order_id = #{gopayOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="gopayTxnTm != null" >
+        gopay_txn_tm = #{gopayTxnTm,jdbcType=VARCHAR},
+      </if>
+      <if test="merOrderNum != null" >
+        mer_order_num = #{merOrderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="merTxnTm != null" >
+        mer_txn_tm = #{merTxnTm,jdbcType=VARCHAR},
+      </if>
+      <if test="tranCode != null" >
+        tran_code = #{tranCode,jdbcType=VARCHAR},
+      </if>
+      <if test="txnAmt != null" >
+        txn_amt = #{txnAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="bizStsCd != null" >
+        biz_sts_cd = #{bizStsCd,jdbcType=VARCHAR},
+      </if>
+      <if test="bizStsDesc != null" >
+        biz_sts_desc = #{bizStsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="finishTm != null" >
+        finish_tm = #{finishTm,jdbcType=VARCHAR},
+      </if>
+      <if test="payChn != null" >
+        pay_chn = #{payChn,jdbcType=VARCHAR},
+      </if>
+      <if test="stlmDate != null" >
+        stlm_date = #{stlmDate,jdbcType=VARCHAR},
+      </if>
+      <if test="qryTranCode != null" >
+        qry_tran_code = #{qryTranCode,jdbcType=VARCHAR},
+      </if>
+      <if test="procState != null" >
+        proc_state = #{procState,jdbcType=CHAR},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null" >
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null" >
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=TINYINT},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.CsrGopayRecnLt" >
+    update csr_gopay_recn_lt
+    set gopay_order_id = #{gopayOrderId,jdbcType=VARCHAR},
+      gopay_txn_tm = #{gopayTxnTm,jdbcType=VARCHAR},
+      mer_order_num = #{merOrderNum,jdbcType=VARCHAR},
+      mer_txn_tm = #{merTxnTm,jdbcType=VARCHAR},
+      tran_code = #{tranCode,jdbcType=VARCHAR},
+      txn_amt = #{txnAmt,jdbcType=VARCHAR},
+      biz_sts_cd = #{bizStsCd,jdbcType=VARCHAR},
+      biz_sts_desc = #{bizStsDesc,jdbcType=VARCHAR},
+      finish_tm = #{finishTm,jdbcType=VARCHAR},
+      pay_chn = #{payChn,jdbcType=VARCHAR},
+      stlm_date = #{stlmDate,jdbcType=VARCHAR},
+      qry_tran_code = #{qryTranCode,jdbcType=VARCHAR},
+      proc_state = #{procState,jdbcType=CHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=TINYINT}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+
+  
+  <insert id="insertList" parameterType="java.util.List">
+  	<foreach collection ="list" item="gopayLt" open="" close="" index= "index" separator =";">
+	      insert into csr_gopay_recn_lt (row_id, gopay_order_id, gopay_txn_tm, 
+	      mer_order_num, mer_txn_tm, tran_code, 
+	      txn_amt, biz_sts_cd, biz_sts_desc, 
+	      finish_tm, pay_chn, stlm_date, qry_tran_code, proc_state,
+	      created_by, created_date, last_updt_by, 
+	      last_updt_date, version)
+	    values (
+	      #{gopayLt.rowId,jdbcType=INTEGER},
+	      #{gopayLt.gopayOrderId,jdbcType=VARCHAR}, 
+	      #{gopayLt.gopayTxnTm,jdbcType=VARCHAR}, 
+	      #{gopayLt.merOrderNum,jdbcType=VARCHAR}, 
+	      #{gopayLt.merTxnTm,jdbcType=VARCHAR}, 
+	      #{gopayLt.tranCode,jdbcType=VARCHAR}, 
+	      #{gopayLt.txnAmt,jdbcType=VARCHAR}, 
+	      #{gopayLt.bizStsCd,jdbcType=VARCHAR}, 
+	      #{gopayLt.bizStsDesc,jdbcType=VARCHAR}, 
+	      #{gopayLt.finishTm,jdbcType=VARCHAR}, 
+	      #{gopayLt.payChn,jdbcType=VARCHAR}, 
+	      #{gopayLt.stlmDate,jdbcType=VARCHAR}, 
+	      #{gopayLt.qryTranCode,jdbcType=VARCHAR}, 
+	      #{gopayLt.procState,jdbcType=CHAR},
+	      #{gopayLt.createdBy,jdbcType=VARCHAR}, 
+	      #{gopayLt.createdDate,jdbcType=TIMESTAMP}, 
+	      #{gopayLt.lastUpdtBy,jdbcType=VARCHAR}, 
+	      #{gopayLt.lastUpdtDate,jdbcType=TIMESTAMP}, 
+	      #{gopayLt.version,jdbcType=TINYINT}
+	    )
+  	</foreach>
+  </insert>  
+  
+  <select id="selectByCheckDate" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_gopay_recn_lt
+    where stlm_date = #{stlmDate,jdbcType=VARCHAR} and proc_state!='99'
+  </select>
+  
+  	<update id="batchUpdateDetails" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+  		    update csr_gopay_recn_lt
+	         set  proc_state = #{item.chkResult,jdbcType=VARCHAR} 
+		    where row_id = #{item.id,jdbcType=INTEGER}
+        </foreach>				
+	</update>
+    
+    
+  <select id="selectOrderIds" resultType="java.lang.String">
+  	select mer_order_num  from csr_gopay_recn_lt 
+  </select>
+  
+  <update id="updateList" parameterType="java.util.List">
+  		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+		    update csr_gopay_recn_lt
+		    set gopay_order_id = #{item.gopayOrderId,jdbcType=VARCHAR},
+		      gopay_txn_tm = #{item.gopayTxnTm,jdbcType=VARCHAR},
+		      mer_order_num = #{item.merOrderNum,jdbcType=VARCHAR},
+		      mer_txn_tm = #{item.merTxnTm,jdbcType=VARCHAR},
+		      tran_code = #{item.tranCode,jdbcType=VARCHAR},
+		      txn_amt = #{item.txnAmt,jdbcType=VARCHAR},
+		      biz_sts_cd = #{item.bizStsCd,jdbcType=VARCHAR},
+		      biz_sts_desc = #{item.bizStsDesc,jdbcType=VARCHAR},
+		      finish_tm = #{item.finishTm,jdbcType=VARCHAR},
+		      pay_chn = #{item.payChn,jdbcType=VARCHAR},
+		      stlm_date = #{item.stlmDate,jdbcType=VARCHAR},
+		      qry_tran_code = #{item.qryTranCode,jdbcType=VARCHAR},
+		      proc_state = #{item.procState,jdbcType=CHAR},
+		      created_by = #{item.createdBy,jdbcType=VARCHAR},
+		      created_date = #{item.createdDate,jdbcType=TIMESTAMP},
+		      last_updt_by = #{item.lastUpdtBy,jdbcType=VARCHAR},
+		      last_updt_date = #{item.lastUpdtDate,jdbcType=TIMESTAMP},
+		      version = #{item.version,jdbcType=TINYINT}
+		    where mer_order_num = #{item.merOrderNum,jdbcType=VARCHAR}
+        </foreach>
+  </update>
+    
+    
+    
+</mapper>

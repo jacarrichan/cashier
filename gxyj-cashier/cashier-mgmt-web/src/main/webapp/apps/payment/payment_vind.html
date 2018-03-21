@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>维护详情</title>
+<script id="seajsnode" type="text/javascript" src="../../loader.js" data-js="./js/payment_vind" data-css="./css/payment_vind.css"></script>
+</head>
+<body>
+	<div class="wrapper wrapper-content">
+	
+		<div class="result-panel">
+			<div class="func-buttons">
+				<lable id="channelName" name=channelName"">但是规范的施工十多个</lable> 
+			</div>
+		
+			<div class="result-data grid" id="maintain-tbody">
+				<table class="table datatable" data-checkable="true" >
+					<thead>
+						<tr>
+							<th class="number">#</th>
+							<th>维护状态</th>
+							<th>维护时间段</th>
+							<th>原因</th>
+							<th>关闭时间</th>
+							<!-- <th class="sort-disabled">操作</th> -->
+						</tr>
+					</thead>
+					<tbody id="data-body">
+					</tbody>
+				</table>
+				<div class="pager-box">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/template" id="list-tr.tpl">
+		<tr class="row-{{d.index}}" data-id="{{d.rowId}}">
+			<td class="number"> {{d.index}}</td>
+			<td>{{d.procState}}</td>
+			<td class="sort-disabled">{{d.beDate}}</td>
+			<td>{{d.vindExplain}}</td>
+			<td>{{d.closedTime}}</td> 
+		</tr>
+	</script>
+	
+	<script type="text/template" id="list-btn.tpl">
+		<a class="icon-btn {{d.class}}" href="javascript:;" data-right="{{d.rightCode}}" data-value="{{d.value}}" data-toggle="tooltip" title="{{d.title}}"><i class="icon {{d.icon}}"></i></a>
+	</script>
+	
+	<script type="text/template" id="option.tpl">
+		<option value="{{d.code}}" {{d.attr || ''}}>{{d.name}}</option>
+	</script>
+	
+	<script type="text/template" id="icon.tpl">
+		<a class="tip-icon {{d.class}}" title="{{d.title}}" data-toggle="tooltip" data-placement="{{d.dir}}" href="javascript:;"><i class="icon {{d.icon}}"></i></a>
+	</script>
+	
+	<script type="text/template" id="label.tpl">
+		<span class="label {{d.flag}}">{{d.value}}</span>
+	</script>
+</body>
+</html>

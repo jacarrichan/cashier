@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.order.RefundOrderInfoMapper">
+	<resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.RefundOrderInfo">
+		<id column="row_id" jdbcType="INTEGER" property="rowId" />
+		<result column="trans_id" jdbcType="VARCHAR" property="transId" />
+		<result column="refund_id" jdbcType="VARCHAR" property="refundId" />
+		<result column="orgn_order_id" jdbcType="VARCHAR" property="orgnOrderId" />
+		<result column="channel_id" jdbcType="INTEGER" property="channelId" />
+		<result column="channel_cd" jdbcType="CHAR" property="channelCd" />
+		<result column="client_ip" jdbcType="VARCHAR" property="clientIp" />
+		<result column="refund_amt" jdbcType="DECIMAL" property="refundAmt" />
+		<result column="orgn_trans_amt" jdbcType="DECIMAL" property="orgnTransAmt" />
+		<result column="refund_date" jdbcType="TIMESTAMP" property="refundDate" />
+		<result column="proc_state" jdbcType="CHAR" property="procState" />
+		<result column="err_flag" jdbcType="TINYINT" property="errFlag" />
+		<result column="recon_flag" jdbcType="VARCHAR" property="reconFlag" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+		<result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+		<result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+		<result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+		<result column="version" jdbcType="TINYINT" property="version" />
+		<result column="payer_insti_nm" property="payerInstiNm" jdbcType="VARCHAR" />
+		<result column="mall_id" property="mallId" jdbcType="VARCHAR" />
+		<result column="payer_insti_no" property="payerInstiNo" jdbcType="VARCHAR" />
+		<result column="insti_rsp_time" property="instiRspTime" jdbcType="VARCHAR" />
+	</resultMap>
+ 	
+	<sql id="Base_Column_List">
+		row_id, trans_id, refund_id, orgn_order_id,channel_id, channel_cd, client_ip,
+		refund_amt, orgn_trans_amt,
+		refund_date, proc_state, err_flag, recon_flag, remark, created_by, created_date,
+		last_updt_date, last_updt_by, version
+	</sql>
+
+	
+	
+	<select id="selectByParamMap" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		SELECT r.refund_id,p.trans_id,r.orgn_order_id,r.proc_state,p.payer_insti_nm,p.payer_insti_no,
+		r.refund_amt,r.orgn_trans_amt,p.insti_rsp_time,o.mall_id
+		FROM csr_refund_order r 
+		LEFT JOIN csr_payment p ON r.trans_id = p.trans_id 
+		LEFT JOIN csr_order_info o ON r.orgn_order_id = o.order_id
+		WHERE 1=1 and r.refund_id = #{refundId,jdbcType=VARCHAR}
+	    <if test="transId != null and transId != ''" >
+	     	and r.trans_id = #{transId,jdbcType=VARCHAR}
+	    </if>
+	    <if test="channelCd != null and channelCd != ''" >
+	     	and r.channel_cd = #{channelCd,jdbcType=VARCHAR}
+	    </if>
+	    <if test="payerInstiNo != null and payerInstiNo != ''" >
+	     	and p.payer_insti_no = #{payerInstiNo,jdbcType=VARCHAR}
+	    </if>
+	    limit 0,1000
+	</select>
+	
+	<select id="selectByTransId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from csr_refund_order
+		where trans_id = #{transId,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByRefundId" parameterType="com.gxyj.cashier.domain.RefundOrderInfo"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from csr_refund_order
+		where refund_id = #{refundId,jdbcType=VARCHAR}
+		and channel_cd=#{channelCd,jdbcType=CHAR}
+		<if test="orgnOrderId != null and orgnOrderId != ''">
+			and orgn_order_id = #{orgnOrderId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<select id="selectByRefundIdAndOrigOrderId" parameterType="com.gxyj.cashier.domain.RefundOrderInfo"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from csr_refund_order
+		where refund_id = #{refundId,jdbcType=VARCHAR}
+		and channel_cd=#{channelCd,jdbcType=CHAR}
+		<if test="orgnOrderId != null and orgnOrderId != ''">
+			and orgn_order_id = #{orgnOrderId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<select id="selectByOrigOrderId" parameterType="com.gxyj.cashier.domain.RefundOrderInfo"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from csr_refund_order
+		where orgn_order_id = #{orgnOrderId,jdbcType=VARCHAR}
+		and channel_cd=#{channelCd,jdbcType=CHAR}
+	</select>
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from csr_refund_order
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from csr_refund_order
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</delete>
+
+	<insert id="insert" parameterType="com.gxyj.cashier.domain.RefundOrderInfo">
+		<selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into csr_refund_order (trans_id, refund_id,
+		orgn_order_id,channel_id,
+		channel_cd, client_ip, refund_amt,
+		orgn_trans_amt, refund_date, proc_state,
+		err_flag, recon_flag, remark,
+		created_by, created_date, last_updt_date,
+		last_updt_by, version)
+		values (#{transId,jdbcType=VARCHAR}, #{refundId,jdbcType=VARCHAR},
+		#{orgnOrderId,jdbcType=VARCHAR}, #{channelId,jdbcType=INTEGER},
+		#{channelCd,jdbcType=CHAR}, #{clientIp,jdbcType=VARCHAR},
+		#{refundAmt,jdbcType=DECIMAL},
+		#{orgnTransAmt,jdbcType=DECIMAL}, #{refundDate,jdbcType=TIMESTAMP}, #{procState,jdbcType=CHAR},
+		#{errFlag,jdbcType=TINYINT}, #{reconFlag,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP},
+		#{lastUpdtDate,jdbcType=TIMESTAMP},
+		#{lastUpdtBy,jdbcType=VARCHAR}, #{version,jdbcType=TINYINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gxyj.cashier.domain.RefundOrderInfo">
+		<selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into csr_refund_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="transId != null">
+				trans_id,
+			</if>
+			<if test="refundId != null">
+				refund_id,
+			</if>
+			<if test="orgnOrderId != null">
+				orgn_order_id,
+			</if>
+			<if test="channelId != null">
+				channel_id,
+			</if>
+			<if test="channelCd != null">
+				channel_cd,
+			</if>
+			<if test="clientIp != null">
+				client_ip,
+			</if>
+			<if test="refundAmt != null">
+				refund_amt,
+			</if>
+			<if test="orgnTransAmt != null">
+				orgn_trans_amt,
+			</if>
+			<if test="refundDate != null">
+				refund_date,
+			</if>
+			<if test="procState != null">
+				proc_state,
+			</if>
+			<if test="errFlag != null">
+				err_flag,
+			</if>
+			<if test="reconFlag != null">
+				recon_flag,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="createdDate != null">
+				created_date,
+			</if>
+			<if test="lastUpdtDate != null">
+				last_updt_date,
+			</if>
+			<if test="lastUpdtBy != null">
+				last_updt_by,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="transId != null">
+				#{transId,jdbcType=VARCHAR},
+			</if>
+			<if test="refundId != null">
+				#{refundId,jdbcType=VARCHAR},
+			</if>
+			<if test="orgnOrderId != null">
+				#{orgnOrderId,jdbcType=VARCHAR},
+			</if>
+			<if test="channelId != null">
+				#{channelId,jdbcType=INTEGER},
+			</if>
+			<if test="channelCd != null">
+				#{channelCd,jdbcType=CHAR},
+			</if>
+			<if test="clientIp != null">
+				#{clientIp,jdbcType=VARCHAR},
+			</if>
+			<if test="refundAmt != null">
+				#{refundAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="orgnTransAmt != null">
+				#{orgnTransAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="refundDate != null">
+				#{refundDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="procState != null">
+				#{procState,jdbcType=CHAR},
+			</if>
+			<if test="errFlag != null">
+				#{errFlag,jdbcType=TINYINT},
+			</if>
+			<if test="reconFlag != null">
+				#{reconFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createdDate != null">
+				#{createdDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtDate != null">
+				#{lastUpdtDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtBy != null">
+				#{lastUpdtBy,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByUniqueKeySelective" parameterType="com.gxyj.cashier.domain.RefundOrderInfo">
+		update csr_refund_order
+		<set>
+			<if test="transId != null">
+				trans_id = #{transId,jdbcType=VARCHAR},
+			</if>
+			<if test="refundId != null">
+				refund_id = #{refundId,jdbcType=VARCHAR},
+			</if>
+			<if test="orgnOrderId != null">
+				orgn_order_id = #{orgnOrderId,jdbcType=VARCHAR},
+			</if>
+			<if test="channelId != null">
+				channel_id = #{channelId,jdbcType=INTEGER},
+			</if>
+			<if test="channelCd != null">
+				channel_cd = #{channelCd,jdbcType=CHAR},
+			</if>
+			<if test="clientIp != null">
+				client_ip = #{clientIp,jdbcType=VARCHAR},
+			</if>
+			<if test="refundAmt != null">
+				refund_amt = #{refundAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="orgnTransAmt != null">
+				orgn_trans_amt = #{orgnTransAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="refundDate != null">
+				refund_date = #{refundDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="procState != null">
+				proc_state = #{procState,jdbcType=CHAR},
+			</if>
+			<if test="errFlag != null">
+				err_flag = #{errFlag,jdbcType=TINYINT},
+			</if>
+			<if test="reconFlag != null">
+				recon_flag = #{reconFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				created_by = #{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createdDate != null">
+				created_date = #{createdDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtDate != null">
+				last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtBy != null">
+				last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				version = #{version,jdbcType=TINYINT},
+			</if>
+		</set>
+		where refund_id = #{refundId,jdbcType=VARCHAR} 
+		and channel_cd =#{channelCd,jdbcType=CHAR}
+		<if test="transId != null">
+		and	trans_id = #{transId,jdbcType=VARCHAR}
+		</if>
+
+	</update>
+
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.RefundOrderInfo">
+		update csr_refund_order
+		<set>
+			<if test="transId != null">
+				trans_id = #{transId,jdbcType=VARCHAR},
+			</if>
+			<if test="refundId != null">
+				refund_id = #{refundId,jdbcType=VARCHAR},
+			</if>
+			<if test="orgnOrderId != null">
+				orgn_order_id = #{orgnOrderId,jdbcType=VARCHAR},
+			</if>
+			<if test="channelId != null">
+				channel_id = #{channelId,jdbcType=INTEGER},
+			</if>
+			<if test="channelCd != null">
+				channel_cd = #{channelCd,jdbcType=CHAR},
+			</if>
+			<if test="clientIp != null">
+				client_ip = #{clientIp,jdbcType=VARCHAR},
+			</if>
+			<if test="refundAmt != null">
+				refund_amt = #{refundAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="orgnTransAmt != null">
+				orgn_trans_amt = #{orgnTransAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="refundDate != null">
+				refund_date = #{refundDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="procState != null">
+				proc_state = #{procState,jdbcType=CHAR},
+			</if>
+			<if test="errFlag != null">
+				err_flag = #{errFlag,jdbcType=TINYINT},
+			</if>
+			<if test="reconFlag != null">
+				recon_flag = #{reconFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				created_by = #{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createdDate != null">
+				created_date = #{createdDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtDate != null">
+				last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtBy != null">
+				last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				version = #{version,jdbcType=TINYINT},
+			</if>
+		</set>
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.RefundOrderInfo">
+		update csr_refund_order
+		set trans_id = #{transId,jdbcType=VARCHAR},
+		refund_id = #{refundId,jdbcType=VARCHAR},
+		orgn_order_id = #{orgnOrderId,jdbcType=VARCHAR},
+		channel_cd = #{channelCd,jdbcType=CHAR},
+		client_ip = #{clientIp,jdbcType=VARCHAR},
+		refund_amt = #{refundAmt,jdbcType=DECIMAL},
+		orgn_trans_amt = #{orgnTransAmt,jdbcType=DECIMAL},
+		refund_date = #{refundDate,jdbcType=TIMESTAMP},
+		proc_state = #{procState,jdbcType=CHAR},
+		err_flag = #{errFlag,jdbcType=TINYINT},
+		recon_flag = #{reconFlag,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR},
+		created_by = #{createdBy,jdbcType=VARCHAR},
+		created_date = #{createdDate,jdbcType=TIMESTAMP},
+		last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+		last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+		version = #{version,jdbcType=TINYINT}
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateNoReconRefund" parameterType="java.util.Map">
+
+		update csr_refund_order t
+		set t.recon_flag = #{reconFlag,jdbcType=VARCHAR}
+		where date_format(t.refund_date,'%Y%m%d')=#{transDate,jdbcType=VARCHAR}
+		and t.trans_id in (select t1.trans_id from csr_payment t1
+		where t1.trans_id=t.trans_id and
+		t1.payer_insti_no=#{payInstiNo,jdbcType=VARCHAR})
+	</update>
+
+	<select id="selectList" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select a.row_id,a.orgn_order_id, a.refund_id, a.trans_id, a.client_ip, a.refund_amt,
+		a.proc_state,a.refund_date, a.err_flag, b.payer_insti_no,
+		b.payer_insti_nm,c.channel_name as channel_cd,c.channel_code as remark,  e.mall_name as mall_id
+		from csr_refund_order a,csr_payment b, csr_busi_channel c,csr_order_info d, csr_mall_info e where a.trans_id=b.trans_id and
+		c.row_id = a.channel_id and a.orgn_order_id = d.order_id and  d.mall_id=e.mall_id
+		<if test="orgnOrderId != null and orgnOrderId != '' ">
+			AND a.orgn_order_id = #{orgnOrderId,jdbcType=VARCHAR}
+		</if>
+		<if test="refundId != null and refundId != '' ">
+			AND a.refund_id = #{refundId,jdbcType=VARCHAR}
+		</if>
+		<if test="mallId != null and mallId!='' ">
+			AND d.mall_id = #{mallId,jdbcType=CHAR}
+		</if>
+		<if test="payerInstiNo != null and payerInstiNo!='' ">
+			AND b.payer_insti_no = #{payerInstiNo,jdbcType=CHAR}
+		</if>
+		<if test="procState != null and  procState != '' ">
+			AND a.proc_state = #{procState,jdbcType=CHAR}
+		</if>
+		<if test="channelId != null and channelId != '' ">
+			AND a.channel_cd = #{channelId,jdbcType=VARCHAR}
+		</if>
+		<if test="startDate != null and startDate != '' ">
+        <![CDATA[ AND a.refund_date > #{startDate,jdbcType=VARCHAR}  ]]>
+		</if>
+		<if test="endDate != null and endDate != '' ">
+        <![CDATA[ AND a.refund_date < #{endDate,jdbcType=VARCHAR}  ]]>
+		</if>
+		order by a.refund_date desc
+	</select>
+
+</mapper>

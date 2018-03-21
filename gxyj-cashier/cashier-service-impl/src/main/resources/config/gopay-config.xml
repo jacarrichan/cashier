@@ -1,0 +1,8 @@
+GOPAY.URL=https\://gateway.gopay.com.cn/Trans/WebClientAction.do
+GOPAY.FRONTURL=http\://www.baidu.com
+GOPAY.BACKURL=http\://www.google.com
+GOPAY.CARDIN=0000000002000000257
+GOPAY.BANKCODE=ICBC
+GOPAY.MERCHANTID=0000001502
+GOPAY.VERFICATIONCODE=11111aaaaa
+GOPAY.FILE.DIR=/opt/epay

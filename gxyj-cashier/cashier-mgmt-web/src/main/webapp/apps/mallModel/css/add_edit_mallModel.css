@@ -1,0 +1,52 @@
+@CHARSET "UTF-8";
+
+@import "../../../common/css/page-common.css";
+
+.flot-chart-content {
+	padding: 0px; 
+	position: relative;
+}
+
+.flot-chart {
+	height: 302px;
+}
+
+.flot-chart canvas {
+	height: 302px;
+}
+
+.ibox-content .stat-list {
+	padding-left: 0;
+}
+
+.ibox-content .stat-list li {
+	list-style: none;
+}
+
+
+.logobox {
+	background: url('../../../images/gxyj-logo2.png') no-repeat;
+	width: 310px;
+    height: 150px;
+    margin: auto;
+    margin-top: 130px;
+}
+
+.logotext {
+    width: 355px;
+    height: 50px;
+    margin: auto;
+    font-size: 40px;
+}
+#channelDiv .checkbox-inline {
+	margin-left: 0;
+	display: block;
+}
+#channelDiv {
+	width: 200px;
+}
+#channelDiv,
+#radioPart {
+	padding-left: 0;
+	padding-right: 0;
+}

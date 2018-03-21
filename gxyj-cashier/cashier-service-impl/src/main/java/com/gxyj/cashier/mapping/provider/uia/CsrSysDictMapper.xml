@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.uia.CsrSysDictMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.CsrSysDict">
+    <id column="row_id" jdbcType="BIGINT" property="rowId" />
+    <result column="data_code" jdbcType="VARCHAR" property="dataCode" />
+    <result column="data_name" jdbcType="VARCHAR" property="dataName" />
+    <result column="data_value" jdbcType="VARCHAR" property="dataValue" />
+    <result column="data_desc" jdbcType="VARCHAR" property="dataDesc" />
+    <result column="is_val" jdbcType="VARCHAR" property="isVal" />
+    <result column="input_user" jdbcType="VARCHAR" property="inputUser" />
+    <result column="check_user" jdbcType="VARCHAR" property="checkUser" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="modified_by" jdbcType="VARCHAR" property="modifiedBy" />
+    <result column="whenmodified" jdbcType="TIMESTAMP" property="whenmodified" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, data_code, data_name, data_value, data_desc, is_val, input_user, check_user, 
+    created_by, created_date, modified_by, whenmodified, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_sys_dict
+    where row_id = #{rowId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from csr_sys_dict
+    where row_id = #{rowId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.CsrSysDict">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_sys_dict (data_code, data_name, data_value, 
+      data_desc, is_val, input_user, 
+      check_user, created_by, created_date, 
+      modified_by, whenmodified, version
+      )
+    values (#{dataCode,jdbcType=VARCHAR}, #{dataName,jdbcType=VARCHAR}, #{dataValue,jdbcType=VARCHAR}, 
+      #{dataDesc,jdbcType=VARCHAR}, #{isVal,jdbcType=VARCHAR}, #{inputUser,jdbcType=VARCHAR}, 
+      #{checkUser,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{modifiedBy,jdbcType=VARCHAR}, #{whenmodified,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.CsrSysDict">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_sys_dict
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dataCode != null">
+        data_code,
+      </if>
+      <if test="dataName != null">
+        data_name,
+      </if>
+      <if test="dataValue != null">
+        data_value,
+      </if>
+      <if test="dataDesc != null">
+        data_desc,
+      </if>
+      <if test="isVal != null">
+        is_val,
+      </if>
+      <if test="inputUser != null">
+        input_user,
+      </if>
+      <if test="checkUser != null">
+        check_user,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="modifiedBy != null">
+        modified_by,
+      </if>
+      <if test="whenmodified != null">
+        whenmodified,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dataCode != null">
+        #{dataCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dataName != null">
+        #{dataName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataValue != null">
+        #{dataValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dataDesc != null">
+        #{dataDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isVal != null">
+        #{isVal,jdbcType=VARCHAR},
+      </if>
+      <if test="inputUser != null">
+        #{inputUser,jdbcType=VARCHAR},
+      </if>
+      <if test="checkUser != null">
+        #{checkUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedBy != null">
+        #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="whenmodified != null">
+        #{whenmodified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.CsrSysDict">
+    update csr_sys_dict
+    <set>
+      <if test="dataCode != null">
+        data_code = #{dataCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dataName != null">
+        data_name = #{dataName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataValue != null">
+        data_value = #{dataValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dataDesc != null">
+        data_desc = #{dataDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isVal != null">
+        is_val = #{isVal,jdbcType=VARCHAR},
+      </if>
+      <if test="inputUser != null">
+        input_user = #{inputUser,jdbcType=VARCHAR},
+      </if>
+      <if test="checkUser != null">
+        check_user = #{checkUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedBy != null">
+        modified_by = #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="whenmodified != null">
+        whenmodified = #{whenmodified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.CsrSysDict">
+    update csr_sys_dict
+    set data_code = #{dataCode,jdbcType=VARCHAR},
+      data_name = #{dataName,jdbcType=VARCHAR},
+      data_value = #{dataValue,jdbcType=VARCHAR},
+      data_desc = #{dataDesc,jdbcType=VARCHAR},
+      is_val = #{isVal,jdbcType=VARCHAR},
+      input_user = #{inputUser,jdbcType=VARCHAR},
+      check_user = #{checkUser,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      modified_by = #{modifiedBy,jdbcType=VARCHAR},
+      whenmodified = #{whenmodified,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=INTEGER}
+    where row_id = #{rowId,jdbcType=BIGINT}
+  </update>
+  
+  <select id="findAllByDataName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_sys_dict
+    where data_name = #{dataName,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findByDataNameAndDataCode" parameterType="com.gxyj.cashier.domain.CsrSysDict" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_sys_dict
+    where data_name = #{dataName,jdbcType=VARCHAR} and data_code = #{dataCode,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findAllInDataName" parameterType="java.util.List" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_sys_dict
+    where data_name in
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+          #{item}  
+	</foreach>
+  </select>
+  
+</mapper>

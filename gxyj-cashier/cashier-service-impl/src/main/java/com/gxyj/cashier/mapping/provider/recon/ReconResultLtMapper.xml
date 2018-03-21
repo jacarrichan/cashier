@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.recon.ReconResultLtMapper">
+	<resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.ReconResultLt">
+		<id column="row_id" jdbcType="INTEGER" property="rowId" />
+		<result column="cl_key" jdbcType="INTEGER" property="clKey" />
+		<result column="pay_recon_key" jdbcType="INTEGER" property="payReconKey" />
+		<result column="check_date" jdbcType="VARCHAR" property="checkDate" />
+		<result column="trans_id" jdbcType="VARCHAR" property="transId" />
+		<result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+		<result column="order_type" jdbcType="INTEGER" property="orderType" />
+		<result column="refund_no" jdbcType="VARCHAR" property="refundNo" />
+		<result column="channel_id" jdbcType="INTEGER" property="channelId" />
+		<result column="channel_code" jdbcType="CHAR" property="channelCode" />
+		<result column="trans_amt" jdbcType="DECIMAL" property="transAmt" />
+		<result column="refund_amt" jdbcType="DECIMAL" property="refundAmt" />
+		<result column="charge_fee" jdbcType="DECIMAL" property="chargeFee" />
+		<result column="begin_date" jdbcType="VARCHAR" property="beginDate" />
+		<result column="end_date" jdbcType="VARCHAR" property="endDate" />
+		<result column="insti_pay_time" jdbcType="TIMESTAMP" property="instiPayTime" />
+		<result column="insti_proc_cd" jdbcType="VARCHAR" property="instiProcCd" />
+		<result column="payer_name" jdbcType="VARCHAR" property="payerName" />
+		<result column="payer_acct_no" jdbcType="VARCHAR" property="payerAcctNo" />
+		<result column="payer_insti_id" jdbcType="INTEGER" property="payerInstiId" />
+		<result column="payer_insti_cd" jdbcType="VARCHAR" property="payerInstiCd" />
+		<result column="payer_insti_nm" jdbcType="VARCHAR" property="payerInstiNm" />
+		<result column="insti_pay_type" jdbcType="CHAR" property="instiPayType" />
+		<result column="check_state" jdbcType="CHAR" property="checkState" />
+		<result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+		<result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+		<result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+		<result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+		<result column="version" jdbcType="TINYINT" property="version" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		row_id, cl_key,pay_recon_key,check_date, trans_id,
+		order_no,order_type,refund_no, channel_id,
+		channel_code, trans_amt,
+		refund_amt, charge_fee, begin_date, end_date, insti_pay_time,
+		insti_proc_cd,
+		payer_name,
+		payer_acct_no, payer_insti_id,
+		payer_insti_cd, payer_insti_nm, insti_pay_type,
+		check_state,
+		created_by, created_date, last_updt_date, last_updt_by, version
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from csr_recon_result_lt
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</select>
+	<select id="selectByClKeys" parameterType="java.util.List" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from csr_recon_result_lt
+		where cl_key in (#{clKeyList})
+	</select>
+	
+	<select id="queryDetailRcnltResult" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from csr_recon_result_lt
+		where 1=1
+		<if test="rowId != null">
+			and row_id = #{rowId,jdbcType=INTEGER}
+		</if>
+		<if test="checkDate != null">
+			and check_date = #{checkDate,jdbcType=VARCHAR}
+		</if>
+		<if test="transId != null">
+			and trans_id = #{transId,jdbcType=VARCHAR}
+		</if>
+		<if test="orderNo != null">
+			and order_no = #{orderNo,jdbcType=VARCHAR}
+		</if>
+		<if test="refundNo != null">
+			and refund_no = #{refundNo,jdbcType=VARCHAR}
+		</if>
+		<if test="beginDate != null">
+			<![CDATA[ begin_date >= #{beginDate,jdbcType=VARCHAR}  ]]>
+		</if>
+		<if test="endDate != null">
+			<![CDATA[ AND end_date <= #{endDate,jdbcType=VARCHAR}  ]]>
+		</if>
+		<if test="checkState != null">
+			and check_state = #{checkState,jdbcType=CHAR}
+		</if>
+		<!-- <if test="createdDate != null">
+			and created_date = #{createdDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="lastUpdtDate != null">
+			and last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP}
+		</if> -->
+		
+	</select>
+	<select id="select" parameterType="com.gxyj.cashier.domain.ReconResultLt"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from csr_recon_result_lt
+		where 1=1
+		<if test="rowId != null">
+			and row_id = #{rowId,jdbcType=INTEGER}
+		</if>
+		<if test="clKey != null">
+			and cl_key = #{clKey,jdbcType=INTEGER}
+		</if>
+		<if test="payReconKey != null">
+			and pay_recon_key = #{payReconKey,jdbcType=INTEGER}
+		</if>
+		<if test="checkDate != null">
+			and check_date = #{checkDate,jdbcType=VARCHAR}
+		</if>
+		<if test="transId != null">
+			and trans_id = #{transId,jdbcType=VARCHAR}
+		</if>
+		<if test="orderType != null">
+			and order_type = #{orderType,jdbcType=VARCHAR}
+		</if>
+		<if test="orderNo != null">
+			and order_no = #{orderNo,jdbcType=VARCHAR}
+		</if>
+		<if test="refundNo != null">
+			and refund_no = #{refundNo,jdbcType=VARCHAR}
+		</if>
+		<if test="channelId != null">
+			and channel_id = #{channelId,jdbcType=INTEGER}
+		</if>
+		<if test="channelCode != null">
+			and channel_code = #{channelCode,jdbcType=CHAR}
+		</if>
+		<if test="transAmt != null">
+			and trans_amt = #{transAmt,jdbcType=DECIMAL}
+		</if>
+		<if test="refundAmt != null">
+			and refund_amt = #{refundAmt,jdbcType=DECIMAL}
+		</if>
+		<if test="chargeFee != null">
+			and charge_fee = #{chargeFee,jdbcType=DECIMAL}
+		</if>
+		<if test="beginDate != null">
+			and begin_date = #{beginDate,jdbcType=VARCHAR}
+		</if>
+		<if test="endDate != null">
+			and end_date = #{endDate,jdbcType=VARCHAR}
+		</if>
+		<if test="instiPayTime != null">
+			and insti_pay_time = #{instiPayTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="instiProcCd != null">
+			and insti_proc_cd = #{instiProcCd,jdbcType=VARCHAR}
+		</if>
+		<if test="payerName != null">
+			and payer_name = #{payerName,jdbcType=VARCHAR}
+		</if>
+		<if test="payerAcctNo != null">
+			and payer_acct_no = #{payerAcctNo,jdbcType=VARCHAR}
+		</if>
+		<if test="payerInstiId != null">
+			and payer_insti_id = #{payerInstiId,jdbcType=INTEGER}
+		</if>
+		<if test="payerInstiCd != null">
+			and payer_insti_cd = #{payerInstiCd,jdbcType=VARCHAR}
+		</if>
+		<if test="payerInstiNm != null">
+			and payer_insti_nm = #{payerInstiNm,jdbcType=VARCHAR}
+		</if>
+		<if test="instiPayType != null">
+			and insti_pay_type = #{instiPayType,jdbcType=CHAR}
+		</if>
+		<if test="checkState != null">
+			and check_state = #{checkState,jdbcType=CHAR}
+		</if>
+		<if test="createdBy != null">
+			and created_by = #{createdBy,jdbcType=VARCHAR}
+		</if>
+		<if test="createdDate != null">
+			and created_date = #{createdDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="lastUpdtDate != null">
+			and last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="lastUpdtBy != null">
+			and last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR}
+		</if>
+		<if test="version != null">
+			and version = #{version,jdbcType=TINYINT}
+		</if>
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		csr_recon_result_lt
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.gxyj.cashier.domain.ReconResultLt">
+		<selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into csr_recon_result_lt (cl_key,pay_recon_key,check_date,
+		trans_id,
+		order_no,order_type,
+		refund_no, channel_id, channel_code,
+		trans_amt, refund_amt, charge_fee,
+		begin_date, end_date,
+		insti_pay_time,
+		insti_proc_cd, payer_name, payer_acct_no,
+		payer_insti_id, payer_insti_cd, payer_insti_nm,
+		insti_pay_type,
+		check_state, created_by,
+		created_date, last_updt_date, last_updt_by,
+		version)
+		values
+		(#{clKey,jdbcType=INTEGER},#{payReconKey,jdbcType=INTEGER},#{checkDate,jdbcType=VARCHAR},
+		#{transId,jdbcType=VARCHAR},
+		#{orderNo,jdbcType=VARCHAR},#{orderType,jdbcType=INTEGER},
+		#{refundNo,jdbcType=VARCHAR}, #{channelId,jdbcType=INTEGER},
+		#{channelCode,jdbcType=CHAR},
+		#{transAmt,jdbcType=DECIMAL},
+		#{refundAmt,jdbcType=DECIMAL}, #{chargeFee,jdbcType=DECIMAL},
+		#{beginDate,jdbcType=VARCHAR}, #{endDate,jdbcType=VARCHAR},
+		#{instiPayTime,jdbcType=TIMESTAMP},
+		#{instiProcCd,jdbcType=VARCHAR},
+		#{payerName,jdbcType=VARCHAR}, #{payerAcctNo,jdbcType=VARCHAR},
+		#{payerInstiId,jdbcType=INTEGER}, #{payerInstiCd,jdbcType=VARCHAR},
+		#{payerInstiNm,jdbcType=VARCHAR},
+		#{instiPayType,jdbcType=CHAR},
+		#{checkState,jdbcType=CHAR}, #{createdBy,jdbcType=VARCHAR},
+		#{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtDate,jdbcType=TIMESTAMP},
+		#{lastUpdtBy,jdbcType=VARCHAR},
+		#{version,jdbcType=TINYINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gxyj.cashier.domain.ReconResultLt">
+		<selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into csr_recon_result_lt
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="clKey != null">
+				cl_key,
+			</if>
+			<if test="payReconKey != null">
+				pay_recon_key,
+			</if>
+			<if test="checkDate != null">
+				check_date,
+			</if>
+			<if test="transId != null">
+				trans_id,
+			</if>
+			<if test="orderNo != null">
+				order_no,
+			</if>
+			<if test="orderType != null">
+				order_type,
+			</if>
+			<if test="refundNo != null">
+				refund_no,
+			</if>
+			<if test="channelId != null">
+				channel_id,
+			</if>
+			<if test="channelCode != null">
+				channel_code,
+			</if>
+			<if test="transAmt != null">
+				trans_amt,
+			</if>
+			<if test="refundAmt != null">
+				refund_amt,
+			</if>
+			<if test="chargeFee != null">
+				charge_fee,
+			</if>
+			<if test="beginDate != null">
+				begin_date,
+			</if>
+			<if test="endDate != null">
+				end_date,
+			</if>
+			<if test="instiPayTime != null">
+				insti_pay_time,
+			</if>
+			<if test="instiProcCd != null">
+				insti_proc_cd,
+			</if>
+			<if test="payerName != null">
+				payer_name,
+			</if>
+			<if test="payerAcctNo != null">
+				payer_acct_no,
+			</if>
+			<if test="payerInstiId != null">
+				payer_insti_id,
+			</if>
+			<if test="payerInstiCd != null">
+				payer_insti_cd,
+			</if>
+			<if test="payerInstiNm != null">
+				payer_insti_nm,
+			</if>
+			<if test="instiPayType != null">
+				insti_pay_type,
+			</if>
+			<if test="checkState != null">
+				check_state,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="createdDate != null">
+				created_date,
+			</if>
+			<if test="lastUpdtDate != null">
+				last_updt_date,
+			</if>
+			<if test="lastUpdtBy != null">
+				last_updt_by,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="clKey != null">
+				#{clKey,jdbcType=INTEGER},
+			</if>
+			<if test="payReconKey != null">
+				#{payReconKey,jdbcType=INTEGER},
+			</if>
+			<if test="checkDate != null">
+				#{checkDate,jdbcType=VARCHAR},
+			</if>
+			<if test="transId != null">
+				#{transId,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNo != null">
+				#{orderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="orderType != null">
+				#{orderType,jdbcType=INTEGER},
+			</if>
+			<if test="refundNo != null">
+				#{refundNo,jdbcType=VARCHAR},
+			</if>
+			<if test="channelId != null">
+				#{channelId,jdbcType=INTEGER},
+			</if>
+			<if test="channelCode != null">
+				#{channelCode,jdbcType=CHAR},
+			</if>
+			<if test="transAmt != null">
+				#{transAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="refundAmt != null">
+				#{refundAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="chargeFee != null">
+				#{chargeFee,jdbcType=DECIMAL},
+			</if>
+			<if test="beginDate != null">
+				#{beginDate,jdbcType=VARCHAR},
+			</if>
+			<if test="endDate != null">
+				#{endDate,jdbcType=VARCHAR},
+			</if>
+			<if test="instiPayTime != null">
+				#{instiPayTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="instiProcCd != null">
+				#{instiProcCd,jdbcType=VARCHAR},
+			</if>
+			<if test="payerName != null">
+				#{payerName,jdbcType=VARCHAR},
+			</if>
+			<if test="payerAcctNo != null">
+				#{payerAcctNo,jdbcType=VARCHAR},
+			</if>
+			<if test="payerInstiId != null">
+				#{payerInstiId,jdbcType=INTEGER},
+			</if>
+			<if test="payerInstiCd != null">
+				#{payerInstiCd,jdbcType=VARCHAR},
+			</if>
+			<if test="payerInstiNm != null">
+				#{payerInstiNm,jdbcType=VARCHAR},
+			</if>
+			<if test="instiPayType != null">
+				#{instiPayType,jdbcType=CHAR},
+			</if>
+			<if test="checkState != null">
+				#{checkState,jdbcType=CHAR},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createdDate != null">
+				#{createdDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtDate != null">
+				#{lastUpdtDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtBy != null">
+				#{lastUpdtBy,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.ReconResultLt">
+		update csr_recon_result_lt
+		<set>
+			<if test="clKey != null">
+				cl_key = #{clKey,jdbcType=INTEGER},
+			</if>
+			<if test="payReconKey != null">
+				pay_recon_key = #{payReconKey,jdbcType=INTEGER},
+			</if>
+			<if test="checkDate != null">
+				check_date = #{checkDate,jdbcType=VARCHAR},
+			</if>
+			<if test="transId != null">
+				trans_id = #{transId,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNo != null">
+				order_no = #{orderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="orderType != null">
+				order_type = #{orderType,jdbcType=INTEGER},
+			</if>
+			<if test="refundNo != null">
+				refund_no = #{refundNo,jdbcType=VARCHAR},
+			</if>
+			<if test="channelId != null">
+				channel_id = #{channelId,jdbcType=INTEGER},
+			</if>
+			<if test="channelCode != null">
+				channel_code = #{channelCode,jdbcType=CHAR},
+			</if>
+			<if test="transAmt != null">
+				trans_amt = #{transAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="refundAmt != null">
+				refund_amt = #{refundAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="chargeFee != null">
+				charge_fee = #{chargeFee,jdbcType=DECIMAL},
+			</if>
+			<if test="beginDate != null">
+				begin_date = #{beginDate,jdbcType=VARCHAR},
+			</if>
+			<if test="endDate != null">
+				end_date = #{endDate,jdbcType=VARCHAR},
+			</if>
+			<if test="instiPayTime != null">
+				insti_pay_time = #{instiPayTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="instiProcCd != null">
+				insti_proc_cd = #{instiProcCd,jdbcType=VARCHAR},
+			</if>
+			<if test="payerName != null">
+				payer_name = #{payerName,jdbcType=VARCHAR},
+			</if>
+			<if test="payerAcctNo != null">
+				payer_acct_no = #{payerAcctNo,jdbcType=VARCHAR},
+			</if>
+			<if test="payerInstiId != null">
+				payer_insti_id = #{payerInstiId,jdbcType=INTEGER},
+			</if>
+			<if test="payerInstiCd != null">
+				payer_insti_cd = #{payerInstiCd,jdbcType=VARCHAR},
+			</if>
+			<if test="payerInstiNm != null">
+				payer_insti_nm = #{payerInstiNm,jdbcType=VARCHAR},
+			</if>
+			<if test="instiPayType != null">
+				insti_pay_type = #{instiPayType,jdbcType=CHAR},
+			</if>
+			<if test="checkState != null">
+				check_state = #{checkState,jdbcType=CHAR},
+			</if>
+			<if test="createdBy != null">
+				created_by = #{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createdDate != null">
+				created_date = #{createdDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtDate != null">
+				last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtBy != null">
+				last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				version = #{version,jdbcType=TINYINT},
+			</if>
+		</set>
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.ReconResultLt">
+		update
+		csr_recon_result_lt
+		set cl_key = #{clKey,jdbcType=INTEGER},
+		pay_recon_key = #{payReconKey,jdbcType=INTEGER},
+		check_date = #{checkDate,jdbcType=VARCHAR},
+		trans_id =
+		#{transId,jdbcType=VARCHAR},
+		order_no = #{orderNo,jdbcType=VARCHAR},
+		order_type = #{orderType,jdbcType=INTEGER},
+		refund_no = #{refundNo,jdbcType=VARCHAR},
+		channel_id =
+		#{channelId,jdbcType=INTEGER},
+		channel_code =
+		#{channelCode,jdbcType=CHAR},
+		trans_amt = #{transAmt,jdbcType=DECIMAL},
+		refund_amt = #{refundAmt,jdbcType=DECIMAL},
+		charge_fee =
+		#{chargeFee,jdbcType=DECIMAL},
+		begin_date =
+		#{beginDate,jdbcType=VARCHAR},
+		end_date = #{endDate,jdbcType=VARCHAR},
+		insti_pay_time = #{instiPayTime,jdbcType=TIMESTAMP},
+		insti_proc_cd =
+		#{instiProcCd,jdbcType=VARCHAR},
+		payer_name =
+		#{payerName,jdbcType=VARCHAR},
+		payer_acct_no =
+		#{payerAcctNo,jdbcType=VARCHAR},
+		payer_insti_id =
+		#{payerInstiId,jdbcType=INTEGER},
+		payer_insti_cd =
+		#{payerInstiCd,jdbcType=VARCHAR},
+		payer_insti_nm =
+		#{payerInstiNm,jdbcType=VARCHAR},
+		insti_pay_type =
+		#{instiPayType,jdbcType=CHAR},
+		check_state =
+		#{checkState,jdbcType=CHAR},
+		created_by =
+		#{createdBy,jdbcType=VARCHAR},
+		created_date =
+		#{createdDate,jdbcType=TIMESTAMP},
+		last_updt_date =
+		#{lastUpdtDate,jdbcType=TIMESTAMP},
+		last_updt_by =
+		#{lastUpdtBy,jdbcType=VARCHAR},
+		version = #{version,jdbcType=TINYINT}
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</update>
+
+	<insert id="extractAdnSaveBill" parameterType="java.util.Map">
+		<selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into csr_recon_result_lt (check_date, trans_id, order_no,
+		refund_no, channel_id, channel_code,
+		trans_amt, refund_amt, charge_fee,
+		begin_date, end_date, insti_pay_time,
+		insti_proc_cd, payer_name,
+		payer_acct_no,
+		payer_insti_id, payer_insti_cd, payer_insti_nm,
+		insti_pay_type, check_state, created_by,
+		created_date, last_updt_date,
+		last_updt_by,
+		version,pay_recon_key,order_type)
+		select
+		trans_date,trans_id,order_no,refund_no,channel_id,channel_code,trans_amt,
+		refund_amt, charge_fee,
+		begin_date, end_date, insti_pay_time,
+		insti_proc_cd, payer_name, payer_acct_no,
+		#{payerInstiId,jdbcType=INTEGER},
+		payer_insti_cd, payer_insti_nm,
+		insti_pay_type, check_state,
+		'Sys',now(),now(),'Sys',0,#{payReconKey,jdbcType=INTEGER},order_type
+		from (select t1.trans_id as trans_id,
+		t1.order_id as order_no,
+		date_format(t1.trans_time,'%Y%m%d') as trans_date,
+		'' as refund_no,
+		t1.channel_id as channel_id,
+		t1.channel_cd as channel_code,
+		t1.trans_amt as trans_amt,
+		0.00 as refund_amt,
+		t1.charge_fee as
+		charge_fee,
+		date_format(t1.trans_time,'%Y%m%d%H%i%s') as begin_date,
+		date_format(t2.insti_rsp_time,'%Y%m%d%H%i%s') as end_date,
+		t2.insti_rsp_time as insti_pay_time,
+		t2.insti_resp_cd as insti_proc_cd,
+		t2.payer_name as payer_name,
+		t2.payer_acct_no as payer_acct_no,
+		t2.payer_insti_no as payer_insti_cd,
+		t2.payer_insti_nm as
+		payer_insti_nm,
+		t2.insti_pay_type as insti_pay_type,
+		t1.recon_flag as
+		check_state,'0' as order_type
+		from csr_order_info t1 inner join
+		csr_payment t2 on
+		t2.trans_id=t1.trans_id
+		where
+		date_format(t1.trans_time,'%Y%m%d')=#{transDate,jdbcType=VARCHAR}
+		and t2.payer_insti_no=#{payInstiNo,jdbcType=VARCHAR}
+		union
+		select
+		t1.trans_id as trans_id,
+		t1.orgn_order_id as order_no,
+		date_format(t1.refund_date,'%Y%m%d') as trans_date,
+		t1.refund_id as
+		refund_no,
+		t1.channel_id as channel_id,
+		t1.channel_cd as channel_code,
+		0.00 as trans_amt,
+		t1.refund_amt as refund_amt,
+		0.00 as charge_fee,
+		date_format(t1.refund_date,'%Y%m%d%H%i%s') as begin_date,
+		date_format(t2.insti_rsp_time,'%Y%m%d%H%i%s') as end_date,
+		t2.insti_rsp_time as insti_pay_time,
+		t2.insti_resp_cd as insti_proc_cd,
+		t2.payer_name as payer_name,
+		t2.payer_acct_no as payer_acct_no,
+		t2.payer_insti_no as payer_insti_cd,
+		t2.payer_insti_nm as
+		payer_insti_nm,
+		t2.insti_pay_type as insti_pay_type,
+		t1.recon_flag as
+		check_state,'1' as order_type
+		from csr_refund_order t1 inner join
+		csr_payment t2 on
+		t2.trans_id=t1.trans_id
+		where
+		date_format(t1.refund_date,'%Y%m%d')=#{transDate,jdbcType=VARCHAR}
+		and t2.payer_insti_no=#{payInstiNo,jdbcType=VARCHAR}
+		)aa
+	</insert>
+	
+	<delete id="cleanHistory" parameterType="java.util.Map">
+		delete from csr_recon_result_lt where 1=1
+		<if test="payInstiCode!=nulll">
+			and payer_insti_cd = #{payInstiCode,jdbcType=VARCHAR}
+		</if>
+		<if test="reclnDate!=nulll">
+			and check_date = #{reclnDate,jdbcType=VARCHAR}
+		</if>
+
+	</delete>
+	
+	<update id="updateClKeyByRecord" parameterType="com.gxyj.cashier.domain.ReconResultLt">
+		update
+		csr_recon_result_lt
+		set cl_key = #{clKey,jdbcType=INTEGER}
+		where channel_code=#{channelCode,jdbcType=VARCHAR}
+			and check_date=#{checkDate,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="qryReconDetailList" parameterType="com.gxyj.cashier.domain.ReconResultLt"
+		resultMap="BaseResultMap">
+		select a.row_id, a.cl_key,a.pay_recon_key,a.check_date, a.trans_id,
+		a.order_no,a.order_type,a.refund_no, a.channel_id,
+		a.channel_code, a.trans_amt,
+		a.refund_amt, a.charge_fee, a.begin_date, a.end_date, a.insti_pay_time,
+		a.insti_proc_cd,
+		a.payer_name,
+		a.payer_acct_no, a.payer_insti_id,
+		a.payer_insti_cd, a.payer_insti_nm, a.insti_pay_type,
+		a.check_state   from csr_recon_result_lt a ,csr_recln_payment_result b
+		where a.pay_recon_key=b.row_id 
+		<if test="payerInstiCd!=null and payerInstiCd!='' ">
+	  	  and b.channel_code = #{payerInstiCd,jdbcType=VARCHAR}
+		</if>
+		<if test="checkDate!=null and checkDate!=''">
+		 and b.recln_date = #{checkDate,jdbcType=VARCHAR}
+		</if>
+		order by a.insti_pay_time desc
+	</select>
+	
+	
+	<select id="selectByTransId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from csr_recon_result_lt where trans_id=#{transId,jdbcType=VARCHAR}
+	</select>
+	
+</mapper>

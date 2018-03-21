@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<function_list>
+		<item name="myUtils" class="com.gxyj.cashier.common.convert.utils.ConvertUtils"/>
+	</function_list>
+	<transaction code="payWeChatRequest">
+		<request msg_type="bean">
+			<group name="xml">
+	    		<item name="appid" bean_field="appid" /><!--公众账号ID-->
+				<item name="mch_id" bean_field="mchId" /><!--商户号-->
+				<item name="device_info" bean_field="deviceInfo" /><!--设备号-->
+				<item name="nonce_str" bean_field="nonceStr" /><!--随机字符串-->
+				<item name="sign" bean_field="sign" /><!--签名-->
+				<item name="sign_type" bean_field="signType" /><!--签名类型-->
+				<item name="body" bean_field="body" /><!--商品描述-->
+				<item name="detail" bean_field="detail" /><!--商品详情-->
+				<item name="attach" bean_field="attach" /><!--附加数据-->
+				<item name="out_trade_no" bean_field="outTradeNo" /><!--商户订单号-->
+				<item name="fee_type" bean_field="feeType" /><!--标价币种-->
+				<item name="total_fee" bean_field="totalFee" /><!--标价金额-->
+				<item name="spbill_create_ip" bean_field="spbillCreateIp" /><!--终端IP-->
+				<item name="time_start" bean_field="timeStart" /><!--交易起始时间-->
+				<item name="time_expire" bean_field="timeExpire" /><!--交易结束时间-->
+				<item name="goods_tag" bean_field="goodsTag" /><!--订单优惠标记-->
+				<item name="notify_url" bean_field="notifyUrl" /><!--通知地址-->
+				<item name="trade_type" bean_field="tradeType" /><!--交易类型-->
+				<item name="product_id" bean_field="productId" /><!--商品ID-->
+				<item name="limit_pay" bean_field="limitPay" /><!--指定支付方式-->
+				<item name="openid" bean_field="openid" /><!--用户标识-->
+				<item name="scene_info" bean_field="sceneInfo" /><!--场景信息-->
+			</group>
+		</request>
+
+		<response msg_type="xml">
+			<group name="xml">
+				<item name="appid" /><!--公众账号ID-->
+				<item name="mch_id" /><!--商户号-->
+				<item name="device_info" /><!--设备号-->
+				<item name="nonce_str" /><!--随机字符串-->
+				<item name="sign" /><!--签名-->
+				<item name="sign_type" /><!--签名类型-->
+				<item name="body" /><!--商品描述-->
+				<item name="detail" value="function:myUtils.toCData(./)" /><!--商品详情-->
+				<item name="attach" /><!--附加数据-->
+				<item name="out_trade_no" /><!--商户订单号-->
+				<item name="fee_type" /><!--标价币种-->
+				<item name="total_fee" /><!--标价金额-->
+				<item name="spbill_create_ip" /><!--终端IP-->
+				<item name="time_start" /><!--交易起始时间-->
+				<item name="time_expire" /><!--交易结束时间-->
+				<item name="goods_tag" /><!--订单优惠标记-->
+				<item name="notify_url" /><!--通知地址-->
+				<item name="trade_type" /><!--交易类型-->
+				<item name="product_id" /><!--商品ID-->
+				<item name="limit_pay" /><!--指定支付方式-->
+				<item name="openid" /><!--用户标识-->
+				<item name="scene_info" /><!--场景信息-->
+			</group>
+		</response>
+	</transaction>
+	<transaction code="payWeChatResultRequest">
+		<request msg_type="bean">
+			<group name="xml">
+				<item name="appid" bean_field="appid" /><!--公众账号ID-->
+				<item name="mch_id" bean_field="mchId" /><!--商户号-->
+				<item name="out_trade_no" bean_field="outTradeNo" /><!--商户订单号-->
+				<item name="nonce_str" bean_field="nonceStr" /><!--随机字符串-->
+				<item name="sign" bean_field="sign" /><!--签名-->
+				<item name="sign_type" bean_field="signType" /><!--签名类型-->
+			</group>
+		</request>
+		<response msg_type="xml">
+			<group name="xml">
+				<item name="appid" /><!--公众账号ID-->
+				<item name="mch_id" /><!--商户号-->
+				<item name="out_trade_no" /><!--商户订单号-->
+				<item name="nonce_str" /><!--随机字符串-->
+				<item name="sign" /><!--签名-->
+				<item name="sign_type" /><!--签名类型-->
+			</group>
+		</response>
+	</transaction>
+	<transaction code="payWeChatRefundRequest">
+		<request msg_type="bean">
+			<group name="xml">
+				<item name="appid" bean_field="appid" /><!--公众账号ID-->
+				<item name="mch_id" bean_field="mchId" /><!--商户号-->
+				<item name="nonce_str" bean_field="nonceStr" /><!--随机字符串-->
+				<item name="sign" bean_field="sign" /><!--签名-->
+				<item name="sign_type" bean_field="signType" /><!--签名类型-->
+				<item name="out_trade_no" bean_field="outTradeNo" /><!--商户订单号-->
+				<item name="out_refund_no" bean_field="outRefundNo" /><!--商户退款单号-->
+				<item name="total_fee" bean_field="totalFee" /><!--订单金额-->
+				<item name="refund_fee" bean_field="refundFee" /><!--退款金额-->
+				<item name="refund_fee_type" bean_field="refundFeeType" /><!--货币种类-->
+				<item name="refund_desc" bean_field="refundDesc" /><!--退款原因-->
+				<item name="refund_account" bean_field="refundAccount" /><!--退款资金来源-->
+			</group>
+		</request>
+		<response msg_type="xml">
+			<group name="xml">
+				<item name="appid" /><!--公众账号ID-->
+				<item name="mch_id" /><!--商户号-->
+				<item name="nonce_str" /><!--随机字符串-->
+				<item name="sign" /><!--签名-->
+				<item name="sign_type" /><!--签名类型-->
+				<item name="out_trade_no" /><!--商户订单号-->
+				<item name="out_refund_no" /><!--商户退款单号-->
+				<item name="total_fee" /><!--订单金额-->
+				<item name="refund_fee" /><!--退款金额-->
+				<item name="refund_fee_type" /><!--货币种类-->
+				<item name="refund_desc" /><!--退款原因-->
+				<item name="refund_account" /><!--退款资金来源-->
+			</group>
+		</response>
+	</transaction>
+	<transaction code="payWeChatRefundQueryRequest">
+		<request msg_type="bean">
+			<group name="xml">
+				<item name="appid" bean_field="appid" /><!--公众账号ID-->
+				<item name="mch_id" bean_field="mchId" /><!--商户号-->
+				<item name="nonce_str" bean_field="nonceStr" /><!--随机字符串-->
+				<item name="sign" bean_field="sign" /><!--签名-->
+				<item name="sign_type" bean_field="signType" /><!--签名类型-->
+				<item name="out_trade_no" bean_field="outTradeNo" /><!--商户订单号-->
+				<item name="out_refund_no" bean_field="outRefundNo" /><!--商户退款单号-->
+			</group>
+		</request>
+		<response msg_type="xml">
+			<group name="xml">
+				<item name="appid" /><!--公众账号ID-->
+				<item name="mch_id" /><!--商户号-->
+				<item name="nonce_str" /><!--随机字符串-->
+				<item name="sign" /><!--签名-->
+				<item name="sign_type" /><!--签名类型-->
+				<item name="out_trade_no" /><!--商户订单号-->
+				<item name="out_refund_no" /><!--商户退款单号-->
+			</group>
+		</response>
+	</transaction>
+	
+	<!-- 微信订单关闭报文 -->
+	<transaction code="wxCloseorderRequest">
+		<request msg_type="bean">
+			<group name="xml">
+				<item name="appid" bean_field="appid" /><!--公众账号ID-->
+				<item name="mch_id" bean_field="mchId" /><!--商户号-->
+				<item name="nonce_str" bean_field="nonceStr" /><!--随机字符串-->
+				<item name="sign" bean_field="sign" /><!--签名-->
+				<item name="out_trade_no" bean_field="outTradeNo" /><!--商户退款单号-->
+			</group>
+		</request>
+		<response msg_type="xml">
+			<group name="xml">
+				<item name="appid" /><!--公众账号ID-->
+				<item name="mch_id" /><!--商户号-->
+				<item name="nonce_str" /><!--随机字符串-->
+				<item name="sign" /><!--签名-->
+				<item name="out_trade_no" /><!--商户退款单号-->
+			</group>
+		</response>
+	</transaction>
+	
+	
+</config>

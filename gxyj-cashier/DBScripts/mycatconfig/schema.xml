@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE mycat:schema SYSTEM "schema.dtd">
+<mycat:schema xmlns:mycat="http://io.mycat/">
+	
+	<!-- 
+	   配置详解：http://blog.csdn.net/tornadojava/article/details/54948662
+	 -->
+	<schema name="gxyj_cashier_db" checkSQLschema="false" sqlMaxLimit="1000" dataNode="dn01"></schema>
+	
+	<schema name="gxyj_cashier_db_sit" checkSQLschema="false" sqlMaxLimit="1000" dataNode="dn02"></schema>
+	
+	<dataNode name="dn01" dataHost="cashierdb01" database="gxyj_cashier_db" />
+	
+	<dataNode name="dn02" dataHost="cashierdb01" database="gxyj_cashier_db_sit" />
+	
+	<dataHost name="cashierdb01" maxCon="1000" minCon="10" balance="0"
+		writeType="0" dbType="mysql" dbDriver="native" switchType="1"
+		slaveThreshold="100">
+		<heartbeat>select user()</heartbeat>
+		<writeHost host="host01" url="10.1.102.219:3306" user="cashier_dev" password="JI5cYvhu75"/>
+	</dataHost>
+
+</mycat:schema>

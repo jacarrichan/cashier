@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.recon.OrderPaymentMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.OrderPayment">
+    <result column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="trans_id" jdbcType="VARCHAR" property="transId" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="payment_id" jdbcType="INTEGER" property="paymentId" />
+    <result column="refund_flag" jdbcType="TINYINT" property="refundFlag" />
+    <result column="order_type" jdbcType="CHAR" property="orderType" />
+    <result column="channel_id" jdbcType="INTEGER" property="channelId" />
+    <result column="trans_amt" jdbcType="DECIMAL" property="transAmt" />
+    <result column="charge_fee" jdbcType="DECIMAL" property="chargeFee" />
+    <result column="trans_time" jdbcType="TIMESTAMP" property="transTime" />
+    <result column="payer_name" jdbcType="VARCHAR" property="payerName" />
+    <result column="payer_acct_no" jdbcType="VARCHAR" property="payerAcctNo" />
+    <result column="payer_insti_no" jdbcType="VARCHAR" property="payerInstiNo" />
+    <result column="payer_insti_nm" jdbcType="VARCHAR" property="payerInstiNm" />
+    <result column="insti_pay_type" jdbcType="CHAR" property="instiPayType" />
+    <result column="trans_code" jdbcType="VARCHAR" property="transCode" />
+    <result column="insti_resp_cd" jdbcType="VARCHAR" property="instiRespCd" />
+    <result column="insti_rsp_des" jdbcType="VARCHAR" property="instiRspDes" />
+    <result column="insti_rsp_time" jdbcType="VARCHAR" property="instiRspTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id,trans_id,order_id,payment_id,refund_flag,order_type,channel_id,trans_amt,charge_fee,
+    trans_time,payer_name,payer_acct_no,payer_insti_no,payer_insti_nm,insti_pay_type,trans_code,
+    insti_resp_cd,insti_rsp_des,insti_rsp_time,
+  </sql>
+ <select id="selectByChannelId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_payment_view
+    where channel_id = #{channelId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByTransDate" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_payment_view
+    where date_format(trans_time,'%Y-%m-%d') = #{transDate,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="selectByChannlAndChkData" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_payment_view
+    where date_format(trans_time,'%Y-%m-%d') = #{transDate,jdbcType=VARCHAR}
+    and channel_id=#{channelId,jdbcType=INTEGER}
+  </select>
+  
+ 
+  
+  
+  
+</mapper>

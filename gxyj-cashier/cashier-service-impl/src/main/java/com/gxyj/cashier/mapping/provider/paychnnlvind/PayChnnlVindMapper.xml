@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.paychnnlvind.PayChnnlVindMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.PayChnnlVind">
+    <id column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="channel_id" jdbcType="INTEGER" property="channelId" />
+    <result column="proc_state" jdbcType="CHAR" property="procState" />
+    <result column="change_type" jdbcType="TINYINT" property="changeType" />
+    <result column="begin_date" jdbcType="CHAR" property="beginDate" />
+    <result column="end_date" jdbcType="CHAR" property="endDate" />
+    <result column="closed_time" jdbcType="TIMESTAMP" property="closedTime" />
+    <result column="vind_explain" jdbcType="VARCHAR" property="vindExplain" />
+    <result column="emails_to" jdbcType="VARCHAR" property="emailsTo" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+    <result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+    <result column="version" jdbcType="TINYINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, channel_id, proc_state, change_type, begin_date, end_date, closed_time, vind_explain, emails_to,
+    created_by, created_date, last_updt_by, last_updt_date, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_pay_chnnl_vind
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from csr_pay_chnnl_vind
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.PayChnnlVind">
+    insert into csr_pay_chnnl_vind (row_id, channel_id, proc_state, 
+      change_type, begin_date, end_date, 
+      closed_time, vind_explain, emails_to, created_by, 
+      created_date, last_updt_by, last_updt_date, 
+      version)
+    values (#{rowId,jdbcType=INTEGER}, #{channelId,jdbcType=INTEGER}, #{procState,jdbcType=CHAR}, 
+      #{changeType,jdbcType=TINYINT}, #{beginDate,jdbcType=CHAR}, #{endDate,jdbcType=CHAR}, 
+      #{closedTime,jdbcType=TIMESTAMP}, #{vindExplain,jdbcType=VARCHAR}, #{emailsTo,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtBy,jdbcType=VARCHAR}, #{lastUpdtDate,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.PayChnnlVind">
+    insert into csr_pay_chnnl_vind
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rowId != null">
+        row_id,
+      </if>
+      <if test="channelId != null">
+        channel_id,
+      </if>
+      <if test="procState != null">
+        proc_state,
+      </if>
+      <if test="changeType != null">
+        change_type,
+      </if>
+      <if test="beginDate != null">
+        begin_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="closedTime != null">
+        closed_time,
+      </if>
+      <if test="vindExplain != null">
+        vind_explain,
+      </if>
+      <if test="emailsTo != null">
+        emails_to,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by,
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rowId != null">
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="channelId != null">
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="procState != null">
+        #{procState,jdbcType=CHAR},
+      </if>
+      <if test="changeType != null">
+        #{changeType,jdbcType=TINYINT},
+      </if>
+      <if test="beginDate != null">
+        #{beginDate,jdbcType=CHAR},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=CHAR},
+      </if>
+      <if test="closedTime != null">
+        #{closedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vindExplain != null">
+        #{vindExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="emailsTo != null">
+        #{emailsTo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.PayChnnlVind">
+    update csr_pay_chnnl_vind
+    <set>
+      <if test="channelId != null">
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="procState != null">
+        proc_state = #{procState,jdbcType=CHAR},
+      </if>
+      <if test="changeType != null">
+        change_type = #{changeType,jdbcType=TINYINT},
+      </if>
+      <if test="beginDate != null">
+        begin_date = #{beginDate,jdbcType=CHAR},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=CHAR},
+      </if>
+      <if test="closedTime != null">
+        closed_time = #{closedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vindExplain != null">
+        vind_explain = #{vindExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="emailsTo != null">
+         emails_to = #{emailsTo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=TINYINT},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.PayChnnlVind">
+    update csr_pay_chnnl_vind
+    set channel_id = #{channelId,jdbcType=INTEGER},
+      proc_state = #{procState,jdbcType=CHAR},
+      change_type = #{changeType,jdbcType=TINYINT},
+      begin_date = #{beginDate,jdbcType=CHAR},
+      end_date = #{endDate,jdbcType=CHAR},
+      closed_time = #{closedTime,jdbcType=TIMESTAMP},
+      vind_explain = #{vindExplain,jdbcType=VARCHAR},
+      emails_to = #{emailsTo,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=TINYINT}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  
+  
+  <select id="selectByLikePoJo" parameterType="com.gxyj.cashier.domain.PayChnnlVind" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+    from csr_pay_chnnl_vind where 1 = 1  and using_status in (0,1,2)
+  	  <if test="channelId != null and channelId != '' ">
+       AND channel_id = #{channelId,jdbcType=INTEGER}
+      </if>
+      <if test="procState != null and procState != '' ">
+       AND  proc_state = #{procState,jdbcType=CHAR}
+      </if>
+      <if test="changeType != null and changeType != '' ">
+       AND  change_type = #{changeType,jdbcType=TINYINT}
+      </if>
+      <if test="beginDate != null and beginDate != '' ">
+       AND  begin_date = #{beginDate,jdbcType=CHAR}
+      </if>
+      <if test="endDate != null and endDate != '' ">
+        AND end_date = #{endDate,jdbcType=CHAR}
+      </if>
+      <if test="closedTime != null and closedTime != '' ">
+        AND closed_time = #{closedTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="vindExplain != null and vindExplain != '' ">
+        AND vind_explain = #{vindExplain,jdbcType=VARCHAR}
+      </if>
+      <if test="emailsTo != null and emailsTo != '' ">
+        AND emails_to = #{emailsTo,jdbcType=VARCHAR}
+      </if>
+      <if test="createdBy != null and createdBy != '' ">
+        AND created_by = #{createdBy,jdbcType=VARCHAR}
+      </if>
+      <if test="createdDate != null and createdDate != '' ">
+        AND created_date = #{createdDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastUpdtBy != null and lastUpdtBy != '' ">
+        AND last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR}
+      </if>
+      <if test="lastUpdtDate != null and lastUpdtDate != '' ">
+        AND last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="version != null and version != '' ">
+        AND version = #{version,jdbcType=TINYINT}
+      </if>
+      
+  </select>
+  
+  
+   <select id="selectByPoJo" parameterType="com.gxyj.cashier.domain.PayChnnlVind" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+    from csr_pay_chnnl_vind where 1 = 1 
+  	  <if test="channelId != null and channelId != '' ">
+       AND channel_id = #{channelId,jdbcType=INTEGER}
+      </if>
+      <if test="procState != null and procState != '' ">
+       AND  proc_state = #{procState,jdbcType=CHAR}
+      </if>
+      <if test="changeType != null and changeType != '' ">
+       AND  change_type = #{changeType,jdbcType=TINYINT}
+      </if>
+      <if test="beginDate != null and beginDate != '' ">
+       AND  begin_date = #{beginDate,jdbcType=CHAR}
+      </if>
+      <if test="endDate != null and endDate != '' ">
+        AND end_date = #{endDate,jdbcType=CHAR}
+      </if>
+      <if test="closedTime != null and closedTime != '' ">
+        AND closed_time = #{closedTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="vindExplain != null and vindExplain != '' ">
+        AND vind_explain = #{vindExplain,jdbcType=VARCHAR}
+      </if>
+      <if test="emailsTo != null and emailsTo != '' ">
+        AND emails_to = #{emailsTo,jdbcType=VARCHAR}
+      </if>
+      <if test="createdBy != null and createdBy != '' ">
+        AND created_by = #{createdBy,jdbcType=VARCHAR}
+      </if>
+      <if test="createdDate != null and createdDate != '' ">
+        AND created_date = #{createdDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastUpdtBy != null and lastUpdtBy != '' ">
+        AND last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR}
+      </if>
+      <if test="lastUpdtDate != null and lastUpdtDate != '' ">
+        AND last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="version != null and version != '' ">
+        AND version = #{version,jdbcType=TINYINT}
+      </if>
+      order by proc_state asc
+      
+  </select>
+  
+</mapper>

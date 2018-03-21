@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<function_list>
+		<item name="myUtils" class="com.gxyj.cashier.common.convert.utils.ConvertUtils" />
+	</function_list>
+	<transaction code="CSRReq"><!--发起报文 -->
+		<request msg_type="bean">
+			<group name="MessageSuit">
+				<group name="Message">	
+					<item name="itemMsgId" bean_field="msgId"/>
+					<group name="Plain">
+						<attr name="id" value="CSRReq" />
+						<item name="transId" value="CSRReq"/>
+						<item name="merId" bean_field="merId"/>
+						<item name="serialNo" bean_field="msgId"/>
+						<item name="date" bean_field="date"/>
+						<item name="originalSerialNo" bean_field="originalSerialNo"/>
+						<item name="originalDate" bean_field="originalDate"/>
+						<item name="amount" bean_field="amount"/>
+					</group>
+				</group>
+			</group>
+		</request>
+
+		<response msg_type="xml">
+			<group name="MessageSuit" doc_encode="UTF-8">
+				<group name="Message">
+				<item name="itemMsgId" hidden="true"/>	
+				<attr name="id"	value="./itemMsgId"/>			
+					<group name="Plain">
+						<attr name="id" value="CSRReq" />
+						<item name="transId" value="function:myUtils.toCData(./)"/>
+						<item name="merId" value="function:myUtils.toCData(./)"/>
+						<item name="serialNo" value="function:myUtils.toCData(./)"/>
+						<item name="date" value="function:myUtils.toCData(./)"/>
+						<item name="originalSerialNo" value="function:myUtils.toCData(./)"/>
+						<item name="originalDate" value="function:myUtils.toCData(./)"/>
+						<item name="amount" value="function:myUtils.toCData(./)"/>
+					</group>
+				</group>
+			</group>
+		</response>
+		
+	</transaction>
+</config>

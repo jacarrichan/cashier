@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>新增收银台业务渠道模板</title>
+<script id="seajsnode" type="text/javascript" src="../../loader.js" data-js="./js/add_edit_WebpageModel.js" data-css="./css/add_edit_WebpageModel.css"></script>
+</head>
+<body>
+	<div class="wrapper wrapper-content">
+		<div class="modal fade" id="smModal">
+			<div class="modal-dialog modal-sm">
+			    <div class="modal-content">
+			      	<div class="modal-header">
+			        	<h4 class="modal-title">提示</h4>
+			      	</div>
+			      	<div class="modal-body">
+			        	<h4>新增成功，是否继续新增？</h4>
+			      	</div>
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-default btn-no" data-dismiss=  "modal">取消</button>
+			        	<button type="button" class="btn btn-primary btn-yes">继续</button>
+			      	</div>
+			    </div>
+		  	</div>
+		</div>
+		<form class="form-horizontal form-inline form-group" id="form">
+			<input type="hidden" id="templateName" name="templateName"/>
+			<input type="hidden" id="channelName" name="channelName"/>
+		    <div class="form-group col-sm-12">
+				<label class="col-sm-5" for="pageName"><span class="red">*</span> 页面名称：</label>
+				<input class="form-control" id="pageName"  name="pageName" placeholder="页面名称" style="width: 200px;" data-rule='[required=true;bothSideBlank=false;chinaCharNumber=true;maxlength=30;isExist={"url":"webpageModel/checkName","data":{}}]'   />
+			</div>
+			
+		    <div class="form-group col-sm-12">
+				<label class="col-sm-5" for="introduction"><span class="red">*</span> 页面说明:</label>
+				<textarea id="introduction" name="introduction"  class="form-control" rows="3" style="width: 200px;"  placeholder="页面说明" data-rule='[required=true;bothSideBlank=false;chinaCharNumber=true;maxlength=100]' ></textarea>
+		   </div>
+		   
+		   <div class="form-group col-sm-12">
+				<label class="col-sm-5"><span class="red">*</span> 业务渠道:</label>
+				 <select class="form-control" id="channelId" name="channelId"
+					style="width: 200px;" data-rule='[required=true]'>
+					<option value="" selected="selected">请选择</option>
+				</select>
+			</div>
+			
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5"><span class="red">*</span> 适应终端:</label> <select
+					class="form-control" id="terminal" name="terminal"
+					style="width: 200px;" data-rule='[required=true]'>
+					<option value="" selected="selected">请选择</option>
+					<option value="01">PC</option>
+					<option value="02">WAP</option>
+					<option value="03">APP（微支付）</option>
+				</select>
+			</div>
+			
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5"><span class="red">*</span> 模板名称:</label> <select
+					class="form-control" id="templateId" name="templateId"
+					style="width: 200px;" data-rule='[required=true]'>
+					<option value="" selected="selected">请选择</option>
+				</select>
+			</div>
+			
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="pageAddress"><span class="red">*</span> 模板地址：</label>
+				<input class="form-control" id="pageAddress"  name="pageAddress" style="width: 200px;" disabled='disabled'  data-rule='[required=true]'/>
+			</div>
+			
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5"><span class="red">*</span> 是否启用:</label>
+				<label class="radio-inline">
+				  <input type="radio" value="1" id="open" name="openFlag"  checked="true"/> 是
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" value="0" id="close" name="openFlag" /> 否
+				</label>
+			</div>
+		    
+		    <div class="form-group col-sm-12">
+				<label class="col-sm-5"><span class="red">*</span> 是否默认页面:</label>
+				<label class="radio-inline">
+				  <input type="radio" value="0" id="defautlYes" name="defautlWebpage" checked="true" /> 是
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" value="1" id="defautlNo" name="defautlWebpage" /> 否
+				</label>
+			</div> 
+			
+			<div class="col-sm-12">
+				<div class="alert"></div>
+			</div>
+		</form>
+		
+		<div class="form-group form-buttons text-center">
+			<button class="btn btn-success btn-submit">提交</button>
+			<button class="btn btn-warning btn-cancel">取消</button>
+		</div>
+	</div>
+	<script type="text/template" id="option.tpl">
+		<option value="{{d.code}}" {{d.attr || ''}}>{{d.name}}</option>
+	</script>
+</body>
+</html>

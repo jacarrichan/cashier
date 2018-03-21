@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+
+@import "../../../common/css/page-common.css";
+
+.tip-icon {
+	color: #999999;
+	cursor: pointer !important;
+}
+
+.tip-icon.error {
+	color: #990000;
+}
+.divTip{
+	margin-top:20px;
+	margin-left:20px;
+	margin-bottom: 30px;
+}
+
+.btn-taskPannel{
+	margin-left:20px;
+}
+
+.btn-start {
+	margin-right: 15px;	
+}
+.line {
+    width: 100%;
+    display: inline-block;
+}
+
+/* .col-sm-2 {
+    width: 80px;
+} */
+
+.td-right-middle {
+    text-align: right;
+    vertical-align: middle !important;
+}
+.wrapper-content {
+	overflow-y: auto;
+	height: 100%;
+}

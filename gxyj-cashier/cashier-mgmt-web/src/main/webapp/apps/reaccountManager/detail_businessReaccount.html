@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>业务渠道对账汇总详情</title>
+<script id="seajsnode" type="text/javascript" src="../../loader.js" data-js="./js/detail_businessReaccount.js" data-css="./css/detail_reaccount.css"></script>
+</head>
+<body>
+	<div class="wrapper wrapper-content">
+		<form class="form-horizontal form-inline form-group" id="form">
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="channelName"><span class="red">*</span> 业务渠道：</label>
+				<input class="form-control" id="channelName"  name="channelName" disabled='disabled' />
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="paySumAmt"><span class="red">*</span> 渠道总金额：</label>
+				<input class="form-control" id="paySumAmt"  name="paySumAmt" disabled='disabled' />
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="refundSumAmt"><span class="red">*</span> 平台总金额：</label>
+				<input class="form-control" id="refundSumAmt"  name="refundSumAmt" disabled='disabled' />
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="payTotalCnt"><span class="red">*</span> 渠道总笔数：</label>
+				<input class="form-control" id="payTotalCnt"  name="payTotalCnt" disabled='disabled' />
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="refundTotalCnt"><span class="red">*</span> 平台总笔数：</label>
+				<input class="form-control" id="refundTotalCnt"  name="refundTotalCnt" disabled='disabled' />
+			</div>
+			<div class="form-group col-sm-12">
+				<label class="col-sm-5" for="beginChkDate"><span class="red">*</span> 对账时间：</label>
+				<input class="form-control" id="beginChkDate"  name="beginChkDate" disabled='disabled' />
+			</div>
+			<!-- <div class="form-group col-sm-12">
+				<label class="col-sm-5" for="tableName"><span class="red">*</span> 对账文件：</label>
+				<input class="form-control" id="tableName"  name="tableName" disabled='disabled' />
+			</div> -->
+			<div class="col-sm-12">
+				<div class="alert"></div>
+			</div>
+		</form>
+		
+		<div class="form-group form-buttons text-center">
+			<button class="btn btn-warning btn-cancel">确定</button>
+		</div>
+	</div>
+	<script type="text/template" id="option.tpl">
+		<option value="{{d.code}}" {{d.attr || ''}}>{{d.name}}</option>
+	</script>
+	<script type="text/template" id="input.tpl">
+		<label class="checkbox-inline">
+	    	<input type="checkbox" value="{{d.value}}" id="{{d.value}}" name="payChannel" /> {{d.name}}
+		</label>
+	</script>
+</body>
+</html>

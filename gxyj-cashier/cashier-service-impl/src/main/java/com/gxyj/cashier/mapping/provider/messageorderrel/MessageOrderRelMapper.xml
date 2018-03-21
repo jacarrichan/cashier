@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.messageorderrel.MessageOrderRelMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.MessageOrderRel">
+    <id column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="trans_id" jdbcType="VARCHAR" property="transId" />
+    <result column="msg_id" jdbcType="VARCHAR" property="msgId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+    <result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+    <result column="version" jdbcType="TINYINT" property="version" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.gxyj.cashier.domain.MessageOrderRel">
+    <result column="rtn_url" jdbcType="LONGVARCHAR" property="rtnUrl" />
+    <result column="notify_url" jdbcType="LONGVARCHAR" property="notifyUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, trans_id, msg_id,status, created_by, created_date, last_updt_date, last_updt_by, 
+    version
+  </sql>
+  <sql id="Blob_Column_List">
+    rtn_url,notify_url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from csr_message_order_rel
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByTransId" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from csr_message_order_rel
+    where trans_id = #{transId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="select" parameterType="com.gxyj.cashier.domain.MessageOrderRel" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from csr_message_order_rel
+    where 1=1
+    <if test="msgId != null">
+    	and msg_id = #{msgId,jdbcType=VARCHAR}
+    </if>
+    <if test="transId != null">
+    	and trans_id = #{transId,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from csr_message_order_rel
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.MessageOrderRel">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_message_order_rel (trans_id, msg_id, created_by, 
+      created_date, last_updt_date, last_updt_by, 
+      version, rtn_url, notify_url)
+    values (#{transId,jdbcType=VARCHAR}, #{msgId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtDate,jdbcType=TIMESTAMP}, #{lastUpdtBy,jdbcType=VARCHAR}, 
+      #{version,jdbcType=TINYINT}, #{rtnUrl,jdbcType=LONGVARCHAR}, #{notifyUrl,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.MessageOrderRel">
+    <selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into csr_message_order_rel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="transId != null">
+        trans_id,
+      </if>
+      <if test="msgId != null">
+        msg_id,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date,
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="rtnUrl != null">
+        rtn_url,
+      </if>
+      <if test="notifyUrl != null">
+        notify_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="transId != null">
+        #{transId,jdbcType=VARCHAR},
+      </if>
+      <if test="msgId != null">
+        #{msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null">
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=TINYINT},
+      </if>
+      <if test="rtnUrl != null">
+        #{rtnUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notifyUrl != null">
+        #{notifyUrl,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.MessageOrderRel">
+    update csr_message_order_rel
+    <set>
+      <if test="transId != null">
+        trans_id = #{transId,jdbcType=VARCHAR},
+      </if>
+      <if test="msgId != null">
+        msg_id = #{msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=TINYINT},
+      </if>
+      <if test="rtnUrl != null">
+        rtn_url = #{rtnUrl,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where 1=1 
+    <if test="msgId != null">
+    	and msg_id = #{msgId,jdbcType=VARCHAR}
+    </if>
+    <if test="transId != null">
+    	and trans_id = #{transId,jdbcType=VARCHAR}
+    </if>
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gxyj.cashier.domain.MessageOrderRel">
+    update csr_message_order_rel
+    set trans_id = #{transId,jdbcType=VARCHAR},
+      msg_id = #{msgId,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      version = #{version,jdbcType=TINYINT},
+      rtn_url = #{rtnUrl,jdbcType=LONGVARCHAR}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.MessageOrderRel">
+    update csr_message_order_rel
+    set trans_id = #{transId,jdbcType=VARCHAR},
+      msg_id = #{msgId,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      version = #{version,jdbcType=TINYINT}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+</mapper>

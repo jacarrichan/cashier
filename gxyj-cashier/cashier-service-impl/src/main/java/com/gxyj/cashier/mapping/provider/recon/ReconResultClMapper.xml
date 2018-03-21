@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.recon.ReconResultClMapper">
+	<resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.ReconResultCl">
+		<id column="row_id" jdbcType="INTEGER" property="rowId" />
+		<result column="channel_code" jdbcType="VARCHAR" property="channelCode" />
+		<result column="channel_name" jdbcType="VARCHAR" property="channelName" />
+		<result column="begin_chk_date" jdbcType="VARCHAR" property="beginChkDate" />
+		<result column="end_chk_date" jdbcType="VARCHAR" property="endChkDate" />
+		<result column="refund_sum_amt" jdbcType="DECIMAL" property="refundSumAmt" />
+		<result column="pay_sum_amt" jdbcType="DECIMAL" property="paySumAmt" />
+		<result column="pay_total_cnt" jdbcType="INTEGER" property="payTotalCnt" />
+		<result column="refund_total_cnt" jdbcType="INTEGER" property="refundTotalCnt" />
+		<result column="sum_charge_fee" jdbcType="DECIMAL" property="sumChargeFee" />
+		<result column="check_state" jdbcType="CHAR" property="checkState" />
+		<result column="proc_state" jdbcType="CHAR" property="procState" />
+		<result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+		<result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+		<result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+		<result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+		<result column="version" jdbcType="TINYINT" property="version" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		row_id, channel_code, channel_name, begin_chk_date, end_chk_date,
+		refund_sum_amt,
+		pay_sum_amt, pay_total_cnt, refund_total_cnt, sum_charge_fee, check_state,
+		proc_state,
+		created_by, created_date, last_updt_date, last_updt_by, version
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from csr_recon_result_cl
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</select>
+	<select id="select" parameterType="com.gxyj.cashier.domain.ReconResultCl"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from csr_recon_result_cl
+		where 1=1
+		<if test="rowId != null">
+			and row_id = #{rowId,jdbcType=INTEGER}
+		</if>
+		<if test="channelCode != null">
+			and channel_code = #{channelCode,jdbcType=VARCHAR}
+		</if>
+		<if test="channelName != null">
+			and channel_name = #{channelName,jdbcType=VARCHAR}
+		</if>
+		<if test="beginChkDate != null">
+			and begin_chk_date = #{beginChkDate,jdbcType=VARCHAR}
+		</if>
+		<if test="endChkDate != null">
+			and end_chk_date = #{endChkDate,jdbcType=VARCHAR}
+		</if>
+		<if test="refundSumAmt != null">
+			and refund_sum_amt = #{refundSumAmt,jdbcType=DECIMAL}
+		</if>
+		<if test="paySumAmt != null">
+			and pay_sum_amt = #{paySumAmt,jdbcType=DECIMAL}
+		</if>
+		<if test="payTotalCnt != null">
+			and pay_total_cnt = #{payTotalCnt,jdbcType=INTEGER}
+		</if>
+		<if test="refundTotalCnt != null">
+			and refund_total_cnt = #{refundTotalCnt,jdbcType=INTEGER}
+		</if>
+		<if test="sumChargeFee != null">
+			and sum_charge_fee = #{sumChargeFee,jdbcType=DECIMAL}
+		</if>
+		<if test="checkState != null">
+			and check_state = #{checkState,jdbcType=CHAR}
+		</if>
+		<if test="procState != null">
+			and proc_state = #{procState,jdbcType=CHAR}
+		</if>
+		<if test="createdBy != null">
+			and created_by = #{createdBy,jdbcType=VARCHAR}
+		</if>
+		<if test="createdDate != null">
+			and created_date = #{createdDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="lastUpdtDate != null">
+			and last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="lastUpdtBy != null">
+			and last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR}
+		</if>
+		<if test="version != null">
+			and version = #{version,jdbcType=TINYINT}
+		</if>
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from csr_recon_result_cl
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.gxyj.cashier.domain.ReconResultCl">
+		<selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into csr_recon_result_cl (channel_code, channel_name,
+		begin_chk_date,
+		end_chk_date, refund_sum_amt, pay_sum_amt,
+		pay_total_cnt, refund_total_cnt, sum_charge_fee,
+		check_state, proc_state, created_by,
+		created_date, last_updt_date, last_updt_by,
+		version)
+		values (#{channelCode,jdbcType=VARCHAR}, #{channelName,jdbcType=VARCHAR},
+		#{beginChkDate,jdbcType=VARCHAR},
+		#{endChkDate,jdbcType=VARCHAR}, #{refundSumAmt,jdbcType=DECIMAL}, #{paySumAmt,jdbcType=DECIMAL},
+		#{payTotalCnt,jdbcType=INTEGER}, #{refundTotalCnt,jdbcType=INTEGER},
+		#{sumChargeFee,jdbcType=DECIMAL},
+		#{checkState,jdbcType=CHAR}, #{procState,jdbcType=CHAR}, #{createdBy,jdbcType=VARCHAR},
+		#{createdDate,jdbcType=TIMESTAMP}, #{lastUpdtDate,jdbcType=TIMESTAMP},
+		#{lastUpdtBy,jdbcType=VARCHAR},
+		#{version,jdbcType=TINYINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gxyj.cashier.domain.ReconResultCl">
+		<selectKey keyProperty="rowId" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into csr_recon_result_cl
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="channelCode != null">
+				channel_code,
+			</if>
+			<if test="channelName != null">
+				channel_name,
+			</if>
+			<if test="beginChkDate != null">
+				begin_chk_date,
+			</if>
+			<if test="endChkDate != null">
+				end_chk_date,
+			</if>
+			<if test="refundSumAmt != null">
+				refund_sum_amt,
+			</if>
+			<if test="paySumAmt != null">
+				pay_sum_amt,
+			</if>
+			<if test="payTotalCnt != null">
+				pay_total_cnt,
+			</if>
+			<if test="refundTotalCnt != null">
+				refund_total_cnt,
+			</if>
+			<if test="sumChargeFee != null">
+				sum_charge_fee,
+			</if>
+			<if test="checkState != null">
+				check_state,
+			</if>
+			<if test="procState != null">
+				proc_state,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="createdDate != null">
+				created_date,
+			</if>
+			<if test="lastUpdtDate != null">
+				last_updt_date,
+			</if>
+			<if test="lastUpdtBy != null">
+				last_updt_by,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="channelCode != null">
+				#{channelCode,jdbcType=VARCHAR},
+			</if>
+			<if test="channelName != null">
+				#{channelName,jdbcType=VARCHAR},
+			</if>
+			<if test="beginChkDate != null">
+				#{beginChkDate,jdbcType=VARCHAR},
+			</if>
+			<if test="endChkDate != null">
+				#{endChkDate,jdbcType=VARCHAR},
+			</if>
+			<if test="refundSumAmt != null">
+				#{refundSumAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="paySumAmt != null">
+				#{paySumAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="payTotalCnt != null">
+				#{payTotalCnt,jdbcType=INTEGER},
+			</if>
+			<if test="refundTotalCnt != null">
+				#{refundTotalCnt,jdbcType=INTEGER},
+			</if>
+			<if test="sumChargeFee != null">
+				#{sumChargeFee,jdbcType=DECIMAL},
+			</if>
+			<if test="checkState != null">
+				#{checkState,jdbcType=CHAR},
+			</if>
+			<if test="procState != null">
+				#{procState,jdbcType=CHAR},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createdDate != null">
+				#{createdDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtDate != null">
+				#{lastUpdtDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtBy != null">
+				#{lastUpdtBy,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.ReconResultCl">
+		update csr_recon_result_cl
+		<set>
+			<if test="channelCode != null">
+				channel_code = #{channelCode,jdbcType=VARCHAR},
+			</if>
+			<if test="channelName != null">
+				channel_name = #{channelName,jdbcType=VARCHAR},
+			</if>
+			<if test="beginChkDate != null">
+				begin_chk_date = #{beginChkDate,jdbcType=VARCHAR},
+			</if>
+			<if test="endChkDate != null">
+				end_chk_date = #{endChkDate,jdbcType=VARCHAR},
+			</if>
+			<if test="refundSumAmt != null">
+				refund_sum_amt = #{refundSumAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="paySumAmt != null">
+				pay_sum_amt = #{paySumAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="payTotalCnt != null">
+				pay_total_cnt = #{payTotalCnt,jdbcType=INTEGER},
+			</if>
+			<if test="refundTotalCnt != null">
+				refund_total_cnt = #{refundTotalCnt,jdbcType=INTEGER},
+			</if>
+			<if test="sumChargeFee != null">
+				sum_charge_fee = #{sumChargeFee,jdbcType=DECIMAL},
+			</if>
+			<if test="checkState != null">
+				check_state = #{checkState,jdbcType=CHAR},
+			</if>
+			<if test="procState != null">
+				proc_state = #{procState,jdbcType=CHAR},
+			</if>
+			<if test="createdBy != null">
+				created_by = #{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createdDate != null">
+				created_date = #{createdDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtDate != null">
+				last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdtBy != null">
+				last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				version = #{version,jdbcType=TINYINT},
+			</if>
+		</set>
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.ReconResultCl">
+		update csr_recon_result_cl
+		set channel_code = #{channelCode,jdbcType=VARCHAR},
+		channel_name = #{channelName,jdbcType=VARCHAR},
+		begin_chk_date = #{beginChkDate,jdbcType=VARCHAR},
+		end_chk_date = #{endChkDate,jdbcType=VARCHAR},
+		refund_sum_amt = #{refundSumAmt,jdbcType=DECIMAL},
+		pay_sum_amt = #{paySumAmt,jdbcType=DECIMAL},
+		pay_total_cnt = #{payTotalCnt,jdbcType=INTEGER},
+		refund_total_cnt = #{refundTotalCnt,jdbcType=INTEGER},
+		sum_charge_fee = #{sumChargeFee,jdbcType=DECIMAL},
+		check_state = #{checkState,jdbcType=CHAR},
+		proc_state = #{procState,jdbcType=CHAR},
+		created_by = #{createdBy,jdbcType=VARCHAR},
+		created_date = #{createdDate,jdbcType=TIMESTAMP},
+		last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+		last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+		version = #{version,jdbcType=TINYINT}
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</update>
+
+	<select id="querySummaryRcnltResult" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select t.channel_code as channel_code,
+		sum(t.refund_amt) as
+		refund_sum_amt,
+		sum(t.trans_amt) as pay_sum_amt,
+		(select
+		count(t1.row_id) from csr_recon_result_lt t1 where t1.order_type='0')
+		as pay_total_cnt,
+		(select count(t1.row_id) from csr_recon_result_lt t1
+		where t1.order_type='1') as refund_total_cnt,
+		sum(t.charge_fee) as
+		sum_charge_fee
+		from csr_recon_result_lt t
+		where 1=1 
+		<if test="checkDate != null">
+			and t.check_date=#{checkDate,jdbcType=VARCHAR}
+		</if>		
+		<if test="channelCode != null">
+			and t.channel_code=#{channelCode,jdbcType=VARCHAR}
+		</if>
+		 group by t.channel_code;
+	</select>
+	
+	<select id="querySummaryResultList" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select 
+			channel_code, channel_name, begin_chk_date, end_chk_date,
+			refund_sum_amt,
+			pay_sum_amt, pay_total_cnt, refund_total_cnt, sum_charge_fee, check_state,
+			proc_state 
+		from csr_recon_result_lt 
+		where 1=1 
+		<if test="checkDate != null">
+			and check_date=#{checkDate,jdbcType=VARCHAR}
+		</if>
+		<if test="beginChkDate != null">
+			and begin_chk_date=#{beginChkDate,jdbcType=VARCHAR}
+		</if>
+		<if test="endChkDate != null">
+			and end_chk_date=#{endChkDate,jdbcType=VARCHAR}
+		</if>
+		<if test="channelCode != null">
+			and end_channel_code=#{channelCode,jdbcType=VARCHAR}
+		</if>
+		 group by t.channel_code;
+	</select>
+
+	<delete id="deletePreReconData" parameterType="java.util.Map">
+		delete from csr_recon_result_cl
+		where begin_chk_date=#{beginChkDate,jdbcType=VARCHAR} 
+			and end_chk_date=#{endChkDate,jdbcType=VARCHAR}
+		<if test="version != null">
+			and channel_code = #{channelCode,jdbcType=VARCHAR}
+		</if>
+		
+	</delete>
+	
+	<select id="qryBusiReconResultList" parameterType="com.gxyj.cashier.domain.ReconResultCl" resultMap="BaseResultMap">
+         select 
+		row_id, channel_code, channel_name,
+		DATE_FORMAT(begin_chk_date,'%Y-%m-%d'), 
+		end_chk_date,
+		refund_sum_amt,
+		pay_sum_amt, pay_total_cnt, refund_total_cnt, sum_charge_fee, check_state,
+		proc_state from  csr_recon_result_cl  where  1 = 1
+        <if test="beginChkDate != null and beginChkDate !='' ">
+          and begin_chk_date = #{beginChkDate,jdbcType=VARCHAR}
+        </if>
+        <if test="channelCode != null and channelCode !='' ">
+		  and channel_code = #{channelCode,jdbcType=VARCHAR}
+		</if>
+    </select>
+    
+	<select id="qryAccountSum" parameterType="com.gxyj.cashier.domain.ReconResultCl" resultMap="BaseResultMap">
+         select sum(pay_sum_amt) pay_sum_amt, sum(pay_total_cnt)  pay_total_cnt,sum(refund_sum_amt) refund_sum_amt, sum(refund_total_cnt)  refund_total_cnt
+		 from  csr_recon_result_cl  where  1 = 1
+        <if test="beginChkDate != null and beginChkDate !='' ">
+          and begin_chk_date = #{beginChkDate,jdbcType=VARCHAR}
+        </if>
+        <if test="channelCode != null and channelCode !='' ">
+			and channel_code = #{channelCode,jdbcType=VARCHAR}
+		</if>
+    </select>
+
+    <select id="selectListByKeys" parameterType="java.util.List" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from csr_recon_result_cl
+      where 1=1
+      <if test="clKeyList != null">
+      and row_id in (#{clKeyList})
+      </if>
+    </select>
+</mapper>

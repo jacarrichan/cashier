@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <title>供销收银台</title>
+    <script id="seajsnode" type="text/javascript" src="./../../loader.js" data-js="./js/cashier.js" 
+	data-css="./css/cashier.css"></script>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+  		<script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+  		<script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  		<script src="../../lib/core/PIE.js"></script>
+	<![endif]-->
+</head>
+<body>
+    <div class="pay-wrapper">
+    	<!-- 头部导航栏 -->
+        <div class="row payment-head">
+            <div class="com-width">
+                <div class="header">
+                    <div class="logo-img pull-left">
+                        <img class="gx-logo" src="../images/payment/logo.png" alt="">
+                        <span class="logo-name">收银台</span>
+                    </div>
+                    <ol class="breadcrumb pull-right header-right" id="payment-header">
+                        <li class="active" id="userId"></li>
+
+                        <li><span>我的订单</span></li>
+                        <li><span>支付帮助</span></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- 订单详情 -->
+        <div class="row order-section">
+            <div class="order-part com-width">
+                <div class="line-block pull-left shop-code">
+                    <img class="shop-logo" src="../images/payment/QR-code.jpg" alt="">
+                </div>
+                <div class="line-block pull-left order-info">
+                    <div class="order-num">订单提交成功,请尽快付款!</div>
+                    <div class="order-explain">请在<strong class="red-color">24小时</strong>内完成支付</div>
+                    <!-- <div class="order-product" id="orderGoods"></div> -->
+                    <div class="serial-num"><span class="order-item"><span class="w3">订单号</span></span>：<span id="orderNumber" class="special-color"></span></div>
+                    <div class="serial-num"><span class="order-item"><span class="">交易流水号</span></span>：<span id="transNum" class="special-color"></span></div>
+                </div>
+                <div class="line-block pull-right order-pay">
+                    <div class="order-pay-explain">支付金额</div>
+                    <div class="pay-money" id="totalPay">
+                    	
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 支付方式列表 -->
+        <div class="com-width channel-section" id="bank">
+        	<div class="pull-left cyber-pay" id="cyberPay">
+				
+			</div>
+        	<div class="pull-right third-pay" id="thirdPay">
+				
+				<div class="company-bank over-hidden text-center" id="payBtn">
+					<input type="button" id="buyNow" class="btn btn-warning btn-lg pay-now" value="立即支付">
+				</div>
+			</div>
+        </div>
+    </div>
+    <!-- 底部网站信息 -->
+    <div class="pay-footer">
+        <p>Copyright &copy; 2015 - 2017 供销e家版权所有 京ICP备15050565号 京公网安备11011202001970 经营许可证编号：京ICP证151138号</p>
+    </div>
+    <!-- 已选择的渠道弹框 -->
+    <div id="E-currency" class="modal hide fade in gxyj-modal pay-modal display-none">
+        <div class="modal-header modal-header-common">
+            <a class="close" data-dismiss="modal">×</a>
+            <p class="pay-type">网银支付</p>
+        </div>
+        <div class="modal-body over-hidden modal-body-common">
+            <div class="modal-body-left pull-left">
+                <img src="../images/payment/pay-warning.jpg" alt="">
+            </div>
+            <div class="modal-body-right pull-right">
+                <h3 class="m-t-xs">请您在打开的<span id="selectedBank"></span>支付页面进行支付</h3>
+                <p>付款完成前，请不要关闭该窗口</p>
+                <p>付款完成后，请根据付款情况点击下面按钮</p>
+                <div class="modal-btn-group">
+                    <a class="btn btn-default" id="isPayment">付款遇到问题</a>
+                    <a class="btn btn-default" id="payComplete">已完成支付</a>
+                </div>
+                <a href="javascript: void(0);" class="other-channel">返回选择其他支付方式</a>
+            </div>
+        </div>
+    </div>
+    <!-- 微信支付弹框 -->
+    <div id="weChatModal" class="modal hide fade in gxyj-modal chat-modal display-none">
+        <div class="modal-header modal-header-common">
+            <a class="close" data-dismiss="modal">×</a>
+            <p class="pay-type">微信支付</p>
+        </div>
+        <div class="modal-body over-hidden modal-body-common">
+            <p class="text-center" id="qrcodeInfo">距离二维码过期还剩<span class="red-color" id="reduceTime">60</span><span class="red-color">秒</span>，过期后请刷新页面重新获取二维码</p>
+            <div class="modal-left pull-left">
+                <div class="text-center">
+                    <img id="qrcode" src="" alt="" width="300" height="300">
+                </div>
+            </div>
+            <div class="modal-right pull-right">
+                <div class="text-center">
+                    <img src="../images/payment/saomiao.png" width="300" height="300" alt="">
+                </div>
+            </div>
+
+        </div>
+        <a class="other-pay-type other-channel" href="javascript: void(0);">返回选择其他支付方式</a>
+    </div>
+    
+    <!-- 页面超时弹框 -->
+    <div id="reloadPage">
+    	<div class="text-center refresh-explain">您因长时间未进行操作页面已过期，请<a href="javascript: void(0);" id="refreshPage">刷新</a>页面!</div>
+    </div>
+    
+    <!--  弹框背景 -->
+    <div id="modalMark"></div>
+    <!--  支付渠道模板     -->
+    <script type="text/template" id="bank-list">
+		{{# for(var j = 0; j < d.cyData.length; j++){ }}
+			<div class="personal-bank">
+				<p class="channel-head">{{d.cyData[j].payType}}</p>
+				<ul class="list-unstyled over-hidden">
+				{{# for(var i = 0, len = d.cyData[j].bankLists.length; i < len; i++){ }}
+					<li class="bank-li">
+						<label class="radio-inline">
+ 							
+							<span class="max-circle">
+								<span class="min-circle"></span>
+							</span>
+							<span class="bank-list">
+ 								<img class="bank-img" src="{{ d.cyData[j].bankLists[i].src }}" data-channel="{{ d.cyData[j].payChannel }}" data-code="{{d.cyData[j].bankLists[i].payCode}}" data-bank="{{ d.cyData[j].bankLists[i].bank }}" data-ajax="{{ d.cyData[j].bankLists[i].ajaxUrl }}" >
+ 							</span>
+ 						</label>
+ 						
+ 					</li>
+				{{# } }}
+				</ul>
+			</div>
+		{{# } }}
+	</script>
+	<!-- 订单编号 -->
+	<script type="text/template" id="orderNum">
+		<span><strong>{{d.orderId}}</strong></span>
+	</script>
+	<!-- 订单商品 
+	<script type="text/template" id="goods">
+		<span class="product-order">{{d.orderGoods}}</span>
+	</script>
+	 -->
+	<!-- 订单金额 -->
+	<script type="text/template" id="orderPay">
+		<span class="pay-money">&yen;{{d.orderPayAmt}}</span>
+	</script>
+	<!-- 用户id-->
+	<script type="text/template" id="userInfo">
+		<span>{{d.buyerPhone}}</span>
+	</script>
+	<script type="text/template" id="transId">
+		<span><strong>{{d.transId}}</strong></span>
+	</script>
+</body>
+</html>

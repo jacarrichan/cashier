@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+@import "../../../common/css/page-common.css";
+
+.choose {
+    background-color: #ffe254 !important;
+}
+
+.datatable-rows .table-datatable tr td {
+	line-height: 30px;
+}
+
+.result-panel-right {
+	overflow: auto; 
+	border: 1px solid #dddddd;
+    padding: 5px;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+	<title>收银台订单支付</title>
+	<script id="seajsnode" type="text/javascript" src="./../../loader.js" data-js="./js/refund" 
+		data-css="./css/repay.css"></script>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+  		<script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+  		<script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+<form id="frmPayment" method="get" action="">
+  <div class="form-group col-sm-12">
+  	<lable >适应终端:</label>
+    <select class="form-control" style="width: 150px;" id="terminal" >
+       <option value="01">PC</option>
+       <option value="03">APP</option>
+    </select>
+  </div>
+  <div class="form-group col-sm-12">
+  	<lable ><span class="red">*</span>退款编号:</label>
+    <input class="form-control" style="width: 150px;" id="refundId"/>
+  </div>
+   <div class="form-group col-sm-12">
+  	<lable ><span class="red">*</span>原订单编号:</label>
+    <input class="form-control" style="width: 150px;" id="origOrderId"/>
+  </div>
+   <div class="form-group col-sm-12">
+  	<lable> <span class="red">*</span>退款金额:</label>
+    <input class="form-control" style="width: 150px;" id="refundAmt"/>
+  </div>
+   <div class="form-group col-sm-12">
+  	<lable>订单支付渠道:</label>
+    <select class="form-control" style="width: 150px;"  id="channelType" >
+       <option value="004">微信</option>
+       <option value="005">支付宝</option>
+       <option value="002">翼支付</option>
+       <option value="003">国付宝</option>
+       <option value="006">建行个人网银</option>
+       <option value="0061">建行企业网银</option>
+       <option value="007">光大个人网银</option>
+       <option value="0071">光大企业网银</option>
+       <option value="008">农信银个人网银</option>
+       <option value="0081">农信银企业网银</option>
+    </select>
+  </div>
+   <div class="form-group col-sm-12">
+  	<lable>业务渠道代码:</label>
+    <select class="form-control" style="width: 150px;"  id="channelId" >
+       <option value="001">B2C</option>
+       <option value="002">B2B</option>
+       <option value="003">O2O</option>
+       <option value="004">零批</option>
+    </select>
+  </div>
+   <div class="form-group col-sm-12">
+  	<lable>平台编号:</label>
+    <input class="form-control" style="width: 150px;" value="00000000" id="mallId"/>
+  </div>
+  <div>
+  	<input type="button" id="btnPay" value="提交退款"/>
+  	<input type="hidden" value="" id="jsonValue"/>
+  </div>
+  
+  <div class="row" style="margin-top:50px;">
+      <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+         	<label for="inputText3" class="col-sm-2 control-label text-right" style="padding-right: 20px;margin-top: 10px;">返回结果</label>
+			<div class="col-sm-10" style="padding: 0;">
+		    	<div id="result" style="border: 1px solid #ddd;width: 100%;min-height:50px;padding: 15px 20px;word-wrap:break-word;">
+		        		
+		        </div>
+			</div>
+         </div>    
+   </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<function_list>
+		<item name="myUtils" class="com.gxyj.cashier.common.convert.utils.ConvertUtils" />
+	</function_list>
+	<transaction code="5W1003"><!--商户退款流水查询-->
+		<request msg_type="bean">
+			<group name="TX">
+				<item name="REQUEST_SN" bean_field="requestMsgId" /><!-- 请求序列号 只可以使用数字 -->
+				<item name="CUST_ID" bean_field="merId" />			<!--商户号(网银商户号) -->
+				<item name="USER_ID" bean_field="userId" />			<!--操作员号 -->
+				<item name="PASSWORD" bean_field="password" />		<!--操作员号交易密码 -->
+				<item name="TX_CODE" value="5W1003" />				<!--交易请求码 -->
+				<item name="LANGUAGE" value="CN" />					<!--语言 固定为CN -->
+				<group name="TX_INFO">
+					<item name="START" bean_field="start" />		<!--起始日期 -->
+					<item name="STARTHOUR" bean_field="starthour"/> <!-- 开始小时  -->
+					<item name="STARTMIN" bean_field="startmin" />	<!--开始分钟 -->
+					<item name="END" bean_field="end" />			<!-- 截止日期 -->
+					<item name="ENDHOUR" bean_field="endhour" />	<!-- 结束小时 -->
+					<item name="ENDMIN" bean_field="endmin" />		<!-- 结束分钟 -->
+					<item name="KIND" bean_field="kind" />			<!--流水类型 Char(1) F 0:未结流水,1:已结流水  -->
+					<item name="ORDER" bean_field="order" />		<!-- 订单号 -->
+					<item name="ACCOUNT" bean_field="account" />	<!-- 结算账户号 -->
+					<item name="DEXCEL" bean_field="dexcel" />		<!-- 文件类型 Char(1) F 默认为“1”，1:不压缩,2.压缩成zip文件 -->
+					<item name="MONEY" bean_field="money" />		<!-- 截止日期 -->
+					<item name="NORDERBY" bean_field="norderby" />	<!--  排序     Char(1) F 1:交易日期,2:订单号  -->
+					<item name="PAGE" bean_field="page" />			<!-- 当前页次 -->
+					<item name="POS_CODE" bean_field="posCode" />	<!--  柜台号  -->
+					<item name="STATUS" bean_field="status" />		<!-- 流水状态 Char(1) F 0:交易失败,1:交易成功,2:待银行确认(针对未结流水查询);3:全部 -->
+				</group>
+			</group>
+		</request>
+
+		<response msg_type="xml">
+			<group name="TX" doc_encode="GB2312">
+				<item name="REQUEST_SN" />				<!-- 请求序列号 只可以使用数字 -->
+				<item name="CUST_ID" />					<!--商户号(网银商户号) -->
+				<item name="USER_ID" />					<!--操作员号 -->
+				<item name="PASSWORD" />				<!--操作员号交易密码 -->
+				<item name="TX_CODE" value="5W1003" />	<!--交易请求码 -->
+				<item name="LANGUAGE" value="CN" />		<!--语言 固定为CN -->
+				<group name="TX_INFO">
+					<item name="START" />       <!--起始日期 -->
+					<item name="STARTHOUR" />   <!-- 开始小时  -->
+					<item name="STARTMIN" />	<!--开始分钟 -->
+					<item name="END"  />        <!-- 截止日期 -->
+					<item name="ENDHOUR" />		<!-- 结束小时 -->
+					<item name="ENDMIN"  />		<!-- 结束分钟 -->
+					<item name="KIND"  />		<!--流水类型 Char(1) F 0:未结流水,1:已结流水  -->
+					<item name="ORDER"  />		<!-- 订单号 -->
+					<item name="ACCOUNT" />		<!-- 结算账户号 -->
+					<item name="DEXCEL"  />		<!-- 文件类型 Char(1) F 默认为“1”，1:不压缩,2.压缩成zip文件 -->
+					<item name="MONEY"  />		<!-- 截止日期 -->
+					<item name="NORDERBY"  />	<!--  排序     Char(1) F 1:交易日期,2:订单号  -->
+					<item name="PAGE"  />		<!-- 当前页次 　  -->
+					<item name="POS_CODE" />	<!--  柜台号  -->
+					<item name="STATUS"  />		<!-- 流水状态 Char(1) F 0:交易失败,1:交易成功,2:待银行确认(针对未结流水查询);3:全部 -->
+				</group>
+			</group>
+		</response>
+
+	</transaction>
+</config>

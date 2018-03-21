@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxyj.cashier.mapping.interfacesurl.InterfacesUrlMapper">
+  <resultMap id="BaseResultMap" type="com.gxyj.cashier.domain.InterfacesUrl">
+    <id column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="interface_url" jdbcType="VARCHAR" property="interfaceUrl" />
+    <result column="interface_name" jdbcType="VARCHAR" property="interfaceName" />
+    <result column="interface_code" jdbcType="VARCHAR" property="interfaceCode" />
+    <result column="interface_explain" jdbcType="VARCHAR" property="interfaceExplain" />
+    <result column="interface_status" jdbcType="VARCHAR" property="interfaceStatus" />
+    <result column="srv_file_path" jdbcType="VARCHAR" property="srvFilePath" />
+    
+    <result column="payment_channel_id" jdbcType="INTEGER" property="paymentChannelId" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="last_updt_by" jdbcType="VARCHAR" property="lastUpdtBy" />
+    <result column="last_updt_date" jdbcType="TIMESTAMP" property="lastUpdtDate" />
+    <result column="version" jdbcType="TINYINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_id, interface_url, interface_name, interface_code,srv_file_path, interface_explain, interface_status, 
+    payment_channel_id, created_by, created_date, last_updt_by, last_updt_date, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from csr_interfaces_url
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from csr_interfaces_url
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gxyj.cashier.domain.InterfacesUrl">
+    insert into csr_interfaces_url (row_id, interface_url,srv_file_path, interface_name, 
+      interface_code, interface_explain, interface_status, 
+      payment_channel_id, created_by, created_date, 
+      last_updt_by, last_updt_date, version
+      )
+    values (#{rowId,jdbcType=INTEGER}, #{interfaceUrl,jdbcType=VARCHAR},#{srvFilePath,jdbcType=VARCHAR}, #{interfaceName,jdbcType=VARCHAR}, 
+      #{interfaceCode,jdbcType=VARCHAR}, #{interfaceExplain,jdbcType=VARCHAR}, #{interfaceStatus,jdbcType=VARCHAR}, 
+      #{paymentChannelId,jdbcType=INTEGER}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{lastUpdtBy,jdbcType=VARCHAR}, #{lastUpdtDate,jdbcType=TIMESTAMP}, #{version,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxyj.cashier.domain.InterfacesUrl">
+    insert into csr_interfaces_url
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rowId != null">
+        row_id,
+      </if>
+      <if test="interfaceUrl != null">
+        interface_url,
+      </if>
+      <if test="srvFilePath != null">
+        srv_file_path,
+      </if>
+      <if test="interfaceName != null">
+        interface_name,
+      </if>
+      <if test="interfaceCode != null">
+        interface_code,
+      </if>
+      <if test="interfaceExplain != null">
+        interface_explain,
+      </if>
+      <if test="interfaceStatus != null">
+        interface_status,
+      </if>
+      <if test="paymentChannelId != null">
+        payment_channel_id,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by,
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rowId != null">
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="interfaceUrl != null">
+        #{interfaceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="srvFilePath != null">
+        #{srvFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceName != null">
+        #{interfaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceCode != null">
+        #{interfaceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceExplain != null">
+        #{interfaceExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceStatus != null">
+        #{interfaceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentChannelId != null">
+        #{paymentChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyj.cashier.domain.InterfacesUrl">
+    update csr_interfaces_url
+    <set>
+      <if test="interfaceUrl != null">
+        interface_url = #{interfaceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceName != null">
+        interface_name = #{interfaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceCode != null">
+        interface_code = #{interfaceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceExplain != null">
+        interface_explain = #{interfaceExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceStatus != null">
+        interface_status = #{interfaceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentChannelId != null">
+        payment_channel_id = #{paymentChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdtBy != null">
+        last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdtDate != null">
+        last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=TINYINT},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxyj.cashier.domain.InterfacesUrl">
+    update csr_interfaces_url
+    set interface_url = #{interfaceUrl,jdbcType=VARCHAR},
+      srv_file_path = #{srvFilePath,jdbcType=VARCHAR},
+      interface_name = #{interfaceName,jdbcType=VARCHAR},
+      interface_code = #{interfaceCode,jdbcType=VARCHAR},
+      interface_explain = #{interfaceExplain,jdbcType=VARCHAR},
+      interface_status = #{interfaceStatus,jdbcType=VARCHAR},
+      payment_channel_id = #{paymentChannelId,jdbcType=INTEGER},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updt_by = #{lastUpdtBy,jdbcType=VARCHAR},
+      last_updt_date = #{lastUpdtDate,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=TINYINT}
+    where row_id = #{rowId,jdbcType=INTEGER}
+  </update>
+  
+  
+  <select id="selectByRecord" parameterType="com.gxyj.cashier.domain.InterfacesUrl" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    	from csr_interfaces_url where 1=1
+      <if test="interfaceCode != null">
+        and interface_code=#{interfaceCode,jdbcType=VARCHAR}
+      </if>
+      <if test="interfaceStatus != null and interfaceStatus != '' ">
+        and interface_status=#{interfaceStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="paymentChannelId != null and paymentChannelId!=0">
+        and payment_channel_id=#{paymentChannelId,jdbcType=INTEGER}
+      </if>
+  </select>
+  
+</mapper>

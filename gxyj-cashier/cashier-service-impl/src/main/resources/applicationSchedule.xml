@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/task 
+        http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<!-- 调度工厂  此配置文件目前不使用 tangdaibing-->
+	<bean id="scheduler"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="overwriteExistingJobs" value="true" />
+		<property name="applicationContextSchedulerContextKey" value="applicationContextKey" />  
+        <property name="configLocation" value="classpath:quartz.properties" /> 
+        <property name="autoStartup" value="false"/>
+
+		<property name="triggers">
+			<list>
+				<ref bean="reconCheckDataTrigger" />
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- 日切任务  begin-->
+	<bean id="reconCheckDataTask" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="group" value="recon_chk_file" />
+		<property name="name" value="recon_chk_file" />
+		<property name="durability" value="true" />
+		<property name="jobClass">
+			<value>com.gxyj.cashier.schedule.jobs.ReconCheckFileJob</value>
+		</property>
+	</bean>
+	
+	<bean id="reconCheckDataTrigger" class="com.gxyj.cashier.schedule.CsrCronTriggerFactoryBean">
+		<property name="paramName" value="CHK_RECON_EXP"/><!-- 此参数的为任务计划时间的正则表达式在数据库中的存在，优先按此参数安排任务，忽略cronExpression的配置 -->
+		<property name="name" value="trigger_chk_file" />
+		<property name="group" value="trigger_chk_file_grp" />
+		<property name="jobDetail">
+			<ref bean="reconCheckDataTask" />
+		</property>
+		<property name="cronExpression">
+		<!-- [秒] [分] [小时] [日] [月] [周] [年] -->
+			<!-- <value>0 30 22 * * ?</value> --><!-- 每天22:30自动执行一次 -->
+			<value>0 0/2 * * * ?</value>
+		</property>
+	</bean>	
+
+</beans>

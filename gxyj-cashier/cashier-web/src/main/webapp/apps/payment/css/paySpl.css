@@ -1,0 +1,474 @@
+@CHARSET "UTF-8";
+/* 公共样式 */
+body {
+	background-color: #f0f3f0;
+    overflow-x: hidden;
+}
+.over-hidden {
+    overflow: hidden;
+}
+.dis-none {
+    display: none !important;
+}
+.display-none {
+    display: none;
+}
+.special-color {
+    color: #ffa900;
+}
+.bg-white {
+	background-color: #fff;
+}
+.red-color {
+    color: #e50d1e;
+}
+.m-t-n {
+	margin-top: 0;
+}
+.m-t-xs {
+	margin-top: 5px;
+}
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;
+    border-color: transparent;
+}
+.btn {
+	-moz-border-radius: 4px 4px 4px 4px; /* Firefox */
+  	-webkit-border-radius: 4px; /* Safari 和 Chrome */
+	border-radius: 4px;
+}
+/* 公共样式结束 */
+/* 头部导航 */
+.logo-img {
+	height: 100%;
+	overflow: hidden;
+}
+.gx-logo {
+	height: 100%;
+	padding: 6px 6px 6px 0;
+	min-height: 100%;
+	float: left;
+	max-width: none;
+}
+.payment-head {
+	background-color: #fff;
+	height: 90px;
+}
+.header {
+	padding: 8px 0;
+	height: 90px;
+}
+.logo-name {
+	display: inline-block;
+    font-weight: 700;
+    font-size: 18px;
+    margin-top: 35px;
+    float: left;
+}
+.header-right {
+    padding: 42px 0 0 0;
+    margin-bottom: 0;
+}
+.header-right li {
+    cursor: pointer;
+}
+.header-right .active {
+    color: #000000;
+    font-weight: 700;
+}
+.pay-wrapper {
+    margin-bottom: -110px;
+    overflow: hidden;
+}
+.pay-header {
+    border-bottom: 1px solid #dddddd;
+}
+.pay-wrapper .breadcrumb>li+li:before {
+    content: "|\00a0";
+}
+.pay-header span{
+	display: inline-block;
+    height: 100%;
+    border-bottom: 2px solid #aaa;
+    color: #000;
+    font-size: 16px;
+    padding: 15px 40px 10px 0;
+    font-weight: 700;
+}
+/* 头部导航结束 */
+/* 订单信息 */
+.order-section {
+    background-color: #00cdd5;
+    padding-top: 28px;
+    height: 300px;
+    color: #fff;
+}
+.order-part {
+	height: 128px;
+}
+.shop-code {
+	width: 128px;
+	height: 128px;
+}
+.shop-logo {
+	width: 100%;
+	height: 100%;
+}
+.order-item {
+    display: inline-block;
+    width: 5em;
+    text-align: justify;
+}
+.order-item span {
+    display: block;
+}
+.w3 {
+    letter-spacing:1em; /*如果需要y个字两端对齐，则为(x-y)/(y-1),这里是（4-3）/(3-1)=0.5em */
+    margin-right:-1em; /*同上*/
+}
+.product-order {
+	display: block;
+	/* margin-left: -5px; */
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.bank-lists ul li {
+    text-align: center;
+    width: 25%;
+    height: 45px;
+    float: left;
+}
+.bank-lists ul li img {
+    /* display: inline-block; */
+}
+.bank-lists .active {
+	border: 2px solid #00cdd5;
+}
+.bank-list {
+    position: relative;
+    margin-top: 25px;
+}
+@media screen and (min-width: 1120px) and (max-width: 1500px) {
+	.bank-lists ul li {
+    	width: 33.33333333%;
+	}
+}
+@media screen and (min-width: 520px) and (max-width: 1119px) {
+	.bank-lists ul li {
+    	width: 50%;
+	}
+}
+@media screen and (max-width: 519px) {
+	.bank-lists ul li {
+    	width: 100%;
+	}
+}
+.bank-item {
+	height: 100%;
+	cursor: pointer;
+	width: 215px;
+    border: 1px solid #ddd;
+    margin: 0 auto;
+}
+.pay-immediate {
+	margin-top: 20px;
+    padding: 5px 0 10px 0;
+    overflow: hidden;
+}
+.pay-btn {
+    padding: 10px 60px;
+    background-color: #ffa900;
+}
+.pay-amount span {
+    height: 32px;
+    line-height: 32px;
+    overflow: hidden;
+    float: left;
+}
+.pay-amount .pay-money {
+	font-size: 24px;
+    color: #00cdd5;
+    font-weight: 700;
+}
+.pay-money {
+    font-size: 40px;
+    /* color: #ffa900; */
+    font-weight: 700;
+}
+.payent-money {
+	font-size: 24px;
+    color: #ffa900;
+    font-weight: 700;
+}
+/* 订单信息结束 */
+/* 支付渠道 */
+.bank-tab {
+	position: relative;
+	top: -110px;
+}
+.nav-section {
+	background-color: #fff;
+	padding: 20px;
+	-moz-border-radius: 10px;
+  	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+.pay-modal {
+    width: 600px;
+    background-color: #fff;
+    position: fixed;
+    left: 50%;
+    bottom: auto;
+    margin-left: -300px;
+    max-height: 600px;
+    margin-top: 80px;
+}
+.nav-section .nav-tabs li {
+	width: 25%;
+	border: 2px solid #ddd;
+	margin-right: 1%;
+	font-size: 16px;
+	-moz-border-radius: 5px;
+  	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	min-width: 100px;
+}
+.nav-section .nav-tabs li.active {
+	border: 2px solid #00cdd5;
+}
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus {
+	color: #00cdd5;
+}
+
+.nav-section .nav-tabs {
+	border: none;
+}
+.nav-section .nav-tabs a{
+	border: none;
+	margin: 0;
+	text-align: center;
+	padding: 0;
+	height: 60px;
+	line-height: 60px;
+}
+.nav-section .nav-tabs>li.active>a, 
+.nav-section .nav-tabs>li.active>a:focus, 
+.nav-section .nav-tabs>li.active>a:hover {
+	border: none;
+}
+.nav-section .nav-tabs > li > a {
+	border-radius: 5px;
+}
+.tab-bank-content {
+	border: 2px solid #ddd;
+	margin-top: 25px;
+	-moz-border-radius: 5px;
+  	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	position: relative;
+	padding-bottom: 15px;
+}
+.tab-bank-content .tab-pane {
+	position: relative;
+}
+.personal-bank em {
+    display: block;
+    width: 41px;
+    height: 21px;
+    background: url(../../images/payment/00000.png) no-repeat 100%;
+    border-width: 20px;
+    position: absolute;
+    top: -21px;
+   /*  border-style: solid dashed dashed;
+    border-color: transparent transparent #ddd transparent; */
+    font-size: 0;
+    line-height: 0;
+}
+/* .personal-bank span {
+    display: block;
+    border-width: 20px;
+    position: absolute;
+    top: -38px;
+    border-style: solid dashed dashed;
+    border-color: transparent transparent #FFF transparent;
+    font-size: 0;
+    line-height: 0;
+} */
+#tab2Content1 em {
+	left: 10.5%;
+}
+/* #tab2Content1 span {
+	left: 10.5%;
+} */
+#tab2Content2 em {
+	left: 36.5%;
+}
+/* #tab2Content2 span {
+	left: 36.5%;
+} */
+#tab2Content3 em {
+	left: 62.5%;
+}
+/* #tab2Content3 span {
+	left: 62.5%;
+} */
+.time-out {
+	color: #e50d1e;
+}
+/******************** 支付渠道结束*************/
+/***************** 弹框 ************************/
+.chat-modal {
+    width: 800px;
+    background-color: #fff;
+    position: fixed;
+    left: 50%;
+    bottom: auto;
+    margin-left: -400px;
+    max-height: 600px;
+    margin-top: 80px;
+}
+.modal-btn-group {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.modal-btn-group a {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 40px;
+}
+.modal-body-left {
+    width: 20%;
+    text-align: right;
+    padding-right: 10px;
+}
+.modal-body-right {
+    width: 80%;
+}
+.modal-left {
+    width: 50%;
+    text-align: right;
+}
+.modal-right {
+    width: 50%;
+}
+#modalMark {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1040;
+	background-color: #000;
+	-khtml-opacity:0.5;
+	-moz-opacity:0.5;
+	filter:alpha(opacity=50);
+	filter:"alpha(opacity=50)";
+	opacity:0.5; 
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);/*兼容ie8及以下*/
+	display: none;
+}
+.bank-img {
+    width: 85%;
+    max-width: 85%;
+    height: 41px;
+    float: left;
+}
+.bank-select {
+    width: 15%;
+    margin-top: 8px;
+}
+.order-num {
+    font-size: 13px;
+    /* color: #000; */
+    font-weight: 700;
+    margin-top: 10px;
+}
+.order-explain {
+    font-size: 13px;
+    margin-top: 8px;
+}
+.order-product {
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    
+}
+.order-info {
+    max-width: 60%;
+    padding-left: 20px;
+}
+.order-pay {
+    margin-top: 30px;
+    text-align: right;
+}
+.other-type {
+	color: #ffa900;
+}
+.pay-type {
+    font-size: 15px;
+    color: #fff;
+    font-weight: 700;
+    margin: 0;
+}
+.serial-num {
+	margin-top: 8px;
+}
+#orderNumber > span,
+#transNum > span {
+	font-weight: 700;
+}
+.modal-header-common {
+    padding: 10px 15px;
+    background-color: #00cdd5;
+}
+.modal-body-common {
+    padding: 40px  0;
+}
+.modal-body-common>P {
+	margin-bottom: 20px;
+}
+.gxyj-modal {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+ }
+ .other-pay-type {
+    clear: both;
+    display: block;
+    margin-bottom: 30px;
+    padding-left: 60px;
+}
+/* 弹框结束 */
+/* 底部信息 */
+.pay-footer {
+	margin: 40px 20px 20px 20px;
+    text-align: center;
+    background-color: #f0f3f0;
+}
+#reloadPage {
+	position: fixed;
+	width: 400px;
+	height: 200px;
+	background-color: #fff;
+	left: 50%;
+	top: 50%;
+	margin-left: -150px;
+	margin-top: -100px;
+	z-index: 3000;
+	display: none;
+	-moz-border-radius: 10px; /* Firefox */
+  	-webkit-border-radius: 10px; /* Safari 和 Chrome */
+	border-radius: 10px;
+}
+.refresh-explain {
+	margin-top: 90px;
+	padding: 0 20px;
+}
+/* 底部信息结束 */

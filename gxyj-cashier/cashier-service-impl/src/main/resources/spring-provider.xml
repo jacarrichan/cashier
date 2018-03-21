@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+
+	<!-- <context:property-placeholder location="classpath:zookeeper.properties" ignore-unresolvable="true"/> -->
+    
+    <dubbo:application name="cashier-service-provider"/>
+    
+    <dubbo:registry protocol="zookeeper" address="${zookeeper.address}" check="false" subscribe="false"/>
+	
+	<!-- 发布的dubbo服务 -->
+	<dubbo:service interface="com.gxyj.cashier.service.ifmessage.IfsMessageService" ref="ifsMessageService" timeout="10000" />
+	<dubbo:service interface="com.gxyj.cashier.service.business.BusiChannelService" ref="busiChannelService" timeout="10000" />
+	<dubbo:service interface="com.gxyj.cashier.service.business.BusiChannelVindService" ref="busiChannelVindService" timeout="10000" />
+	<dubbo:service interface="com.gxyj.cashier.service.displayTemplate.PayTemplateService" ref="payTemplateService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.order.OrderPayInfoService" ref="orderPayInfoService" timeout="10000" /> 
+	<dubbo:service interface="com.gxyj.cashier.service.order.OrderInfoService" ref="orderInfoService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.wechat.PayWeChatService" ref="payWeChatService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.wechat.QueryWeChatService" ref="queryWeChatService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.wechat.RefundQueryWeChatService" ref="refundQueryWeChatService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.mallinterface.MallInterfaceService" ref="mallInterfaceService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.SequenceService" ref="sequenceService" timeout="10000" />
+	<dubbo:service interface="com.gxyj.cashier.service.paymentchannel.PaymentChannelService" ref="paymentChannelService" timeout="10000" />
+	<dubbo:service interface="com.gxyj.cashier.service.order.ChangeOrderStatusService" ref="changeOrderStatusService" timeout="10000" />
+	<dubbo:service interface="com.gxyj.cashier.service.order.ChangeRefundOrderStatusService" ref="changeRefundOrderStatusService" timeout="10000" />
+	<dubbo:service interface="com.gxyj.cashier.service.commongenno.CommonGenNoService" ref="commonGenNoService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.displayTemplate.WebpageModelService" ref="webpageModelService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.paymentchannel.PayChannelVindService" ref="payChannelVindService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.paramsetting.ParamSettingsService" ref="paramSettingsService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.displayTemplate.MallModelService" ref="mallModelService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.mallInfo.MallInfoService" ref="mallInfoService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.payment.PaymentService" ref="paymentService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.uia.CsrSysDictService" ref="sysDictService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.CommonService" ref="commonService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.recon.ReconciliationService" ref="reconciliationService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.message.MessageService" ref="messageService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.recon.QueryReconciliationService" ref="queryReconciliationService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.forward.ForwardService" ref="forwardService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.order.OrderRefundService" ref="orderRefundService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.interfacesurl.InterfacesUrlService" ref="interfacesUrlService " timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.schedule.SchedulerService" ref="schedulerService " timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.order.OrderCloseService" ref="orderCloseService " timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.bestpay.BestPayService" ref="bestPayService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.rocketmq.RocketMqService" ref="rocketMqService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.alipay.AliPayService" ref="aliPayService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.gopay.GoPayService" ref="goPayService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.paymentchannel.CsrPayMerRelationService" ref="payMerRelationService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.order.OrderTradePayService" ref="orderTradePayService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.ccb.CcbPayService" ref="ccbPayService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.rcb.RcbPayService" ref="rcbPayService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.CEBBank.CEBBankService" ref="cEBBankService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.uia.CsrUserInfoService" ref="userInfoService" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.alipay.AliPayH5Service" ref="aliPayH5Service" timeout="10000" />
+    <dubbo:service interface="com.gxyj.cashier.service.alipay.AliPayAppService" ref="aliPayAppService" timeout="10000" />
+    
+    <dubbo:service interface="com.gxyj.cashier.service.bestpay.BestPayH5Service" ref="bestPayH5Service" timeout="10000" />
+</beans>

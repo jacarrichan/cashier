@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<function_list>
+		<item name="myUtils" class="com.gxyj.cashier.common.convert.utils.ConvertUtils" />
+	</function_list>
+	<transaction code="CEBNotifyAccept"><!--发起报文 -->
+		<request msg_type="bean">
+			<group name="MessageSuit">
+				<group name="Message">	
+					<item name="itemMsgId" bean_field="msgId"/>
+					<group name="Plain">
+						<attr name="id" value="NotifyAccept" />
+						<item name="transId" value="NotifyAccept"/>
+						<item name="merId" bean_field="merCode"/>
+					</group>
+				</group>
+			</group>
+		</request>
+
+		<response msg_type="xml">
+			<group name="MessageSuit" doc_encode="UTF-8">
+				<group name="Message">
+				<item name="itemMsgId" hidden="true"/>	
+				<attr name="id"	value="./itemMsgId"/>			
+					<group name="Plain">
+						<attr name="id" value="NotifyAccept" />
+						<item name="transId" value="NotifyAccept"/>
+						<item name="merId" />
+					</group>
+				</group>
+			</group>
+		</response>
+		
+	</transaction>
+</config>
